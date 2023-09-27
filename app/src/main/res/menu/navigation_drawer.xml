@@ -1,0 +1,34 @@
+<!--Illia Popov | n01421791 | Course ID: 1682.202350-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home_screen"
+            android:icon="@drawable/ic_home_foreground"
+            android:title="@string/home" />
+    </group>
+
+    <item android:title="@string/sensors">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/distance_sensor"
+                    android:icon="@drawable/ic_distance_foreground"
+                    android:title="@string/distance_sensor" />
+                <item
+                    android:id="@+id/proximity_sensor"
+                    android:icon="@drawable/ic_proximity_foreground"
+                    android:title="@string/proximity_sensor" />
+                <item
+                    android:id="@+id/balance_sensor"
+                    android:icon="@drawable/ic_balance_foreground"
+                    android:title="@string/balance_sensor" />
+                <item
+                    android:id="@+id/motors_sensors"
+                    android:icon="@drawable/ic_motor_foreground"
+                    android:title="@string/motors_sensors" />
+            </group>
+        </menu>
+    </item>
+</menu>
