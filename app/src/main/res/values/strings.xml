@@ -4,7 +4,7 @@
 <!-- Ahmad Aljawish | ID: n01375348 Section B -->
 <resources>
     <string name="app_name">PetasosExpress</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_describe">PetasosExpress:\n\n Effortless, autonomous deliveries at your fingertips.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sensors">Sensors</string>
     <string name="home">Home</string>
