@@ -8,10 +8,11 @@
     <string name="hello_blank_fragment">Bonjour fragment vide</string>
     <string name="sensors">Capteurs</string>
     <string name="home">Accueil</string>
-    <string name="distance_sensor">Capteur de distance</string>
-    <string name="proximity_sensor">Capteur de proximité</string>
-    <string name="balance_sensor">Capteur d\'équilibre</string>
-    <string name="motors_sensors">Capteurs de moteurs</string>
+    <string name="gps_sensor">Capteur GPS</string>
+    <string name="distance_sensor">Capteur de Distance</string>
+    <string name="proximity_sensor">Capteur de Proximité</string>
+    <string name="balance_sensor">Capteur D\'équilibre</string>
+    <string name="motors_sensors">Capteurs de Moteurs</string>
     <string name="navigation_drawer_open">Ouvrir le tiroir de navigation</string>
     <string name="navigation_drawer_close">Fermer le tiroir de navigation</string>
     <string name="alert_exit">Voulez-vous quitter l\'application ?</string>

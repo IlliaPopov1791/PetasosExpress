@@ -152,18 +152,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (itemId == R.id.home_screen) {
                     Home home = new Home();
                     fragmentManager.beginTransaction().replace(R.id.main_frame_layout, home).commit();
+                } else if (itemId == R.id.gps_sensor) {
+                    SensorGPS gps = new SensorGPS();
+                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, gps).commit();
                 } else if (itemId == R.id.distance_sensor) {
-                    SensorDistance down = new SensorDistance();
-                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, down).commit();
+                    SensorDistance dis = new SensorDistance();
+                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, dis).commit();
                 } else if (itemId == R.id.proximity_sensor) {
-                    SensorProximity weat = new SensorProximity();
-                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, weat).commit();
+                    SensorProximity prox = new SensorProximity();
+                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, prox).commit();
                 } else if (itemId == R.id.balance_sensor) {
-                    SensorBalance data = new SensorBalance();
-                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, data).commit();
+                    SensorBalance bal = new SensorBalance();
+                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, bal).commit();
                 } else if (itemId == R.id.motors_sensors) {
-                    SensorMotors mail = new SensorMotors();
-                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, mail).commit();
+                    SensorMotors mot = new SensorMotors();
+                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, mot).commit();
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
