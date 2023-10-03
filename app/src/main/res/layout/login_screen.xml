@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/logo_dark"
+    tools:context=".LoginScreen">
+
+    <ImageView
+        android:layout_width="489dp"
+        android:layout_height="354dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp"
+        android:src="@mipmap/ic_logo_wine" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Gmail"
+        android:textColorHint="@color/wine"
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="16dp"
+        android:importantForAccessibility="yes"
+        android:contentDescription="Enter your Gmail address"
+        android:textColor="@color/wine"/>
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:textColorHint="@color/wine"
+        android:inputType="textPassword"
+        android:layout_marginTop="8dp"
+        android:importantForAccessibility="yes"
+        android:contentDescription="Enter your password"
+        android:textColor="@color/wine"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:background="@color/wine"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        android:onClick="loginClicked" />
+</LinearLayout>
