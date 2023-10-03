@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         this.configureToolBar();
 
         this.configureDrawerLayout();
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         Home HomeFragment = new Home();
-        fragmentTransaction.add(R.id.main_drawer_layout, HomeFragment);
+        fragmentTransaction.add(R.id.main_frame_layout, HomeFragment);
         fragmentTransaction.commit();
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
@@ -71,12 +72,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
-                Snackbar.make(drawerLayout, getResources().getString(R.string.app_name) + ", " + getResources().getString(R.string.navigation_drawer_open), Snackbar.LENGTH_SHORT).show();
+                //Snackbar.make(drawerLayout, getResources().getString(R.string.app_name) + ", " + getResources().getString(R.string.navigation_drawer_open), Snackbar.LENGTH_SHORT).show();
             }
 
             @Override
             public void onDrawerClosed(@NonNull View drawerView) {
-                DisplayToast( getResources().getString(R.string.app_name) + ", " + getResources().getString(R.string.navigation_drawer_close));
+                //DisplayToast( getResources().getString(R.string.app_name) + ", " + getResources().getString(R.string.navigation_drawer_close));
             }
 
             @Override
@@ -96,6 +97,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.top_menu, menu);
         return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (item.getItemId() == R.id.home) {
+            Home home = new Home();
+            fragmentManager.beginTransaction().replace(R.id.main_frame_layout, home).commit();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     private void showExitAlertDialog() {
@@ -140,18 +152,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (itemId == R.id.home_screen) {
                     Home home = new Home();
                     fragmentManager.beginTransaction().replace(R.id.main_frame_layout, home).commit();
+                } else if (itemId == R.id.gps_sensor) {
+                    SensorGPS gps = new SensorGPS();
+                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, gps).commit();
                 } else if (itemId == R.id.distance_sensor) {
-                    SensorDistance down = new SensorDistance();
-                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, down).commit();
+                    SensorDistance dis = new SensorDistance();
+                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, dis).commit();
                 } else if (itemId == R.id.proximity_sensor) {
-                    SensorProximity weat = new SensorProximity();
-                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, weat).commit();
+                    SensorProximity prox = new SensorProximity();
+                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, prox).commit();
                 } else if (itemId == R.id.balance_sensor) {
-                    SensorBalance data = new SensorBalance();
-                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, data).commit();
+                    SensorBalance bal = new SensorBalance();
+                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, bal).commit();
                 } else if (itemId == R.id.motors_sensors) {
-                    SensorMotors mail = new SensorMotors();
-                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, mail).commit();
+                    SensorMotors mot = new SensorMotors();
+                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, mot).commit();
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;

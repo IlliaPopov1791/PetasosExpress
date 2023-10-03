@@ -13,6 +13,10 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
+                    android:id="@+id/gps_sensor"
+                    android:icon="@drawable/ic_gps_foreground"
+                    android:title="@string/gps_sensor" />
+                <item
                     android:id="@+id/distance_sensor"
                     android:icon="@drawable/ic_distance_foreground"
                     android:title="@string/distance_sensor" />

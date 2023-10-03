@@ -8,4 +8,5 @@
         android:title="@string/home"
         android:orderInCategory="300"
         app:showAsAction="ifRoom"/>
+
 </menu>
