@@ -29,10 +29,12 @@
 
     <color name="light_yellow">#FFFF99</color>
     <color name="logo">#EFDFC5</color>
+    <color name="logo_dark">#DBB98F</color>
     <color name="logo_saturated">#ffcc99</color>
 
     <color name="dark_red">#8B0000</color>
     <color name="red">#FF0000</color>
+    <color name="wine">#96351E</color>
 
     <color name="skin">#F4CAC6</color>
     <color name="light_pink">#FFB6C1</color>

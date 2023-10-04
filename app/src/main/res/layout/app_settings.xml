@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/logo_dark"
+    tools:context=".AppSettings">
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Notifications Switch -->
+
+        <!-- Languages Spinner -->
+
+        <!-- Dark Mode Toggle -->
+
+        <!-- Portrait/Landscape Toggle -->
+
+        <Switch
+            android:id="@+id/switch_notifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="176dp"
+            android:layout_marginTop="320dp"
+            android:checked="true"
+            android:text="Notifications"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spinner_languages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="164dp"
+            tools:layout_editor_absoluteY="273dp" />
+
+        <ToggleButton
+            android:id="@+id/toggle_dark_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="Light "
+            android:textOn="Dark "
+            tools:layout_editor_absoluteX="176dp"
+            tools:layout_editor_absoluteY="441dp" />
+
+        <ToggleButton
+            android:id="@+id/toggle_portrait_landscape"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="Portrait"
+            android:textOn="Landscape"
+            tools:layout_editor_absoluteX="176dp"
+            tools:layout_editor_absoluteY="381dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="66dp"
+            android:layout_height="26dp"
+            android:text="App Mode"
+            tools:layout_editor_absoluteX="87dp"
+            tools:layout_editor_absoluteY="456dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Screen Resolution"
+            tools:layout_editor_absoluteX="51dp"
+            tools:layout_editor_absoluteY="393dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Languages"
+            tools:layout_editor_absoluteX="84dp"
+            tools:layout_editor_absoluteY="273dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>
