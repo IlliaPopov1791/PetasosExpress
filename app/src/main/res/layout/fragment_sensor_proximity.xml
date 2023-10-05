@@ -1,15 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/proximity_sensor"
-    tools:context=".SensorProximity">
+    android:background="@color/logo_dark">
 
-    <!-- TODO: Update blank fragment layout -->
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="336dp"
+        android:layout_height="383dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="77"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/proximity_sensor" />
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:gravity="center_horizontal"
+        android:text="Proximity sensor"
+        android:textColor="@color/wine"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="107dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="56dp"
+        android:gravity="center"
+        android:text="4cm"
+        android:textColor="@color/wine"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+        app:layout_constraintEnd_toEndOf="@+id/progressBar"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="@+id/progressBar"
+        app:layout_constraintTop_toTopOf="@+id/progressBar"
+        app:layout_constraintVertical_bias="0.439" />
+
+    <TextView
+        android:id="@+id/statusTextView"
+        android:layout_width="133dp"
+        android:layout_height="42dp"
+        android:textSize="18dp"
+        android:gravity="center"
+        android:text="status: warning"
+        android:textColor="@color/wine"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="252dp"
+        android:layout_height="82dp"
+        android:progress="10"
+        android:progressTint="@color/wine"
+        android:thumbTint="@color/wine"
+        app:layout_constraintEnd_toEndOf="@+id/titleTextView"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="@+id/titleTextView"
+        app:layout_constraintTop_toTopOf="@+id/titleTextView" />
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="205dp"
+        android:layout_height="34dp"
+        android:text="Set Proximity Threshold"
+        android:textColor="@color/wine"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="417dp"
+        android:layout_height="185dp"
+        android:layout_below="@id/seekBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,7 +24,8 @@
     <string name="place_order">Search</string>
     <string name="search_hint">Search for locations</string>
     <string name="home_question1">What order do you need today?</string>
-
+    <string name="_4cm">4cm</string>
+    <string name="status_warning">Status: Warning</string>
 
 
 </resources>
