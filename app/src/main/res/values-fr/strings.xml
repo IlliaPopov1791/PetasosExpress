@@ -29,7 +29,10 @@
     <string name="set_proximity_threshold">Définir le seuil de proximité</string>
     <string name="status">état :</string>
     <string name="_status">État :</string>
-
-
-
+    <string name="motor_speed">Vitesse du Moteur :</string>
+    <string name="motor_speed_value">.</string>
+    <string name="motor_rpm">Tours par Minute du Moteur :</string>
+    <string name="error_codes">Codes d\'Erreur :</string>
+    <string name="safety_alerts">Alertes de Sécurité :</string>
+    <string name="emergency_stop">Arrêt d\'Urgence</string>
 </resources>

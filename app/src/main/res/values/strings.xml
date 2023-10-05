@@ -29,6 +29,10 @@
     <string name="set_proximity_threshold">set proximity threshold</string>
     <string name="status">status:</string>
     <string name="_status">Status:</string>
-
-
+    <string name="motor_speed">Motor Speed:</string>
+    <string name="motor_speed_value">.</string>
+    <string name="motor_rpm">Motor RPM:</string>
+    <string name="error_codes">Error Codes:</string>
+    <string name="safety_alerts">Safety Alerts:</string>
+    <string name="emergency_stop">Emergency Stop</string>
 </resources>
