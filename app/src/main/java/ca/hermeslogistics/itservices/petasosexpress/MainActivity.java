@@ -1,17 +1,5 @@
-/*
- * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
- * Student ID: n01421791, n01479878, n01442206, n01375348
- * Section: B
- */
-
 package ca.hermeslogistics.itservices.petasosexpress;
 
-/*
- * Illia M. Popov | ID: n01421791
- *  William Margalik | ID: n01479878
- * Dylan Ashton | ID: n01442206
- *  Ahmad Aljawish | ID: n01375348
- */
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -43,6 +31,11 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+/*
+ * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
+ * Student ID: n01421791, n01479878, n01442206, n01375348
+ * Section: B
+ */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
