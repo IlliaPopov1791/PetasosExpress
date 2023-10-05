@@ -24,6 +24,12 @@
     <string name="place_order">Recherche</string>
     <string name="search_hint">Rechercher des endroits</string>
     <string name="home_question1">Quelle commande avez-vous besoin aujourd\'hui?</string>
+    <string name="_4cm">4 cm</string>
+    <string name="status_warning">État : Avertissement</string>
+    <string name="set_proximity_threshold">Définir le seuil de proximité</string>
+    <string name="status">état :</string>
+    <string name="_status">État :</string>
+
 
 
 </resources>
