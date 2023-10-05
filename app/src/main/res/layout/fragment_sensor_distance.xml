@@ -1,15 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/distance_sensor"
-    tools:context=".SensorDistance">
+    android:background="@color/logo_dark"
+    tools:context=".SensorDistance"
+    android:padding="16dp">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- Header Section -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/distance_sensor" />
+        android:id="@+id/txtHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Collision Avoidance"
+        android:textColor="@color/wine"
+        android:textStyle="bold"
+        android:textSize="36sp"
+        android:layout_centerHorizontal="true"/>
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/imgPetasos"
+        android:layout_width="294dp"
+        android:layout_height="178dp"
+        android:layout_below="@id/txtHeader"
+        android:layout_alignEnd="@+id/txtHeader"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="162dp"
+        android:src="@mipmap/ic_petasos_foreground" />
+
+    <ImageView
+        android:id="@+id/imgSound"
+        android:layout_width="215dp"
+        android:layout_height="129dp"
+        android:layout_below="@id/txtHeader"
+        android:layout_alignEnd="@+id/txtHeader"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="77dp"
+        android:src="@mipmap/ic_sound_foreground" />
+
+    <ImageView
+        android:id="@+id/imgStone"
+        android:layout_width="227dp"
+        android:layout_height="161dp"
+        android:layout_below="@id/txtHeader"
+        android:layout_alignEnd="@+id/txtHeader"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="-20dp"
+        android:src="@mipmap/ic_object_foreground" />
+
+    <TextView
+        android:id="@+id/txtDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgPetasos"
+        android:layout_alignEnd="@+id/txtStatus"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="0dp"
+        android:text="Distance: "
+        android:textColor="@color/wine"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/txtValue"
+        android:layout_width="83dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgPetasos"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="6dp"
+        android:layout_toEndOf="@+id/txtDistance"
+        android:gravity="end"
+        android:text="0"
+        android:textColor="@color/wine"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/txtUnit"
+        android:layout_width="44dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgPetasos"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="17dp"
+        android:layout_toEndOf="@+id/txtValue"
+        android:text="M"
+        android:textColor="@color/wine"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/txtStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgPetasos"
+        android:layout_marginTop="109dp"
+        android:layout_marginEnd="17dp"
+        android:layout_toStartOf="@+id/imgStatus"
+        android:text="Speed Mode: "
+        android:textColor="@color/wine"
+        android:textSize="24dp" />
+
+    <ImageView
+        android:id="@+id/imgStatus"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_below="@id/txtUnit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:src="@mipmap/speed_max_round" />
+
+    <Button
+        android:id="@+id/btnUnits"
+        android:layout_width="249dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgStatus"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp"
+        android:background="@color/wine"
+        android:text="Change Units (Meters/Feet)"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/txtHistory"
+        android:layout_width="197dp"
+        android:layout_height="38dp"
+        android:layout_below="@id/imgPetasos"
+        android:layout_alignEnd="@+id/txtStatus"
+        android:layout_marginTop="275dp"
+        android:layout_marginEnd="-66dp"
+        android:text="Stops' History: "
+        android:textColor="@color/wine"
+        android:textSize="24sp" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="wrap_content"
+        android:layout_height="319dp"
+        android:layout_below="@id/btnUnits"
+        android:layout_marginTop="94dp" />
+
+</RelativeLayout>
