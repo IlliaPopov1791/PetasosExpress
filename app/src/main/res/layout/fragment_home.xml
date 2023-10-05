@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,10 +8,93 @@
     android:id="@+id/main_home"
     tools:context=".Home">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- Top Bar with Logo and User Profile -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:layout_centerVertical="true" >
+
+        <!-- Search Bar -->
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/search_hint"
+            android:background="@drawable/search_bar_background"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:layout_weight="1"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="570dp"
+        android:text="@string/welcome_message"
+        android:textColor="@color/wine"
+        android:textSize="32sp" />
 
-</FrameLayout>
+    <TextView
+        android:layout_width="210dp"
+        android:layout_height="141dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginEnd="97dp"
+        android:layout_marginBottom="403dp"
+        android:background="@drawable/border"
+        android:gravity="center"
+        android:text="@string/home_question1"
+        android:textColor="@color/wine"
+        android:textSize="35sp" />
+
+    <Button
+        android:id="@+id/placeOrderButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="138dp"
+        android:layout_marginBottom="218dp"
+        android:background="@color/wine"
+        android:paddingStart="32dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="32dp"
+        android:paddingBottom="16dp"
+        android:text="@string/place_order"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/circular_border"
+        android:contentDescription="@string/app_name"
+        android:src="@mipmap/ic_logo_wine" />
+
+
+
+</RelativeLayout>

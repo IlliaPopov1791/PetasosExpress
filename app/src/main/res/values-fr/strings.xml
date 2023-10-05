@@ -18,4 +18,12 @@
     <string name="alert_exit">Voulez-vous quitter l\'application ?</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
+    <string name="user_pfp">Profil Utilisateur</string>
+    <string name="welcome_message">Bienvenue sur PetasosExpress</string>
+    <string name="delivery_robot">Robot de Livraison</string>
+    <string name="place_order">Recherche</string>
+    <string name="search_hint">Rechercher des endroits</string>
+    <string name="home_question1">Quelle commande avez-vous besoin aujourd\'hui?</string>
+
+
 </resources>
