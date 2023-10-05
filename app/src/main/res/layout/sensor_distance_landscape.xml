@@ -11,12 +11,13 @@
     <!-- Header Section -->
 
     <ImageView
-        android:id="@+id/imgBorder3"
-        android:layout_width="381dp"
-        android:layout_height="287dp"
-
-        android:layout_below="@+id/txtHeader"
-        android:layout_marginTop="162dp"
+        android:id="@+id/imgBorder"
+        android:layout_width="326dp"
+        android:layout_height="308dp"
+        android:layout_below="@id/txtUnit"
+        android:layout_marginStart="-529dp"
+        android:layout_marginTop="-193dp"
+        android:layout_toEndOf="@+id/txtStatus"
         android:src="@drawable/border" />
 
     <TextView
@@ -31,32 +32,30 @@
 
     <ImageView
         android:id="@+id/imgPetasos"
-        android:layout_width="294dp"
-        android:layout_height="178dp"
+        android:layout_width="159dp"
+        android:layout_height="125dp"
         android:layout_below="@id/txtHeader"
-        android:layout_alignEnd="@+id/txtHeader"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="162dp"
+        android:layout_marginTop="2dp"
         android:src="@mipmap/ic_petasos_foreground" />
 
     <ImageView
         android:id="@+id/imgSound"
-        android:layout_width="215dp"
-        android:layout_height="129dp"
+        android:layout_width="159dp"
+        android:layout_height="98dp"
         android:layout_below="@id/txtHeader"
-        android:layout_alignEnd="@+id/txtHeader"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="77dp"
+        android:layout_marginStart="-81dp"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@+id/imgPetasos"
         android:src="@mipmap/ic_sound_foreground" />
 
     <ImageView
         android:id="@+id/imgStone"
-        android:layout_width="227dp"
-        android:layout_height="161dp"
+        android:layout_width="119dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/txtHeader"
-        android:layout_alignEnd="@+id/txtHeader"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="-20dp"
+        android:layout_marginStart="-44dp"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@+id/imgSound"
         android:src="@mipmap/ic_object_foreground" />
 
     <TextView
@@ -64,9 +63,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/imgPetasos"
-        android:layout_alignStart="@+id/txtStatus"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginStart="-289dp"
+        android:layout_marginTop="32dp"
+        android:layout_toEndOf="@+id/imgStone"
         android:text="@string/distance"
         android:textColor="@color/wine"
         android:textSize="24sp" />
@@ -76,8 +75,9 @@
         android:layout_width="83dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/imgPetasos"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="6dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="19dp"
         android:layout_toEndOf="@+id/txtDistance"
         android:gravity="end"
         android:text="@string/num_0"
@@ -86,11 +86,12 @@
 
     <TextView
         android:id="@+id/txtUnit"
-        android:layout_width="116dp"
+        android:layout_width="53dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imgPetasos"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="18dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="27dp"
         android:layout_toEndOf="@+id/txtValue"
         android:text="@string/meters"
         android:textColor="@color/wine"
@@ -99,32 +100,55 @@
     <TextView
         android:id="@+id/txtStatus"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="51dp"
         android:layout_below="@id/imgPetasos"
-        android:layout_alignEnd="@+id/txtHeader"
-        android:layout_marginTop="116dp"
-        android:layout_marginEnd="173dp"
+        android:layout_alignStart="@+id/txtHeader"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="29dp"
         android:text="@string/speed_mode"
         android:textColor="@color/wine"
+        android:textSize="28dp" />
+
+    <TextView
+        android:id="@+id/txtSpeed"
+        android:layout_width="158dp"
+        android:layout_height="54dp"
+        android:layout_below="@id/imgPetasos"
+        android:layout_alignStart="@+id/txtHeader"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="87dp"
+        android:text="@string/maximum_speed"
+        android:textColor="@color/white"
         android:textSize="24dp" />
 
     <ImageView
         android:id="@+id/imgStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="86dp"
+        android:layout_height="82dp"
         android:layout_below="@id/txtUnit"
-        android:layout_alignEnd="@+id/txtHeader"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="69dp"
+        android:layout_marginStart="-119dp"
+        android:layout_marginTop="-147dp"
+        android:layout_toEndOf="@+id/txtStatus"
         android:src="@mipmap/speed_max_round" />
+
+    <ImageView
+        android:id="@+id/imgBorder1"
+        android:layout_width="207dp"
+        android:layout_height="307dp"
+        android:layout_below="@id/txtUnit"
+        android:layout_marginStart="-186dp"
+        android:layout_marginTop="-193dp"
+        android:layout_toEndOf="@+id/txtStatus"
+        android:src="@drawable/border" />
 
     <Button
         android:id="@+id/btnUnits"
-        android:layout_width="304dp"
-        android:layout_height="62dp"
-        android:layout_below="@id/imgStatus"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
+        android:layout_width="287dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtHeader"
+        android:layout_marginStart="-282dp"
+        android:layout_marginTop="243dp"
+        android:layout_toEndOf="@+id/imgStone"
         android:background="@color/wine"
         android:text="@string/change_units"
         android:textColor="@color/white" />
@@ -134,18 +158,21 @@
         android:layout_width="197dp"
         android:layout_height="38dp"
         android:layout_below="@id/imgPetasos"
-        android:layout_alignEnd="@+id/txtStatus"
-        android:layout_marginTop="287dp"
-        android:layout_marginEnd="14dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="-109dp"
+        android:layout_toEndOf="@+id/txtHeader"
         android:text="@string/stops_history"
         android:textColor="@color/wine"
         android:textSize="24sp" />
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="wrap_content"
-        android:layout_height="137dp"
-        android:layout_below="@id/btnUnits"
-        android:layout_marginTop="81dp" />
+        android:layout_width="187dp"
+        android:layout_height="250dp"
+        android:layout_below="@id/txtHistory"
+        android:layout_alignStart="@+id/txtHistory"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/border" />
 
 </RelativeLayout>
