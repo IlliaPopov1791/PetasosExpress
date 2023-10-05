@@ -1,20 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@drawable/main_theme"
+    android:id="@+id/motors_sensors"
+    >
 
-    <!-- Sensor Motors Content Goes Here -->
-
+    <!-- TextView for Motor Speed -->
     <TextView
+        android:id="@+id/textViewMotor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sensor Motors Fragment"
-        android:textSize="24sp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/motor_speed"
+        android:textColor="@color/wine"
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
 
 
-</LinearLayout>
+    <!-- ProgressBar for Motor Speed -->
+
+    <TextView
+        android:id="@+id/textViewMotorSpeed"
+        android:layout_width="161dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewMotor"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="126dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/motor_speed_value"
+        android:textColor="@color/wine"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="211dp"
+        android:layout_height="46dp"
+        android:layout_below="@id/textViewMotorSpeed"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/circular_border"
+        android:max="20" />
+
+    <!-- Motor RPM -->
+    <TextView
+        android:id="@+id/textViewRPM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/motor_rpm"
+        android:textColor="@color/wine"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_below="@id/progressBar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" />
+
+    <!-- Error Codes -->
+    <TextView
+        android:id="@+id/textViewRPMValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progressBar"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="17dp"
+        android:layout_toEndOf="@+id/textViewRPM"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/wine"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/error_codes"
+        android:textColor="@color/wine"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_below="@id/textViewRPM"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <!-- Safety Alerts -->
+    <TextView
+        android:id="@+id/textViewAlerts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/safety_alerts"
+        android:textColor="@color/wine"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_below="@id/textViewError"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <!-- Emergency Stop Button -->
+    <Button
+        android:id="@+id/btnEmergencyStop"
+        android:layout_width="212dp"
+        android:layout_height="74dp"
+        android:layout_below="@id/textViewAlerts"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="249dp"
+        android:backgroundTint="@color/red"
+        android:text="@string/emergency_stop"
+        android:textColor="@android:color/white" />
+
+</RelativeLayout>
