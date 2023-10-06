@@ -35,4 +35,13 @@
     <string name="error_codes">Codes d\'Erreur :</string>
     <string name="safety_alerts">Alertes de Sécurité :</string>
     <string name="emergency_stop">Arrêt d\'Urgence</string>
+    <string name="collision_avoidance">Évitement de collision</string>
+    <string name="distance">Distance :</string>
+    <string name="num_0">0</string>
+    <string name="meters">Mètres</string>
+    <string name="speed_mode">Mode de vitesse :</string>
+    <string name="change_units">Changer d\'unités (Mètres/Pieds)</string>
+    <string name="stops_history">Historique des arrêts :</string>
+    <string name="maximum_speed">Vitesse maximale</string>
+
 </resources>
