@@ -8,7 +8,7 @@
         android:id="@+id/balanceSensorTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Balance Sensor"
+        android:text="@string/balance_sensor"
         android:textColor="@color/wine"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -36,7 +36,7 @@
         android:id="@+id/xAxisLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="X Axis"
+        android:text="@string/x_axis"
         app:layout_constraintBottom_toTopOf="@id/xAxisProgressBar"
         app:layout_constraintLeft_toLeftOf="@id/xAxisProgressBar"/>
 
@@ -44,7 +44,7 @@
         android:id="@+id/xAxisValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Value: 0"
+        android:text="@string/value_0"
         app:layout_constraintTop_toBottomOf="@id/xAxisProgressBar"
         app:layout_constraintLeft_toLeftOf="@id/xAxisProgressBar"/>
 
@@ -67,7 +67,7 @@
         android:id="@+id/yAxisLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Y Axis"
+        android:text="@string/y_axis"
         app:layout_constraintBottom_toTopOf="@id/yAxisProgressBar"
         app:layout_constraintLeft_toLeftOf="@id/yAxisProgressBar"/>
 
@@ -75,7 +75,7 @@
         android:id="@+id/yAxisValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Value: 0"
+        android:text="@string/value_0"
         app:layout_constraintTop_toBottomOf="@id/yAxisProgressBar"
         app:layout_constraintLeft_toLeftOf="@id/yAxisProgressBar"/>
 
@@ -98,7 +98,7 @@
         android:id="@+id/zAxisLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Z Axis"
+        android:text="@string/z_axis"
         app:layout_constraintBottom_toTopOf="@id/zAxisProgressBar"
         app:layout_constraintLeft_toLeftOf="@id/zAxisProgressBar"/>
 
@@ -106,7 +106,7 @@
         android:id="@+id/zAxisValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Value: 0"
+        android:text="@string/value_0"
         app:layout_constraintTop_toBottomOf="@id/zAxisProgressBar"
         app:layout_constraintLeft_toLeftOf="@id/zAxisProgressBar"/>
 
@@ -117,7 +117,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="144dp"
-        android:text="Start Simulation"
+        android:text="@string/start_simulation"
         android:textColor="#FFFFFF"
     android:background="@color/wine"
     app:layout_constraintBottom_toBottomOf="parent"

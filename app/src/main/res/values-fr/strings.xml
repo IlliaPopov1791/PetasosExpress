@@ -43,5 +43,10 @@
     <string name="change_units">Changer d\'unités (Mètres/Pieds)</string>
     <string name="stops_history">Historique des arrêts :</string>
     <string name="maximum_speed">Vitesse maximale</string>
+    <string name="x_axis">X Axis</string>
+    <string name="value_0">Value: 0</string>
+    <string name="y_axis">Y Axis</string>
+    <string name="z_axis">Z Axis</string>
+    <string name="start_simulation">Start Simulation</string>
 
 </resources>
