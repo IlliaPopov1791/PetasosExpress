@@ -3,87 +3,78 @@
  * Student ID: n01421791, n01479878, n01442206, n01375348
  * Section: B
  */
-package ca.hermeslogistics.itservices.petasosexpress;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
+package ca.hermeslogistics.itservices.petasosexpress;
+import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import androidx.fragment.app.Fragment;
 
 import java.util.Random;
 
 public class SensorBalance extends Fragment implements SensorEventListener {
-
-    private View circleX, circleY, circleZ;
+    private ProgressBar xAxisProgressBar, yAxisProgressBar, zAxisProgressBar;
+    private TextView xAxisValue, yAxisValue, zAxisValue;
+    private Handler handler;
     private Random random;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sensor_balance, container, false);
 
-        circleX = view.findViewById(R.id.circleX);
-        circleY = view.findViewById(R.id.circleY);
-        circleZ = view.findViewById(R.id.circleZ);
+        xAxisProgressBar = view.findViewById(R.id.xAxisProgressBar);
+        yAxisProgressBar = view.findViewById(R.id.yAxisProgressBar);
+        zAxisProgressBar = view.findViewById(R.id.zAxisProgressBar);
+
+        xAxisValue = view.findViewById(R.id.xAxisValue);
+        yAxisValue = view.findViewById(R.id.yAxisValue);
+        zAxisValue = view.findViewById(R.id.zAxisValue);
+
+        handler = new Handler();
+        random = new Random();
+
+        view.findViewById(R.id.startSimulationButton).setOnClickListener(v -> simulateAxes());
 
         return view;
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        random = new Random();
+    private void simulateAxes() {
+        simulateAxis(xAxisProgressBar, xAxisValue);
+        simulateAxis(yAxisProgressBar, yAxisValue);
+        simulateAxis(zAxisProgressBar, zAxisValue);
+
+        // Call this method again after a short delay for continuous simulation
+        handler.postDelayed(this::simulateAxes, 1000); // 1-second delay
+    }
+
+    private void simulateAxis(ProgressBar progressBar, TextView valueText) {
+        int axisValue = random.nextInt(201) - 100; // Simulating values between -100 and 100
+
+        progressBar.setProgress(axisValue + 100); // Offset by 100 to make it positive for progress bar
+        valueText.setText("Value: " + axisValue); // Display the value in the TextView
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        simulateSensorChanges();
+    public void onDestroyView() {
+        super.onDestroyView();
+        handler.removeCallbacksAndMessages(null); // Stop all callbacks when the fragment is destroyed
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    private void simulateSensorChanges() {
-        // Generate random values between -100 and 100 for each axis
-        float x = random.nextFloat() * 200 - 100;
-        float y = random.nextFloat() * 200 - 100;
-        float z = random.nextFloat() * 200 - 100;
-
-        Log.d("SimulatedMagnetometer", "X: " + x + ", Y: " + y + ", Z: " + z);
-
-        updateCircleColor(circleX, x);
-        updateCircleColor(circleY, y);
-        updateCircleColor(circleZ, z);
-
-        // Call this method again after a short delay to continuously update the circles
-        circleX.postDelayed(this::simulateSensorChanges, 1000); // 1 second delay
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // Handle accuracy changes if needed
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        // No real sensor reading, using simulated values
-    }
-
-    @Override
-    public void onAccuracyChanged(android.hardware.Sensor sensor, int accuracy) {
-        // Handle accuracy changes if needed
-    }
-
-    private void updateCircleColor(View circle, float value) {
-        GradientDrawable drawable = (GradientDrawable) circle.getBackground();
-
-        int colorValue = (int) (Math.abs(value) * 2);  // Using absolute value and multiplying for emphasis
-        colorValue = Math.min(255, Math.max(0, colorValue)); // Clamping to [0, 255]
-
-        drawable.setColor(Color.rgb(colorValue, colorValue, colorValue));
+        // Handle sensor changes if needed
     }
 }

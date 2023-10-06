@@ -1,58 +1,129 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/balance_sensor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/logo_dark"
-    tools:context=".SensorBalance">
+    android:background="@color/logo_dark">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/balanceSensorTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="84dp"
-        android:text="Balance_Sensor"
+        android:text="Balance Sensor"
         android:textColor="@color/wine"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp"/>
 
-    <!-- Circle for X axis -->
-    <View
-        android:id="@+id/circleX"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <!-- X Axis -->
+
+    <ProgressBar
+        android:id="@+id/xAxisProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
         android:layout_marginTop="50dp"
-        android:background="@drawable/gradient_x"
-        app:layout_constraintEnd_toStartOf="@+id/circleY"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/balanceSensorTitle"
+        android:max="200"
+        android:progress="100"
+        android:progressTint="@color/wine"/>
 
-    <!-- Circle for Y axis -->
-    <View
-        android:id="@+id/circleY"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/gradient_y"
-        app:layout_constraintEnd_toStartOf="@+id/circleZ"
-        app:layout_constraintStart_toEndOf="@+id/circleX"
-        app:layout_constraintTop_toTopOf="@+id/circleX" />
+    <TextView
+        android:id="@+id/xAxisLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="X Axis"
+        app:layout_constraintBottom_toTopOf="@id/xAxisProgressBar"
+        app:layout_constraintLeft_toLeftOf="@id/xAxisProgressBar"/>
 
-    <!-- Circle for Z axis -->
-    <View
-        android:id="@+id/circleZ"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/gradient_z"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/circleY"
-        app:layout_constraintTop_toTopOf="@+id/circleY" />
+    <TextView
+        android:id="@+id/xAxisValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Value: 0"
+        app:layout_constraintTop_toBottomOf="@id/xAxisProgressBar"
+        app:layout_constraintLeft_toLeftOf="@id/xAxisProgressBar"/>
+
+    <!-- Y Axis -->
+
+    <ProgressBar
+        android:id="@+id/yAxisProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xAxisValue"
+        android:max="200"
+        android:progress="100"
+        android:progressTint="@color/wine"/>
+
+    <TextView
+        android:id="@+id/yAxisLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Y Axis"
+        app:layout_constraintBottom_toTopOf="@id/yAxisProgressBar"
+        app:layout_constraintLeft_toLeftOf="@id/yAxisProgressBar"/>
+
+    <TextView
+        android:id="@+id/yAxisValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Value: 0"
+        app:layout_constraintTop_toBottomOf="@id/yAxisProgressBar"
+        app:layout_constraintLeft_toLeftOf="@id/yAxisProgressBar"/>
+
+    <!-- Z Axis -->
+
+    <ProgressBar
+        android:id="@+id/zAxisProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/yAxisValue"
+        android:max="200"
+        android:progress="100"
+        android:progressTint="@color/wine"/>
+
+    <TextView
+        android:id="@+id/zAxisLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Z Axis"
+        app:layout_constraintBottom_toTopOf="@id/zAxisProgressBar"
+        app:layout_constraintLeft_toLeftOf="@id/zAxisProgressBar"/>
+
+    <TextView
+        android:id="@+id/zAxisValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Value: 0"
+        app:layout_constraintTop_toBottomOf="@id/zAxisProgressBar"
+        app:layout_constraintLeft_toLeftOf="@id/zAxisProgressBar"/>
+
+    <!-- Start Simulation Button -->
+
+    <Button
+        android:id="@+id/startSimulationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="144dp"
+        android:text="Start Simulation"
+        android:textColor="#FFFFFF"
+    android:background="@color/wine"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintHorizontal_bias="0.455"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
