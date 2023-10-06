@@ -5,65 +5,85 @@
  */
 package ca.hermeslogistics.itservices.petasosexpress;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.fragment.app.Fragment;
 
-/*
- * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
- * Student ID: n01421791, n01479878, n01442206, n01375348
- * Section: B
- */
-public class SensorBalance extends Fragment {
+import java.util.Random;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class SensorBalance extends Fragment implements SensorEventListener {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private View circleX, circleY, circleZ;
+    private Random random;
 
-    public SensorBalance() {
-        // Required empty public constructor
-    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_sensor_balance, container, false);
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SensorBalance.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SensorBalance newInstance(String param1, String param2) {
-        SensorBalance fragment = new SensorBalance();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        circleX = view.findViewById(R.id.circleX);
+        circleY = view.findViewById(R.id.circleY);
+        circleZ = view.findViewById(R.id.circleZ);
+
+        return view;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        random = new Random();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sensor_balance, container, false);
+    public void onResume() {
+        super.onResume();
+        simulateSensorChanges();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    private void simulateSensorChanges() {
+        // Generate random values between -100 and 100 for each axis
+        float x = random.nextFloat() * 200 - 100;
+        float y = random.nextFloat() * 200 - 100;
+        float z = random.nextFloat() * 200 - 100;
+
+        Log.d("SimulatedMagnetometer", "X: " + x + ", Y: " + y + ", Z: " + z);
+
+        updateCircleColor(circleX, x);
+        updateCircleColor(circleY, y);
+        updateCircleColor(circleZ, z);
+
+        // Call this method again after a short delay to continuously update the circles
+        circleX.postDelayed(this::simulateSensorChanges, 1000); // 1 second delay
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        // No real sensor reading, using simulated values
+    }
+
+    @Override
+    public void onAccuracyChanged(android.hardware.Sensor sensor, int accuracy) {
+        // Handle accuracy changes if needed
+    }
+
+    private void updateCircleColor(View circle, float value) {
+        GradientDrawable drawable = (GradientDrawable) circle.getBackground();
+
+        int colorValue = (int) (Math.abs(value) * 2);  // Using absolute value and multiplying for emphasis
+        colorValue = Math.min(255, Math.max(0, colorValue)); // Clamping to [0, 255]
+
+        drawable.setColor(Color.rgb(colorValue, colorValue, colorValue));
     }
 }

@@ -43,4 +43,5 @@
     <string name="change_units">Change Units (Meters/Feet)</string>
     <string name="stops_history">Stops\' History:</string>
     <string name="maximum_speed">Maximum Speed</string>
+
 </resources>

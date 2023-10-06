@@ -1,15 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/balance_sensor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/balance_sensor"
+    android:background="@color/logo_dark"
     tools:context=".SensorBalance">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/balance_sensor" />
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="84dp"
+        android:text="Balance_Sensor"
+        android:textColor="@color/wine"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <!-- Circle for X axis -->
+    <View
+        android:id="@+id/circleX"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/gradient_x"
+        app:layout_constraintEnd_toStartOf="@+id/circleY"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <!-- Circle for Y axis -->
+    <View
+        android:id="@+id/circleY"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/gradient_y"
+        app:layout_constraintEnd_toStartOf="@+id/circleZ"
+        app:layout_constraintStart_toEndOf="@+id/circleX"
+        app:layout_constraintTop_toTopOf="@+id/circleX" />
+
+    <!-- Circle for Z axis -->
+    <View
+        android:id="@+id/circleZ"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/gradient_z"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/circleY"
+        app:layout_constraintTop_toTopOf="@+id/circleY" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
