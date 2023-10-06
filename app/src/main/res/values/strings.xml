@@ -26,7 +26,7 @@
     <string name="home_question1">What order do you need today?</string>
     <string name="_4cm">4cm</string>
     <string name="status_warning">Status: Warning</string>
-    <string name="set_proximity_threshold">set proximity threshold</string>
+    <string name="set_proximity_threshold">Set Proximity Threshold</string>
     <string name="status">status:</string>
     <string name="_status">Status:</string>
     <string name="motor_speed">Motor Speed:</string>
