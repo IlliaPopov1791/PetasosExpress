@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="ontario_cities">
+        <item>Toronto</item>
+        <item>Ottawa</item>
+        <item>Mississauga</item>
+        <item>Brampton</item>
+        <item>Hamilton</item>
+        <item>London</item>
+        <item>Markham</item>
+        <item>Vaughan</item>
+        <item>Kitchener</item>
+        <item>Windsor</item>
+        <item>Richmond Hill</item>
+        <item>Burlington</item>
+        <item>Sudbury</item>
+        <item>Oshawa</item>
+        <item>Barrie</item>
+        <item>St. Catharines</item>
+        <item>Cambridge</item>
+        <item>Kingston</item>
+        <item>Waterloo</item>
+        <item>Brantford</item>
+        <item>Thunder Bay</item>
+        <item>Guelph</item>
+        <item>North Bay</item>
+        <item>Belleville</item>
+        <item>Peterborough</item>
+        <item>Sarnia</item>
+        <item>Chatham-Kent</item>
+        <item>Sault Ste. Marie</item>
+        <item>Kawartha Lakes</item>
+        <item>Niagara Falls</item>
+        <item>Welland</item>
+        <item>Windsor</item>
+        <!-- You can continue to add more cities as needed -->
+    </string-array>
+</resources>

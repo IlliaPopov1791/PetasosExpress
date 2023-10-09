@@ -1,7 +1,7 @@
-<!--Illia Popov | n01421791 | Course ID: 1682.202350-->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
+
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/home_screen"
@@ -35,4 +35,16 @@
             </group>
         </menu>
     </item>
+
+    <item android:title="@string/Settings">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/AppSettings"
+                    android:icon="@drawable/ic_settings_foreground"
+                    android:title="@string/AppSettings" />
+            </group>
+        </menu>
+    </item>
+
 </menu>

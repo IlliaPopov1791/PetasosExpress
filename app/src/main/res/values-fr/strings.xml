@@ -48,5 +48,7 @@
     <string name="y_axis">Axe Y</string>
     <string name="z_axis">Axe Z</string>
     <string name="start_simulation">Démarrer la simulation</string>
+    <string name="Settings">settings</string>
+    <string name="AppSettings">AppSettings</string>
 
 </resources>

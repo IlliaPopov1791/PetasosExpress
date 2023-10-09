@@ -27,9 +27,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
 /*
  * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
@@ -160,6 +158,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 } else if (itemId == R.id.motors_sensors) {
                     SensorMotors mot = new SensorMotors();
                     fragmentManager.beginTransaction().replace(R.id.main_frame_layout, mot).commit();
+                } else if (itemId == R.id.AppSettings) { // <-- Add this case
+                    AppSettings settings = new AppSettings();
+                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, settings).commit();
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
