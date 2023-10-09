@@ -1,5 +1,7 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
+import android.content.res.Configuration;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
@@ -7,20 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
-
 import android.os.Handler;
 import android.os.Looper;
-import android.widget.ProgressBar;
-
 import java.util.Random;
-
-/*
- * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
- * Student ID: n01421791, n01479878, n01442206, n01375348
- * Section: B
- */
 
 public class SensorMotors extends Fragment {
 
@@ -35,8 +29,20 @@ public class SensorMotors extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.sensor_motors, container, false);
+        // Determine the device's current orientation
+        int orientation = getResources().getConfiguration().orientation;
+
+        // Load the appropriate layout based on orientation
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            return inflater.inflate(R.layout.sensor_motors, container, false);
+        } else {
+            return inflater.inflate(R.layout.sensor_motors_landscape, container, false);
+        }
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         // Find the TextView and ProgressBar by ID
         progressBar = view.findViewById(R.id.progressBar);
@@ -44,9 +50,8 @@ public class SensorMotors extends Fragment {
         Button btnEmergencyStop = view.findViewById(R.id.btnEmergencyStop);
 
         // Apply underline effect to the "Motor Speed" text
-        String motorSpeedText = " ";
-        SpannableString content = new SpannableString(motorSpeedText);
-        content.setSpan(new UnderlineSpan(), 0, motorSpeedText.length(), 0);
+        SpannableString content = new SpannableString(getString(R.string.motor_speed_label));
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         textViewMotorSpeed.setText(content);
 
         // Start updating ProgressBar and TextView with random values
@@ -59,13 +64,11 @@ public class SensorMotors extends Fragment {
                 // Stop updating values and set motor speed to 0.00 km/h
                 handler.removeCallbacksAndMessages(null);
                 progressBar.setProgress(0);
-                textViewMotorSpeed.setText("0.00 km/h");
+                textViewMotorSpeed.setText(getString(R.string.motor_speed_value_placeholder, "0.00"));
             }
         });
 
         // TODO: Initialize and control your Sensor Motors here if necessary
-
-        return view;
     }
 
     private void startUpdatingValues() {

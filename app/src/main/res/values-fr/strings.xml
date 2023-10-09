@@ -50,5 +50,7 @@
     <string name="start_simulation">Démarrer la simulation</string>
     <string name="Settings">settings</string>
     <string name="AppSettings">AppSettings</string>
+    <string name="motor_speed_label">Vitesse du moteur</string>
+    <string name="motor_speed_value_placeholder">%s km/h</string>
 
 </resources>

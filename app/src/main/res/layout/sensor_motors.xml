@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_theme"
-    android:id="@+id/motors_sensors"
+    android:id="@+id/motors_sensors">
     >
 
     <!-- TextView for Motor Speed -->
