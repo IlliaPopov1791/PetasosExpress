@@ -1,17 +1,16 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 /*
  * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
  * Student ID: n01421791, n01479878, n01442206, n01375348
