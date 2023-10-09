@@ -28,7 +28,7 @@ public class SensorBalance extends Fragment implements SensorEventListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_sensor_balance, container, false);
+        View view = inflater.inflate(R.layout.sensor_balance, container, false);
 
         xAxisProgressBar = view.findViewById(R.id.xAxisProgressBar);
         yAxisProgressBar = view.findViewById(R.id.yAxisProgressBar);

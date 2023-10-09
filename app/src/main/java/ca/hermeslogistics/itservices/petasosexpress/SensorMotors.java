@@ -1,9 +1,7 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +9,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
-import android.os.Bundle;
+
 import android.os.Handler;
 import android.os.Looper;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-import androidx.fragment.app.Fragment;
+
 import java.util.Random;
 
 /*
@@ -42,7 +36,7 @@ public class SensorMotors extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_sensor_motors, container, false);
+        View view = inflater.inflate(R.layout.sensor_motors, container, false);
 
         // Find the TextView and ProgressBar by ID
         progressBar = view.findViewById(R.id.progressBar);
