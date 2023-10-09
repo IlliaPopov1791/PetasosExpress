@@ -24,6 +24,7 @@ public class LoginScreen extends AppCompatActivity {
     private EditText emailEditText;
     private EditText passwordEditText;
     private Button loginButton;
+    private Button signupButton; // New button for signup
     private FirebaseAuth mAuth;
 
     @Override
@@ -38,6 +39,9 @@ public class LoginScreen extends AppCompatActivity {
         emailEditText = findViewById(R.id.editTextEmail);
         passwordEditText = findViewById(R.id.editTextPassword);
         loginButton = findViewById(R.id.buttonLogin);
+        signupButton = findViewById(R.id.buttonSignUp); // Initialize the signup button
+
+        // Set an OnClickListener for the login button
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,6 +65,14 @@ public class LoginScreen extends AppCompatActivity {
                                 }
                             }
                         });
+            }
+        });
+
+        signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginScreen.this, SignupScreen.class);
+                startActivity(intent);
             }
         });
     }
