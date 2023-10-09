@@ -50,5 +50,6 @@
     <string name="start_simulation">Démarrer la simulation</string>
     <string name="Settings">settings</string>
     <string name="AppSettings">AppSettings</string>
+    <string name="help">help</string>
 
 </resources>

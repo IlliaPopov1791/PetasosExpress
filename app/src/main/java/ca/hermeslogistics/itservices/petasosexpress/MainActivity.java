@@ -26,8 +26,17 @@ import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import com.google.android.material.snackbar.Snackbar;
+
 
 /*
  * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
@@ -39,10 +48,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         this.configureToolBar();
 
@@ -89,17 +101,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getMenuInflater().inflate(R.menu.top_menu, menu);
         return true;
     }
-
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (item.getItemId() == R.id.home) {
             Home home = new Home();
             fragmentManager.beginTransaction().replace(R.id.main_frame_layout, home).commit();
             return true;
+        } else if (item.getItemId() == R.id.help) {
+            initiateCall();
+            return true;
         } else {
             return super.onOptionsItemSelected(item);
         }
     }
+
 
     private void showExitAlertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -174,5 +190,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void DisplayToast(String msg)
     {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+    private void initiateCall() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 123);
+            return;
+        }
+        callPhoneNumber();
+    }
+    private void callPhoneNumber() {
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:1234567890")); // Adjust with your phone number
+        startActivity(callIntent);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 123) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Snackbar.make(drawerLayout, "Permission granted!", Snackbar.LENGTH_SHORT).show();
+                callPhoneNumber();
+            } else {
+                Snackbar.make(drawerLayout, "Permission denied!", Snackbar.LENGTH_SHORT).show();
+            }
+        }
     }
 }

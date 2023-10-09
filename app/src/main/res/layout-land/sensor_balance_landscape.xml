@@ -6,7 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/balance_sensor_sensor"
     tools:context=".SensorBalance"
-    android:background="@color/logo_dark">
+    android:background="@color/logo_dark"
+    tools:ignore="MissingDefaultResource">
 
     <!-- Title -->
     <TextView
