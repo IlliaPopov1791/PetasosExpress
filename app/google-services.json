@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "158343388699",
+    "project_id": "petasosexpress-5fde0",
+    "storage_bucket": "petasosexpress-5fde0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:158343388699:android:65bfdd57ade1b208c4e2be",
+        "android_client_info": {
+          "package_name": "ca.hermeslogistics.itservices.petasosexpress"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9HQTULDooH5_1aCABcxu3JwJq48m7YyU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
