@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.Manifest;
@@ -54,6 +55,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (savedInstanceState == null) {
+            restoreLastFragment();  // Add this line to restore the last active fragment
+        }
 
 
         this.configureToolBar();
@@ -62,12 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         this.configureNavigationView();
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        Home HomeFragment = new Home();
-        fragmentTransaction.add(R.id.main_frame_layout, HomeFragment);
-        fragmentTransaction.commit();
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
@@ -159,38 +158,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentManager fragmentManager = getSupportFragmentManager();
         this.navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @SuppressLint("NonConstantResourceId")//Cannot extract string from here as value MUST be constant
+            @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                Fragment fragmentToLoad = null;
+                String fragmentTag = "";
+
                 if (itemId == R.id.home_screen) {
-                    Home home = new Home();
-                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, home).commit();
+                    fragmentToLoad = new Home();
+                    fragmentTag = "home";
                 } else if (itemId == R.id.gps_sensor) {
-                    SensorGPS gps = new SensorGPS();
-                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, gps).commit();
+                    fragmentToLoad = new SensorGPS();
+                    fragmentTag = "gps";
                 } else if (itemId == R.id.distance_sensor) {
-                    SensorDistance dis = new SensorDistance();
-                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, dis).commit();
+                    fragmentToLoad = new SensorDistance();
+                    fragmentTag = "distance";
                 } else if (itemId == R.id.proximity_sensor) {
-                    SensorProximity prox = new SensorProximity();
-                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, prox).commit();
+                    fragmentToLoad = new SensorProximity();
+                    fragmentTag = "proximity";
                 } else if (itemId == R.id.balance_sensor) {
-                    SensorBalance bal = new SensorBalance();
-                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, bal).commit();
+                    fragmentToLoad = new SensorBalance();
+                    fragmentTag = "balance";
                 } else if (itemId == R.id.motors_sensors) {
-                    SensorMotors mot = new SensorMotors();
-                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, mot).commit();
+                    fragmentToLoad = new SensorMotors();
+                    fragmentTag = "motors";
                 } else if (itemId == R.id.AppSettings) {
-                    AppSettings settings = new AppSettings();
-                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, settings).commit();
-                }else if (itemId == R.id.AppSettings) {
-                        AppSettings settings = new AppSettings();
-                        fragmentManager.beginTransaction().replace(R.id.main_frame_layout, settings).commit();
+                    fragmentToLoad = new AppSettings();
+                    fragmentTag = "settings";
                 }
+
+                if (fragmentToLoad != null) {
+                    fragmentManager.beginTransaction().replace(R.id.main_frame_layout, fragmentToLoad).commit();
+                    saveCurrentFragment(fragmentTag); // Save the current fragment's tag
+                }
+
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
+
         });
     }
     @Override
@@ -225,4 +232,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
     }
+    // This method saves the current fragment's tag to shared preferences
+    private void saveCurrentFragment(String fragmentTag) {
+        getSharedPreferences("app_settings", MODE_PRIVATE).edit().putString("current_fragment", fragmentTag).apply();
+    }
+
+    // This method retrieves the saved fragment's tag from shared preferences
+    private String getSavedFragment() {
+        return getSharedPreferences("app_settings", MODE_PRIVATE).getString("current_fragment", "");
+    }
+
+    // This method is used to restore the last active fragment from shared preferences
+    private void restoreLastFragment() {
+        String fragmentTag = getSavedFragment();
+        Fragment fragmentToLoad = null;
+
+        switch (fragmentTag) {
+            case "home":
+                fragmentToLoad = new Home();
+                break;
+            case "gps":
+                fragmentToLoad = new SensorGPS();
+                break;
+            case "distance":
+                fragmentToLoad = new SensorDistance();
+                break;
+            case "proximity":
+                fragmentToLoad = new SensorProximity();
+                break;
+            case "balance":
+                fragmentToLoad = new SensorBalance();
+                break;
+            case "motors":
+                fragmentToLoad = new SensorMotors();
+                break;
+            case "settings":
+                fragmentToLoad = new AppSettings();
+                break;
+            default:
+                fragmentToLoad = new Home();
+                break;
+        }
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, fragmentToLoad).commit();
+    }
+
 }
