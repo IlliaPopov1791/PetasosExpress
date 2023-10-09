@@ -7,3 +7,8 @@
 
 ### GitHub project repo link: https://github.com/IlliaPopov1791/PetasosExpress.git
 
+### Project Description:
+#### PetasosExpress revolutionizes delivery through autonomous robots and a user-friendly mobile app, providing seamless item ordering, pickup, and delivery.
+#### Real-time tracking and sensor data access ensure transparency and control.
+
+
