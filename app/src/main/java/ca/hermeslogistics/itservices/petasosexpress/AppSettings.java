@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.ToggleButton;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 /*
@@ -36,6 +39,24 @@ public class AppSettings extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         citiesSpinner.setAdapter(adapter);
 
+        ToggleButton toggleTheme = view.findViewById(R.id.toggle_theme);
+        toggleTheme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toggleTheme.isChecked()) {
+                    // Dark Theme
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    DisplayToast( "Switched to Dark Theme");
+                } else {
+                    // Light Theme
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    DisplayToast( "Switched to Light Theme");
+                }
+                getActivity().recreate();
+            }
+        });
+
+
         // ToggleButton for orientation
         ToggleButton toggleOrientation = view.findViewById(R.id.toggle_portrait_landscape);
         toggleOrientation.setOnClickListener(new View.OnClickListener() {
@@ -44,13 +65,22 @@ public class AppSettings extends Fragment {
                 if (toggleOrientation.isChecked()) {
                     // Landscape
                     getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    DisplayToast( "Landscape");
                 } else {
                     // Portrait
                     getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    DisplayToast( "Portrait");
                 }
             }
         });
 
+
+
         return view;
     }
+    private void DisplayToast(String msg)
+    {
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
 }
