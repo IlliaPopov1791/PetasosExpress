@@ -41,11 +41,12 @@
         android:textColor="@color/wine"/>
 
     <Button
+        android:id="@+id/buttonLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Login"
         android:background="@color/wine"
         android:textColor="@color/white"
         android:layout_marginTop="16dp"
-        android:onClick="loginClicked" />
+        />
 </LinearLayout>
