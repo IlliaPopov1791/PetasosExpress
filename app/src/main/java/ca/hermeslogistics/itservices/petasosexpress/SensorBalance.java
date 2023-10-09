@@ -5,6 +5,7 @@
  */
 
 package ca.hermeslogistics.itservices.petasosexpress;
+import android.content.res.Configuration;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -26,9 +27,20 @@ public class SensorBalance extends Fragment implements SensorEventListener {
     private Handler handler;
     private Random random;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.sensor_balance, container, false);
+
+        int orientation = getResources().getConfiguration().orientation;
+        View view;
+        // Load the appropriate layout based on orientation
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            view = inflater.inflate(R.layout.sensor_balance, container, false);
+        } else {
+            view = inflater.inflate(R.layout.sensor_balance_landscape, container, false);
+        }
+        // Determine the device's current orientation
+
 
         xAxisProgressBar = view.findViewById(R.id.xAxisProgressBar);
         yAxisProgressBar = view.findViewById(R.id.yAxisProgressBar);

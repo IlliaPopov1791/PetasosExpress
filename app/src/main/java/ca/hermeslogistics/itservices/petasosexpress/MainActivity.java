@@ -115,10 +115,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return super.onOptionsItemSelected(item);
         }
     }
-
-
     private void showExitAlertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setIcon(R.drawable.ic_delivery_foreground);
         builder.setMessage(R.string.alert_exit)
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
@@ -136,6 +135,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
+
     private void configureToolBar(){
         this.toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
