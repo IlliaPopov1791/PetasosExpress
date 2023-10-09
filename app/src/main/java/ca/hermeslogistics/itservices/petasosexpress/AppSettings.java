@@ -1,12 +1,14 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.content.res.Configuration;
+import android.widget.ToggleButton;
 import androidx.fragment.app.Fragment;
 
 /*
@@ -34,7 +36,21 @@ public class AppSettings extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         citiesSpinner.setAdapter(adapter);
 
+        // ToggleButton for orientation
+        ToggleButton toggleOrientation = view.findViewById(R.id.toggle_portrait_landscape);
+        toggleOrientation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toggleOrientation.isChecked()) {
+                    // Landscape
+                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                } else {
+                    // Portrait
+                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                }
+            }
+        });
+
         return view;
     }
-
 }
