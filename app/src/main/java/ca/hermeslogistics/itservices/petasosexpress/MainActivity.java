@@ -122,7 +122,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     private void showExitAlertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setIcon(R.drawable.ic_delivery_foreground);
+        builder.setIcon(R.mipmap.ic_launcher_foreground);
+        builder.setTitle(R.string.app_name);
         builder.setMessage(R.string.alert_exit)
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
