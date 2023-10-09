@@ -108,9 +108,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Home home = new Home();
             fragmentManager.beginTransaction().replace(R.id.main_frame_layout, home).commit();
             return true;
+        } if (item.getItemId() == R.id.Settings_button) {
+            AppSettings settings = new AppSettings();
+            fragmentManager.beginTransaction().replace(R.id.main_frame_layout, settings).commit();
+            return true;
         } else if (item.getItemId() == R.id.help) {
             initiateCall();
             return true;
+
         } else {
             return super.onOptionsItemSelected(item);
         }
@@ -175,9 +180,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 } else if (itemId == R.id.motors_sensors) {
                     SensorMotors mot = new SensorMotors();
                     fragmentManager.beginTransaction().replace(R.id.main_frame_layout, mot).commit();
-                } else if (itemId == R.id.AppSettings) { // <-- Add this case
+                } else if (itemId == R.id.AppSettings) {
                     AppSettings settings = new AppSettings();
                     fragmentManager.beginTransaction().replace(R.id.main_frame_layout, settings).commit();
+                }else if (itemId == R.id.AppSettings) {
+                        AppSettings settings = new AppSettings();
+                        fragmentManager.beginTransaction().replace(R.id.main_frame_layout, settings).commit();
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
