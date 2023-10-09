@@ -53,4 +53,9 @@
     <string name="help">help</string>
     <string name="motor_speed_label">Vitesse du moteur</string>
     <string name="motor_speed_value_placeholder">%s km/h</string>
+    <string name="login">Connexion</string>
+    <string name="enter_your_password">Entrez votre mot de passe</string>
+    <string name="password">Mot de passe</string>
+    <string name="enter_your_gmail_address">Entrez votre adresse Gmail</string>
+    <string name="gmail">Gmail</string>
 </resources>
