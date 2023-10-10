@@ -10,27 +10,14 @@
     android:padding="16dp"
     tools:context=".LoginScreen">
 
-    <Button
-        android:id="@+id/buttonSignUp"
-        android:layout_width="241dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/wine"
-        android:text="Don't have an Account"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/editTextPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
-        app:layout_constraintVertical_bias="0.455" />
-
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="233dp"
-        android:layout_height="183dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="339dp"
+        android:layout_height="282dp"
+        android:layout_marginTop="48dp"
         android:src="@mipmap/ic_logo_wine"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.012"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,8 +25,8 @@
         android:id="@+id/editTextEmail"
         android:layout_width="233dp"
         android:layout_height="49dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="56dp"
         android:contentDescription="@string/enter_your_gmail_address"
         android:hint="@string/gmail"
         android:importantForAccessibility="yes"
@@ -47,13 +34,40 @@
         android:textColor="@color/wine"
         android:textColorHint="@color/wine"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="241dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/wine"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <Button
+        android:id="@+id/buttonSignUp"
+        android:layout_width="241dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="4dp"
+        android:background="@color/wine"
+        android:text="Don't have an Account"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextPassword"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
+        app:layout_constraintVertical_bias="0.245" />
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="234dp"
         android:layout_height="48dp"
-        android:layout_marginStart="76dp"
+        android:layout_marginStart="56dp"
         android:layout_marginTop="44dp"
         android:contentDescription="@string/enter_your_password"
         android:hint="@string/password"
@@ -64,18 +78,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/editTextEmail"
-        app:layout_constraintVertical_bias="0.089" />
+        app:layout_constraintVertical_bias="0.048" />
 
-    <Button
-        android:id="@+id/buttonLogin"
-        android:layout_width="241dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/wine"
-        android:text="@string/login"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/editTextPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
-        app:layout_constraintVertical_bias="0.021" />
 </androidx.constraintlayout.widget.ConstraintLayout>
