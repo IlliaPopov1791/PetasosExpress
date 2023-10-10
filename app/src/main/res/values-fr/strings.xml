@@ -59,6 +59,6 @@
     <string name="enter_your_gmail_address">Entrez votre adresse Gmail</string>
     <string name="gmail">Gmail</string>
     <string name="searching_for">Recherche en cours : %1$s</string>
-    <string name="location" />
+    <string name="location">emplacement</string>
 
 </resources>
