@@ -68,7 +68,7 @@ public class LoginScreen extends AppCompatActivity {
                                     finish();
                                 } else {
                                     // Sign-in failed
-                                    Toast.makeText(LoginScreen.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginScreen.this, getString(R.string.authentication_failed), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

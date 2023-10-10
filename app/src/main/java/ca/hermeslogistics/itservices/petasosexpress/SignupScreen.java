@@ -59,13 +59,13 @@ public class SignupScreen extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     // Sign-up successful
-                                    Toast.makeText(SignupScreen.this, "Registration successful.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignupScreen.this, R.string.registration_successful, Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(SignupScreen.this, MainActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
                                     // Sign-up failed
-                                    Toast.makeText(SignupScreen.this, "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignupScreen.this, R.string.registration_failed_please_try_again, Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

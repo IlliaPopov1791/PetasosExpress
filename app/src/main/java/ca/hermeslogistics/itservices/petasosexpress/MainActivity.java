@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentManager fragmentManager = getSupportFragmentManager();
         this.navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @SuppressLint("NonConstantResourceId")
+            @SuppressLint({"NonConstantResourceId", "ResourceType"})
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
@@ -172,25 +172,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 if (itemId == R.id.home_screen) {
                     fragmentToLoad = new Home();
-                    fragmentTag = "home";
+                    fragmentTag = getString(R.string.home_tag);
                 } else if (itemId == R.id.gps_sensor) {
                     fragmentToLoad = new SensorGPS();
-                    fragmentTag = "gps";
+                    fragmentTag = getString(R.string.gps_tag);
                 } else if (itemId == R.id.distance_sensor) {
                     fragmentToLoad = new SensorDistance();
-                    fragmentTag = "distance";
+                    fragmentTag = getString(R.string.distance_tag);
                 } else if (itemId == R.id.proximity_sensor) {
                     fragmentToLoad = new SensorProximity();
-                    fragmentTag = "proximity";
+                    fragmentTag = getString(R.string.proximity_tag);
                 } else if (itemId == R.id.balance_sensor) {
                     fragmentToLoad = new SensorBalance();
-                    fragmentTag = "balance";
+                    fragmentTag = getString(R.string.balance_tag);
                 } else if (itemId == R.id.motors_sensors) {
                     fragmentToLoad = new SensorMotors();
-                    fragmentTag = "motors";
+                    fragmentTag = getString(R.string.motors_tag);
                 } else if (itemId == R.id.AppSettings) {
                     fragmentToLoad = new AppSettings();
-                    fragmentTag = "settings";
+                    fragmentTag = getString(R.string.settings_tag);
                 }
 
                 if (fragmentToLoad != null) {
@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     private void callPhoneNumber() {
         Intent callIntent = new Intent(Intent.ACTION_CALL);
-        callIntent.setData(Uri.parse("tel:1234567890")); // Adjust with your phone number
+        callIntent.setData(Uri.parse(getString(R.string.tel_1234567890))); // Adjust with your phone number
         startActivity(callIntent);
     }
     @Override
@@ -229,21 +229,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 123) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Snackbar.make(drawerLayout, "Permission granted!", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(drawerLayout, R.string.permission_granted, Snackbar.LENGTH_SHORT).show();
                 callPhoneNumber();
             } else {
-                Snackbar.make(drawerLayout, "Permission denied!", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(drawerLayout, R.string.permission_denied, Snackbar.LENGTH_SHORT).show();
             }
         }
     }
     // This method saves the current fragment's tag to shared preferences
     private void saveCurrentFragment(String fragmentTag) {
-        getSharedPreferences("app_settings", MODE_PRIVATE).edit().putString("current_fragment", fragmentTag).apply();
+        getSharedPreferences(getString(R.string.app_settings), MODE_PRIVATE).edit().putString(getString(R.string.current_fragment), fragmentTag).apply();
     }
 
     // This method retrieves the saved fragment's tag from shared preferences
     private String getSavedFragment() {
-        return getSharedPreferences("app_settings", MODE_PRIVATE).getString("current_fragment", "");
+        return getSharedPreferences(getString(R.string.app_settings), MODE_PRIVATE).getString(getString(R.string.current_fragment), getString(R.string.empty_space));
     }
 
     // This method is used to restore the last active fragment from shared preferences

@@ -59,6 +59,28 @@
     <string name="enter_your_gmail_address">Enter your Gmail address</string>
     <string name="gmail">Gmail</string>
     <string name="searching_for">Searching for: %1$s</string>
-    <string name="location"> location </string>/>
+    <string name="location"> location </string>
+    <string name="dark_theme_switched">Switched to Dark Theme</string>
+    <string name="light_theme_switched">Switched to Light Theme</string>
+    <string name="landscape_orientation">Landscape</string>
+    <string name="portrait_orientation">Portrait</string>
+    <string name="authentication_failed">Authentication failed.</string>
+    <string name="home_tag">home</string>
+    <string name="gps_tag">gps</string>
+    <string name="distance_tag">distance</string>
+    <string name="proximity_tag">proximity</string>
+    <string name="balance_tag">balance</string>
+    <string name="motors_tag">motors</string>
+    <string name="settings_tag">settings</string>
+    <string name="tel_1234567890">tel:1234567890</string>
+    <string name="permission_granted">Permission granted!</string>
+    <string name="permission_denied">Permission denied!</string>
+    <string name="app_settings">app_settings</string>
+    <string name="current_fragment">current_fragment</string>
+    <string name="empty_space">" "</string>
+    <string name="value">"Value: "</string>
+    <string name="_2f_km_h">%.2f km/h</string>
+    <string name="registration_successful">Registration successful.</string>
+    <string name="registration_failed_please_try_again">Registration failed. Please try again.</string>
 
 </resources>

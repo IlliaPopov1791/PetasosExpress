@@ -50,7 +50,7 @@ public class SensorMotors extends Fragment {
         Button btnEmergencyStop = view.findViewById(R.id.btnEmergencyStop);
 
         // Apply underline effect to the "Motor Speed" text
-        SpannableString content = new SpannableString(getString(R.string.motor_speed_label));
+        SpannableString content = new SpannableString(getString(R.string.empty_space));
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         textViewMotorSpeed.setText(content);
 
@@ -81,7 +81,7 @@ public class SensorMotors extends Fragment {
                 double speedInKmPerHour = randomValue * 1.0; // Assuming a conversion factor
                 // Update ProgressBar and TextView with the random value and "km/h"
                 progressBar.setProgress(randomValue);
-                textViewMotorSpeed.setText(String.format("%.2f km/h", speedInKmPerHour));
+                textViewMotorSpeed.setText(String.format(getString(R.string._2f_km_h), speedInKmPerHour));
                 // Call the method again after 1000 milliseconds
                 startUpdatingValues();
             }

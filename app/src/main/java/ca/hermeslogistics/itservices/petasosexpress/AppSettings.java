@@ -14,11 +14,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
-/*
- * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
- * Student ID: n01421791, n01479878, n01442206, n01375348
- * Section: B
- */
 public class AppSettings extends Fragment {
 
     @Override
@@ -46,16 +41,15 @@ public class AppSettings extends Fragment {
                 if (toggleTheme.isChecked()) {
                     // Dark Theme
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    DisplayToast( "Switched to Dark Theme");
+                    DisplayToast(getString(R.string.dark_theme_switched));
                 } else {
                     // Light Theme
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    DisplayToast( "Switched to Light Theme");
+                    DisplayToast(getString(R.string.light_theme_switched));
                 }
                 getActivity().recreate();
             }
         });
-
 
         // ToggleButton for orientation
         ToggleButton toggleOrientation = view.findViewById(R.id.toggle_portrait_landscape);
@@ -65,22 +59,19 @@ public class AppSettings extends Fragment {
                 if (toggleOrientation.isChecked()) {
                     // Landscape
                     getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                    DisplayToast( "Landscape");
+                    DisplayToast(getString(R.string.landscape_orientation));
                 } else {
                     // Portrait
                     getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                    DisplayToast( "Portrait");
+                    DisplayToast(getString(R.string.portrait_orientation));
                 }
             }
         });
 
-
-
         return view;
     }
-    private void DisplayToast(String msg)
-    {
+
+    private void DisplayToast(String msg) {
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
-
 }

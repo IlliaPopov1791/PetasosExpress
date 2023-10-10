@@ -71,7 +71,7 @@ public class SensorBalance extends Fragment implements SensorEventListener {
         int axisValue = random.nextInt(201) - 100; // Simulating values between -100 and 100
 
         progressBar.setProgress(axisValue + 100); // Offset by 100 to make it positive for progress bar
-        valueText.setText("Value: " + axisValue); // Display the value in the TextView
+        valueText.setText(getString(R.string.value) + axisValue); // Display the value in the TextView
     }
 
     @Override

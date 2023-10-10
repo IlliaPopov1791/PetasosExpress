@@ -60,5 +60,27 @@
     <string name="gmail">Gmail</string>
     <string name="searching_for">Recherche en cours : %1$s</string>
     <string name="location">emplacement</string>
+    <string name="dark_theme_switched">Passé en mode sombre</string>
+    <string name="light_theme_switched">Passé en mode lumière</string>
+    <string name="landscape_orientation">Paysage</string>
+    <string name="portrait_orientation">Portrait</string>
+    <string name="authentication_failed">Échec de l\'authentification.</string>
+    <string name="home_tag">accueil</string>
+    <string name="gps_tag">gps</string>
+    <string name="distance_tag">distance</string>
+    <string name="proximity_tag">proximité</string>
+    <string name="balance_tag">équilibre</string>
+    <string name="motors_tag">moteurs</string>
+    <string name="settings_tag">paramètres</string>
+    <string name="tel_1234567890">tel:1234567890</string>
+    <string name="permission_granted">Permission accordée !</string>
+    <string name="permission_denied">Permission refusée !</string>
+    <string name="app_settings">paramètres_application</string>
+    <string name="current_fragment">fragment_actuel</string>
+    <string name="empty_space">" "</string>
+    <string name="value">"Valeur : "</string>
+    <string name="_2f_km_h">%.2f km/h</string>
+    <string name="registration_successful">Inscription réussie.</string>
+    <string name="registration_failed_please_try_again">Inscription échouée. Veuillez réessayer.</string>
 
 </resources>
