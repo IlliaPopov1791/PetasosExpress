@@ -19,4 +19,9 @@
         android:orderInCategory="300"
         app:showAsAction="never" />
 
+    <item android:id="@+id/location_button"
+        android:title="@string/location"
+        android:orderInCategory="300"
+        app:showAsAction="never" />
+
 </menu>

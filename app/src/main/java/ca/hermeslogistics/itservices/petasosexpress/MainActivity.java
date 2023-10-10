@@ -111,7 +111,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             AppSettings settings = new AppSettings();
             fragmentManager.beginTransaction().replace(R.id.main_frame_layout, settings).commit();
             return true;
-        } else if (item.getItemId() == R.id.help) {
+        }if (item.getItemId() == R.id.location_button) {
+            SensorGPS gps = new SensorGPS();
+            fragmentManager.beginTransaction().replace(R.id.main_frame_layout, gps).commit();
+            return true;
+        }else if (item.getItemId() == R.id.help) {
             initiateCall();
             return true;
 
