@@ -10,21 +10,20 @@
 
     <ImageView
         android:id="@+id/logoImageView"
-        android:layout_width="174dp"
-        android:layout_height="155dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="264dp"
+        android:layout_height="231dp"
+        android:layout_marginTop="60dp"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/appDescriptionTextView"
-        android:layout_width="317dp"
-        android:layout_height="76dp"
-        android:layout_marginStart="197dp"
-        android:layout_marginEnd="197dp"
+        android:layout_width="308dp"
+        android:layout_height="86dp"
+        android:layout_marginEnd="56dp"
         android:gravity="center"
         android:text="@string/app_describe"
         android:textColor="@color/dark_grey"
@@ -32,24 +31,23 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/logoImageView"
-        app:layout_constraintVertical_bias="0.525" />
+        app:layout_constraintVertical_bias="0.036" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="82dp"
-        android:layout_height="72dp"
+        android:layout_width="297dp"
+        android:layout_height="133dp"
         android:layout_gravity="center"
-        android:indeterminate="false"
+        android:indeterminate="true"
         android:max="100"
         android:progress="77"
         android:progressDrawable="@drawable/splash_progress_bar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintHorizontal_bias="0.845"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appDescriptionTextView"
-        app:layout_constraintVertical_bias="0.187" />
+        app:layout_constraintVertical_bias="0.114" />
 </androidx.constraintlayout.widget.ConstraintLayout>

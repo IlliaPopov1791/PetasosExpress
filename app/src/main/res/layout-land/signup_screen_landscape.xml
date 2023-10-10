@@ -1,6 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/logo_dark"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    tools:context=".LoginScreen">
 
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="241dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/wine"
+        android:text="Already have an Account"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        app:layout_constraintVertical_bias="0.459" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="249dp"
+        android:layout_height="177dp"
+        android:layout_marginTop="24dp"
+        android:src="@mipmap/ic_logo_wine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.006"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="233dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/enter_your_gmail_address"
+        android:hint="@string/gmail"
+        android:importantForAccessibility="yes"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/wine"
+        android:textColorHint="@color/wine"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="234dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="44dp"
+        android:contentDescription="@string/enter_your_password"
+        android:hint="@string/password"
+        android:importantForAccessibility="yes"
+        android:inputType="textPassword"
+        android:textColor="@color/wine"
+        android:textColorHint="@color/wine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/editTextEmail"
+        app:layout_constraintVertical_bias="0.089" />
+
+    <Button
+        android:id="@+id/buttonSignUp"
+        android:layout_width="241dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/wine"
+        android:text="Register"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        app:layout_constraintVertical_bias="0.021" />
 </androidx.constraintlayout.widget.ConstraintLayout>
