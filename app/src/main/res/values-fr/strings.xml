@@ -4,7 +4,7 @@
 <!-- Ahmad Aljawish | ID: n01375348 Section B -->
 <resources>
     <string name="app_name">PetasosExpress</string>
-    <string name="app_describe">PetasosExpress :\n\n Livraisons autonomes et sans effort à portée de main.</string>
+    <string name="app_describe">Livraisons autonomes et sans effort à portée de main.</string>
     <string name="hello_blank_fragment">Bonjour fragment vide</string>
     <string name="sensors">Capteurs</string>
     <string name="home">Accueil</string>

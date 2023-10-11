@@ -23,13 +23,13 @@
 
     <TextView
         android:id="@+id/appDescriptionTextView"
-        android:layout_width="390dp"
-        android:layout_height="87dp"
+        android:layout_width="395dp"
+        android:layout_height="153dp"
         android:layout_marginTop="128dp"
         android:gravity="center"
         android:text="@string/app_describe"
         android:textColor="@color/dark_grey"
-        android:textSize="16sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -50,6 +50,20 @@
     app:layout_constraintTop_toBottomOf="@+id/appDescriptionTextView"
     app:layout_constraintVertical_bias="0.089" />
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="245dp"
+        android:layout_height="52dp"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textColor="@color/dark_grey"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/logoImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.523" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
