@@ -1,4 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <!--
+     Illia M. Popov | ID: n01421791
+     William Margalik | ID: n01479878
+     Dylan Ashton | ID: n01442206
+     Ahmad Aljawish | ID: n01375348-->
     <!-- Base application theme. -->
     <style name="Base.Theme.PetasosExpress" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/wine</item>

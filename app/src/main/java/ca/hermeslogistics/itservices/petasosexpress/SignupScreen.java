@@ -13,7 +13,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.AuthResult;
-
+/*
+ * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
+ * Student ID: n01421791, n01479878, n01442206, n01375348
+ * Section: B
+ */
 public class SignupScreen extends AppCompatActivity {
 
     private EditText emailEditText;
