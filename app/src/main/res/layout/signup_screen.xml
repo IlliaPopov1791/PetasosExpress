@@ -20,42 +20,45 @@
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="@string/email"
         android:textColorHint="@color/wine"
         android:inputType="textEmailAddress"
         android:layout_marginTop="16dp"
         android:importantForAccessibility="yes"
-        android:contentDescription="Enter your Email address"
-        android:textColor="@color/wine"/>
+        android:contentDescription="@string/enter_your_email_address"
+        android:textColor="@color/wine"
+        tools:ignore="ContentDescription" />
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="@string/password"
         android:textColorHint="@color/wine"
         android:inputType="textPassword"
         android:layout_marginTop="8dp"
         android:importantForAccessibility="yes"
-        android:contentDescription="Enter your password"
-        android:textColor="@color/wine"/>
+        android:contentDescription="@string/enter_your_password"
+        android:textColor="@color/wine"
+        tools:ignore="ContentDescription" />
 
     <EditText
         android:id="@+id/editTextFullName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Full Name"
+        android:hint="@string/full_name"
         android:textColorHint="@color/wine"
         android:layout_marginTop="16dp"
         android:importantForAccessibility="yes"
-        android:contentDescription="Enter your full name"
-        android:textColor="@color/wine"/>
+        android:contentDescription="@string/enter_your_full_name"
+        android:textColor="@color/wine"
+        tools:ignore="ContentDescription" />
 
     <Button
         android:id="@+id/buttonSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="@string/register"
         android:background="@color/wine"
         android:textColor="@color/white"
         android:layout_marginTop="16dp"/>
@@ -63,7 +66,7 @@
         android:id="@+id/buttonLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Already have an Account"
+        android:text="@string/already_have_an_account"
         android:background="@color/wine"
         android:textColor="@color/white"
         android:layout_marginTop="16dp"

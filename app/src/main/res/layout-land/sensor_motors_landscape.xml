@@ -6,16 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/main_theme"
     android:id="@+id/motors_sensors">
-    >
 
-    <!-- TextView for Motor Speed -->
-
-
-    <!-- ProgressBar for Motor Speed -->
-
-    <!-- Motor RPM -->
-
-    <!-- Error Codes -->
 
     <TextView
         android:id="@+id/textViewMotor"

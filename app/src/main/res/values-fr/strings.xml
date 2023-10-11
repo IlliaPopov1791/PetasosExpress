@@ -82,5 +82,21 @@
     <string name="_2f_km_h">%.2f km/h</string>
     <string name="registration_successful">Inscription réussie.</string>
     <string name="registration_failed_please_try_again">Inscription échouée. Veuillez réessayer.</string>
+    <string name="portrait">Portrait</string>
+    <string name="landscape">Paysage</string>
+    <string name="orientation">Orientation</string>
+    <string name="light">Lumière</string>
+    <string name="dark">Sombre</string>
+    <string name="dark_mode">Mode sombre</string>
+    <string name="cities">Villes</string>
+    <string name="notifications">Notifications</string>
+    <string name="don_t_have_an_account">Vous n\'avez pas de compte</string>
+    <string name="already_have_an_account">Vous avez déjà un compte</string>
+    <string name="register">S\'inscrire</string>
+    <string name="enter_your_full_name">Entrez votre nom complet</string>
+    <string name="full_name">Nom complet</string>
+    <string name="enter_your_email_address">Entrez votre adresse e-mail</string>
+    <string name="email">E-mail</string>
+
 
 </resources>

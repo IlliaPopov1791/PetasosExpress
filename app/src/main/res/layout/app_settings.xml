@@ -20,7 +20,7 @@
                 android:id="@+id/label_notifications"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notifications"
+                android:text="@string/notifications"
                 android:layout_marginTop="48dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -31,14 +31,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/label_notifications"
-                app:layout_constraintStart_toEndOf="@+id/label_notifications" />
+                app:layout_constraintStart_toEndOf="@+id/label_notifications"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
 
             <!-- Cities Spinner -->
             <TextView
                 android:id="@+id/label_cities"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cities"
+                android:text="@string/cities"
                 android:layout_marginTop="32dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/label_notifications" />
@@ -58,7 +59,7 @@
                 android:id="@+id/label_dark_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dark Mode"
+                android:text="@string/dark_mode"
                 android:layout_marginTop="32dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinner_cities" />
@@ -67,8 +68,8 @@
                 android:id="@+id/toggle_theme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOff="Light"
-                android:textOn="Dark"
+                android:textOff="@string/light"
+                android:textOn="@string/dark"
                 android:layout_marginStart="32dp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/label_dark_mode"
                 app:layout_constraintStart_toEndOf="@+id/label_dark_mode" />
@@ -78,7 +79,7 @@
                 android:id="@+id/label_orientation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Orientation"
+                android:text="@string/orientation"
                 android:layout_marginTop="32dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/label_dark_mode" />
@@ -87,8 +88,8 @@
                 android:id="@+id/toggle_portrait_landscape"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOff="Portrait"
-                android:textOn="Landscape"
+                android:textOff="@string/portrait"
+                android:textOn="@string/landscape"
                 android:layout_marginStart="32dp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/label_orientation"
                 app:layout_constraintStart_toEndOf="@+id/label_orientation" />

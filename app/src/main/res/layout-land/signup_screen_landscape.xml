@@ -15,7 +15,7 @@
         android:layout_width="241dp"
         android:layout_height="49dp"
         android:background="@color/wine"
-        android:text="Already have an Account"
+        android:text="@string/already_have_an_account"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/editTextPassword"
@@ -46,7 +46,8 @@
         android:textColor="@color/wine"
         android:textColorHint="@color/wine"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -63,7 +64,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/editTextEmail"
-        app:layout_constraintVertical_bias="0.089" />
+        app:layout_constraintVertical_bias="0.089"
+        tools:ignore="ContentDescription" />
 
     <Button
         android:id="@+id/buttonSignUp"
@@ -71,7 +73,7 @@
         android:layout_height="49dp"
         android:layout_marginTop="16dp"
         android:background="@color/wine"
-        android:text="Register"
+        android:text="@string/register"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/editTextPassword"

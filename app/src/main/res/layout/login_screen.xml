@@ -20,31 +20,32 @@
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Gmail"
+        android:hint="@string/gmail"
         android:textColorHint="@color/wine"
         android:inputType="textEmailAddress"
         android:layout_marginTop="16dp"
         android:importantForAccessibility="yes"
-        android:contentDescription="Enter your Gmail address"
+        android:contentDescription="@string/enter_your_gmail_address"
         android:textColor="@color/wine"/>
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="@string/password"
         android:textColorHint="@color/wine"
         android:inputType="textPassword"
         android:layout_marginTop="8dp"
         android:importantForAccessibility="yes"
-        android:contentDescription="Enter your password"
-        android:textColor="@color/wine"/>
+        android:contentDescription="@string/enter_your_password"
+        android:textColor="@color/wine"
+        tools:ignore="ContentDescription" />
 
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="@string/login"
         android:background="@color/wine"
         android:textColor="@color/white"
         android:layout_marginTop="16dp"
@@ -53,7 +54,7 @@
         android:id="@+id/buttonSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Don't have an Account"
+        android:text="@string/don_t_have_an_account"
         android:background="@color/wine"
         android:textColor="@color/white"
         android:layout_marginTop="16dp"/>

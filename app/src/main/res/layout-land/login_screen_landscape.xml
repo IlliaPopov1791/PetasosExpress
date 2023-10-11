@@ -34,7 +34,8 @@
         android:textColor="@color/wine"
         android:textColorHint="@color/wine"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <Button
         android:id="@+id/buttonLogin"
@@ -56,7 +57,7 @@
         android:layout_height="49dp"
         android:layout_marginStart="4dp"
         android:background="@color/wine"
-        android:text="Don't have an Account"
+        android:text="@string/don_t_have_an_account"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/editTextPassword"
@@ -78,6 +79,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/editTextEmail"
-        app:layout_constraintVertical_bias="0.048" />
+        app:layout_constraintVertical_bias="0.048"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
