@@ -97,6 +97,7 @@
     <string name="full_name">Nom complet</string>
     <string name="enter_your_email_address">Entrez votre adresse e-mail</string>
     <string name="email">E-mail</string>
+    <string name="theme">Thème</string>
 
 
 </resources>

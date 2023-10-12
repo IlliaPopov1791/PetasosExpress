@@ -25,12 +25,12 @@
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/gmail"
+        android:hint="@string/email"
         android:textColorHint="@color/wine"
         android:inputType="textEmailAddress"
         android:layout_marginTop="16dp"
         android:importantForAccessibility="yes"
-        android:contentDescription="@string/enter_your_gmail_address"
+        android:contentDescription="@string/enter_your_email_address"
         android:textColor="@color/wine"/>
 
     <EditText
