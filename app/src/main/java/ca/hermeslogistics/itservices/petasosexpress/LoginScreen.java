@@ -55,6 +55,17 @@ public class LoginScreen extends AppCompatActivity {
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
+                if (email.isEmpty()) {
+                    Toast.makeText(LoginScreen.this, "Email field is empty", Toast.LENGTH_SHORT).show();
+                    emailEditText.requestFocus();
+                    return;
+                }
+                if (password.isEmpty()) {
+                    Toast.makeText(LoginScreen.this, "Password field is empty", Toast.LENGTH_SHORT).show();
+                    passwordEditText.requestFocus();
+                    return;
+                }
+
                 // Authentication of the user using Firebase Authentication
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LoginScreen.this, new OnCompleteListener<AuthResult>() {
