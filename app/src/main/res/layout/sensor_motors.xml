@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_theme"
+    android:background="@color/logo"
     android:id="@+id/motors_sensors">
     <!--
      Illia M. Popov | ID: n01421791
@@ -23,8 +23,6 @@
         android:textColor="@color/wine"
         android:textSize="28sp"
         android:textStyle="bold" />
-
-
 
     <!-- ProgressBar for Motor Speed -->
 
