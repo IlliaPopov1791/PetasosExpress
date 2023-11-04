@@ -33,11 +33,6 @@ public class AppSettings extends Fragment {
             view = inflater.inflate(R.layout.app_setttings_landscape, container, false);
         }
 
-        // Initialize the spinner
-        Spinner citiesSpinner = view.findViewById(R.id.spinner_cities);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.ontario_cities, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        citiesSpinner.setAdapter(adapter);
 
         ToggleButton toggleTheme = view.findViewById(R.id.toggle_theme);
         toggleTheme.setOnClickListener(new View.OnClickListener() {

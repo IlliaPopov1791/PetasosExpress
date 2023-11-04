@@ -13,93 +13,78 @@
         tools:context=".AppSettings"
         android:id="@+id/AppSettings">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/relativeLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingStart="32dp"
-            android:paddingEnd="32dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp">
 
-            <!-- Notifications Switch -->
-            <TextView
-                android:id="@+id/label_notifications"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/notifications"
-                android:layout_marginTop="48dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <!-- Notifications Switch -->
+        <TextView
+            android:id="@+id/label_notifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="@string/notifications"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ToggleButton
-                android:id="@+id/switch_notifications"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/label_notifications"
-                app:layout_constraintStart_toEndOf="@+id/label_notifications"
-                tools:ignore="UseSwitchCompatOrMaterialXml" />
+        <ToggleButton
+            android:id="@+id/switch_notifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/label_notifications"
+            app:layout_constraintStart_toEndOf="@+id/label_notifications"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-            <!-- Cities Spinner -->
-            <TextView
-                android:id="@+id/label_cities"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cities"
-                android:layout_marginTop="32dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/label_notifications" />
+        <!-- Cities Spinner -->
 
-            <Spinner
-                android:id="@+id/spinner_cities"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="0dp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/label_cities"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/label_cities" />
+        <!-- Dark Mode Toggle -->
 
-            <!-- Dark Mode Toggle -->
-            <TextView
-                android:id="@+id/label_dark_mode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/theme"
-                android:layout_marginTop="32dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_cities" />
+        <TextView
+            android:id="@+id/label_dark_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/theme"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="152dp" />
 
-            <ToggleButton
-                android:id="@+id/toggle_theme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textOff="@string/light"
-                android:textOn="@string/dark"
-                android:layout_marginStart="32dp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/label_dark_mode"
-                app:layout_constraintStart_toEndOf="@+id/label_dark_mode" />
+        <!-- Portrait/Landscape Toggle -->
+        <ToggleButton
+            android:id="@+id/toggle_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:textOff="@string/light"
+            android:textOn="@string/dark"
+            app:layout_constraintBaseline_toBaselineOf="@+id/label_dark_mode"
+            app:layout_constraintStart_toEndOf="@+id/label_dark_mode" />
 
-            <!-- Portrait/Landscape Toggle -->
-            <TextView
-                android:id="@+id/label_orientation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/orientation"
-                android:layout_marginTop="32dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/label_dark_mode" />
+        <TextView
+            android:id="@+id/label_orientation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="480dp"
+            android:text="@string/orientation"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <ToggleButton
-                android:id="@+id/toggle_portrait_landscape"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textOff="@string/portrait"
-                android:textOn="@string/landscape"
-                android:layout_marginStart="32dp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/label_orientation"
-                app:layout_constraintStart_toEndOf="@+id/label_orientation" />
+        <ToggleButton
+            android:id="@+id/toggle_portrait_landscape"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="112dp"
+            android:layout_marginBottom="456dp"
+            android:textOff="@string/portrait"
+            android:textOn="@string/landscape"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
