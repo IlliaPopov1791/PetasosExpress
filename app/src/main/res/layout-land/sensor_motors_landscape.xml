@@ -7,10 +7,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motors_sensors"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_theme"
-    android:id="@+id/motors_sensors">
+    android:background="@drawable/main_theme">
 
 
     <TextView
@@ -64,24 +64,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.232" />
 
+
     <TextView
         android:id="@+id/textViewRPM"
-        android:layout_width="182dp"
+        android:layout_width="157dp"
         android:layout_height="45dp"
         android:layout_below="@id/textViewAlerts"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="168dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/motor_rpm"
         android:textColor="@color/wine"
         android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.699"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textViewError"
-        app:layout_constraintVertical_bias="0.959" />
+        app:layout_constraintEnd_toEndOf="@+id/textViewError"
+        app:layout_constraintTop_toBottomOf="@+id/textViewError" />
 
     <TextView
         android:id="@+id/textViewAlerts"
@@ -89,17 +86,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewError"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/safety_alerts"
         android:textColor="@color/wine"
         android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textViewError"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.689"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewError"
@@ -107,16 +103,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewRPM"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="224dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/error_codes"
         android:textColor="@color/wine"
         android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.671"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/textViewAlerts"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textViewAlerts"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAlerts" />
 
     <Button
         android:id="@+id/btnEmergencyStop"

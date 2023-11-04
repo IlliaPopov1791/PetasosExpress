@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/balance_sensor"
     tools:context=".SensorBalance"
-    android:background="@color/logo_dark">
+    android:background="@color/logo">
     <!--
  Illia M. Popov | ID: n01421791
  William Margalik | ID: n01479878
