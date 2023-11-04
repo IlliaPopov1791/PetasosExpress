@@ -1,9 +1,3 @@
-/*
- * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
- * Student ID: n01421791, n01479878, n01442206, n01375348
- * Section: B
- */
-
 package ca.hermeslogistics.itservices.petasosexpress;
 import android.content.res.Configuration;
 import android.hardware.Sensor;
@@ -20,7 +14,11 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import java.util.Random;
-
+/*
+ * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
+ * Student ID: n01421791, n01479878, n01442206, n01375348
+ * Section: B
+ */
 public class SensorBalance extends Fragment implements SensorEventListener {
     private ProgressBar xAxisProgressBar, yAxisProgressBar, zAxisProgressBar;
     private TextView xAxisValue, yAxisValue, zAxisValue;
