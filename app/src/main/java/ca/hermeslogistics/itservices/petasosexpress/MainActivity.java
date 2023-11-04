@@ -17,6 +17,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -37,6 +38,7 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 /*
@@ -103,25 +105,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         FragmentManager fragmentManager = getSupportFragmentManager();
+
         if (item.getItemId() == R.id.home) {
             Home home = new Home();
             fragmentManager.beginTransaction().replace(R.id.main_frame_layout, home).commit();
             return true;
-        } if (item.getItemId() == R.id.Settings_button) {
+        } else if (item.getItemId() == R.id.Settings_button) {
             AppSettings settings = new AppSettings();
             fragmentManager.beginTransaction().replace(R.id.main_frame_layout, settings).commit();
             return true;
-        }if (item.getItemId() == R.id.location_button) {
+        } else if (item.getItemId() == R.id.location_button) {
             SensorGPS gps = new SensorGPS();
             fragmentManager.beginTransaction().replace(R.id.main_frame_layout, gps).commit();
             return true;
-        }else if (item.getItemId() == R.id.help) {
+        } else if (item.getItemId() == R.id.help) {
             initiateCall();
             return true;
-
-        } else {
-            return super.onOptionsItemSelected(item);
+        } else if (item.getItemId() == R.id.sign_out_button) {
+            signOut();
+            return true;
         }
+
+        return super.onOptionsItemSelected(item);
     }
     private void showExitAlertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -278,6 +283,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, fragmentToLoad).commit();
+    }
+
+    private void signOut() {
+        // Sign out from Firebase (Important!!!)
+        FirebaseAuth.getInstance().signOut();
+
+        // Clear "Remember Me" preference
+        clearRememberMe(this);
+
+        // Go back to the Login Screen
+        Intent intent = new Intent(this, LoginScreen.class);
+        // Clearing the stack to prevent going back to the MainActivity after signing out
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    public static void clearRememberMe(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("RememberMe");
+        editor.apply();
     }
 
 }
