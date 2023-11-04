@@ -98,5 +98,6 @@
     <string name="enter_your_email_address">Enter your Email address</string>
     <string name="email">Email</string>
     <string name="theme">Theme</string>
+    <string name="remember_me">Remember me</string>
 
 </resources>

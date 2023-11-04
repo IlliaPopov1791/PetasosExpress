@@ -46,6 +46,12 @@
         android:textColor="@color/wine"
         tools:ignore="ContentDescription" />
 
+    <CheckBox
+        android:id="@+id/remember"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/remember_me" />
+
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="match_parent"
@@ -55,6 +61,7 @@
         android:textColor="@color/white"
         android:layout_marginTop="16dp"
         />
+
     <Button
         android:id="@+id/buttonSignUp"
         android:layout_width="match_parent"
@@ -63,4 +70,5 @@
         android:background="@color/wine"
         android:textColor="@color/white"
         android:layout_marginTop="16dp"/>
+
 </LinearLayout>

@@ -2,83 +2,91 @@ package ca.hermeslogistics.itservices.petasosexpress;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-/*
- * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
- * Student ID: n01421791, n01479878, n01442206, n01375348
- * Section: B
- */
 public class LoginScreen extends AppCompatActivity {
 
     private EditText emailEditText;
     private EditText passwordEditText;
     private Button loginButton;
-    private Button signupButton; // New button for signup
+    private Button signupButton;
+    private CheckBox rememberMeCheckBox;
     private FirebaseAuth mAuth;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int orientation = getResources().getConfiguration().orientation;
 
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+
+        // Check if user is already logged in and "Remember Me" is true
+        sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        boolean isRemembered = sharedPreferences.getBoolean("RememberMe", false);
+
+        if (currentUser != null && isRemembered) {
+            startMainActivity();
+            return;
+        }
+
+        // Set the layout based on the orientation
+        int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             setContentView(R.layout.login_screen);
         } else {
             setContentView(R.layout.login_screen_landscape);
         }
 
-        // Initializing Firebase
-        mAuth = FirebaseAuth.getInstance();
-
         // Initializing views
         emailEditText = findViewById(R.id.editTextEmail);
         passwordEditText = findViewById(R.id.editTextPassword);
         loginButton = findViewById(R.id.buttonLogin);
-        signupButton = findViewById(R.id.buttonSignUp); // Initialize the signup button
+        signupButton = findViewById(R.id.buttonSignUp);
+        rememberMeCheckBox = findViewById(R.id.remember);
 
-        // Set an OnClickListener for the login button
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = emailEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
+                String email = emailEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString().trim();
 
                 if (email.isEmpty()) {
                     Toast.makeText(LoginScreen.this, "Email field is empty", Toast.LENGTH_SHORT).show();
-                    emailEditText.requestFocus();
                     return;
                 }
                 if (password.isEmpty()) {
                     Toast.makeText(LoginScreen.this, "Password field is empty", Toast.LENGTH_SHORT).show();
-                    passwordEditText.requestFocus();
                     return;
                 }
 
-                // Authentication of the user using Firebase Authentication
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LoginScreen.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    // Sign-in successful
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    Intent intent = new Intent(LoginScreen.this, MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putBoolean("RememberMe", rememberMeCheckBox.isChecked());
+                                    editor.apply();
+
+                                    startMainActivity();
                                 } else {
-                                    // Sign-in failed
                                     Toast.makeText(LoginScreen.this, getString(R.string.authentication_failed), Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -93,5 +101,18 @@ public class LoginScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void startMainActivity() {
+        Intent intent = new Intent(LoginScreen.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public static void clearRememberMe(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("RememberMe");
+        editor.apply();
     }
 }
