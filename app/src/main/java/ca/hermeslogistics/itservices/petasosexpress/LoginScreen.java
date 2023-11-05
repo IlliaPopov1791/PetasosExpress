@@ -42,27 +42,6 @@ public class LoginScreen extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        // Check if user is already logged in and "Remember Me" is true
-        sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        boolean isRemembered = sharedPreferences.getBoolean("RememberMe", false);
-
-        if (currentUser != null) {
-            currentUser.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
-                public void onComplete(@NonNull Task<GetTokenResult> task) {
-                    if (task.isSuccessful()) {
-                        if (isRemembered) {
-                            startMainActivity();
-                            return;
-                        }
-                    } else {
-                        mAuth.signOut();
-                        clearRememberMe(LoginScreen.this);
-                    }
-                }
-            });
-        }
-
         // Set the layout based on the orientation
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
