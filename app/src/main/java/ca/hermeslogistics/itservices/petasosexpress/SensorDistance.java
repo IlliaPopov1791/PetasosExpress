@@ -62,7 +62,7 @@ public class SensorDistance extends Fragment {
             public void onEvent(@Nullable DocumentSnapshot snapshot,
                                 @Nullable FirebaseFirestoreException e) {
                 if (e != null) {
-                    // Handle error - !DO Later!
+                    txtValue.setText(R.string.server_error);
                     return;
                 }
 
