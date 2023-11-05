@@ -110,5 +110,6 @@
     <string name="passwords_do_not_match">Passwords do not match.</string>
     <string name="server_error">Server Error</string>
     <string name="placeholder">Value: %1$d</string>
+    <string name="rpm_value_placeholder">RPM: %1$s</string>
 
 </resources>

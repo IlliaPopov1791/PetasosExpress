@@ -31,7 +31,6 @@ public class SensorDistance extends Fragment {
     private FirebaseFirestore db;
 
     public SensorDistance() {
-        // Required empty public constructor
     }
 
     @Override
