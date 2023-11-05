@@ -1,5 +1,9 @@
 package ca.hermeslogistics.itservices.petasosexpress;
-
+/*
+ * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
+ * Student ID: n01421791, n01479878, n01442206, n01375348
+ * Section: B
+ */
 import android.content.res.Configuration;
 import android.os.Bundle;
 
@@ -8,12 +12,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-/*
- * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
- * Student ID: n01421791, n01479878, n01442206, n01375348
- * Section: B
- */
 import android.widget.TextView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,11 +30,10 @@ public class SensorProximity extends Fragment {
     // TextView for displaying proximity value and timestamp
     private TextView txtProximity, txtTime;
 
-    // Firestore database reference
     private FirebaseFirestore db;
 
     public SensorProximity() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -65,7 +62,7 @@ public class SensorProximity extends Fragment {
 
 
         // Get the document reference from Firestore
-        DocumentReference docRef = db.collection("Proximity (IR Sensor)").document("0NdvEw2YdE4G8BqV6GcI"); // Replace "YourDocumentID" with the actual ID
+        DocumentReference docRef = db.collection("Proximity (IR Sensor)").document("0NdvEw2YdE4G8BqV6GcI");
 
         // Listen for realtime updates
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
