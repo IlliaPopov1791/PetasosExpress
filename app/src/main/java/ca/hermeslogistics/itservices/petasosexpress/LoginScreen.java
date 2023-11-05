@@ -4,6 +4,7 @@ package ca.hermeslogistics.itservices.petasosexpress;
  * Student ID: n01421791, n01479878, n01442206, n01375348
  * Section: B
  */
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -22,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.GetTokenResult;
 
 public class LoginScreen extends AppCompatActivity {
 
@@ -45,9 +47,20 @@ public class LoginScreen extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         boolean isRemembered = sharedPreferences.getBoolean("RememberMe", false);
 
-        if (currentUser != null && isRemembered) {
-            startMainActivity();
-            return;
+        if (currentUser != null) {
+            currentUser.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                public void onComplete(@NonNull Task<GetTokenResult> task) {
+                    if (task.isSuccessful()) {
+                        if (isRemembered) {
+                            startMainActivity();
+                            return;
+                        }
+                    } else {
+                        mAuth.signOut();
+                        clearRememberMe(LoginScreen.this);
+                    }
+                }
+            });
         }
 
         // Set the layout based on the orientation
