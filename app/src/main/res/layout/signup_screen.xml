@@ -109,8 +109,8 @@
 
     <CheckBox
         android:id="@+id/remember"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="379dp"
+        android:layout_height="40dp"
         android:text="@string/remember_me" />
 
     <!-- Sign Up Button -->

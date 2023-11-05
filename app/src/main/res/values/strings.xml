@@ -105,5 +105,7 @@
     <string name="last_name">Last Name</string>
     <string name="phone_number">Phone Number</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="all_fields_filled">All fields must be filled.</string>
+    <string name="passwords_do_not_match">Passwords do not match.</string>
 
 </resources>
