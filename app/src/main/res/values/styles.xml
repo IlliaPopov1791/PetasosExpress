@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- RatingBar style -->
+    <style name="CustomRatingBar" parent="@android:style/Widget.DeviceDefault.RatingBar.Small">
+        <item name="colorControlNormal">@color/logo_saturated</item> <!-- Color for non-selected stars -->
+        <item name="colorControlActivated">@color/logo_dark</item> <!-- Color for selected stars -->
+    </style>
+
+    <!-- EditText style -->
+    <style name="CustomEditText" parent="Widget.AppCompat.EditText">
+        <item name="colorControlNormal">@color/logo</item> <!-- Color for underline when not focused -->
+        <item name="colorControlActivated">@color/logo_dark</item> <!-- Color for underline when focused -->
+        <item name="colorControlHighlight">@color/logo_saturated</item> <!-- Color for the highlight when text is selected -->
+    </style>
+</resources>

@@ -111,5 +111,11 @@
     <string name="server_error">Server Error</string>
     <string name="placeholder">Value: %1$d</string>
     <string name="rpm_value_placeholder">RPM: %1$s</string>
+    <string name="feedback">Feedback</string>
+    <string name="name_hint">Name</string>
+    <string name="phone_hint">Phone Number</string>
+    <string name="email_hint">Email</string>
+    <string name="comment_hint">Comment</string>
+    <string name="submit_feedback">Submit Feedback</string>
 
 </resources>
