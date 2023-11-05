@@ -13,51 +13,107 @@
      William Margalik | ID: n01479878
      Dylan Ashton | ID: n01442206
      Ahmad Aljawish | ID: n01375348-->
+
+    <!-- Horizontal LinearLayout for First and Last Name -->
+
     <ImageView
-        android:layout_width="489dp"
-        android:layout_height="354dp"
+        android:layout_width="280dp"
+        android:layout_height="169dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="3dp"
         android:src="@mipmap/ic_logo_wine" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <!-- First Name -->
+        <EditText
+            android:id="@+id/editTextFirstName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/first_name"
+            android:inputType="textPersonName"
+            android:textColor="@color/wine"
+            android:textColorHint="@color/wine" />
+
+        <!-- Margin between the EditTexts -->
+        <View
+            android:layout_width="16dp"
+            android:layout_height="wrap_content" />
+
+        <!-- Last Name -->
+        <EditText
+            android:id="@+id/editTextLastName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/last_name"
+            android:inputType="textPersonName"
+            android:textColor="@color/wine"
+            android:textColorHint="@color/wine" />
+    </LinearLayout>
+
+    <!-- Phone Number -->
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/email"
-        android:textColorHint="@color/wine"
-        android:inputType="textEmailAddress"
         android:layout_marginTop="16dp"
-        android:importantForAccessibility="yes"
-        android:contentDescription="@string/enter_your_email_address"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
         android:textColor="@color/wine"
-        tools:ignore="ContentDescription" />
+        android:textColorHint="@color/wine" />
 
+    <EditText
+        android:id="@+id/editTextPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/phone_number"
+        android:inputType="phone"
+        android:textColorHint="@color/wine"
+        android:textColor="@color/wine"
+        android:layout_marginTop="16dp" />
+
+    <!-- Email -->
+
+    <!-- Password -->
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password"
-        android:textColorHint="@color/wine"
         android:inputType="textPassword"
-        android:layout_marginTop="8dp"
-        android:importantForAccessibility="yes"
-        android:contentDescription="@string/enter_your_password"
+        android:textColorHint="@color/wine"
         android:textColor="@color/wine"
-        tools:ignore="ContentDescription" />
+        android:layout_marginTop="16dp" />
 
+    <!-- Confirm Password -->
     <EditText
-        android:id="@+id/editTextFullName"
+        android:id="@+id/editTextConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/full_name"
+        android:hint="@string/confirm_password"
+        android:inputType="textPassword"
         android:textColorHint="@color/wine"
-        android:layout_marginTop="16dp"
-        android:importantForAccessibility="yes"
-        android:contentDescription="@string/enter_your_full_name"
         android:textColor="@color/wine"
-        tools:ignore="ContentDescription" />
+        android:layout_marginTop="16dp" />
 
+
+    <View
+        android:layout_width="101dp"
+        android:layout_height="13dp" />
+
+    <CheckBox
+        android:id="@+id/remember"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/remember_me" />
+
+    <!-- Sign Up Button -->
     <Button
         android:id="@+id/buttonSignUp"
         android:layout_width="match_parent"
@@ -66,6 +122,8 @@
         android:background="@color/wine"
         android:textColor="@color/white"
         android:layout_marginTop="16dp"/>
+
+    <!-- Login Button -->
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="match_parent"
@@ -73,6 +131,5 @@
         android:text="@string/already_have_an_account"
         android:background="@color/wine"
         android:textColor="@color/white"
-        android:layout_marginTop="16dp"
-        />
+        android:layout_marginTop="16dp"/>
 </LinearLayout>
