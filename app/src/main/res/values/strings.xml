@@ -98,6 +98,7 @@
     <string name="enter_your_email_address">Enter your Email address</string>
     <string name="email">Email</string>
     <string name="theme">Theme</string>
+    <string name="registration_in_process">Registration in process…</string>
     <string name="remember_me">Remember me</string>
     <string name="sign_out">sign out</string>
     <string name="no_data">No Data</string>
