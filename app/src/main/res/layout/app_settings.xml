@@ -42,22 +42,17 @@
             app:layout_constraintStart_toEndOf="@+id/label_notifications"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-        <!-- Cities Spinner -->
-
-        <!-- Dark Mode Toggle -->
-
-        <!-- Portrait/Landscape Toggle -->
 
         <TextView
             android:id="@+id/label_dark_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
+            android:layout_marginStart="48dp"
             android:text="@string/theme"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.255" />
+            app:layout_constraintVertical_bias="0.29" />
 
         <ToggleButton
             android:id="@+id/toggle_theme"
@@ -91,6 +86,28 @@
             app:layout_constraintStart_toEndOf="@+id/label_orientation"
             app:layout_constraintTop_toTopOf="@+id/label_orientation"
             app:layout_constraintVertical_bias="0.551" />
+
+        <EditText
+            android:id="@+id/editTextText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="120dp"
+            android:ems="10"
+            android:hint="Address"
+            android:inputType="text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="136dp"
+            android:text="Default address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
