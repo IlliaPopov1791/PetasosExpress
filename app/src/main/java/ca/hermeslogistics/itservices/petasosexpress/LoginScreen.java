@@ -56,6 +56,8 @@ public class LoginScreen extends AppCompatActivity {
         loginButton = findViewById(R.id.buttonLogin);
         signupButton = findViewById(R.id.buttonSignUp);
         rememberMeCheckBox = findViewById(R.id.remember);
+        sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
