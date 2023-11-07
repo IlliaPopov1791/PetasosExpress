@@ -14,7 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -57,6 +60,8 @@ public class SensorProximity extends Fragment {
         txtProximity = view.findViewById(R.id.textView2);
         ProgressBar progressBar = view.findViewById(R.id.progressBar);
         ImageView imgStatus = view.findViewById(R.id.imgStatus);
+        // Get a reference to the SeekBar
+        SeekBar seekBar = view.findViewById(R.id.seekBar);
         /*
         This one is for your list of stops, Dylan
 
@@ -88,6 +93,8 @@ public class SensorProximity extends Fragment {
                         updateProgressBar(progressBar, proximity.intValue());
                         // Update the ImageView based on the proximity value
                         updateImageViewBasedOnProximity(imgStatus, proximity.intValue());
+                        // Compare proximity value with the SeekBar's value and show a Toast if condition is met
+                        compareProximityToSliderAndToast(proximity.intValue(), seekBar);
                         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy 'at' HH:mm:ss z", Locale.getDefault());
                         //txtTime.setText(dateFormat.format(time));
                     } else {
@@ -126,6 +133,13 @@ public class SensorProximity extends Fragment {
         } else {
             // Otherwise, set the image source to drawable_medium
             imageView.setImageResource(R.mipmap.status_warning_round);
+        }
+    }
+
+    private void compareProximityToSliderAndToast(int proximityValue, SeekBar seekBar) {
+        int sliderValue = seekBar.getProgress();
+        if (proximityValue < sliderValue) {
+            Toast.makeText(getContext(), "Proximity value is smaller than the slider setting.", Toast.LENGTH_SHORT).show();
         }
     }
 

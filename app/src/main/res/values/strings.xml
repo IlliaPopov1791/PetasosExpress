@@ -117,5 +117,6 @@
     <string name="email_hint">Email</string>
     <string name="comment_hint">Comment</string>
     <string name="submit_feedback">Submit Feedback</string>
+    <string name="proximity_value_is_smaller_than_the_threshold">Proximity value is smaller than the threshold.</string>
 
 </resources>
