@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -53,7 +54,7 @@ public class SensorProximity extends Fragment {
 
         // Get a reference to the TextViews
         txtProximity = view.findViewById(R.id.textView2);
-
+        ProgressBar progressBar = view.findViewById(R.id.progressBar);
         /*
         This one is for your list of stops, Dylan
 
@@ -82,7 +83,7 @@ public class SensorProximity extends Fragment {
                     // Check if success
                     if (proximity != null && time != null) {
                         txtProximity.setText(String.format(Locale.getDefault(), "%dcm", proximity.intValue()));
-
+                        updateProgressBar(progressBar, proximity.intValue());
                         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy 'at' HH:mm:ss z", Locale.getDefault());
                         //txtTime.setText(dateFormat.format(time));
                     } else {
@@ -100,4 +101,15 @@ public class SensorProximity extends Fragment {
 
         return view;
     }
+
+    private void updateProgressBar(ProgressBar progressBar, int proximityValue) {
+        final int maxSensorValue = 20; // Max value from the proximity sensor
+        final int maxProgressValue = 20; // Max value for the ProgressBar
+        // Invert the proximity value (e.g., 19 becomes 1, 1 becomes 19)
+        int invertedValue = maxSensorValue - proximityValue;
+        // Now scale the inverted value to fit the ProgressBar scale
+        int scaledValue = (invertedValue * (maxProgressValue - 1)) / (maxSensorValue - 1) + 1;
+        progressBar.setProgress(scaledValue);
+    }
+
 }
