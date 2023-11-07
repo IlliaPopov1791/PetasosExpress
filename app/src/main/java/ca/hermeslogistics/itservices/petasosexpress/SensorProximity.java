@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.google.firebase.firestore.DocumentReference;
@@ -55,6 +56,7 @@ public class SensorProximity extends Fragment {
         // Get a reference to the TextViews
         txtProximity = view.findViewById(R.id.textView2);
         ProgressBar progressBar = view.findViewById(R.id.progressBar);
+        ImageView imgStatus = view.findViewById(R.id.imgStatus);
         /*
         This one is for your list of stops, Dylan
 
@@ -84,6 +86,8 @@ public class SensorProximity extends Fragment {
                     if (proximity != null && time != null) {
                         txtProximity.setText(String.format(Locale.getDefault(), "%dcm", proximity.intValue()));
                         updateProgressBar(progressBar, proximity.intValue());
+                        // Update the ImageView based on the proximity value
+                        updateImageViewBasedOnProximity(imgStatus, proximity.intValue());
                         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy 'at' HH:mm:ss z", Locale.getDefault());
                         //txtTime.setText(dateFormat.format(time));
                     } else {
@@ -111,5 +115,19 @@ public class SensorProximity extends Fragment {
         int scaledValue = (invertedValue * (maxProgressValue - 1)) / (maxSensorValue - 1) + 1;
         progressBar.setProgress(scaledValue);
     }
+
+    private void updateImageViewBasedOnProximity(ImageView imageView, int proximityValue) {
+        if (proximityValue < 5) {
+            // If the proximity is less than 5, set the image source to drawable_close
+            imageView.setImageResource(R.mipmap.statsu_cancel_round);
+        } else if (proximityValue > 15) {
+            // If the proximity is greater than 15, set the image source to drawable_far
+            imageView.setImageResource(R.mipmap.status_good_round);
+        } else {
+            // Otherwise, set the image source to drawable_medium
+            imageView.setImageResource(R.mipmap.status_warning_round);
+        }
+    }
+
 
 }

@@ -44,8 +44,8 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="107dp"
-        android:layout_height="88dp"
+        android:layout_width="151dp"
+        android:layout_height="79dp"
         android:layout_marginTop="56dp"
         android:gravity="center"
         android:text="@string/_4cm"
@@ -54,10 +54,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="@+id/progressBar"
-        app:layout_constraintHorizontal_bias="0.366"
+        app:layout_constraintHorizontal_bias="0.275"
         app:layout_constraintStart_toStartOf="@+id/progressBar"
         app:layout_constraintTop_toTopOf="@+id/progressBar"
-        app:layout_constraintVertical_bias="0.435" />
+        app:layout_constraintVertical_bias="0.431" />
 
     <TextView
         android:id="@+id/statusTextView"
@@ -80,7 +80,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_centerHorizontal="true"
-        android:src="@mipmap/status_warning_round"
+        android:src="@drawable/ic_other_button"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="@+id/progressBar"
         app:layout_constraintHorizontal_bias="0.682"
