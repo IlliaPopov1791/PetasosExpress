@@ -93,6 +93,28 @@
             app:layout_constraintHorizontal_bias="0.923"
             app:layout_constraintStart_toStartOf="@+id/switch_notifications" />
 
+        <EditText
+            android:id="@+id/editTextText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="356dp"
+            android:layout_marginTop="64dp"
+            android:ems="10"
+            android:hint="Address"
+            android:inputType="text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="244dp"
+            android:layout_marginTop="76dp"
+            android:text="Default address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
