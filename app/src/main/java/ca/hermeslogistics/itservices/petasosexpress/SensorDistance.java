@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import com.google.firebase.firestore.DocumentReference;
@@ -23,9 +24,10 @@ import java.util.Locale;
 import javax.annotation.Nullable;
 
 public class SensorDistance extends Fragment {
-
-    // TextView for displaying the value
     private TextView txtValue;
+    private ImageView statusImg;
+    private Double lastDistance = 0.0;
+    private Double rpmValue = null;
 
     // Firestore database reference
     private FirebaseFirestore db;
@@ -49,9 +51,27 @@ public class SensorDistance extends Fragment {
             view = inflater.inflate(R.layout.sensor_distance_landscape, container, false);
         }
 
-        // Get a reference to the TextView
+        // Get a reference to UI objects
         txtValue = view.findViewById(R.id.txtValue);
-
+        statusImg = view.findViewById(R.id.imgStatus);
+        //Ref for max speed
+        DocumentReference rpmRef = db.collection("Motors").document("PMfVBrNcmgOhjYlQZ4Ih");
+        rpmRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    // Handle error
+                    return;
+                }
+                if (snapshot != null && snapshot.exists()) {
+                    Double rpm = snapshot.getDouble("rpm");
+                    if (rpm != null) {
+                        rpmValue = rpm; // Store the RPM for use in distance update logic
+                    }
+                }
+            }
+        });
         // Get the document reference from Firestore
         DocumentReference docRef = db.collection("Distance (Ultrasonic Sensor)").document("HChcHZOZwRMcrFVLnar4");
 
@@ -76,6 +96,8 @@ public class SensorDistance extends Fragment {
                         Double distance = pulseDuration * speedOfSound;
 
                         txtValue.setText(String.format(Locale.getDefault(), "%.2f", distance));
+                        updateStatus(statusImg, distance);
+                        lastDistance = distance;
                     } else {
                         //If the fields are not found or null
                         txtValue.setText(R.string.no_data);
@@ -88,6 +110,25 @@ public class SensorDistance extends Fragment {
         });
 
         return view;
+    }
+    private void updateStatus(ImageView imageView, double distance) {
+        boolean isAccelerating = lastDistance != null && distance > lastDistance;
+
+        if (distance < 0.1) {
+            imageView.setImageResource(R.mipmap.speed_stop_round);
+        } else if (distance >= 0.1 && distance <= 1.5) {
+            if (rpmValue != null && rpmValue == 100) {
+                imageView.setImageResource(R.mipmap.speed_max_round);
+            } else {
+                imageView.setImageResource(isAccelerating ? R.mipmap.speed_accelerate_round : R.mipmap.speed_slow_round);
+            }
+        } else if (distance > 1.5) {
+            if (rpmValue != null && rpmValue == 100) {
+                imageView.setImageResource(R.mipmap.speed_max_round);
+            } else {
+                imageView.setImageResource(R.mipmap.speed_accelerate_round);
+            }
+        }
     }
 }
 

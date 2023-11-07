@@ -118,5 +118,7 @@
     <string name="comment_hint">Comment</string>
     <string name="submit_feedback">Submit Feedback</string>
     <string name="proximity_value_is_smaller_than_the_threshold">Proximity value is smaller than the threshold.</string>
-
+    <string name="please_fill_in_all_fields">Please fill in all fields</string>
+    <string name="feedback_submitted_successfully">Feedback submitted successfully!</string>
+    <string name="failed_to_submit_feedback">Failed to submit feedback</string>
 </resources>

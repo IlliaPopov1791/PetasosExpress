@@ -71,7 +71,7 @@ public class FeedbackScreen extends Fragment {
 
         // Validate inputs
         if (name.isEmpty() || phone.isEmpty() || email.isEmpty()) {
-            Toast.makeText(getContext(), "Please fill in all fields", Toast.LENGTH_LONG).show();
+            DisplayToast(getString(R.string.please_fill_in_all_fields));
             return;
         }
 
@@ -89,8 +89,8 @@ public class FeedbackScreen extends Fragment {
         //Adding the feedback to the 'feedbackRecord' collection
         db.collection("feedbackRecord").document(documentId)
                 .set(feedback)
-                .addOnSuccessListener(aVoid -> Toast.makeText(getContext(), "Feedback submitted successfully!", Toast.LENGTH_SHORT).show())
-                .addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to submit feedback", Toast.LENGTH_SHORT).show());
+                .addOnSuccessListener(aVoid -> DisplayToast(getString(R.string.feedback_submitted_successfully)))
+                .addOnFailureListener(e -> DisplayToast(getString(R.string.failed_to_submit_feedback)));
     }
 
     private String generateRandomDocumentId(int targetStringLength) {
@@ -103,5 +103,9 @@ public class FeedbackScreen extends Fragment {
                 .limit(targetStringLength)
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString();
+    }
+
+    private void DisplayToast(String msg) {
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 }
