@@ -81,7 +81,8 @@ public class SensorBalance extends Fragment {
     private void updateAxis(ProgressBar progressBar, TextView valueText, Number axisValue) {
         if (axisValue != null) {
             int value = axisValue.intValue();
-            progressBar.setProgress(value + 100);
+            int normalizedProgress = value + 100; // Normalize to 0-200 range
+            progressBar.setProgress(normalizedProgress);
             valueText.setText(getString(R.string.placeholder, value));
         } else {
             valueText.setText(R.string.no_data);
