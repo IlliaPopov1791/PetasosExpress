@@ -1,10 +1,14 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +29,15 @@ public class Home extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view;
+
+        // Set the layout based on the orientation
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            view = inflater.inflate(R.layout.fragment_home, container, false);
+        } else {
+            view = inflater.inflate(R.layout.home_landscape, container, false);
+        }
 
         // Initialize UI elements
         searchEditText = view.findViewById(R.id.searchEditText);
@@ -33,26 +45,16 @@ public class Home extends Fragment {
         // Get the SharedViewModel instance
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
-        // Set up click listener for the search button
-        searchEditText.setOnClickListener(new View.OnClickListener() {
+        // Set up editor action listener for the search EditText (handle "Enter" key event)
+        searchEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onClick(View v) {
-                String searchQuery = searchEditText.getText().toString();
-                // Update the search query in the SharedViewModel
-                sharedViewModel.setSearchQuery(searchQuery);
-
-                // Create the SearchScreen fragment
-                SearchScreen searchScreenFragment = new SearchScreen();
-
-                // Replace the current fragment with the SearchScreen fragment
-                getParentFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, searchScreenFragment) // R.id.fragment_container is the container in your activity layout where you want to replace the fragments
-                        .addToBackStack(null) // Optional: Allows the user to navigate back to the previous fragment
-                        .commit();
-
-                // Perform search based on searchQuery (optional)
-                String message = getString(R.string.searching_for, searchQuery);
-                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_NULL) {
+                    // Handle the "Enter" key event by triggering the search action
+                    handleSearch();
+                    return true;
+                }
+                return false;
             }
         });
 
@@ -63,5 +65,24 @@ public class Home extends Fragment {
         });
 
         return view;
+    }
+
+    private void handleSearch() {
+        String searchQuery = searchEditText.getText().toString();
+        // Update the search query in the SharedViewModel
+        sharedViewModel.setSearchQuery(searchQuery);
+
+        // Create the SearchScreen fragment
+        SearchScreen searchScreenFragment = new SearchScreen();
+
+        // Replace the current fragment with the SearchScreen fragment
+        getParentFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, searchScreenFragment)
+                .addToBackStack(null)
+                .commit();
+
+        // Perform search based on searchQuery (optional)
+        String message = getString(R.string.searching_for, searchQuery);
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 }
