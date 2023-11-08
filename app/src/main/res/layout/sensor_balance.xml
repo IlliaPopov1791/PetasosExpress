@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     android:background="@color/logo"
     tools:context=".SensorBalance">
+    <!--
+       Illia M. Popov | ID: n01421791
+       William Margalik | ID: n01479878
+       Dylan Ashton | ID: n01442206
+       Ahmad Aljawish | ID: n01375348-->
 
     <!-- Title -->
     <TextView
