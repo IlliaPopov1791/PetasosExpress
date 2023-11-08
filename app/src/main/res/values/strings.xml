@@ -121,4 +121,7 @@
     <string name="please_fill_in_all_fields">Please fill in all fields</string>
     <string name="feedback_submitted_successfully">Feedback submitted successfully!</string>
     <string name="failed_to_submit_feedback">Failed to submit feedback</string>
+    <string name="enter_your_last_name">Enter your last name</string>
+    <string name="enter_your_phone_number">Enter your phone number</string>
+    <string name="enter_your_first_name">Enter your first name</string>
 </resources>

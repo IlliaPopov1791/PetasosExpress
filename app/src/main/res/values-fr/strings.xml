@@ -118,5 +118,8 @@
     <string name="comment_hint">Commentaire</string>
     <string name="submit_feedback">Soumettre le retour d\'information</string>
     <string name="proximity_value_is_smaller_than_the_threshold">La valeur de proximité est inférieure au seuil.</string>
+    <string name="enter_your_last_name">Enter your last name</string>
+    <string name="enter_your_phone_number">Enter your phone number</string>
+    <string name="enter_your_first_name">Enter your first name</string>
 
 </resources>
