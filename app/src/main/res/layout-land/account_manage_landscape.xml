@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/logo">
+
+    <!-- ImageView Placeholder -->
+    <ImageView
+        android:id="@+id/imagePlaceholder"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginTop="16dp"/>
+
+    <!-- Email Label -->
+    <TextView
+        android:id="@+id/labelEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imagePlaceholder"
+        app:layout_constraintEnd_toStartOf="@id/labelFirstName"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:layout_marginEnd="8dp"/>
+
+    <!-- Email Input -->
+    <EditText
+        android:id="@+id/inputEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="Enter your email"
+        app:layout_constraintStart_toStartOf="@id/labelEmail"
+        app:layout_constraintTop_toBottomOf="@id/labelEmail"
+        app:layout_constraintEnd_toEndOf="@id/labelEmail"/>
+
+    <!-- Last Name Label -->
+    <TextView
+        android:id="@+id/labelLastName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Last Name"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/labelEmail"
+        app:layout_constraintTop_toBottomOf="@id/inputEmail"
+        app:layout_constraintEnd_toEndOf="@id/labelEmail"
+        android:layout_marginTop="24dp"/>
+
+    <!-- Last Name Input -->
+    <EditText
+        android:id="@+id/inputLastName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Enter your last name"
+        app:layout_constraintStart_toStartOf="@id/labelLastName"
+        app:layout_constraintTop_toBottomOf="@id/labelLastName"
+        app:layout_constraintEnd_toEndOf="@id/labelLastName"/>
+
+    <!-- First Name Label -->
+    <TextView
+        android:id="@+id/labelFirstName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="First Name"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/labelEmail"
+        app:layout_constraintTop_toBottomOf="@id/imagePlaceholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="8dp"/>
+
+    <!-- First Name Input -->
+    <EditText
+        android:id="@+id/inputFirstName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Enter your first name"
+        app:layout_constraintStart_toStartOf="@id/labelFirstName"
+        app:layout_constraintTop_toBottomOf="@id/labelFirstName"
+        app:layout_constraintEnd_toEndOf="@id/labelFirstName"/>
+
+    <!-- Phone Label -->
+    <TextView
+        android:id="@+id/labelPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Phone"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/labelFirstName"
+        app:layout_constraintTop_toBottomOf="@id/inputFirstName"
+        app:layout_constraintEnd_toEndOf="@id/labelFirstName"
+        android:layout_marginTop="24dp"/>
+
+    <!-- Phone Input -->
+    <EditText
+        android:id="@+id/inputPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:hint="Enter your phone number"
+        app:layout_constraintStart_toStartOf="@id/labelPhone"
+        app:layout_constraintTop_toBottomOf="@id/labelPhone"
+        app:layout_constraintEnd_toEndOf="@id/labelPhone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
