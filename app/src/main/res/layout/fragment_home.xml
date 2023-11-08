@@ -98,5 +98,11 @@
         android:textColor="@android:color/black"
         android:textSize="16sp" />
 
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    </FrameLayout>
 
 </RelativeLayout>
