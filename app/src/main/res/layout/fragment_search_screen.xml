@@ -22,5 +22,14 @@
         android:textColor="@android:color/black"
         android:textSize="16sp" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchResultsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/searchEditText"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="128dp"
+        android:layout_marginBottom="347dp" />
+
 
 </RelativeLayout>
