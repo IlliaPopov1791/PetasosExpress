@@ -44,6 +44,10 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
+                    android:id="@+id/AccountSettings"
+                    android:icon="@drawable/manage_account_foreground"
+                    android:title="@string/account_settings" />
+                <item
                     android:id="@+id/AppSettings"
                     android:icon="@drawable/ic_settings_foreground"
                     android:title="@string/AppSettings" />

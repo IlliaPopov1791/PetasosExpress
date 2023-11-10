@@ -48,7 +48,7 @@
     <string name="y_axis">Axe Y</string>
     <string name="z_axis">Axe Z</string>
     <string name="start_simulation">Démarrer la simulation</string>
-    <string name="Settings">settings</string>
+    <string name="Settings">Settings</string>
     <string name="AppSettings">AppSettings</string>
     <string name="help">help</string>
     <string name="motor_speed_label">Vitesse du moteur</string>
@@ -149,4 +149,6 @@
         <item>Board Game Paradise</item>
     </string-array>
     <string name="searching_for_category" translatable="false">Recherche d\'articles dans la catégorie : %s</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="ManageAccount" />
 </resources>
