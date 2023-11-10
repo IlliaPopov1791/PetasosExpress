@@ -118,9 +118,15 @@
     <string name="comment_hint">Commentaire</string>
     <string name="submit_feedback">Soumettre le retour d\'information</string>
     <string name="proximity_value_is_smaller_than_the_threshold">La valeur de proximité est inférieure au seuil.</string>
+    <string name="please_fill_in_all_fields">Veuillez remplir tous les champs</string>
+    <string name="feedback_submitted_successfully">Retour soumis avec succès !</string>
+    <string name="failed_to_submit_feedback">Échec de la soumission du retour</string>
     <string name="enter_your_last_name">Entrez votre nom de famille</string>
     <string name="enter_your_phone_number">Entrez votre numéro de téléphone</string>
     <string name="enter_your_first_name">Entrez votre prénom</string>
+    <string name="invalid_email_format">Veuillez entrer une adresse e-mail valide.</string>
+    <string name="invalid_password_format1">Le mot de passe doit comporter au moins 6 caractères,</string>
+    <string name="invalid_password_format2">inclure un chiffre, une lettre majuscule et un caractère spécial.</string>
 
 
 </resources>

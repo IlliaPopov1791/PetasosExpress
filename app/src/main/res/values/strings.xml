@@ -124,4 +124,7 @@
     <string name="enter_your_last_name">Enter your last name</string>
     <string name="enter_your_phone_number">Enter your phone number</string>
     <string name="enter_your_first_name">Enter your first name</string>
+    <string name="invalid_email_format">Please enter a valid email address.</string>
+    <string name="invalid_password_format1">Password must be at least 6 characters,</string>
+    <string name="invalid_password_format2">include a number, a capital letter, and a special character.</string>
 </resources>
