@@ -4,9 +4,9 @@
         <shape
             android:innerRadiusRatio="2.5"
             android:shape="ring"
-            android:thicknessRatio="12"
+            android:thicknessRatio="52"
             android:useLevel="false">
-            <size android:height="200dp" android:width="200dp" />
+            <size android:height="50dp" android:width="50dp" />
             <solid android:color="@color/logo" /> <!-- Background color -->
         </shape>
     </item>

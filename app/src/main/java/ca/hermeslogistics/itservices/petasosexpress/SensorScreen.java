@@ -54,14 +54,12 @@ public class SensorScreen extends Fragment {
 
     // Proximity Sensor
     private TextView txtProximity, txtTime;
-    private ProgressBar proximityProgressBar;
-    private SeekBar seekBar;
     private ImageView imgStatus;
+    private  ProgressBar progressBar;
 
     // Motor Sensor
     private ProgressBar motorProgressBar;
     private TextView textViewMotorSpeed;
-    private Button btnEmergencyStop;
 
     public SensorScreen() {
         // Required empty public constructor
@@ -71,20 +69,28 @@ public class SensorScreen extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         db = FirebaseFirestore.getInstance();
 
+        // Determine the device's current orientation
         int orientation = getResources().getConfiguration().orientation;
-        View view = inflater.inflate(orientation == Configuration.ORIENTATION_PORTRAIT ? R.layout.sensor_screen : R.layout.sensor_screen_landscape, container, false);
+
+        // Load the appropriate layout based on orientation
+        View view;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            view = inflater.inflate(R.layout.sensor_screen, container, false);
+        } else {
+            view = inflater.inflate(R.layout.sensor_screen_landscape, container, false);
+        }
 
         // Initialize components for each sensor
-        initializeDistanceSensor(view);
-        initializeBalanceSensor(view);
+       // initializeDistanceSensor(view);
+       // initializeBalanceSensor(view);
         initializeProximitySensor(view);
-        initializeMotorSensor(view);
+      //  initializeMotorSensor(view);
 
         // Set up Firestore document references and listeners for each sensor
-        setupDistanceSensor();
-        setupBalanceSensor();
+        //setupDistanceSensor();
+        //setupBalanceSensor();
         setupProximitySensor();
-        setupMotorSensor();
+       // setupMotorSensor();
 
         return view;
     }
@@ -108,15 +114,13 @@ public class SensorScreen extends Fragment {
 
     private void initializeProximitySensor(View view) {
         txtProximity = view.findViewById(R.id.textView2);
-        proximityProgressBar = view.findViewById(R.id.progressBar);
         imgStatus = view.findViewById(R.id.imgStatus);
-        seekBar = view.findViewById(R.id.seekBar);
+        progressBar = view.findViewById(R.id.progressBar);
     }
 
     private void initializeMotorSensor(View view) {
         motorProgressBar = view.findViewById(R.id.progressBar);
         textViewMotorSpeed = view.findViewById(R.id.textViewMotorSpeed);
-        btnEmergencyStop = view.findViewById(R.id.btnEmergencyStop);
     }
 
     private void setupDistanceSensor() {
@@ -195,12 +199,10 @@ public class SensorScreen extends Fragment {
                     // Check if success
                     if (proximity != null && time != null) {
                         txtProximity.setText(String.format(Locale.getDefault(), "%dcm", proximity.intValue()));
-                        updateProgressBar(proximityProgressBar, proximity.intValue());
                         // Update the ImageView based on the proximity value
                         updateImageViewBasedOnProximity(imgStatus, proximity.intValue());
-                        // Compare proximity value with the SeekBar's value and show a Toast if condition is met
-                        compareProximityToSliderAndToast(proximity.intValue(), seekBar);
                         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy 'at' HH:mm:ss z", Locale.getDefault());
+                        updateProgressBar(progressBar,proximity.intValue());
                         //txtTime.setText(dateFormat.format(time));
                     } else {
                         //If the fields are not found or null
@@ -281,16 +283,6 @@ public class SensorScreen extends Fragment {
         }
     }
 
-    private void updateProgressBar(ProgressBar progressBar, int proximityValue) {
-        final int maxSensorValue = 20; // Max value from the proximity sensor
-        final int maxProgressValue = 20; // Max value for the ProgressBar
-        // Invert the proximity value (e.g., 19 becomes 1, 1 becomes 19)
-        int invertedValue = maxSensorValue - proximityValue;
-        // Now scale the inverted value to fit the ProgressBar scale
-        int scaledValue = (invertedValue * (maxProgressValue - 1)) / (maxSensorValue - 1) + 1;
-        progressBar.setProgress(scaledValue);
-    }
-
     private void updateImageViewBasedOnProximity(ImageView imageView, int proximityValue) {
         if (proximityValue < 5) {
             // If the proximity is less than 5, set the image source to drawable_close
@@ -304,10 +296,15 @@ public class SensorScreen extends Fragment {
         }
     }
 
-    private void compareProximityToSliderAndToast(int proximityValue, SeekBar seekBar) {
-        int sliderValue = seekBar.getProgress();
-        if (proximityValue < sliderValue) {
-            Toast.makeText(getContext(), "Proximity value is smaller than the slider setting.", Toast.LENGTH_SHORT).show();
-        }
+    private void updateProgressBar(ProgressBar progressBar, int proximityValue) {
+        final int maxSensorValue = 20; // Max value from the proximity sensor
+        final int maxProgressValue = 20; // Max value for the ProgressBar
+        // Invert the proximity value (e.g., 19 becomes 1, 1 becomes 19)
+        int invertedValue = maxSensorValue - proximityValue;
+        // Now scale the inverted value to fit the ProgressBar scale
+        int scaledValue = (invertedValue * (maxProgressValue - 1)) / (maxSensorValue - 1) + 1;
+        progressBar.setProgress(scaledValue);
     }
+
+
 }

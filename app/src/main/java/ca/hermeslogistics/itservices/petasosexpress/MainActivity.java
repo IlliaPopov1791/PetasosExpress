@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     fragmentToLoad = new SensorDistance();
                     fragmentTag = getString(R.string.distance_tag);
                 } else if (itemId == R.id.proximity_sensor) {
-                    fragmentToLoad = new SensorProximity();
+                    fragmentToLoad = new SensorScreen();
                     fragmentTag = getString(R.string.proximity_tag);
                 } else if (itemId == R.id.balance_sensor) {
                     fragmentToLoad = new SensorBalance();

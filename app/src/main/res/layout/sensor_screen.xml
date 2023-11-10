@@ -1,11 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SensorScreen"
-    android:background="@color/logo">
+    android:background="@color/logo"
+    tools:context=".SensorScreen">
+
+    <!--
+     Illia M. Popov | ID: n01421791
+     William Margalik | ID: n01479878
+     Dylan Ashton | ID: n01442206
+     Ahmad Aljawish | ID: n01375348-->
 
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:gravity="center_horizontal"
+        android:text="@string/distance"
+        android:textColor="@color/wine"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/txtHistory"
+        android:layout_width="197dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="460dp"
+        android:text="@string/stops_history"
+        android:textColor="@color/wine"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="368dp"
+        android:layout_height="136dp"
+        android:layout_below="@id/btnUnits"
+        app:layout_constraintStart_toStartOf="@+id/txtHistory"
+        app:layout_constraintTop_toBottomOf="@+id/txtHistory" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="151dp"
+        android:layout_height="79dp"
+        android:gravity="center"
+        android:text="@string/_4cm"
+        android:textColor="@color/wine"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.444" />
+
+    <ImageView
+        android:id="@+id/imgStatus"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="28dp"
+        android:src="@drawable/ic_other_button"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.521" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="99dp"
+        android:layout_height="101dp"
+        android:layout_gravity="center"
+        android:indeterminate="false"
+        android:max="20"
+        android:progress="1"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        app:layout_constraintBottom_toBottomOf="@+id/imgStatus"
+        app:layout_constraintEnd_toEndOf="@+id/imgStatus"
+        app:layout_constraintStart_toStartOf="@+id/imgStatus"
+        app:layout_constraintTop_toTopOf="@+id/imgStatus" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
