@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
- Illia M. Popov | ID: n01421791
- William Margalik | ID: n01479878
- Dylan Ashton | ID: n01442206
- Ahmad Aljawish | ID: n01375348-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +7,6 @@
     android:background="@drawable/main_theme"
     android:id="@+id/main_home"
     tools:context=".Home">
-
 
     <!-- Button Layout with Margin -->
     <LinearLayout
@@ -31,7 +25,7 @@
 
             <!-- Food Button with Padding -->
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/foodButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_food_button_foreground"
@@ -40,7 +34,7 @@
 
             <!-- Electronics Button with Padding -->
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/electronicsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -59,7 +53,7 @@
 
             <!-- Medical Button with Padding -->
             <ImageButton
-                android:id="@+id/imageButton5"
+                android:id="@+id/medicalButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_medical_button_foreground"
@@ -68,7 +62,7 @@
 
             <!-- Other Button with Padding -->
             <ImageButton
-                android:id="@+id/imageButton6"
+                android:id="@+id/otherButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -80,15 +74,12 @@
     </LinearLayout>
 
     <!-- Search Bar -->
-
     <EditText
         android:id="@+id/searchEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginTop="97dp"
-        android:layout_marginBottom="588dp"
         android:background="@drawable/search_bar_background"
         android:hint="@string/search_hint"
         android:paddingStart="16dp"
@@ -97,12 +88,5 @@
         android:paddingBottom="12dp"
         android:textColor="@android:color/black"
         android:textSize="16sp" />
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-    </FrameLayout>
 
 </RelativeLayout>

@@ -77,7 +77,7 @@ public class Home extends Fragment {
 
         // Replace the current fragment with the SearchScreen fragment
         getParentFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, searchScreenFragment)
+                .replace(R.id.main_home, searchScreenFragment)
                 .addToBackStack(null)
                 .commit();
 
