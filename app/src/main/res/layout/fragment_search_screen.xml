@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,15 +21,13 @@
         android:textColor="@android:color/black"
         android:textSize="16sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchResultsRecyclerView"
+    <!-- ListView for search results -->
+    <ListView
+        android:id="@+id/search_stuff"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/searchEditText"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="128dp"
-        android:layout_marginBottom="347dp" />
-
-
+        android:layout_marginTop="11dp"
+        android:padding="20dp" />
 
 </RelativeLayout>
