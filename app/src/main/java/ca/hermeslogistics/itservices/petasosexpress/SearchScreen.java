@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,25 +24,29 @@ import java.util.Locale;
 
 public class SearchScreen extends Fragment {
 
-    private ListView searchStuffListView;
-    private ArrayAdapter<String> adapter;
-    private List<String> fullItemList;
+    private ListView searchResultsListView;
+    private ProductAdapter productAdapter;
+    private List<Product> productList;
+    private List<Product> fullItemList; // Full list of products
     private EditText searchEditText;
     private FirebaseFirestore db;
 
     public SearchScreen() {
+        // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_screen, container, false);
 
-        searchStuffListView = view.findViewById(R.id.search_stuff);
+        searchResultsListView = view.findViewById(R.id.search_stuff);
         searchEditText = view.findViewById(R.id.searchEditText);
         db = FirebaseFirestore.getInstance();
 
-        adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1);
-        searchStuffListView.setAdapter(adapter);
+        productList = new ArrayList<>();
+        fullItemList = new ArrayList<>(); // Initialize the full item list
+        productAdapter = new ProductAdapter(requireContext(), productList);
+        searchResultsListView.setAdapter(productAdapter);
 
         Bundle args = getArguments();
         String initialQuery = args != null ? args.getString("searchQuery", "") : "";
@@ -80,18 +84,21 @@ public class SearchScreen extends Fragment {
     private void fetchItems(String initialQuery) {
         db.collection("goods").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                fullItemList = new ArrayList<>();
+                productList.clear();
+                fullItemList.clear(); // Clear the full list
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     String name = document.getString("name");
                     Double price = document.getDouble("price");
+                    String producer = document.getString("producer");
+                    String type = document.getString("type");
 
                     if (name != null && price != null) {
-                        String formattedItem = name + " - $" + String.format(Locale.getDefault(), "%.2f", price);
-                        fullItemList.add(formattedItem);
+                        Product product = new Product(name, price, producer, type);
+                        fullItemList.add(product); // Add to the full list
+                        productList.add(product); // Add to the display list
                     }
                 }
-                adapter.addAll(fullItemList);
-                adapter.notifyDataSetChanged();
+                productAdapter.notifyDataSetChanged();
 
                 // Filter with the initial query if it exists
                 if (!initialQuery.isEmpty()) {
@@ -105,17 +112,17 @@ public class SearchScreen extends Fragment {
 
     private void filterAdapter(String query) {
         query = query.toLowerCase(Locale.getDefault());
-        List<String> filteredList = new ArrayList<>();
+        List<Product> filteredList = new ArrayList<>();
 
-        for (String item : fullItemList) {
-            if (item.toLowerCase(Locale.getDefault()).contains(query)) {
-                filteredList.add(item);
+        for (Product product : fullItemList) { // Filter from the full list
+            if (product.matchesQuery(query)) {
+                filteredList.add(product);
             }
         }
 
-        adapter.clear();
-        adapter.addAll(filteredList);
-        adapter.notifyDataSetChanged();
+        productAdapter.clear();
+        productAdapter.addAll(filteredList);
+        productAdapter.notifyDataSetChanged();
     }
 
     private void closeKeyboard() {
