@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -127,12 +128,17 @@ public class SignupScreen extends AppCompatActivity {
                                     Toast.makeText(SignupScreen.this, R.string.registration_in_process,
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-                                    //Fail
-                                    Toast.makeText(SignupScreen.this, R.string.authentication_failed,
-                                            Toast.LENGTH_SHORT).show();
+                                    //Check if email is used.
+                                    if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                        Toast.makeText(SignupScreen.this, R.string.email_already_in_use, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(SignupScreen.this, R.string.authentication_failed,
+                                                Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }
                         });
+
             }
         });
 
@@ -152,7 +158,7 @@ public class SignupScreen extends AppCompatActivity {
         user.put("firstName", firstName);
         user.put("lastName", lastName);
         user.put("email", email);
-        user.put("phone", Long.parseLong(phone)); // Store as a number
+        user.put("phone", Long.parseLong(phone));
 
         //Adding a new document with the email as the ID to link with Authentication
         db.collection("userInfo").document(email)

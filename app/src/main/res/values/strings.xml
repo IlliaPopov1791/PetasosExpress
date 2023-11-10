@@ -127,4 +127,6 @@
     <string name="invalid_email_format">Please enter a valid email address.</string>
     <string name="invalid_password_format1">Password must be at least 6 characters,</string>
     <string name="invalid_password_format2">include a number, a capital letter, and a special character.</string>
+    <string name="email_already_in_use">This email is already in use</string>
+
 </resources>
