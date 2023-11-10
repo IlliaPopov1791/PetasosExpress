@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import ca.hermeslogistics.itservices.petasosexpress.SharedViewModel;
@@ -75,6 +76,9 @@ public class Home extends Fragment {
         // Create the SearchScreen fragment
         SearchScreen searchScreenFragment = new SearchScreen();
 
+        Bundle args = new Bundle();
+        args.putString("searchQuery", searchQuery);
+        searchScreenFragment.setArguments(args);
         // Replace the current fragment with the SearchScreen fragment
         getParentFragmentManager().beginTransaction()
                 .replace(R.id.main_home, searchScreenFragment)

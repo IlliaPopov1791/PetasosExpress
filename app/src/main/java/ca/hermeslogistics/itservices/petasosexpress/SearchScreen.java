@@ -26,7 +26,6 @@ public class SearchScreen extends Fragment {
 
     private ListView searchStuffListView;
     private ArrayAdapter<String> adapter;
-    private List<String> originalItems;
     private List<String> fullItemList;
     private EditText searchEditText;
     private FirebaseFirestore db;
@@ -42,10 +41,13 @@ public class SearchScreen extends Fragment {
         searchEditText = view.findViewById(R.id.searchEditText);
         db = FirebaseFirestore.getInstance();
 
-        originalItems = new ArrayList<>();
-        adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, originalItems);
+        adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1);
         searchStuffListView.setAdapter(adapter);
-        fetchItems();
+
+        Bundle args = getArguments();
+        String initialQuery = args != null ? args.getString("searchQuery", "") : "";
+        searchEditText.setText(initialQuery);
+        fetchItems(initialQuery);
 
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -75,7 +77,7 @@ public class SearchScreen extends Fragment {
         return view;
     }
 
-    private void fetchItems() {
+    private void fetchItems(String initialQuery) {
         db.collection("goods").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 fullItemList = new ArrayList<>();
@@ -86,10 +88,15 @@ public class SearchScreen extends Fragment {
                     if (name != null && price != null) {
                         String formattedItem = name + " - $" + String.format(Locale.getDefault(), "%.2f", price);
                         fullItemList.add(formattedItem);
-                        originalItems.add(formattedItem);
                     }
                 }
+                adapter.addAll(fullItemList);
                 adapter.notifyDataSetChanged();
+
+                // Filter with the initial query if it exists
+                if (!initialQuery.isEmpty()) {
+                    filterAdapter(initialQuery);
+                }
             } else {
                 Log.e("FetchItems", "Error fetching documents", task.getException());
             }
