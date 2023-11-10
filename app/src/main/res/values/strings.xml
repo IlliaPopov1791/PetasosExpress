@@ -128,5 +128,26 @@
     <string name="invalid_password_format1">Password must be at least 6 characters,</string>
     <string name="invalid_password_format2">include a number, a capital letter, and a special character.</string>
     <string name="email_already_in_use">This email is already in use</string>
+    <string-array name="my_stuff">
+        <item>Pizza Hut</item>
+        <item>KFC</item>
+        <item>Mcdonald\'s</item>
+        <item>Star bucks</item>
+        <item>Best Buy</item>
+        <item>Staples</item>
+        <item>Shoppers Drug mart</item>
+        <item>Circle K</item>
+        <item>Walmart</item>
+        <item>Bed Bath &amp; Beyond</item>
+        <item>Fortinos</item>
+        <item>Humber Bookstore</item>
+        <item>Costco</item>
+        <item>Longos</item>
+        <item>LCBO</item>
+        <item>Beer Store</item>
+        <item>Pharamcist</item>
+        <item>Board Game Paradise</item>
+    </string-array>
+    <string name="searching_for_category" translatable="false">Searching for items in category: %s</string>
 
 </resources>

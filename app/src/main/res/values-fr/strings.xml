@@ -128,5 +128,25 @@
     <string name="invalid_password_format1">Le mot de passe doit comporter au moins 6 caractères,</string>
     <string name="invalid_password_format2">inclure un chiffre, une lettre majuscule et un caractère spécial.</string>
     <string name="email_already_in_use">Cet e-mail est déjà utilisé</string>
-
+    <string-array name="my_stuff">
+        <item>Pizza Hut</item>
+        <item>KFC</item>
+        <item>McDonald\'s</item>
+        <item>Starbucks</item>
+        <item>Best Buy</item>
+        <item>Staples</item>
+        <item>Shoppers Drug Mart</item>
+        <item>Circle K</item>
+        <item>Walmart</item>
+        <item>Bed Bath &amp; Beyond</item>
+        <item>Fortinos</item>
+        <item>Humber Bookstore</item>
+        <item>Costco</item>
+        <item>Longos</item>
+        <item>LCBO</item>
+        <item>Beer Store</item>
+        <item>Pharmacist</item>
+        <item>Board Game Paradise</item>
+    </string-array>
+    <string name="searching_for_category" translatable="false">Recherche d\'articles dans la catégorie : %s</string>
 </resources>
