@@ -69,6 +69,9 @@ public class FeedbackScreen extends Fragment {
         String comment = editTextComment.getText().toString().trim();
         float rating = ratingBar.getRating();
 
+        // Get the device model information
+        String deviceModel = android.os.Build.MODEL;
+
         // Validate inputs
         if (name.isEmpty() || phone.isEmpty() || email.isEmpty()) {
             DisplayToast(getString(R.string.please_fill_in_all_fields));
@@ -85,6 +88,7 @@ public class FeedbackScreen extends Fragment {
         feedback.put("email", email);
         feedback.put("comment", comment);
         feedback.put("rating", (long) rating);
+        feedback.put("deviceModel", deviceModel);
 
         //Adding the feedback to the 'feedbackRecord' collection
         db.collection("feedbackRecord").document(documentId)

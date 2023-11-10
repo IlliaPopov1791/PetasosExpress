@@ -49,8 +49,6 @@ public class SearchScreen extends Fragment {
     }
 
     private List<SearchResult> performSearch(String query) {
-        // Implement your search logic here and return a list of SearchResult objects
-        // For demonstration purposes, returning dummy data
         List<SearchResult> results = new ArrayList<>();
         results.add(new SearchResult("Place 1", "Address 1", "Type 1"));
         results.add(new SearchResult("Place 2", "Address 2", "Type 2"));
