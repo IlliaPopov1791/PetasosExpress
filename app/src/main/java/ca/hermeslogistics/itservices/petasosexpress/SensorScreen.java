@@ -85,7 +85,7 @@ public class SensorScreen extends Fragment {
         setupBalanceSensor();
         //setupProximitySensor();
         setupMotorSensor();
-        setupSensors();
+        setupRangeSensors();
 
 
         return view;
@@ -178,7 +178,7 @@ public class SensorScreen extends Fragment {
     }
 
     //distance and prox
-    private void setupSensors() {
+    private void setupRangeSensors() {
         // Document references for both sensors
         DocumentReference distanceDocRef = db.collection("Distance (Ultrasonic Sensor)").document("HChcHZOZwRMcrFVLnar4");
         DocumentReference proximityDocRef = db.collection("Proximity (IR Sensor)").document("0NdvEw2YdE4G8BqV6GcI");
@@ -198,19 +198,8 @@ public class SensorScreen extends Fragment {
 
                     if (pulseDuration != null && speedOfSound != null) {
                         distance = pulseDuration * speedOfSound;
-                        if (distance != null) {
-                            if (distance >= 0.2 && distance <= 4.0) {
-                                txtProximity.setText(String.format(Locale.getDefault(), "%.2f m", distance));
-                            } else if (distance > 4.0) {
-                                txtProximity.setText(R.string.no_obstacles);
-                            }
-                        } else {
-                            txtProximity.setText(R.string.no_data);
-                        }
-                    } else {
-                        txtProximity.setText(R.string.no_data);
+                        updateDistanceUI();
                     }
-
                 }
             }
         });
@@ -225,16 +214,8 @@ public class SensorScreen extends Fragment {
                 }
 
                 if (snapshot != null && snapshot.exists()) {
-                    Number proximity = snapshot.getLong("Proximity");
-                    if (proximity != null && proximity.intValue() <= 20) {
-                        txtProximity.setText(String.format(Locale.getDefault(), "%dcm", proximity.intValue()));
-                        updateImageViewBasedOnProximity(imgStatus, proximity.intValue());
-                        updateProgressBarOnProx(progressBar, proximity.intValue());
-                    } else {
-                        txtProximity.setText(String.format(Locale.getDefault(), "%.2f m", distance));
-                        updateImageViewBasedOnDistance(imgStatus, distance);
-                        updateProgressBarOnDis(progressBar, distance);
-                    }
+                    proximity = snapshot.getLong("Proximity");
+                    updateProximityUI();
                 } else {
                     txtProximity.setText(String.format(Locale.getDefault(), "%.2f m", distance));
                     updateImageViewBasedOnDistance(imgStatus, distance);
@@ -244,7 +225,30 @@ public class SensorScreen extends Fragment {
         });
     }
 
+    private void updateDistanceUI() {
+        if (distance != null) {
+            if (distance >= 0.2 && distance <= 4.0) {
+                txtProximity.setText(String.format(Locale.getDefault(), "%.2f m", distance));
+            } else if (distance > 4.0) {
+                txtProximity.setText(R.string.no_obstacles);
+            }
 
+            updateImageViewBasedOnDistance(imgStatus, distance);
+            updateProgressBarOnDis(progressBar, distance);
+        } else {
+            txtProximity.setText(R.string.no_data);
+        }
+    }
+
+    private void updateProximityUI() {
+        if (proximity != null && proximity.intValue() <= 20) {
+            txtProximity.setText(String.format(Locale.getDefault(), "%d cm", proximity.intValue()));
+            updateImageViewBasedOnProximity(imgStatus, proximity.intValue());
+            updateProgressBarOnProx(progressBar, proximity.intValue());
+        } else {
+            updateDistanceUI();
+        }
+    }
 
 
     private void updateAxis(ProgressBar progressBar, TextView valueText, Number axisValue) {
@@ -267,9 +271,8 @@ public class SensorScreen extends Fragment {
         }
     }
     private void updateImageViewBasedOnDistance(ImageView imageView, double distance) {
-        if (distance > 0.3) {
+        if (distance > 0.4) {
             imageView.setImageResource(R.mipmap.status_good_round);
-            addStopTimeToList();
         } else {
             imageView.setImageResource(R.mipmap.status_warning_round);
         }
@@ -279,7 +282,7 @@ public class SensorScreen extends Fragment {
         final int minProximity = 20; // Min value for proximity to be used in cm
         int progressValue;
 
-         if (proximityValue != null && proximityValue < minProximity) {
+         if (proximityValue != null && proximityValue <= minProximity) {
             // Scale based on proximity (20cm to 0cm)
             int invertedProximity = minProximity - proximityValue;
             progressValue = (invertedProximity * 100 / minProximity) + 360; // Offset by the distance covered by 0.21m to 4m
@@ -297,7 +300,7 @@ public class SensorScreen extends Fragment {
         if (distance != null && distance <= 4.0 && distance >= 0.20) {
             // Convert distance to cm and scale it for the progress bar
             double scaledDistance = (4.0 - distance) * 100; // Convert to cm and invert
-            progressValue = (int) (scaledDistance * 100 / maxDistance);
+            progressValue = (int) (scaledDistance * 400 / maxDistance);
         } else {
             progressValue = 0;
         }
