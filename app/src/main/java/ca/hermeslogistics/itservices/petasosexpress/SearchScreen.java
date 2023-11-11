@@ -31,17 +31,16 @@ public class SearchScreen extends Fragment {
     private ListView searchResultsListView;
     private ProductAdapter productAdapter;
     private List<Product> productList;
-    private List<Product> fullItemList; // Full list of products
+    private List<Product> fullItemList;
     private EditText searchEditText;
     private FirebaseFirestore db;
 
     public SearchScreen() {
-        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_search_screen, container, false);
+        View view = inflater.inflate(R.layout.search_screen, container, false);
 
         searchResultsListView = view.findViewById(R.id.search_stuff);
         searchEditText = view.findViewById(R.id.searchEditText);
@@ -92,19 +91,19 @@ public class SearchScreen extends Fragment {
                 fullItemList.clear();
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     String name = document.getString("name");
+                    Long id = document.getLong("id");
                     Double price = document.getDouble("price");
                     String producer = document.getString("producer");
                     String type = document.getString("type");
 
                     if (name != null && price != null) {
-                        Product product = new Product(name, price, producer, type);
+                        Product product = new Product(name, id.intValue(), price, producer, type);
                         fullItemList.add(product);
                         productList.add(product);
                     }
                 }
                 productAdapter.notifyDataSetChanged();
 
-                // Filter with the initial query if it exists
                 if (!initialQuery.isEmpty()) {
                     filterAdapter(initialQuery);
                 }

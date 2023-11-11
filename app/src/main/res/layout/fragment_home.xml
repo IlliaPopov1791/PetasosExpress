@@ -79,7 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="97dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/search_bar_background"
         android:hint="@string/search_hint"
         android:paddingStart="16dp"

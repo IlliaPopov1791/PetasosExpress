@@ -22,7 +22,7 @@
     <string name="welcome_message">Bienvenue sur PetasosExpress</string>
     <string name="delivery_robot">Robot de Livraison</string>
     <string name="place_order">Recherche</string>
-    <string name="search_hint">Rechercher des endroits</string>
+    <string name="search_hint">Rechercher des produits</string>
     <string name="home_question1">Quelle commande avez-vous besoin aujourd\'hui?</string>
     <string name="_4cm">4 cm</string>
     <string name="status_warning">État : Avertissement</string>

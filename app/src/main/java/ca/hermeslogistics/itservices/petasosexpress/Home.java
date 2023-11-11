@@ -70,7 +70,6 @@ public class Home extends Fragment {
 
     private void handleSearch() {
         String searchQuery = searchEditText.getText().toString();
-        // Update the search query in the SharedViewModel
         sharedViewModel.setSearchQuery(searchQuery);
 
         // Create the SearchScreen fragment
@@ -81,7 +80,7 @@ public class Home extends Fragment {
         searchScreenFragment.setArguments(args);
         // Replace the current fragment with the SearchScreen fragment
         getParentFragmentManager().beginTransaction()
-                .replace(R.id.main_home, searchScreenFragment)
+                .replace(R.id.main_frame_layout, searchScreenFragment)
                 .addToBackStack(null)
                 .commit();
 

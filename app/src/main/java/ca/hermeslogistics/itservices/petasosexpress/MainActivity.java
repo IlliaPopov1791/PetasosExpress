@@ -91,8 +91,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     @Override
     public void onBackPressed() {
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.main_frame_layout);
+
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerLayout.closeDrawer(GravityCompat.START);
+        } else if (currentFragment instanceof SearchScreen) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.main_frame_layout, new Home());
+            transaction.commit();
         } else {
             showExitAlertDialog();
         }

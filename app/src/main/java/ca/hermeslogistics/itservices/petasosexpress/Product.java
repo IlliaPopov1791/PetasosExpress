@@ -9,11 +9,13 @@ import java.util.Locale;
 public class Product {
     private String name;
     private double price;
+    private int id;
     private String producer;
     private String type;
 
-    public Product(String name, double price, String producer, String type) {
+    public Product(String name, int id, double price, String producer, String type) {
         this.name = name;
+        this.id = id;
         this.price = price;
         this.producer = producer;
         this.type = type;
