@@ -6,6 +6,8 @@ package ca.hermeslogistics.itservices.petasosexpress;
  */
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -78,13 +82,27 @@ public class SensorGPS extends Fragment implements OnMapReadyCallback {
             if (currentLocationMarker != null) {
                 currentLocationMarker.remove();
             }
-            currentLocationMarker = mMap.addMarker(new MarkerOptions().position(location).title("Current Location"));
+            int height = 200;
+            int width = 200;
+
+            MarkerOptions markerOptions = new MarkerOptions()
+                    .position(location)
+                    .title("Current Location")
+                    .icon(resizeMapIcons("petasos_location", width, height));
+
+            currentLocationMarker = mMap.addMarker(markerOptions);
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
         }
     }
 
+
     private void requestLocationPermission() {
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
+    }
+    private BitmapDescriptor resizeMapIcons(String iconName, int width, int height){
+        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier(iconName, "drawable", getActivity().getPackageName()));
+        Bitmap resizedBitmap = Bitmap.createScaledBitmap(imageBitmap, width, height, false);
+        return BitmapDescriptorFactory.fromBitmap(resizedBitmap);
     }
 
     @Override

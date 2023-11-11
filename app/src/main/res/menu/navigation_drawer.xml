@@ -23,7 +23,7 @@
                 <item
                     android:id="@+id/sensor_screen"
                     android:icon="@mipmap/ic_petasos_foreground"
-                    android:title="Device Monitor" />
+                    android:title="@string/delivery_robot_monitor" />
             </group>
         </menu>
     </item>

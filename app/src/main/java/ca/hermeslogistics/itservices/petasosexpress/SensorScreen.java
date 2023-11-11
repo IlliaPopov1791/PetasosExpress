@@ -92,8 +92,6 @@ public class SensorScreen extends Fragment {
     }
 
     private void initializeDistanceSensor(View view) {
-        txtValue = view.findViewById(R.id.txtValue);
-        //statusImg = view.findViewById(R.id.imgStatus);
         listView = view.findViewById(R.id.listView);
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, dateList);
         listView.setAdapter(adapter);
