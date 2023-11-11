@@ -41,9 +41,7 @@ public class SensorScreen extends Fragment {
 
     // Distance Sensor
     private TextView txtValue;
-    private ImageView statusImg;
-    private Double lastDistance = 0.0;
-    private Double rpmValue = null;
+
     private ListView listView;
     private ArrayAdapter<String> adapter;
     private List<String> dateList = new ArrayList<>();
@@ -81,23 +79,25 @@ public class SensorScreen extends Fragment {
         }
 
         // Initialize components for each sensor
-       // initializeDistanceSensor(view);
-       // initializeBalanceSensor(view);
+        initializeDistanceSensor(view);
+        initializeBalanceSensor(view);
         initializeProximitySensor(view);
         initializeMotorSensor(view);
 
         // Set up Firestore document references and listeners for each sensor
         //setupDistanceSensor();
-        //setupBalanceSensor();
-        setupProximitySensor();
+        setupBalanceSensor();
+        //setupProximitySensor();
         setupMotorSensor();
+        setupSensors();
+
 
         return view;
     }
 
     private void initializeDistanceSensor(View view) {
         txtValue = view.findViewById(R.id.txtValue);
-        statusImg = view.findViewById(R.id.imgStatus);
+        //statusImg = view.findViewById(R.id.imgStatus);
         listView = view.findViewById(R.id.listView);
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, dateList);
         listView.setAdapter(adapter);
@@ -123,34 +123,6 @@ public class SensorScreen extends Fragment {
         textViewMotorSpeed = view.findViewById(R.id.textViewMotorSpeed);
     }
 
-    private void setupDistanceSensor() {
-        DocumentReference docRef = db.collection("Distance (Ultrasonic Sensor)").document("HChcHZOZwRMcrFVLnar4");
-        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    txtValue.setText(R.string.server_error);
-                    return;
-                }
-
-                if (snapshot != null && snapshot.exists()) {
-                    Double pulseDuration = snapshot.getDouble("Pulse Duration");
-                    Double speedOfSound = snapshot.getDouble("Speed of Sound ");
-
-                    if (pulseDuration != null && speedOfSound != null) {
-                        Double distance = pulseDuration * speedOfSound;
-                        txtValue.setText(String.format(Locale.getDefault(), "%.2f", distance));
-                        updateStatus(statusImg, distance);
-                        lastDistance = distance;
-                    } else {
-                        txtValue.setText(R.string.no_data);
-                    }
-                } else {
-                    txtValue.setText(R.string.no_data);
-                }
-            }
-        });
-    }
 
     private void setupBalanceSensor() {
         DocumentReference docRef = db.collection("Balance").document("vW8usegJdf1HUrA1gFtk");
@@ -181,42 +153,7 @@ public class SensorScreen extends Fragment {
         });
     }
 
-    private void setupProximitySensor() {
-        DocumentReference docRef = db.collection("Proximity (IR Sensor)").document("0NdvEw2YdE4G8BqV6GcI");
-        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    txtProximity.setText(R.string.server_error);
-                    return;
-                }
 
-                if (snapshot != null && snapshot.exists()) {
-                    //Retrieving the 'Proximity' and 'Time' fields
-                    Number proximity = snapshot.getLong("Proximity");
-                    Date time = snapshot.getDate("Time");
-
-                    // Check if success
-                    if (proximity != null && time != null) {
-                        txtProximity.setText(String.format(Locale.getDefault(), "%dcm", proximity.intValue()));
-                        // Update the ImageView based on the proximity value
-                        updateImageViewBasedOnProximity(imgStatus, proximity.intValue());
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy 'at' HH:mm:ss z", Locale.getDefault());
-                        updateProgressBar(progressBar,proximity.intValue());
-                        //txtTime.setText(dateFormat.format(time));
-                    } else {
-                        //If the fields are not found or null
-                        txtProximity.setText(R.string.no_data);
-                        //txtTime.setText(R.string.no_data);
-                    }
-                } else {
-                    //If document does not exist
-                    txtProximity.setText(R.string.no_data);
-                    //txtTime.setText(R.string.no_data);
-                }
-            }
-        });
-    }
 
     private void setupMotorSensor() {
         DocumentReference motorRef = db.collection("Motors").document("PMfVBrNcmgOhjYlQZ4Ih");
@@ -244,33 +181,67 @@ public class SensorScreen extends Fragment {
         });
     }
 
-    private void updateStatus(ImageView imageView, double distance) {
-        boolean isAccelerating = lastDistance != null && distance > lastDistance;
+    //distance and prox
+    private void setupSensors() {
+        // Document references for both sensors
+        DocumentReference distanceDocRef = db.collection("Distance (Ultrasonic Sensor)").document("HChcHZOZwRMcrFVLnar4");
+        DocumentReference proximityDocRef = db.collection("Proximity (IR Sensor)").document("0NdvEw2YdE4G8BqV6GcI");
 
-        if (distance < 0.1) {
-            imageView.setImageResource(R.mipmap.speed_stop_round);
-            addStopTimeToList();
-        } else if (distance >= 0.1 && distance <= 1.5) {
-            if (rpmValue != null && rpmValue == 100) {
-                imageView.setImageResource(R.mipmap.speed_max_round);
-            } else {
-                imageView.setImageResource(isAccelerating ? R.mipmap.speed_accelerate_round : R.mipmap.speed_slow_round);
+        // Listener for the Distance Sensor
+        distanceDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    txtValue.setText(R.string.server_error);
+                    return;
+                }
+
+                if (snapshot != null && snapshot.exists()) {
+                    Double pulseDuration = snapshot.getDouble("Pulse Duration");
+                    Double speedOfSound = snapshot.getDouble("Speed of Sound ");
+
+                    if (pulseDuration != null && speedOfSound != null) {
+                        Double distance = pulseDuration * speedOfSound;
+                        if (distance > 20) {
+                            txtProximity.setText(String.format(Locale.getDefault(), "%.2f", distance));
+                        }
+                    } else {
+                        txtValue.setText(R.string.no_data);
+                    }
+                } else {
+                    txtValue.setText(R.string.no_data);
+                }
             }
-        } else if (distance > 1.5) {
-            if (rpmValue != null && rpmValue == 100) {
-                imageView.setImageResource(R.mipmap.speed_max_round);
-            } else {
-                imageView.setImageResource(R.mipmap.speed_accelerate_round);
+        });
+
+        // Listener for the Proximity Sensor
+        proximityDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    txtProximity.setText(R.string.server_error);
+                    return;
+                }
+
+                if (snapshot != null && snapshot.exists()) {
+                    Number proximity = snapshot.getLong("Proximity");
+
+                    if (proximity != null && proximity.intValue() < 20) {
+                        txtProximity.setText(String.format(Locale.getDefault(), "%dcm", proximity.intValue()));
+                        updateImageViewBasedOnProximity(imgStatus, proximity.intValue());
+                        updateProgressBar(progressBar, proximity.intValue());
+                    } else {
+                        txtProximity.setText(R.string.no_data);
+                    }
+                } else {
+                    txtProximity.setText(R.string.no_data);
+                }
             }
-        }
+        });
     }
 
-    private void addStopTimeToList() {
-        String currentDateTime = DateFormat.getDateTimeInstance().format(new Date());
-        dateList.add(currentDateTime);
-        adapter.notifyDataSetChanged();
-        listView.smoothScrollToPosition(dateList.size() - 1);
-    }
+
+
 
     private void updateAxis(ProgressBar progressBar, TextView valueText, Number axisValue) {
         if (axisValue != null) {
