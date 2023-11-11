@@ -84,13 +84,13 @@ public class SensorScreen extends Fragment {
        // initializeDistanceSensor(view);
        // initializeBalanceSensor(view);
         initializeProximitySensor(view);
-      //  initializeMotorSensor(view);
+        initializeMotorSensor(view);
 
         // Set up Firestore document references and listeners for each sensor
         //setupDistanceSensor();
         //setupBalanceSensor();
         setupProximitySensor();
-       // setupMotorSensor();
+        setupMotorSensor();
 
         return view;
     }
@@ -115,11 +115,11 @@ public class SensorScreen extends Fragment {
     private void initializeProximitySensor(View view) {
         txtProximity = view.findViewById(R.id.textView2);
         imgStatus = view.findViewById(R.id.imgStatus);
-        progressBar = view.findViewById(R.id.progressBar);
+        progressBar = view.findViewById(R.id.proximityProgressBar);
     }
 
     private void initializeMotorSensor(View view) {
-        motorProgressBar = view.findViewById(R.id.progressBar);
+        motorProgressBar = view.findViewById(R.id.motorProgressBar);
         textViewMotorSpeed = view.findViewById(R.id.textViewMotorSpeed);
     }
 
