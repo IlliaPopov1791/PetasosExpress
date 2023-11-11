@@ -9,10 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -23,7 +20,6 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +37,7 @@ public class SensorScreen extends Fragment {
 
     // Distance Sensor
     private TextView txtValue;
-
+    private Double distance = null;
     private ListView listView;
     private ArrayAdapter<String> adapter;
     private List<String> dateList = new ArrayList<>();
@@ -51,6 +47,7 @@ public class SensorScreen extends Fragment {
     private TextView xAxisValue, yAxisValue, zAxisValue;
 
     // Proximity Sensor
+    private Number proximity;
     private TextView txtProximity, txtTime;
     private ImageView imgStatus;
     private  ProgressBar progressBar;
@@ -60,7 +57,6 @@ public class SensorScreen extends Fragment {
     private TextView textViewMotorSpeed;
 
     public SensorScreen() {
-        // Required empty public constructor
     }
 
     @Override
@@ -192,7 +188,7 @@ public class SensorScreen extends Fragment {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
                 if (e != null) {
-                    txtValue.setText(R.string.server_error);
+                    txtProximity.setText(R.string.server_error);
                     return;
                 }
 
@@ -201,15 +197,20 @@ public class SensorScreen extends Fragment {
                     Double speedOfSound = snapshot.getDouble("Speed of Sound ");
 
                     if (pulseDuration != null && speedOfSound != null) {
-                        Double distance = pulseDuration * speedOfSound;
-                        if (distance > 20) {
-                            txtProximity.setText(String.format(Locale.getDefault(), "%.2f", distance));
+                        distance = pulseDuration * speedOfSound;
+                        if (distance != null) {
+                            if (distance >= 0.2 && distance <= 4.0) {
+                                txtProximity.setText(String.format(Locale.getDefault(), "%.2f m", distance));
+                            } else if (distance > 4.0) {
+                                txtProximity.setText(R.string.no_obstacles);
+                            }
+                        } else {
+                            txtProximity.setText(R.string.no_data);
                         }
                     } else {
-                        txtValue.setText(R.string.no_data);
+                        txtProximity.setText(R.string.no_data);
                     }
-                } else {
-                    txtValue.setText(R.string.no_data);
+
                 }
             }
         });
@@ -225,16 +226,19 @@ public class SensorScreen extends Fragment {
 
                 if (snapshot != null && snapshot.exists()) {
                     Number proximity = snapshot.getLong("Proximity");
-
-                    if (proximity != null && proximity.intValue() < 20) {
+                    if (proximity != null && proximity.intValue() <= 20) {
                         txtProximity.setText(String.format(Locale.getDefault(), "%dcm", proximity.intValue()));
                         updateImageViewBasedOnProximity(imgStatus, proximity.intValue());
-                        updateProgressBar(progressBar, proximity.intValue());
+                        updateProgressBarOnProx(progressBar, proximity.intValue());
                     } else {
-                        txtProximity.setText(R.string.no_data);
+                        txtProximity.setText(String.format(Locale.getDefault(), "%.2f m", distance));
+                        updateImageViewBasedOnDistance(imgStatus, distance);
+                        updateProgressBarOnDis(progressBar, distance);
                     }
                 } else {
-                    txtProximity.setText(R.string.no_data);
+                    txtProximity.setText(String.format(Locale.getDefault(), "%.2f m", distance));
+                    updateImageViewBasedOnDistance(imgStatus, distance);
+                    updateProgressBarOnDis(progressBar, distance);
                 }
             }
         });
@@ -255,27 +259,57 @@ public class SensorScreen extends Fragment {
     }
 
     private void updateImageViewBasedOnProximity(ImageView imageView, int proximityValue) {
-        if (proximityValue < 5) {
-            // If the proximity is less than 5, set the image source to drawable_close
+        if (proximityValue < 10) {
             imageView.setImageResource(R.mipmap.statsu_cancel_round);
-        } else if (proximityValue > 15) {
-            // If the proximity is greater than 15, set the image source to drawable_far
-            imageView.setImageResource(R.mipmap.status_good_round);
+            addStopTimeToList();
         } else {
-            // Otherwise, set the image source to drawable_medium
+            imageView.setImageResource(R.mipmap.status_warning_round);
+        }
+    }
+    private void updateImageViewBasedOnDistance(ImageView imageView, double distance) {
+        if (distance > 0.3) {
+            imageView.setImageResource(R.mipmap.status_good_round);
+            addStopTimeToList();
+        } else {
             imageView.setImageResource(R.mipmap.status_warning_round);
         }
     }
 
-    private void updateProgressBar(ProgressBar progressBar, int proximityValue) {
-        final int maxSensorValue = 20; // Max value from the proximity sensor
-        final int maxProgressValue = 20; // Max value for the ProgressBar
-        // Invert the proximity value (e.g., 19 becomes 1, 1 becomes 19)
-        int invertedValue = maxSensorValue - proximityValue;
-        // Now scale the inverted value to fit the ProgressBar scale
-        int scaledValue = (invertedValue * (maxProgressValue - 1)) / (maxSensorValue - 1) + 1;
-        progressBar.setProgress(scaledValue);
+    private void updateProgressBarOnProx(ProgressBar progressBar, Integer proximityValue){
+        final int minProximity = 20; // Min value for proximity to be used in cm
+        int progressValue;
+
+         if (proximityValue != null && proximityValue < minProximity) {
+            // Scale based on proximity (20cm to 0cm)
+            int invertedProximity = minProximity - proximityValue;
+            progressValue = (invertedProximity * 100 / minProximity) + 360; // Offset by the distance covered by 0.21m to 4m
+        } else {
+            progressValue = 0;
+        }
+
+        progressBar.setProgress(progressValue);
     }
 
+    private void updateProgressBarOnDis(ProgressBar progressBar, Double distance){
+        final int maxDistance = 400; // Max distance in cm (4 meters)
+        int progressValue;
+
+        if (distance != null && distance <= 4.0 && distance >= 0.20) {
+            // Convert distance to cm and scale it for the progress bar
+            double scaledDistance = (4.0 - distance) * 100; // Convert to cm and invert
+            progressValue = (int) (scaledDistance * 100 / maxDistance);
+        } else {
+            progressValue = 0;
+        }
+        progressBar.setProgress(progressValue);
+    }
+
+
+    private void addStopTimeToList() {
+    String currentDateTime = DateFormat.getDateTimeInstance().format(new Date());
+    dateList.add(currentDateTime);
+    adapter.notifyDataSetChanged();
+    listView.smoothScrollToPosition(dateList.size() - 1);
+    }
 
 }

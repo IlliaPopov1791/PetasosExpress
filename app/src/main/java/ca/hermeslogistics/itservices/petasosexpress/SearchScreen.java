@@ -44,7 +44,7 @@ public class SearchScreen extends Fragment {
         db = FirebaseFirestore.getInstance();
 
         productList = new ArrayList<>();
-        fullItemList = new ArrayList<>(); // Initialize the full item list
+        fullItemList = new ArrayList<>();
         productAdapter = new ProductAdapter(requireContext(), productList);
         searchResultsListView.setAdapter(productAdapter);
 
@@ -85,7 +85,7 @@ public class SearchScreen extends Fragment {
         db.collection("goods").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 productList.clear();
-                fullItemList.clear(); // Clear the full list
+                fullItemList.clear();
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     String name = document.getString("name");
                     Double price = document.getDouble("price");
@@ -94,8 +94,8 @@ public class SearchScreen extends Fragment {
 
                     if (name != null && price != null) {
                         Product product = new Product(name, price, producer, type);
-                        fullItemList.add(product); // Add to the full list
-                        productList.add(product); // Add to the display list
+                        fullItemList.add(product);
+                        productList.add(product);
                     }
                 }
                 productAdapter.notifyDataSetChanged();

@@ -151,5 +151,6 @@
     <string name="searching_for_category" translatable="false">Searching for items in category: %s</string>
     <string name="account_settings">Account Settings</string>
     <string name="ManageAccount" />
+    <string name="no_obstacles">No obstacles</string>
 
 </resources>
