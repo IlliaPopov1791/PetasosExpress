@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/logo"
-    tools:context=".SensorScreen">
+    tools:context=".SensorScreen"
+    android:orientation="horizontal">
 
     <!--
      Illia M. Popov | ID: n01421791
