@@ -21,21 +21,9 @@
                     android:icon="@drawable/ic_gps_foreground"
                     android:title="@string/gps_sensor" />
                 <item
-                    android:id="@+id/distance_sensor"
-                    android:icon="@drawable/ic_distance_foreground"
-                    android:title="@string/distance_sensor" />
-                <item
-                    android:id="@+id/proximity_sensor"
-                    android:icon="@drawable/ic_proximity_foreground"
-                    android:title="@string/proximity_sensor" />
-                <item
-                    android:id="@+id/balance_sensor"
-                    android:icon="@drawable/ic_balance_foreground"
-                    android:title="@string/balance_sensor" />
-                <item
-                    android:id="@+id/motors_sensors"
-                    android:icon="@drawable/ic_motor_foreground"
-                    android:title="@string/motors_sensors" />
+                    android:id="@+id/sensor_screen"
+                    android:icon="@mipmap/ic_petasos_foreground"
+                    android:title="Device Monitor" />
             </group>
         </menu>
     </item>

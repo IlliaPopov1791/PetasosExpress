@@ -181,19 +181,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 } else if (itemId == R.id.gps_sensor) {
                     fragmentToLoad = new SensorGPS();
                     fragmentTag = getString(R.string.gps_tag);
-                } else if (itemId == R.id.distance_sensor) {
-                    fragmentToLoad = new SensorDistance();
-                    fragmentTag = getString(R.string.distance_tag);
-                } else if (itemId == R.id.proximity_sensor) {
+                }  else if (itemId == R.id.sensor_screen) {
                     fragmentToLoad = new SensorScreen();
                     fragmentTag = getString(R.string.proximity_tag);
-                } else if (itemId == R.id.balance_sensor) {
-                    fragmentToLoad = new SensorBalance();
-                    fragmentTag = getString(R.string.balance_tag);
-                } else if (itemId == R.id.motors_sensors) {
-                    fragmentToLoad = new SensorMotors();
-                    fragmentTag = getString(R.string.motors_tag);
-                } else if (itemId == R.id.AppSettings) {
+                }  else if (itemId == R.id.AppSettings) {
                     fragmentToLoad = new AppSettings();
                     fragmentTag = getString(R.string.settings_tag);
                 }
@@ -271,17 +262,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case "gps":
                 fragmentToLoad = new SensorGPS();
                 break;
-            case "distance":
-                fragmentToLoad = new SensorDistance();
-                break;
             case "proximity":
-                fragmentToLoad = new SensorProximity();
-                break;
-            case "balance":
-                fragmentToLoad = new SensorBalance();
-                break;
-            case "motors":
-                fragmentToLoad = new SensorMotors();
+                fragmentToLoad = new SensorScreen();
                 break;
             case "settings":
                 fragmentToLoad = new AppSettings();
