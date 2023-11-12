@@ -45,6 +45,7 @@ public class ManageAccount extends Fragment {
 
         btnSave = view.findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 saveUserData();
@@ -55,14 +56,36 @@ public class ManageAccount extends Fragment {
     }
 
     private void saveUserData() {
+        String newFirstName = inputFirstName.getText().toString().trim();
+        String newLastName = inputLastName.getText().toString().trim();
+        String newPhone = inputPhone.getText().toString().trim();
+
+        // Validate first name
+        if (newFirstName.isEmpty()) {
+            Toast.makeText(getContext(), "Please enter your first name", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Validate last name
+        if (newLastName.isEmpty()) {
+            Toast.makeText(getContext(), "Please enter your last name", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Remove non-numeric characters from phone number
+        newPhone = newPhone.replaceAll("[^0-9]", "");
+
+        // Validate phone number length (assuming a valid phone number should have 10 digits)
+        if (newPhone.length() != 10) {
+            Toast.makeText(getContext(), R.string.invalid_phone_format, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Proceed with saving user data
         FirebaseUser currentUser = auth.getCurrentUser();
         if (currentUser != null) {
             String userEmail = currentUser.getEmail();
             if (userEmail != null) {
-                String newFirstName = inputFirstName.getText().toString();
-                String newLastName = inputLastName.getText().toString();
-                String newPhone = inputPhone.getText().toString();
-
                 db.collection("userInfo").document(userEmail)
                         .update("firstName", newFirstName,
                                 "lastName", newLastName,
@@ -76,6 +99,7 @@ public class ManageAccount extends Fragment {
             }
         }
     }
+
 
     private void loadUserData() {
         FirebaseUser currentUser = auth.getCurrentUser();

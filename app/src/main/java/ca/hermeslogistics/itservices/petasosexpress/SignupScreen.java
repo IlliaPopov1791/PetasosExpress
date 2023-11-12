@@ -1,5 +1,7 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
+import static java.security.AccessController.getContext;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -84,8 +86,8 @@ public class SignupScreen extends AppCompatActivity {
                 final String confirmPassword = confirmPasswordEditText.getText().toString().trim();
                 final String firstName = firstNameEditText.getText().toString().trim();
                 final String lastName = lastNameEditText.getText().toString().trim();
-                final String phone = phoneEditText.getText().toString().trim();
-
+                String phone = phoneEditText.getText().toString().trim();
+                final String cleanPhone = phone.replaceAll("[^0-9]", "");
                 //Checking if any field is empty
                 if (TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName) ||
                         TextUtils.isEmpty(email) || TextUtils.isEmpty(phone) ||
@@ -97,6 +99,11 @@ public class SignupScreen extends AppCompatActivity {
                 // Checking if the email is in correct format
                 if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     Toast.makeText(SignupScreen.this, R.string.invalid_email_format, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (cleanPhone.length() != 10) {
+                    Toast.makeText(SignupScreen.this, R.string.invalid_phone_format, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -124,7 +131,7 @@ public class SignupScreen extends AppCompatActivity {
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putBoolean("RememberMe", rememberMeCheckBox.isChecked());
                                     editor.apply();
-                                    addUserToFirestore(email, firstName, lastName, phone);
+                                    addUserToFirestore(email, firstName, lastName, cleanPhone);
                                     Toast.makeText(SignupScreen.this, R.string.registration_in_process,
                                             Toast.LENGTH_SHORT).show();
                                 } else {
