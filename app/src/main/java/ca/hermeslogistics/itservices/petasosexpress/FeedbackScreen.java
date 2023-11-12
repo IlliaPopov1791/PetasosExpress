@@ -74,6 +74,9 @@ public class FeedbackScreen extends Fragment {
             return;
         }
 
+        // Get the device model information
+        String deviceModel = android.os.Build.MODEL;
+
         // Email validation
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             DisplayToast(getString(R.string.invalid_email_format));
@@ -95,6 +98,7 @@ public class FeedbackScreen extends Fragment {
         feedback.put("email", email);
         feedback.put("comment", comment);
         feedback.put("rating", (long) rating);
+        feedback.put("deviceModel", deviceModel);
 
         db.collection("feedbackRecord").document(documentId)
                 .set(feedback)
