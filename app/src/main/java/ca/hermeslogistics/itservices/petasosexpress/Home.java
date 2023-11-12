@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -40,6 +41,7 @@ public class Home extends Fragment {
         // Initialize UI elements
         searchEditText = view.findViewById(R.id.searchEditText);
 
+
         // Get the SharedViewModel instance
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
@@ -62,8 +64,37 @@ public class Home extends Fragment {
             searchEditText.setText(searchQuery);
         });
 
+        //Food Button
+        ImageButton foodButton = view.findViewById(R.id.foodButton);
+        foodButton.setOnClickListener(v -> {
+            searchEditText.setText(R.string.food_1);
+            handleSearch();
+        });
+
+        //Electronics Button
+        ImageButton electronicsButton = view.findViewById(R.id.electronicsButton);
+        electronicsButton.setOnClickListener(v -> {
+            searchEditText.setText(R.string.technology_1);
+            handleSearch();
+        });
+
+        //Medical Button
+        ImageButton medicalButton = view.findViewById(R.id.medicalButton);
+        medicalButton.setOnClickListener(v -> {
+            searchEditText.setText(R.string.medicine);
+            handleSearch();
+        });
+
+        //Other Button
+        ImageButton otherButton = view.findViewById(R.id.otherButton);
+        otherButton.setOnClickListener(v -> {
+            searchEditText.setText(R.string.other);
+            handleSearch();
+        });
+
         return view;
     }
+
 
     private void handleSearch() {
         String searchQuery = searchEditText.getText().toString();

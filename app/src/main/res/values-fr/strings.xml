@@ -133,4 +133,8 @@
     <string name="ManageAccount" />
     <string name="no_obstacles">Aucun obstacle</string>
     <string name="delivery_robot_monitor">Moniteur du robot de livraison</string>
+    <string name="food_1">nourriture</string>
+    <string name="technology_1">technologie</string>
+    <string name="medicine">médecine</string>
+    <string name="other">autre</string>
 </resources>

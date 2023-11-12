@@ -133,5 +133,9 @@
     <string name="ManageAccount" />
     <string name="no_obstacles">No obstacles</string>
     <string name="delivery_robot_monitor">Delivery Robot Monitor</string>
+    <string name="food_1">food</string>
+    <string name="technology_1">technology</string>
+    <string name="medicine">medicine</string>
+    <string name="other">other</string>
 
 </resources>
