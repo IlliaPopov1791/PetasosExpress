@@ -3,6 +3,7 @@ package ca.hermeslogistics.itservices.petasosexpress;
 import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
@@ -139,7 +140,7 @@ public class SensorScreen extends Fragment {
                     return;
                 }
 
-                if (snapshot != null && snapshot.exists()) {
+                if ((snapshot != null && snapshot.exists() && isAdded())) {
                     Number xAxis = snapshot.getLong("X-axis");
                     Number yAxis = snapshot.getLong("Y-axis");
                     Number zAxis = snapshot.getLong("Z-axis");
@@ -167,7 +168,7 @@ public class SensorScreen extends Fragment {
                     return;
                 }
 
-                if (snapshot != null && snapshot.exists()) {
+                if ((snapshot != null && snapshot.exists() && isAdded())) {
                     Double rpm = snapshot.getDouble("rpm");
                     if (rpm != null) {
                         String formattedRPM = String.format(Locale.getDefault(), "%.2f", rpm);
@@ -199,7 +200,7 @@ public class SensorScreen extends Fragment {
                     return;
                 }
 
-                if (snapshot != null && snapshot.exists()) {
+                if ((snapshot != null && snapshot.exists() && isAdded())) {
                     Double pulseDuration = snapshot.getDouble("Pulse Duration");
                     Double speedOfSound = snapshot.getDouble("Speed of Sound ");
 
@@ -220,7 +221,7 @@ public class SensorScreen extends Fragment {
                     return;
                 }
 
-                if (snapshot != null && snapshot.exists()) {
+                if ((snapshot != null && snapshot.exists() && isAdded())) {
                     proximity = snapshot.getLong("Proximity");
                     updateProximityUI();
                 } else {
@@ -323,12 +324,16 @@ public class SensorScreen extends Fragment {
         listView.smoothScrollToPosition(dateList.size() - 1);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                sendNotification();
+                if (isAdded()) {
+                    sendNotification();
+                }
             } else {
                 requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION_REQUEST_CODE);
             }
         } else {
-            sendNotification();
+            if (isAdded()) {
+                sendNotification();
+            }
         }
     }
 
@@ -339,8 +344,14 @@ public class SensorScreen extends Fragment {
         String channelName = "Delivery Notifications";
         String notificationTitle = "Delivery Update";
         String notificationText = "Your delivery may be late due to obstacles on Petasos' way";
+        SharedPreferences settings = getActivity().getSharedPreferences(AppSettings.PREFS_NAME, 0);
+        boolean areNotificationsEnabled = settings.getBoolean(AppSettings.NOTIFICATIONS_KEY, true);
 
-        // Create the NotificationChannel (required for API 26+)
+        if (!areNotificationsEnabled) {
+            //Exit if notifications are disabled
+            return;
+        }
+        // Proceed and create the NotificationChannel (required for API 26+)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);

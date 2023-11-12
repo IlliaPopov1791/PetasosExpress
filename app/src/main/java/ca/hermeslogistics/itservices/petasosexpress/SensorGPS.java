@@ -67,7 +67,7 @@ public class SensorGPS extends Fragment implements OnMapReadyCallback {
                 return;
             }
 
-            if (snapshot != null && snapshot.exists()) {
+            if ((snapshot != null && snapshot.exists() && isAdded())) {
                 GeoPoint geoPoint = snapshot.getGeoPoint("Location");
                 if (geoPoint != null) {
                     LatLng newLocation = new LatLng(geoPoint.getLatitude(), geoPoint.getLongitude());
