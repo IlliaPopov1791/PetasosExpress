@@ -48,7 +48,7 @@ public class SensorScreen extends Fragment {
 
     // Distance Sensor
     private TextView txtValue;
-    private Double distance = null;
+    private Double distance;
     private ListView listView;
     private ArrayAdapter<String> adapter;
     private List<String> dateList = new ArrayList<>();
@@ -211,14 +211,17 @@ public class SensorScreen extends Fragment {
                     txtProximity.setText(R.string.server_error);
                     return;
                 }
-
-                if ((snapshot != null && snapshot.exists() && isAdded())) {
+                if ((snapshot != null && snapshot.exists())) {
                     Double pulseDuration = snapshot.getDouble("Pulse Duration");
                     Double speedOfSound = snapshot.getDouble("Speed of Sound");
 
+                    // Check if both values are not null before using them
                     if (pulseDuration != null && speedOfSound != null) {
                         distance = pulseDuration * speedOfSound;
                         updateDistanceUI();
+                    } else {
+                        distance = 0.0;
+                        txtProximity.setText(R.string.no_data);
                     }
                 }
             }

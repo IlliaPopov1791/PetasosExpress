@@ -1,5 +1,6 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,6 +30,8 @@ public class Home extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view;
+        SharedPreferences settings = getActivity().getSharedPreferences(AppSettings.PREFS_NAME, 0);
+        boolean isLandscapePreference = settings.getBoolean(AppSettings.ORIENTATION_KEY, false);
 
         // Set the layout based on the orientation
         int orientation = getResources().getConfiguration().orientation;

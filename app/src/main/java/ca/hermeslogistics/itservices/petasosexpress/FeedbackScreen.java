@@ -40,7 +40,16 @@ public class FeedbackScreen extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.feedback_screen, container, false);
+        // Determine the device's current orientation
+        int orientation = getResources().getConfiguration().orientation;
+
+        // Load the appropriate layout based on orientation
+        View view;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            view = inflater.inflate(R.layout.feedback_screen, container, false);
+        } else {
+            view = inflater.inflate(R.layout.feedback_screen_landscape, container, false);
+        }
 
         db = FirebaseFirestore.getInstance();
 

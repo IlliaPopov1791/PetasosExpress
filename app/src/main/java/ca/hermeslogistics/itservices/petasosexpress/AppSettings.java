@@ -26,7 +26,7 @@ public class AppSettings extends Fragment {
 
     protected static final String PREFS_NAME = "UserSettings";
     private static final String THEME_KEY = "theme_mode";
-    private static final String ORIENTATION_KEY = "orientation_mode";
+    protected static final String ORIENTATION_KEY = "orientation_mode";
     private static final String ADDRESS_KEY = "default_address";
     protected static final String NOTIFICATIONS_KEY = "notifications";
 

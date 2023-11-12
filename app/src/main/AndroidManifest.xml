@@ -35,12 +35,15 @@
 
         <activity
             android:name=".LoginScreen"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="false" />
         <activity
             android:name=".SignupScreen"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,6 +53,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
+
             android:exported="false" />
     </application>
 

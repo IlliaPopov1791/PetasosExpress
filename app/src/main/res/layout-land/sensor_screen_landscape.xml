@@ -79,7 +79,7 @@
         android:id="@+id/txtHistory"
         android:layout_width="197dp"
         android:layout_height="38dp"
-        android:layout_marginStart="112dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:text="@string/stops_history"
         android:textColor="@color/wine"
@@ -97,8 +97,8 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="151dp"
-        android:layout_height="79dp"
+        android:layout_width="277dp"
+        android:layout_height="60dp"
         android:gravity="center"
         android:text="@string/_4cm"
         android:textColor="@color/wine"
@@ -134,7 +134,7 @@
         android:layout_height="142dp"
         android:layout_gravity="center"
         android:indeterminate="false"
-        android:max="20"
+        android:max="400"
         android:progress="1"
         android:progressDrawable="@drawable/circular_progress_bar"
         app:layout_constraintBottom_toBottomOf="@+id/imgStatus"

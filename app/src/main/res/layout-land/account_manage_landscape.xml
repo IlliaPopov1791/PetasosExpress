@@ -7,7 +7,7 @@
     android:padding="16dp"
     android:background="@color/logo">
 
-    <!-- ImageView Placeholder -->
+    <!-- ImageView Placeholder
     <ImageView
         android:id="@+id/imagePlaceholder"
         android:layout_width="0dp"
@@ -17,21 +17,25 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     android:layout_marginTop="16dp"/>
-
+    -->
     <!-- Email Label -->
+
+    <!-- Email Input -->
+
     <TextView
         android:id="@+id/labelEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/email"
+
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imagePlaceholder"
         app:layout_constraintEnd_toStartOf="@id/labelFirstName"
         app:layout_constraintHorizontal_chainStyle="packed"
-        android:layout_marginEnd="8dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Email Input -->
     <EditText
         android:id="@+id/inputEmail"
         android:layout_width="0dp"
@@ -66,18 +70,21 @@
         app:layout_constraintEnd_toEndOf="@id/labelLastName"/>
 
     <!-- First Name Label -->
+
+    <!-- First Name Input -->
+
     <TextView
         android:id="@+id/labelFirstName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:text="@string/first_name"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@id/labelEmail"
-        app:layout_constraintTop_toBottomOf="@id/imagePlaceholder"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="8dp"/>
+        app:layout_constraintStart_toEndOf="@id/labelEmail"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- First Name Input -->
     <EditText
         android:id="@+id/inputFirstName"
         android:layout_width="0dp"
@@ -110,5 +117,17 @@
         app:layout_constraintStart_toStartOf="@id/labelPhone"
         app:layout_constraintTop_toBottomOf="@id/labelPhone"
         app:layout_constraintEnd_toEndOf="@id/labelPhone"/>
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="249dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/button_background"
+        android:text="@string/save_changes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputPhone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

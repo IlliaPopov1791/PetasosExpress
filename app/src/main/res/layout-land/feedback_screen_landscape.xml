@@ -67,8 +67,8 @@
 
     <EditText
         android:id="@+id/editTextComment"
-        android:layout_width="689dp"
-        android:layout_height="54dp"
+        android:layout_width="702dp"
+        android:layout_height="52dp"
         android:layout_marginBottom="4dp"
         android:gravity="top"
         android:hint="@string/comment_hint"
@@ -80,9 +80,9 @@
 
     <Button
         android:id="@+id/buttonSubmit"
-        android:layout_width="731dp"
-        android:layout_height="37dp"
-        android:layout_marginBottom="4dp"
+        android:layout_width="583dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="60dp"
         android:text="@string/submit_feedback"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
