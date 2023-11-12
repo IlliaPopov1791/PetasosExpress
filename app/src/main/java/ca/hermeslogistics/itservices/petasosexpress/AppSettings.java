@@ -1,6 +1,7 @@
 
 package ca.hermeslogistics.itservices.petasosexpress;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -23,6 +24,25 @@ import androidx.fragment.app.Fragment;
  * Section: B
  */
 public class AppSettings extends Fragment {
+
+    public static void applySavedSettings(Activity activity) {
+        SharedPreferences settings = activity.getSharedPreferences(PREFS_NAME, 0);
+
+        boolean isDarkMode = settings.getBoolean(THEME_KEY, false);
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
+        boolean isLandscape = settings.getBoolean(ORIENTATION_KEY, false);
+        if (isLandscape) {
+            activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+    }
+
 
     // Constants for SharedPreferences keys
     private static final String PREFS_NAME = "UserSettings";
@@ -49,6 +69,8 @@ public class AppSettings extends Fragment {
 
         // Retrieve saved settings
         SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
+        applySavedSettings(getActivity());
+
         boolean isDarkMode = settings.getBoolean(THEME_KEY, false);
         boolean isLandscape = settings.getBoolean(ORIENTATION_KEY, false);
         String savedAddress = settings.getString(ADDRESS_KEY, "Address"); // Default value is "Address"
