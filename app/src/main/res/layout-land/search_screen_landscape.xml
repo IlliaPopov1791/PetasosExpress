@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/logo"
+    android:background="@drawable/landscape"
     android:id="@+id/SearchScreen"
     tools:context=".SearchScreen">
 
@@ -27,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/searchEditText"
+        android:background="@drawable/search_bar_background"
         android:layout_marginTop="11dp"
         android:padding="20dp" />
 

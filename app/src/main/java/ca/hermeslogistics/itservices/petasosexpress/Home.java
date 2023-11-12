@@ -13,10 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
-
-import ca.hermeslogistics.itservices.petasosexpress.SharedViewModel;
 
 public class Home extends Fragment {
 
@@ -37,7 +34,7 @@ public class Home extends Fragment {
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             view = inflater.inflate(R.layout.fragment_home, container, false);
         } else {
-            view = inflater.inflate(R.layout.home_landscape, container, false);
+            view = inflater.inflate(R.layout.fragment_home_landscape, container, false);
         }
 
         // Initialize UI elements

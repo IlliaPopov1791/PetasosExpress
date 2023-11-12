@@ -68,7 +68,7 @@
         android:layout_below="@id/textViewMotorSpeed"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp"
-        android:background="@drawable/circular_border"
+        android:background="@drawable/progress_bar"
         android:max="20"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

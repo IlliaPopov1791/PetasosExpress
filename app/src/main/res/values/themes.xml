@@ -5,8 +5,8 @@
     <!-- Ahmad Aljawish | ID: n01375348 Section B -->
     <!-- Base application theme. -->
     <style name="Base.Theme.PetasosExpress" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/logo_saturated</item>
-        <item name="colorSecondary">@color/wine</item>
+        <item name="colorPrimary">@color/greek</item>
+        <item name="colorSecondary">@color/ceramic</item>
     </style>
 
     <style name="Theme.PetasosExpress" parent="Base.Theme.PetasosExpress" />

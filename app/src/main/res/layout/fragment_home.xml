@@ -4,20 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_theme"
+    android:background="@drawable/portrait2"
     android:id="@+id/main_home"
     tools:context=".Home">
 
     <!-- Button Layout with Margin -->
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="379dp"
+
         android:layout_centerInParent="true"
-        android:background="@drawable/button_group_border"
+        android:orientation="vertical"
         android:padding="16dp">
 
         <!-- First Row of Buttons with Padding -->
+
+        <!-- Second Row of Buttons with Padding -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,9 +30,9 @@
                 android:id="@+id/foodButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_food_button_foreground"
                 android:background="@drawable/button_background"
-                android:padding="16dp" />
+                android:padding="16dp"
+                android:src="@mipmap/ic_food_foreground" />
 
             <!-- Electronics Button with Padding -->
             <ImageButton
@@ -38,27 +40,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:src="@drawable/ic_electronics_button_foreground"
                 android:background="@drawable/button_background"
-                android:padding="16dp" />
+                android:padding="16dp"
+                android:src="@mipmap/ic_tech_foreground" />
 
         </LinearLayout>
 
-        <!-- Second Row of Buttons with Padding -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="24dp">
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal">
 
             <!-- Medical Button with Padding -->
             <ImageButton
                 android:id="@+id/medicalButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_medical_button_foreground"
                 android:background="@drawable/button_background"
-                android:padding="16dp" />
+                android:padding="16dp"
+                android:src="@mipmap/ic_medicine_foreground" />
 
             <!-- Other Button with Padding -->
             <ImageButton
@@ -66,9 +67,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:src="@drawable/ic_other_button"
                 android:background="@drawable/button_background"
-                android:padding="16dp" />
+                android:padding="16dp"
+                android:src="@mipmap/ic_other_foreground" />
 
         </LinearLayout>
     </LinearLayout>
@@ -77,16 +78,16 @@
     <EditText
         android:id="@+id/searchEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="57dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="26dp"
         android:background="@drawable/search_bar_background"
         android:hint="@string/search_hint"
         android:paddingStart="16dp"
         android:paddingTop="12dp"
         android:paddingEnd="16dp"
         android:paddingBottom="12dp"
-        android:textColor="@android:color/black"
+        android:textColor="@color/ceramic"
         android:textSize="16sp" />
 
 </RelativeLayout>

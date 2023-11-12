@@ -29,8 +29,10 @@
 
     <color name="light_yellow">#FFFF99</color>
     <color name="logo">#EFDFC5</color>
+    <color name="greek">#fdf1de</color>
     <color name="logo_dark">#DBB98F</color>
     <color name="logo_saturated">#ffcc99</color>
+    <color name="ceramic">#371a00</color>
 
     <color name="dark_red">#8B0000</color>
     <color name="red">#FF0000</color>
