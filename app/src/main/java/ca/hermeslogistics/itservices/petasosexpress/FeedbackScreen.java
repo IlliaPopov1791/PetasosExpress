@@ -69,28 +69,33 @@ public class FeedbackScreen extends Fragment {
         String comment = editTextComment.getText().toString().trim();
         float rating = ratingBar.getRating();
 
-        // Get the device model information
-        String deviceModel = android.os.Build.MODEL;
-
-        // Validate inputs
         if (name.isEmpty() || phone.isEmpty() || email.isEmpty()) {
             DisplayToast(getString(R.string.please_fill_in_all_fields));
             return;
         }
 
-        //Creating a random document ID
+        // Email validation
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            DisplayToast(getString(R.string.invalid_email_format));
+            return;
+        }
+
+        // Phone validation
+        String cleanPhone = phone.replaceAll("[^0-9]", "");
+        if (cleanPhone.length() != 10) {
+            DisplayToast(getString(R.string.invalid_phone_format));
+            return;
+        }
+
         String documentId = generateRandomDocumentId(15);
 
-        //Creating a new feedback record
         Map<String, Object> feedback = new HashMap<>();
         feedback.put("name", name);
-        feedback.put("phone", Long.parseLong(phone));
+        feedback.put("phone", Long.parseLong(cleanPhone));
         feedback.put("email", email);
         feedback.put("comment", comment);
         feedback.put("rating", (long) rating);
-        feedback.put("deviceModel", deviceModel);
 
-        //Adding the feedback to the 'feedbackRecord' collection
         db.collection("feedbackRecord").document(documentId)
                 .set(feedback)
                 .addOnSuccessListener(aVoid -> DisplayToast(getString(R.string.feedback_submitted_successfully)))
