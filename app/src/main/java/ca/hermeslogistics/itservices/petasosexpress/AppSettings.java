@@ -1,4 +1,3 @@
-
 package ca.hermeslogistics.itservices.petasosexpress;
 
 import android.app.Activity;
@@ -25,116 +24,61 @@ import androidx.fragment.app.Fragment;
  */
 public class AppSettings extends Fragment {
 
-    public static void applySavedSettings(Activity activity) {
-        SharedPreferences settings = activity.getSharedPreferences(PREFS_NAME, 0);
-
-        boolean isDarkMode = settings.getBoolean(THEME_KEY, false);
-        if (isDarkMode) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
-
-        boolean isLandscape = settings.getBoolean(ORIENTATION_KEY, false);
-        if (isLandscape) {
-            activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        } else {
-            activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
-    }
-
-
-    // Constants for SharedPreferences keys
     private static final String PREFS_NAME = "UserSettings";
     private static final String THEME_KEY = "theme_mode";
     private static final String ORIENTATION_KEY = "orientation_mode";
     private static final String ADDRESS_KEY = "default_address";
+    private static final String NOTIFICATIONS_KEY = "notifications";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Determine the device's current orientation
         int orientation = getResources().getConfiguration().orientation;
         View view;
-        // Load the appropriate layout based on orientation
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             view = inflater.inflate(R.layout.app_settings, container, false);
         } else {
             view = inflater.inflate(R.layout.app_setttings_landscape, container, false);
         }
 
-        // Initialize ToggleButtons and EditText
         ToggleButton toggleTheme = view.findViewById(R.id.toggle_theme);
         ToggleButton toggleOrientation = view.findViewById(R.id.toggle_portrait_landscape);
+        ToggleButton toggleNotifications = view.findViewById(R.id.switch_notifications);
         EditText editTextAddress = view.findViewById(R.id.editTextText);
 
-        // Retrieve saved settings
         SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
         applySavedSettings(getActivity());
 
         boolean isDarkMode = settings.getBoolean(THEME_KEY, false);
         boolean isLandscape = settings.getBoolean(ORIENTATION_KEY, false);
-        String savedAddress = settings.getString(ADDRESS_KEY, "Address"); // Default value is "Address"
+        boolean areNotificationsEnabled = settings.getBoolean(NOTIFICATIONS_KEY, true);
+        String savedAddress = settings.getString(ADDRESS_KEY, "");
 
-        // Set saved values
         toggleTheme.setChecked(isDarkMode);
-        if (isDarkMode) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
-
         toggleOrientation.setChecked(isLandscape);
-        if (isLandscape) {
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        } else {
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
-
+        toggleNotifications.setChecked(areNotificationsEnabled);
         editTextAddress.setText(savedAddress);
 
-        // Set onClickListeners for the ToggleButtons
-        toggleTheme.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (toggleTheme.isChecked()) {
-                    // Dark Theme
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    DisplayToast(getString(R.string.dark_theme_switched));
-                } else {
-                    // Light Theme
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    DisplayToast(getString(R.string.light_theme_switched));
-                }
-                getActivity().recreate();
-
-                // Save the theme setting
-                SharedPreferences.Editor editor = settings.edit();
-                editor.putBoolean(THEME_KEY, toggleTheme.isChecked());
-                editor.apply();
-            }
+        toggleTheme.setOnClickListener(v -> {
+            boolean isChecked = toggleTheme.isChecked();
+            AppCompatDelegate.setDefaultNightMode(isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+            DisplayToast(isChecked ? getString(R.string.dark_theme_switched) : getString(R.string.light_theme_switched));
+            getActivity().recreate();
+            settings.edit().putBoolean(THEME_KEY, isChecked).apply();
         });
 
-        toggleOrientation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (toggleOrientation.isChecked()) {
-                    // Landscape
-                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                    DisplayToast(getString(R.string.landscape_orientation));
-                } else {
-                    // Portrait
-                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                    DisplayToast(getString(R.string.portrait_orientation));
-                }
-
-                // Save the orientation setting
-                SharedPreferences.Editor editor = settings.edit();
-                editor.putBoolean(ORIENTATION_KEY, toggleOrientation.isChecked());
-                editor.apply();
-            }
+        toggleOrientation.setOnClickListener(v -> {
+            boolean isChecked = toggleOrientation.isChecked();
+            getActivity().setRequestedOrientation(isChecked ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            DisplayToast(isChecked ? getString(R.string.landscape_orientation) : getString(R.string.portrait_orientation));
+            settings.edit().putBoolean(ORIENTATION_KEY, isChecked).apply();
         });
 
-        // Save address when it changes
+        toggleNotifications.setOnClickListener(v -> {
+            boolean isEnabled = toggleNotifications.isChecked();
+            settings.edit().putBoolean(NOTIFICATIONS_KEY, isEnabled).apply();
+            DisplayToast(isEnabled ? "Notifications enabled" : "Notifications disabled");
+        });
+
         editTextAddress.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -144,9 +88,7 @@ public class AppSettings extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                SharedPreferences.Editor editor = settings.edit();
-                editor.putString(ADDRESS_KEY, s.toString());
-                editor.apply();
+                settings.edit().putString(ADDRESS_KEY, s.toString()).apply();
             }
         });
 
@@ -155,5 +97,15 @@ public class AppSettings extends Fragment {
 
     private void DisplayToast(String msg) {
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void applySavedSettings(Activity activity) {
+        SharedPreferences settings = activity.getSharedPreferences(PREFS_NAME, 0);
+        if (settings.getBoolean(THEME_KEY, false)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+        activity.setRequestedOrientation(settings.getBoolean(ORIENTATION_KEY, false) ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 }
