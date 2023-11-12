@@ -58,7 +58,10 @@ public class SensorGPS extends Fragment implements OnMapReadyCallback {
 
     private void listenForLocationUpdates() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference locationRef = db.collection("Coordinates").document("43nKOPpvl1ZP7Gimojoo");
+        DocumentReference locationRef = db.collection("PetasosRecord")
+                .document("Toronto")
+                .collection("Petasos001")
+                .document("Coordinates");
 
         // Listen for real-time updates
         locationRef.addSnapshotListener((snapshot, e) -> {

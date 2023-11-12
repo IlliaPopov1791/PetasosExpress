@@ -129,7 +129,10 @@ public class SensorScreen extends Fragment {
 
 
     private void setupBalanceSensor() {
-        DocumentReference docRef = db.collection("Balance").document("vW8usegJdf1HUrA1gFtk");
+        DocumentReference docRef = db.collection("PetasosRecord")
+                .document("Toronto")
+                .collection("Petasos001")
+                .document("Balance");
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
@@ -159,7 +162,10 @@ public class SensorScreen extends Fragment {
 
 
     private void setupMotorSensor() {
-        DocumentReference motorRef = db.collection("Motors").document("PMfVBrNcmgOhjYlQZ4Ih");
+        DocumentReference motorRef = db.collection("PetasosRecord")
+                .document("Toronto")
+                .collection("Petasos001")
+                .document("Motors");
         motorRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
@@ -169,7 +175,7 @@ public class SensorScreen extends Fragment {
                 }
 
                 if ((snapshot != null && snapshot.exists() && isAdded())) {
-                    Double rpm = snapshot.getDouble("rpm");
+                    Double rpm = snapshot.getDouble("rps");
                     if (rpm != null) {
                         String formattedRPM = String.format(Locale.getDefault(), "%.2f", rpm);
                         motorProgressBar.setProgress((int) Math.round(rpm));
@@ -188,8 +194,14 @@ public class SensorScreen extends Fragment {
     //distance and prox
     private void setupRangeSensors() {
         // Document references for both sensors
-        DocumentReference distanceDocRef = db.collection("Distance (Ultrasonic Sensor)").document("HChcHZOZwRMcrFVLnar4");
-        DocumentReference proximityDocRef = db.collection("Proximity (IR Sensor)").document("0NdvEw2YdE4G8BqV6GcI");
+        DocumentReference distanceDocRef = db.collection("PetasosRecord")
+                .document("Toronto")
+                .collection("Petasos001")
+                .document("Distance");
+        DocumentReference proximityDocRef = db.collection("PetasosRecord")
+                .document("Toronto")
+                .collection("Petasos001")
+                .document("Proximity");
 
         // Listener for the Distance Sensor
         distanceDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -202,7 +214,7 @@ public class SensorScreen extends Fragment {
 
                 if ((snapshot != null && snapshot.exists() && isAdded())) {
                     Double pulseDuration = snapshot.getDouble("Pulse Duration");
-                    Double speedOfSound = snapshot.getDouble("Speed of Sound ");
+                    Double speedOfSound = snapshot.getDouble("Speed of Sound");
 
                     if (pulseDuration != null && speedOfSound != null) {
                         distance = pulseDuration * speedOfSound;
