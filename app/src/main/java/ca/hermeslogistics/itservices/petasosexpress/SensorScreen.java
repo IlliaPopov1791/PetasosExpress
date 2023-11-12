@@ -1,6 +1,11 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
+import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +15,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.firestore.DocumentReference;
@@ -50,11 +60,12 @@ public class SensorScreen extends Fragment {
     private Number proximity;
     private TextView txtProximity, txtTime;
     private ImageView imgStatus;
-    private  ProgressBar progressBar;
+    private ProgressBar progressBar;
 
     // Motor Sensor
     private ProgressBar motorProgressBar;
     private TextView textViewMotorSpeed;
+    private static final int NOTIFICATION_PERMISSION_REQUEST_CODE = 100;
 
     public SensorScreen() {
     }
@@ -81,9 +92,7 @@ public class SensorScreen extends Fragment {
         initializeMotorSensor(view);
 
         // Set up Firestore document references and listeners for each sensor
-        //setupDistanceSensor();
         setupBalanceSensor();
-        //setupProximitySensor();
         setupMotorSensor();
         setupRangeSensors();
 
@@ -148,7 +157,6 @@ public class SensorScreen extends Fragment {
     }
 
 
-
     private void setupMotorSensor() {
         DocumentReference motorRef = db.collection("Motors").document("PMfVBrNcmgOhjYlQZ4Ih");
         motorRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -163,7 +171,8 @@ public class SensorScreen extends Fragment {
                     Double rpm = snapshot.getDouble("rpm");
                     if (rpm != null) {
                         String formattedRPM = String.format(Locale.getDefault(), "%.2f", rpm);
-                        motorProgressBar.setProgress((int) Math.round(rpm));motorProgressBar.setProgress((int) Math.round(rpm));
+                        motorProgressBar.setProgress((int) Math.round(rpm));
+                        motorProgressBar.setProgress((int) Math.round(rpm));
                         textViewMotorSpeed.setText(getString(R.string.rpm_value_placeholder, formattedRPM));
                     } else {
                         textViewMotorSpeed.setText(R.string.no_data);
@@ -263,11 +272,12 @@ public class SensorScreen extends Fragment {
     private void updateImageViewBasedOnProximity(ImageView imageView, int proximityValue) {
         if (proximityValue < 10) {
             imageView.setImageResource(R.mipmap.statsu_cancel_round);
-            addStopTimeToList();
+            emergencyStop();
         } else {
             imageView.setImageResource(R.mipmap.status_warning_round);
         }
     }
+
     private void updateImageViewBasedOnDistance(ImageView imageView, double distance) {
         if (distance > 0.4) {
             imageView.setImageResource(R.mipmap.status_good_round);
@@ -276,11 +286,11 @@ public class SensorScreen extends Fragment {
         }
     }
 
-    private void updateProgressBarOnProx(ProgressBar progressBar, Integer proximityValue){
+    private void updateProgressBarOnProx(ProgressBar progressBar, Integer proximityValue) {
         final int minProximity = 20; // Min value for proximity to be used in cm
         int progressValue;
 
-         if (proximityValue != null && proximityValue <= minProximity) {
+        if (proximityValue != null && proximityValue <= minProximity) {
             // Scale based on proximity (20cm to 0cm)
             int invertedProximity = minProximity - proximityValue;
             progressValue = (invertedProximity * 100 / minProximity) + 360; // Offset by the distance covered by 0.21m to 4m
@@ -291,7 +301,7 @@ public class SensorScreen extends Fragment {
         progressBar.setProgress(progressValue);
     }
 
-    private void updateProgressBarOnDis(ProgressBar progressBar, Double distance){
+    private void updateProgressBarOnDis(ProgressBar progressBar, Double distance) {
         final int maxDistance = 400; // Max distance in cm (4 meters)
         int progressValue;
 
@@ -306,11 +316,68 @@ public class SensorScreen extends Fragment {
     }
 
 
-    private void addStopTimeToList() {
-    String currentDateTime = DateFormat.getDateTimeInstance().format(new Date());
-    dateList.add(currentDateTime);
-    adapter.notifyDataSetChanged();
-    listView.smoothScrollToPosition(dateList.size() - 1);
+    private void emergencyStop() {
+        String currentDateTime = DateFormat.getDateTimeInstance().format(new Date());
+        dateList.add(currentDateTime);
+        adapter.notifyDataSetChanged();
+        listView.smoothScrollToPosition(dateList.size() - 1);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                sendNotification();
+            } else {
+                requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION_REQUEST_CODE);
+            }
+        } else {
+            sendNotification();
+        }
     }
 
+
+
+    private void sendNotification() {
+        String channelId = "delivery_notifications";
+        String channelName = "Delivery Notifications";
+        String notificationTitle = "Delivery Update";
+        String notificationText = "Your delivery may be late due to obstacles on Petasos' way";
+
+        // Create the NotificationChannel (required for API 26+)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
+
+        // Build the notification
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), channelId)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(notificationTitle)
+                .setContentText(notificationText)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        // Show the notification
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                notificationManager.notify(1, builder.build());
+            } else {
+                requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION_REQUEST_CODE);
+            }
+        } else {
+            notificationManager.notify(1, builder.build());
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == NOTIFICATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                sendNotification();
+            } else {
+                Toast.makeText(getContext(), "Permissions Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
