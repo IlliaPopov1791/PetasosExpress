@@ -137,5 +137,6 @@
     <string name="technology_1">technology</string>
     <string name="medicine">medicine</string>
     <string name="other">other</string>
+    <string name="save_changes">Save Changes</string>
 
 </resources>
