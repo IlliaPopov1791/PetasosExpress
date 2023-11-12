@@ -31,46 +31,46 @@
         <!-- Buttons in a 1x4 horizontal layout with spaces -->
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/foodButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_background"
             android:padding="16dp"
-            android:src="@drawable/ic_food_button_foreground"
+            android:src="@mipmap/ic_food_foreground"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/electronicsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:background="@drawable/button_background"
             android:padding="16dp"
-            android:src="@drawable/ic_electronics_button_foreground"
-            app:layout_constraintStart_toEndOf="@+id/imageButton3"
+            android:src="@mipmap/ic_tech_foreground"
+            app:layout_constraintStart_toEndOf="@+id/foodButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/medicalButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:background="@drawable/button_background"
             android:padding="16dp"
-            android:src="@drawable/ic_medical_button_foreground"
-            app:layout_constraintStart_toEndOf="@+id/imageButton4"
+            android:src="@mipmap/ic_medicine_foreground"
+            app:layout_constraintStart_toEndOf="@+id/electronicsButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/otherButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:background="@drawable/button_background"
             android:padding="16dp"
-            android:src="@drawable/ic_other_button"
-            app:layout_constraintStart_toEndOf="@+id/imageButton5"
+            android:src="@mipmap/ic_other_foreground"
+            app:layout_constraintStart_toEndOf="@+id/medicalButton"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
