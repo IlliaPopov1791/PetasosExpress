@@ -28,10 +28,13 @@
         android:layout_marginBottom="4dp"
         android:numStars="5"
         android:stepSize="1.0"
+        android:progressTint="@color/wine"
         app:layout_constraintBottom_toTopOf="@+id/editTextName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.918" />
 
     <EditText
         android:id="@+id/editTextName"
@@ -39,6 +42,7 @@
         android:layout_height="39dp"
         android:hint="@string/name_hint"
         android:inputType="textPersonName"
+        android:backgroundTint="@color/wine"
         app:layout_constraintBottom_toTopOf="@+id/editTextPhone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -50,6 +54,7 @@
         android:layout_marginBottom="4dp"
         android:hint="@string/phone_hint"
         android:inputType="phone"
+        android:backgroundTint="@color/wine"
         app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -60,6 +65,7 @@
         android:layout_height="44dp"
         android:layout_marginBottom="4dp"
         android:hint="@string/email_hint"
+        android:backgroundTint="@color/wine"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/editTextComment"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,6 +80,7 @@
         android:hint="@string/comment_hint"
         android:inputType="textMultiLine"
         android:lines="4"
+        android:backgroundTint="@color/wine"
         app:layout_constraintBottom_toTopOf="@+id/buttonSubmit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -82,7 +89,8 @@
         android:id="@+id/buttonSubmit"
         android:layout_width="583dp"
         android:layout_height="39dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/logo_dark"
         android:text="@string/submit_feedback"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
