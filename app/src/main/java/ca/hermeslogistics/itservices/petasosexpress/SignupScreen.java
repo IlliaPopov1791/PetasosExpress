@@ -96,26 +96,23 @@ public class SignupScreen extends AppCompatActivity {
                     return;
                 }
 
-                // Checking if the email is in correct format
-                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                // Validating credentials
+                if (!ValidationUtils.isValidEmail(email)) {
                     Toast.makeText(SignupScreen.this, R.string.invalid_email_format, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if (cleanPhone.length() != 10) {
+                if (!ValidationUtils.isValidPhone(phone)) {
                     Toast.makeText(SignupScreen.this, R.string.invalid_phone_format, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                //Checking if passwords match
                 if (!password.equals(confirmPassword)) {
                     Toast.makeText(SignupScreen.this, R.string.passwords_do_not_match, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // Checking if the password is complex enough
-                String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{6,}$";
-                if (!password.matches(passwordPattern)) {
+                if (!ValidationUtils.isValidPassword(password)) {
                     Toast.makeText(SignupScreen.this, R.string.invalid_password_format1, Toast.LENGTH_SHORT).show();
                     Toast.makeText(SignupScreen.this, R.string.invalid_password_format2, Toast.LENGTH_SHORT).show();
                     return;

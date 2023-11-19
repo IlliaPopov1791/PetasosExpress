@@ -74,6 +74,17 @@ public class LoginScreen extends AppCompatActivity {
                     return;
                 }
 
+                // Validating credentials
+                if (!ValidationUtils.isValidEmail(email)) {
+                    Toast.makeText(LoginScreen.this, R.string.invalid_email_format, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!ValidationUtils.isValidPassword(password)) {
+                    Toast.makeText(LoginScreen.this, R.string.invalid_password_format1, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginScreen.this, R.string.invalid_password_format2, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LoginScreen.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -105,12 +116,5 @@ public class LoginScreen extends AppCompatActivity {
         Intent intent = new Intent(LoginScreen.this, MainActivity.class);
         startActivity(intent);
         finish();
-    }
-
-    public static void clearRememberMe(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences("LoginPrefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.remove("RememberMe");
-        editor.apply();
     }
 }
