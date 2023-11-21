@@ -3,7 +3,7 @@ package ca.hermeslogistics.itservices.petasosexpress;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Gravity;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +34,8 @@ public class FeedbackScreen extends Fragment {
     private EditText editTextComment;
     private RatingBar ratingBar;
     private Button buttonSubmit;
+    private static final String PREFS_NAME = "FeedbackPrefs";
+    private static final String LAST_FEEDBACK_KEY = "lastFeedbackTime";
 
     private FirebaseFirestore db;
 
@@ -74,6 +76,25 @@ public class FeedbackScreen extends Fragment {
     }
 
     private void submitFeedback() {
+        SharedPreferences prefs = getActivity().getSharedPreferences(PREFS_NAME, 0);
+        long lastFeedbackTime = prefs.getLong(LAST_FEEDBACK_KEY, 0);
+        long currentTime = System.currentTimeMillis();
+
+// Check if last feedback was sent less than 24 hours ago
+        long timeElapsedSinceLastFeedback = currentTime - lastFeedbackTime;
+        long twentyFourHoursInMilliseconds = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+        if (timeElapsedSinceLastFeedback < twentyFourHoursInMilliseconds) {
+            long timeLeft = twentyFourHoursInMilliseconds - timeElapsedSinceLastFeedback;
+
+            // Convert milliseconds to hours and minutes
+            long hoursLeft = timeLeft / (60 * 60 * 1000);
+            long minutesLeft = (timeLeft % (60 * 60 * 1000)) / (60 * 1000);
+
+            DisplayToast("Please wait " + hoursLeft + " hours and " + minutesLeft + " minutes before sending feedback again.");
+            return;
+        }
+
         String name = editTextName.getText().toString().trim();
         String phone = editTextPhone.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
@@ -111,6 +132,12 @@ public class FeedbackScreen extends Fragment {
 
         // Handler to introduce delay
         new Handler().postDelayed(() -> {
+            // Save current time as last feedback time
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putLong(LAST_FEEDBACK_KEY, currentTime);
+            editor.apply();
+
+            // Submit feedback...
             db.collection("feedbackRecord").document(documentId)
                     .set(feedback)
                     .addOnSuccessListener(aVoid -> DisplayToast(getString(R.string.feedback_submitted_successfully)))
