@@ -2,6 +2,8 @@ package ca.hermeslogistics.itservices.petasosexpress;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,16 +85,11 @@ public class FeedbackScreen extends Fragment {
             return;
         }
 
-        // Get the device model information
-        String deviceModel = android.os.Build.MODEL;
-
-        // Email validation
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             DisplayToast(getString(R.string.invalid_email_format));
             return;
         }
 
-        // Phone validation
         String cleanPhone = phone.replaceAll("[^0-9]", "");
         if (cleanPhone.length() != 10) {
             DisplayToast(getString(R.string.invalid_phone_format));
@@ -107,12 +104,18 @@ public class FeedbackScreen extends Fragment {
         feedback.put("email", email);
         feedback.put("comment", comment);
         feedback.put("rating", (long) rating);
-        feedback.put("deviceModel", deviceModel);
+        feedback.put("deviceModel", android.os.Build.MODEL);
 
-        db.collection("feedbackRecord").document(documentId)
-                .set(feedback)
-                .addOnSuccessListener(aVoid -> DisplayToast(getString(R.string.feedback_submitted_successfully)))
-                .addOnFailureListener(e -> DisplayToast(getString(R.string.failed_to_submit_feedback)));
+        // Inform user that feedback is being processed
+        DisplayToast("Processing feedback...");
+
+        // Handler to introduce delay
+        new Handler().postDelayed(() -> {
+            db.collection("feedbackRecord").document(documentId)
+                    .set(feedback)
+                    .addOnSuccessListener(aVoid -> DisplayToast(getString(R.string.feedback_submitted_successfully)))
+                    .addOnFailureListener(e -> DisplayToast(getString(R.string.failed_to_submit_feedback)));
+        }, 5000); // 5000 milliseconds delay
     }
 
     private String generateRandomDocumentId(int targetStringLength) {
