@@ -81,6 +81,11 @@ public class SearchScreen extends Fragment {
             return false;
         });
 
+        searchResultsListView.setOnItemClickListener((adapterView, view1, position, id) -> {
+            Product selectedProduct = productAdapter.getItem(position);
+            navigateToProductScreen(selectedProduct);
+        });
+
         return view;
     }
 
@@ -131,5 +136,21 @@ public class SearchScreen extends Fragment {
     private void closeKeyboard() {
         InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(searchEditText.getWindowToken(), 0);
+    }
+
+    private void navigateToProductScreen(Product product) {
+        ProductScreen productScreen = new ProductScreen();
+
+        Bundle args = new Bundle();
+        args.putString("productName", product.getName());
+        args.putDouble("productPrice", product.getPrice());
+        args.putString("productProducer", product.getProducer());
+
+        productScreen.setArguments(args);
+
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_frame_layout, productScreen)
+                .addToBackStack(null)
+                .commit();
     }
 }
