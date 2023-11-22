@@ -147,6 +147,11 @@
     <string name="card_number">Card Number</string>
     <string name="$amount">$00.00</string>
     <string name="payment_amount">Payment Amount:</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="product_image">Product Image</string>
+    <string name="product_name">Product Name</string>
+    <string name="quantity">Quantity:</string>
+    <string name="producer">Producer</string>
     <string-array name="months">
         <item>January</item>
         <item>February</item>
@@ -160,5 +165,17 @@
         <item>October</item>
         <item>November</item>
         <item>December</item>
+    </string-array>
+    <string-array name="quantity_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
     </string-array>
 </resources>
