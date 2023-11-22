@@ -145,4 +145,20 @@
     <string name="cvv">CVV</string>
     <string name="card_holder">Card Holder</string>
     <string name="card_number">Card Number</string>
+    <string name="$amount">$00.00</string>
+    <string name="payment_amount">Payment Amount:</string>
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
 </resources>

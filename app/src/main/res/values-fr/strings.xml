@@ -139,4 +139,26 @@
     <string name="other">autre</string>
     <string name="save_changes">Save Changes</string>
     <string name="invalid_phone_format">Invalid phone format</string>
+    <string name="submit">Soumettre</string>
+    <string name="pay">Payer</string>
+    <string name="contact_information">Informations de contact:</string>
+    <string name="cvv">CVV</string>
+    <string name="card_holder">Titulaire de la carte</string>
+    <string name="card_number">Numéro de carte</string>
+    <string name="$amount">00,00$</string>
+    <string name="payment_amount">Montant du paiement:</string>
+    <string-array name="months">
+        <item>Janvier</item>
+        <item>Février</item>
+        <item>Mars</item>
+        <item>Avril</item>
+        <item>Mai</item>
+        <item>Juin</item>
+        <item>Juillet</item>
+        <item>Août</item>
+        <item>Septembre</item>
+        <item>Octobre</item>
+        <item>Novembre</item>
+        <item>Décembre</item>
+    </string-array>
 </resources>
