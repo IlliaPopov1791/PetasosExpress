@@ -145,7 +145,7 @@
     <string name="cvv">CVV</string>
     <string name="card_holder">Card Holder</string>
     <string name="card_number">Card Number</string>
-    <string name="$amount">$00.00</string>
+    <string name="amount">$00.00</string>
     <string name="payment_amount">Payment Amount:</string>
     <string name="add_to_cart">Add to Cart</string>
     <string name="product_image">Product Image</string>

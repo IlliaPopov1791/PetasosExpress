@@ -45,7 +45,7 @@
         android:id="@+id/product_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/$amount"
+        android:text="@string/amount"
         android:textColor="@color/wine"
         android:textSize="24sp"
         android:layout_marginBottom="24dp"/>

@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/wine"
         android:textStyle="bold"
-        android:text="@string/$amount"
+        android:text="@string/amount"
         android:textSize="34sp"
         android:gravity="center_horizontal"
         android:layout_marginBottom="24dp"/>
