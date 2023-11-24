@@ -25,9 +25,9 @@ import androidx.fragment.app.Fragment;
 public class AppSettings extends Fragment {
 
     protected static final String PREFS_NAME = "UserSettings";
-    public static final String THEME_KEY = "theme_mode";
+    public static final String THEME_KEY = "theme_mode"; //changed it to public to use it in a different class
     protected static final String ORIENTATION_KEY = "orientation_mode";
-    public static final String ADDRESS_KEY = "default_address";
+    public static final String ADDRESS_KEY = "default_address"; //changed it to public to use it in a different class
     protected static final String NOTIFICATIONS_KEY = "notifications";
 
     @Override

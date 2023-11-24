@@ -22,7 +22,6 @@ public class AppSettingsTest {
 
     private SharedPreferences sharedPreferences;
     private FragmentScenario<AppSettings> scenario;
-
     @Before
     public void setUp() {
         sharedPreferences = ApplicationProvider.getApplicationContext().getSharedPreferences(AppSettings.PREFS_NAME, 0);
