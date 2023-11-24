@@ -11,9 +11,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.storage.StorageReference;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import java.util.Locale;
 
 public class ProductScreen extends Fragment {
+    private FirebaseStorage storage;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.product_screen, container, false);
@@ -25,22 +33,44 @@ public class ProductScreen extends Fragment {
         Spinner quantitySpinner = view.findViewById(R.id.quantity_spinner);
         Button payButton = view.findViewById(R.id.pay_button);
 
+        storage = FirebaseStorage.getInstance();
+
         Bundle args = getArguments();
         if (args != null) {
             String productName = args.getString("productName");
             double productPrice = args.getDouble("productPrice");
             String productProducer = args.getString("productProducer");
+            int productId = args.getInt("productId");
 
             // Update UI with product data
             productNameTextView.setText(productName);
             productProducerTextView.setText(productProducer);
             productPriceTextView.setText(String.format(Locale.getDefault(), "$%.2f", productPrice));
-
+            loadProductImage(productImage, productId);
         }
 
 
         return view;
     }
+
+    private void loadProductImage(final ImageView imageView, int productId) {
+        StorageReference storageRef = storage.getReference();
+        StorageReference imageRef = storageRef.child("goodsImages/" + productId + ".jpg");
+
+        final long ONE_MEGABYTE = 1024 * 1024;
+        imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                imageView.setImageBitmap(bitmap);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+            }
+        });
+    }
+
 
     private void processPayment(Product product, int quantity) {
     }
