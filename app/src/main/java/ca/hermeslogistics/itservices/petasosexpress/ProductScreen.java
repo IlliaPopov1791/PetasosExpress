@@ -10,9 +10,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import com.bumptech.glide.Glide;
+
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.storage.StorageReference;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import java.util.Locale;
 
@@ -49,17 +53,24 @@ public class ProductScreen extends Fragment {
         return view;
     }
 
-    private void loadProductImage(ImageView imageView, int productId) {
+    private void loadProductImage(final ImageView imageView, int productId) {
         StorageReference storageRef = storage.getReference();
         StorageReference imageRef = storageRef.child("goodsImages/" + productId + ".jpg");
 
-        //Glide to load the image
-        Glide.with(this)
-                .load(imageRef)
-                .placeholder(R.drawable.product_placeholder)
-                .error(R.drawable.portrait2)
-                .into(imageView);
+        final long ONE_MEGABYTE = 1024 * 1024;
+        imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                imageView.setImageBitmap(bitmap);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+            }
+        });
     }
+
 
     private void processPayment(Product product, int quantity) {
     }
