@@ -145,6 +145,7 @@ public class SearchScreen extends Fragment {
         args.putString("productName", product.getName());
         args.putDouble("productPrice", product.getPrice());
         args.putString("productProducer", product.getProducer());
+        args.putInt("productId", product.getId());
 
         productScreen.setArguments(args);
 
