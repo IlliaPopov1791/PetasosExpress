@@ -149,6 +149,13 @@
     <string name="payment_amount">Montant du paiement:</string>
     <string name="add_to_cart">Ajouter au panier</string>
     <string name="product_image">Image du produit</string>
+    <string name="product_name">Nom du produit</string>
+    <string name="quantity">Quantité</string>
+    <string name="producer">Producteur</string>
+    <string name="minus">-</string>
+    <string name="minus_long">—</string>
+    <string name="number">0</string>
+    <string name="plus">+</string>
     <string-array name="months">
         <item>Janvier</item>
         <item>Février</item>

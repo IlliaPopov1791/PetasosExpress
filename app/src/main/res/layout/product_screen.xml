@@ -15,6 +15,7 @@
         android:layout_height="200dp"
         android:src="@drawable/product_placeholder"
         android:scaleType="centerCrop"
+        android:contentDescription="@string/product_image"
         android:layout_marginBottom="16dp"/>
 
     <!-- Product Name -->
@@ -66,14 +67,35 @@
             android:textSize="24sp"
             android:layout_gravity="center_vertical"/>
 
-        <Spinner
-            android:id="@+id/quantity_spinner"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:outlineAmbientShadowColor="@color/wine"
-            android:outlineSpotShadowColor="@color/wine"
-            android:entries="@array/quantity_array" />
+        <Button
+            android:id="@+id/decrease_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:textColor="@color/wine"
+            android:textSize="28sp"
+            android:layout_marginStart="@dimen/spacing_huge"
+            android:background="@drawable/button_background"
+            android:text="@string/minus_long" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/wine"
+            android:text="@string/number"
+            android:textSize="24sp"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_gravity="center_vertical"/>
+
+        <Button
+            android:id="@+id/increase_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:textColor="@color/wine"
+            android:textSize="28sp"
+            android:background="@drawable/button_background"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:text="@string/plus" />
+
     </LinearLayout>
 
     <Button
