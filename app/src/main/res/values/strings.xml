@@ -160,6 +160,7 @@
     <string name="cart">Cart</string>
     <string name="petasos_cart">Your Petasos Cart</string>
     <string name="add_to_your_cart">Add to your Cart</string>
+    <string name="proceed_to_checkout">Proceed to Checkout</string>
     <string-array name="months">
         <item>January</item>
         <item>February</item>

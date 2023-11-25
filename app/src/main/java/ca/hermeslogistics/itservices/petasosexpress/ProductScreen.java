@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.storage.StorageReference;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -30,9 +31,14 @@ public class ProductScreen extends Fragment {
         TextView productNameTextView = view.findViewById(R.id.product_name);
         TextView productProducerTextView = view.findViewById(R.id.product_producer);
         TextView productPriceTextView = view.findViewById(R.id.product_price);
+        TextView quantity = view.findViewById(R.id.quantity);
         Button riseButton = view.findViewById(R.id.increase_button);
         Button dropButton = view.findViewById(R.id.decrease_button);
-        Button payButton = view.findViewById(R.id.pay_button);
+        Button cartButton = view.findViewById(R.id.cart_button);
+
+        // Set the initial quantity
+        int initialQuantity = 1;
+        quantity.setText(String.valueOf(initialQuantity));
 
         storage = FirebaseStorage.getInstance();
 
@@ -50,6 +56,35 @@ public class ProductScreen extends Fragment {
             loadProductImage(productImage, productId);
         }
 
+        // Increase quantity
+        riseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int currentQuantity = Integer.parseInt(quantity.getText().toString());
+                currentQuantity++;
+                quantity.setText(String.valueOf(currentQuantity));
+            }
+        });
+
+        // Decrease quantity
+        dropButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int currentQuantity = Integer.parseInt(quantity.getText().toString());
+                if (currentQuantity > 1) {
+                    currentQuantity--;
+                    quantity.setText(String.valueOf(currentQuantity));
+                }
+            }
+        });
+
+        // Add to the cart
+        cartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         return view;
     }
