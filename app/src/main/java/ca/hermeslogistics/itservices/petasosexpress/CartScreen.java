@@ -29,6 +29,8 @@ public class CartScreen extends Fragment {
     private Button checkoutButton;
     private ProductAdapter productAdapter;
     private List<Product> productList;
+
+
     private FirebaseFirestore db;
 
     @Override
@@ -41,7 +43,7 @@ public class CartScreen extends Fragment {
         db = FirebaseFirestore.getInstance();
 
         productList = new ArrayList<>();
-        productAdapter = new ProductAdapter(requireContext(), productList);
+        productAdapter = new ProductAdapter(requireContext(), productList, true);
         cartItemsListView.setAdapter(productAdapter);
 
         loadCartItems();
@@ -70,6 +72,7 @@ public class CartScreen extends Fragment {
 
                     if (name != null && price != null) {
                         Product product = new Product(name, productId, price, producer, type);
+                        product.setQuantity(quantity);
                         productList.add(product);
                         productAdapter.notifyDataSetChanged();
 

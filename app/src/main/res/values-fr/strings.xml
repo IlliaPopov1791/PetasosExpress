@@ -161,6 +161,7 @@
     <string name="petasos_cart">Votre panier Petasos</string>
     <string name="add_to_your_cart">Ajouter à votre panier</string>
     <string name="proceed_to_checkout">Procéder au paiement</string>
+    <string name="total_amount">Montant total :</string>
     <string-array name="months">
         <item>Janvier</item>
         <item>Février</item>

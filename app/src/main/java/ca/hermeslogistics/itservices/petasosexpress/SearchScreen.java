@@ -48,7 +48,7 @@ public class SearchScreen extends Fragment {
 
         productList = new ArrayList<>();
         fullItemList = new ArrayList<>();
-        productAdapter = new ProductAdapter(requireContext(), productList);
+        productAdapter = new ProductAdapter(requireContext(), productList, false);
         searchResultsListView.setAdapter(productAdapter);
 
         Bundle args = getArguments();

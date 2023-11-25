@@ -17,8 +17,11 @@ import androidx.annotation.Nullable;
 import java.util.List;
 
 public class ProductAdapter extends ArrayAdapter<Product> {
-    public ProductAdapter(Context context, List<Product> products) {
+    private boolean isForCartScreen;
+
+    public ProductAdapter(Context context, List<Product> products, boolean isForCartScreen) {
         super(context, 0, products);
+        this.isForCartScreen = isForCartScreen;
     }
 
     @NonNull
@@ -31,7 +34,11 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         }
 
         TextView tvName = convertView.findViewById(android.R.id.text1);
-        tvName.setText(product.getDisplayName());
+        if (isForCartScreen) {
+            tvName.setText(product.getCartName()); // Use cart name in cart screen
+        } else {
+            tvName.setText(product.getDisplayName()); // Use display name otherwise
+        }
 
         return convertView;
     }
