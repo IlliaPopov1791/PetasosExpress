@@ -1,28 +1,32 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.storage.StorageReference;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.widget.Toast;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.Locale;
 
 public class ProductScreen extends Fragment {
     private FirebaseStorage storage;
+    private int productId;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.product_screen, container, false);
@@ -47,7 +51,7 @@ public class ProductScreen extends Fragment {
             String productName = args.getString("productName");
             double productPrice = args.getDouble("productPrice");
             String productProducer = args.getString("productProducer");
-            int productId = args.getInt("productId");
+            productId = args.getInt("productId");
 
             // Update UI with product data
             productNameTextView.setText(productName);
@@ -82,7 +86,8 @@ public class ProductScreen extends Fragment {
         cartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                int currentQuantity = Integer.parseInt(quantity.getText().toString());
+                addToCart(productId, currentQuantity);
             }
         });
 
@@ -108,6 +113,42 @@ public class ProductScreen extends Fragment {
     }
 
 
-    private void processPayment(Product product, int quantity) {
+    private void addToCart(int productId, int quantity) {
+        SharedPreferences sharedPrefs = getActivity().getSharedPreferences("CartPrefs", Context.MODE_PRIVATE);
+        String cartJson = sharedPrefs.getString("cart", "[]");
+
+        try {
+            JSONArray cartArray = new JSONArray(cartJson);
+            boolean productExists = false;
+
+            //If the product already exists in the cart
+            for (int i = 0; i < cartArray.length(); i++) {
+                JSONObject cartItem = cartArray.getJSONObject(i);
+                if (cartItem.getInt("id") == productId) {
+                    //Updating quantity
+                    int existingQuantity = cartItem.getInt("quantity");
+                    cartItem.put("quantity", existingQuantity + quantity);
+                    productExists = true;
+                    break;
+                }
+            }
+
+            if (!productExists) {
+                //Adding new product to cart
+                JSONObject newCartItem = new JSONObject();
+                newCartItem.put("id", productId);
+                newCartItem.put("quantity", quantity);
+                cartArray.put(newCartItem);
+            }
+
+            //Saving the updated cart back to SharedPreferences
+            sharedPrefs.edit().putString("cart", cartArray.toString()).apply();
+            //Snackbar
+            View view = getActivity().findViewById(android.R.id.content);
+            Snackbar.make(view, "Added to Cart", Snackbar.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
