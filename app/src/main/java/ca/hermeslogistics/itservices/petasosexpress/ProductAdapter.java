@@ -17,12 +17,21 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
+import android.content.SharedPreferences;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class ProductAdapter extends ArrayAdapter<Product> {
     private boolean isForCartScreen;
+    private Runnable onUpdateListener;
 
     public ProductAdapter(Context context, List<Product> products, boolean isForCartScreen) {
         super(context, 0, products);
         this.isForCartScreen = isForCartScreen;
+    }
+
+    public void setOnUpdateListener(Runnable onUpdateListener) {
+        this.onUpdateListener = onUpdateListener;
     }
 
     @NonNull
@@ -30,7 +39,6 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Product product = getItem(position);
 
-        // Inflate different layout for cart screen
         if (isForCartScreen) {
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.cart_item_layout, parent, false);
@@ -39,9 +47,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             Button btnRemove = convertView.findViewById(R.id.btnRemove);
             tvCartItem.setText(product.getCartName());
 
-            btnRemove.setOnClickListener(v -> {
-                // Implement item removal logic
-            });
+            btnRemove.setOnClickListener(v -> removeItemFromCart(product.getId(), position));
         } else {
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
@@ -51,6 +57,34 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         }
 
         return convertView;
+    }
+
+    private void removeItemFromCart(int productId, int position) {
+        SharedPreferences sharedPrefs = getContext().getSharedPreferences("CartPrefs", Context.MODE_PRIVATE);
+        String cartJson = sharedPrefs.getString("cart", "[]");
+
+        try {
+            JSONArray cartArray = new JSONArray(cartJson);
+            JSONArray newCartArray = new JSONArray();
+
+            for (int i = 0; i < cartArray.length(); i++) {
+                JSONObject cartItem = cartArray.getJSONObject(i);
+                if (cartItem.getInt("id") != productId) {
+                    newCartArray.put(cartItem);
+                }
+            }
+
+            sharedPrefs.edit().putString("cart", newCartArray.toString()).apply();
+            this.remove(getItem(position));
+            this.notifyDataSetChanged();
+
+            // Notify the CartScreen to update the total amount
+            if (onUpdateListener != null) {
+                onUpdateListener.run();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 

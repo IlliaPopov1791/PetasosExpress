@@ -44,6 +44,7 @@ public class CartScreen extends Fragment {
 
         productList = new ArrayList<>();
         productAdapter = new ProductAdapter(requireContext(), productList, true);
+        productAdapter.setOnUpdateListener(this::updateTotalAmount);
         cartItemsListView.setAdapter(productAdapter);
 
         loadCartItems();
@@ -85,5 +86,13 @@ public class CartScreen extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    // Method to update total amount
+    public void updateTotalAmount() {
+        double totalAmount = 0.0;
+        for (Product product : productList) {
+            totalAmount += product.getPrice() * product.getQuantity();
+        }
+        totalAmountTextView.setText(String.format(Locale.getDefault(), "$%.2f", totalAmount));
     }
 }
