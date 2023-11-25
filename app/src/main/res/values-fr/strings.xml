@@ -156,6 +156,10 @@
     <string name="minus_long">—</string>
     <string name="number">0</string>
     <string name="plus">+</string>
+    <string name="shopping">Achats</string>
+    <string name="cart">Panier</string>
+    <string name="petasos_cart">Votre panier Petasos</string>
+    <string name="add_to_your_cart">Ajouter à votre panier</string>
     <string-array name="months">
         <item>Janvier</item>
         <item>Février</item>

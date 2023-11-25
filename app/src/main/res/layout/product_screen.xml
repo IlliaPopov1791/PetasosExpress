@@ -104,5 +104,5 @@
         android:layout_height="71dp"
         android:layout_marginTop="38dp"
         android:background="@drawable/button_background"
-        android:text="@string/pay" />
+        android:text="@string/add_to_your_cart" />
 </LinearLayout>

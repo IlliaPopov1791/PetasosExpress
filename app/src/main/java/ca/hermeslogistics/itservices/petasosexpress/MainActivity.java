@@ -100,6 +100,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.main_frame_layout, new Home());
             transaction.commit();
+        } else if (currentFragment instanceof ProductScreen) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.main_frame_layout, new SearchScreen());
+            transaction.commit();
         } else {
             showExitAlertDialog();
         }
@@ -185,6 +189,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (itemId == R.id.home_screen) {
                     fragmentToLoad = new Home();
                     fragmentTag = getString(R.string.home_tag);
+                } else if (itemId == R.id.cart_screen) {
+                    fragmentToLoad = new CartScreen();
+                    fragmentTag = getString(R.string.cart);
                 } else if (itemId == R.id.gps_sensor) {
                     fragmentToLoad = new SensorGPS();
                     fragmentTag = getString(R.string.gps_tag);
@@ -203,10 +210,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     fragmentToLoad = new ManageAccount();
                     fragmentTag = getString(R.string.ManageAccount);
                 }
-
                 if (fragmentToLoad != null) {
                     fragmentManager.beginTransaction().replace(R.id.main_frame_layout, fragmentToLoad).commit();
-                    saveCurrentFragment(fragmentTag); // Save the current fragment's tag
+                    saveCurrentFragment(fragmentTag);
                 }
 
                 drawerLayout.closeDrawer(GravityCompat.START);

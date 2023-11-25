@@ -30,6 +30,8 @@ public class ProductScreen extends Fragment {
         TextView productNameTextView = view.findViewById(R.id.product_name);
         TextView productProducerTextView = view.findViewById(R.id.product_producer);
         TextView productPriceTextView = view.findViewById(R.id.product_price);
+        Button riseButton = view.findViewById(R.id.increase_button);
+        Button dropButton = view.findViewById(R.id.decrease_button);
         Button payButton = view.findViewById(R.id.pay_button);
 
         storage = FirebaseStorage.getInstance();

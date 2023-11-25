@@ -6,12 +6,20 @@
      William Margalik | ID: n01479878
      Dylan Ashton | ID: n01442206
      Ahmad Aljawish | ID: n01375348-->
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/home_screen"
-            android:icon="@drawable/ic_home_foreground"
-            android:title="@string/home" />
-    </group>
+    <item android:title="@string/shopping">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/home_screen"
+                    android:icon="@drawable/ic_home_foreground"
+                    android:title="@string/home" />
+                <item
+                    android:id="@+id/cart_screen"
+                    android:icon="@drawable/ic_cart_foreground"
+                    android:title="@string/petasos_cart" />
+            </group>
+        </menu>
+    </item>
 
     <item android:title="@string/sensors">
         <menu>
