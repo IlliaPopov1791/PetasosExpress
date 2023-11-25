@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/button_background"
+    android:padding="18dp">
+
+    <TextView
+        android:id="@+id/tvCartItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/ceramic"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:gravity="center_vertical" />
+
+    <Button
+        android:id="@+id/btnRemove"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:backgroundTint="@color/logo_dark"
+        android:textColor="@color/wine"
+        android:text="@string/remove" />
+</LinearLayout>

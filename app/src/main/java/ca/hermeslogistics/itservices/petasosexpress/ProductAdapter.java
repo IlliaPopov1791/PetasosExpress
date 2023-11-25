@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,15 +30,24 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Product product = getItem(position);
 
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
-        }
-
-        TextView tvName = convertView.findViewById(android.R.id.text1);
+        // Inflate different layout for cart screen
         if (isForCartScreen) {
-            tvName.setText(product.getCartName()); // Use cart name in cart screen
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.cart_item_layout, parent, false);
+            }
+            TextView tvCartItem = convertView.findViewById(R.id.tvCartItem);
+            Button btnRemove = convertView.findViewById(R.id.btnRemove);
+            tvCartItem.setText(product.getCartName());
+
+            btnRemove.setOnClickListener(v -> {
+                // Implement item removal logic
+            });
         } else {
-            tvName.setText(product.getDisplayName()); // Use display name otherwise
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
+            }
+            TextView tvName = convertView.findViewById(android.R.id.text1);
+            tvName.setText(product.getDisplayName());
         }
 
         return convertView;
