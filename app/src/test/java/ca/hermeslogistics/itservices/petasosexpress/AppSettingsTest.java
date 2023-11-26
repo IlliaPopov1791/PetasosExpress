@@ -1,5 +1,16 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import android.content.SharedPreferences;
 import android.widget.EditText;
 import android.widget.ToggleButton;
@@ -7,23 +18,18 @@ import android.widget.ToggleButton;
 import androidx.fragment.app.testing.FragmentScenario;
 import androidx.test.core.app.ApplicationProvider;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 @RunWith(RobolectricTestRunner.class)
 @Config(sdk = {28})
 public class AppSettingsTest {
 
     private SharedPreferences sharedPreferences;
     private FragmentScenario<AppSettings> scenario;
+    private AppSettings fragment;
     @Before
     public void setUp() {
+        sharedPreferences = RuntimeEnvironment.application.getSharedPreferences(AppSettings.PREFS_NAME, 0);
+        sharedPreferences.edit().clear().commit();
+        sharedPreferences.edit().clear().commit();
         sharedPreferences = ApplicationProvider.getApplicationContext().getSharedPreferences(AppSettings.PREFS_NAME, 0);
         sharedPreferences.edit().clear().commit();
         scenario = FragmentScenario.launchInContainer(AppSettings.class);

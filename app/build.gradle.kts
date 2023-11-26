@@ -53,7 +53,7 @@ dependencies {
     testImplementation("org.mockito:mockito-core:3.3.3")
 
     // Robolectric
-    testImplementation("org.robolectric:robolectric:4.6.1") // Check for the latest version
+    testImplementation("org.robolectric:robolectric:4.11.1")
 
     // AndroidX Test libraries
     testImplementation("androidx.test:core:1.4.0") // Check for the latest version
