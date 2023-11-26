@@ -22,7 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicReference;
-
+/*
+ * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
+ * Student ID: n01421791, n01479878, n01442206, n01375348
+ * Section: B
+ */
 public class CartScreen extends Fragment {
     private ListView cartItemsListView;
     private TextView totalAmountTextView;
@@ -48,6 +52,8 @@ public class CartScreen extends Fragment {
         cartItemsListView.setAdapter(productAdapter);
 
         loadCartItems();
+
+        checkoutButton.setOnClickListener(v -> navigateToPaymentScreen());
 
         return view;
     }
@@ -94,5 +100,19 @@ public class CartScreen extends Fragment {
             totalAmount += product.getPrice() * product.getQuantity();
         }
         totalAmountTextView.setText(String.format(Locale.getDefault(), "$%.2f", totalAmount));
+    }
+
+    private void navigateToPaymentScreen() {
+        String totalAmount = totalAmountTextView.getText().toString();
+        PaymentScreen paymentScreen = new PaymentScreen();
+
+        Bundle args = new Bundle();
+        args.putString("totalAmount", totalAmount);
+        paymentScreen.setArguments(args);
+
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_frame_layout, paymentScreen)
+                .addToBackStack(null)
+                .commit();
     }
 }
