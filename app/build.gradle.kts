@@ -61,6 +61,6 @@ dependencies {
     testImplementation("androidx.fragment:fragment-testing:1.3.6") // Check for the latest version
 
     // Android Test Dependencies
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5") //Latest update for test implementation cases.
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
