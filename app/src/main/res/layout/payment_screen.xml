@@ -79,14 +79,16 @@
                 <!-- Expiry date MM/YY -->
                 <Spinner
                     android:id="@+id/spinner_month"
+                    android:entries="@array/months"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
                 <Spinner
                     android:id="@+id/spinner_year"
+                    android:entries="@array/year_array"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"/>
                 <EditText
                     android:id="@+id/security_code"
@@ -98,7 +100,8 @@
                     android:textSize="18sp"
                     android:textColor="@color/logo"
                     android:textColorHint="@color/logo"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:autofillHints="" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -126,6 +129,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
+            android:hint="@string/name_as_it_is_written_on_the_card"
             android:textSize="18sp"
             android:layout_weight="2"/>
     </LinearLayout>
@@ -143,7 +147,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@color/wine"
-            android:text="Zip Code:"
+            android:text="@string/zip_code"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_weight="1"/>
@@ -152,8 +156,7 @@
             android:id="@+id/zip_code"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:maxLength="5"
+            android:maxLength="6"
             android:textSize="18sp"
             android:layout_weight="2"/>
     </LinearLayout>
