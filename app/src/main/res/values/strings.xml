@@ -172,6 +172,8 @@
     <string name="added_to_cart">Added to Cart</string>
     <string name="please_select_an_expiration_month">Please select an expiration month</string>
     <string name="please_select_an_expiration_year">Please select an expiration year</string>
+    <string name="order_created_successfully">Order created successfully.</string>
+    <string name="error_creating_order">Error creating order.</string>
     <string-array name="months">
         <item>Month</item>
         <item>January</item>

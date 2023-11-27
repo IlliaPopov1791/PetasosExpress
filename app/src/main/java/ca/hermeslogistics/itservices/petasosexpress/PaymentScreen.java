@@ -17,8 +17,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -116,21 +114,32 @@ public class PaymentScreen extends Fragment {
                     double total = Double.parseDouble(numericTotalAmount);
                     orderDocument.put("total", total);
 
-                    //Creating an order
-                    String documentId = UUID.randomUUID().toString().replace("-", "").substring(0, 16);
-                    db.collection("orderRecord").document(documentId)
-                            .set(orderDocument)
-                            .addOnSuccessListener(aVoid -> Toast.makeText(getContext(), "Order created successfully.", Toast.LENGTH_SHORT).show())
-                            .addOnFailureListener(e -> Toast.makeText(getContext(), "Error creating order.", Toast.LENGTH_SHORT).show());
-
-                    //Finding and set the delivery reference
-                    setDeliveryReference(documentId);
+                    submitOrder(orderDocument);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
     }
+
+    private void submitOrder(Map<String, Object> orderDocument) {
+        String documentId = UUID.randomUUID().toString().replace("-", "").substring(0, 16);
+        db.collection("orderRecord").document(documentId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult().exists()) {
+                //If exists retry
+                submitOrder(orderDocument);
+            } else {
+                //Submit a new order
+                db.collection("orderRecord").document(documentId)
+                        .set(orderDocument)
+                        .addOnSuccessListener(aVoid -> DisplayToast(getString(R.string.order_created_successfully)))
+                        .addOnFailureListener(e -> DisplayToast(getString(R.string.error_creating_order)));
+
+                setDeliveryReference(documentId);
+            }
+        });
+    }
+
 
     private void setDeliveryReference(String orderDocumentId) {
         db.collection("PetasosRecord")

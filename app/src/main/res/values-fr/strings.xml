@@ -172,6 +172,8 @@
     <string name="added_to_cart">Ajouté au panier</string>
     <string name="please_select_an_expiration_month">Veuillez sélectionner un mois d\'expiration</string>
     <string name="please_select_an_expiration_year">Veuillez sélectionner une année d\'expiration</string>
+    <string name="order_created_successfully">Commande créée avec succès.</string>
+    <string name="error_creating_order">Erreur lors de la création de la commande.</string>
     <string-array name="months">
         <item>Mois</item>
         <item>January</item>
