@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class FeedbackScreen extends Fragment {
     private EditText editTextComment;
     private RatingBar ratingBar;
     private Button buttonSubmit;
+    private ProgressBar feedbackProgressBar;
     private static final String PREFS_NAME = "FeedbackPrefs";
     private static final String LAST_FEEDBACK_KEY = "lastFeedbackTime";
 
@@ -64,6 +66,7 @@ public class FeedbackScreen extends Fragment {
         editTextComment = view.findViewById(R.id.editTextComment);
         ratingBar = view.findViewById(R.id.ratingBar);
         buttonSubmit = view.findViewById(R.id.buttonSubmit);
+        feedbackProgressBar = view.findViewById(R.id.feedbackProgressBar);
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +133,9 @@ public class FeedbackScreen extends Fragment {
         // Inform user that feedback is being processed
         DisplayToast("Processing feedback...");
 
+        // Call the function to update the progress bar
+        updateProgressBar(feedbackProgressBar, 4800, 400);
+
         // Handler to introduce delay
         new Handler().postDelayed(() -> {
             // Save current time as last feedback time
@@ -159,5 +165,22 @@ public class FeedbackScreen extends Fragment {
 
     private void DisplayToast(String msg) {
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+    private void updateProgressBar(ProgressBar progressBar, int delayMillis, int maxProgress) {
+        int interval = delayMillis / maxProgress; // Calculate the interval for updating the progress
+
+        new Handler().postDelayed(new Runnable() {
+            int progress = 0;
+
+            @Override
+            public void run() {
+                if (progress <= maxProgress) {
+                    progressBar.setProgress(progress); // Update the progress bar
+                    progress++;
+                    new Handler().postDelayed(this, interval); // Schedule the next update
+                }
+            }
+        }, interval); // Start the updates
     }
 }
