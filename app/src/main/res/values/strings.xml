@@ -206,4 +206,7 @@
         <item>33</item>
         <item>34</item>
     </string-array>
+    <string name="queue_alert_title">Order in Queue</string>
+    <string name="queue_alert_message">We\'re experiencing an unusual amount of orders right now. Your order is in a queue and a delivery robot will be assigned to it as soon as possible.</string>
+    <string name="ok">OK</string>
 </resources>

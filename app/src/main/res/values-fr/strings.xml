@@ -206,4 +206,7 @@
         <item>33</item>
         <item>34</item>
     </string-array>
+    <string name="queue_alert_title">Ordre dans la file d\'attente</string>
+    <string name="queue_alert_message">Nous recevons actuellement un nombre inhabituel de commandes. Votre commande est en file d\'attente et un robot livreur lui sera affecté dans les plus brefs délais.</string>
+    <string name="ok">OK</string>
 </resources>

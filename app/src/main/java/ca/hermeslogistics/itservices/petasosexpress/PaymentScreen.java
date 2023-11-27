@@ -1,5 +1,6 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -147,13 +148,33 @@ public class PaymentScreen extends Fragment {
                 .limit(1)
                 .get()
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                        DocumentReference deliveryRef = task.getResult().getDocuments().get(0).getReference();
-                        db.collection("orderRecord").document(orderDocumentId)
-                                .update("delivery", deliveryRef);
+                    if (task.isSuccessful()) {
+                        if (!task.getResult().isEmpty()) {
+                            DocumentReference deliveryRef = task.getResult().getDocuments().get(0).getReference();
+                            db.collection("orderRecord").document(orderDocumentId)
+                                    .update("delivery", deliveryRef)
+                                    .addOnSuccessListener(aVoid -> {
+                                        deliveryRef.update("status", "delivery");
+                                    });
+                        } else {
+                            //No 'ready' Petasos found
+                            db.collection("orderRecord").document(orderDocumentId)
+                                    .update("status", "in a queue");
+                            showQueueAlertDialog();
+                        }
                     }
                 });
     }
+
+    private void showQueueAlertDialog() {
+        new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.queue_alert_title))
+                .setMessage(getString(R.string.queue_alert_message))
+                .setPositiveButton(getString(R.string.ok), null)
+                .setIcon(R.drawable.ic_cart_foreground)
+                .show();
+    }
+
 
     private boolean validatePaymentDetails(EditText creditCardNumber, EditText securityCode, EditText cardHolderName, EditText zipCode) {
         if (creditCardNumber.getText().toString().length() != 16) {
