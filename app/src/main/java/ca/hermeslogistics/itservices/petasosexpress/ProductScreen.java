@@ -145,7 +145,7 @@ public class ProductScreen extends Fragment {
             sharedPrefs.edit().putString("cart", cartArray.toString()).apply();
             //Snackbar
             View view = getActivity().findViewById(android.R.id.content);
-            Snackbar.make(view, "Added to Cart", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(view, getString(R.string.added_to_cart), Snackbar.LENGTH_SHORT).show();
 
         } catch (Exception e) {
             e.printStackTrace();

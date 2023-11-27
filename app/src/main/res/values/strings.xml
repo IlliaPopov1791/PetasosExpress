@@ -169,6 +169,9 @@
     <string name="card_holder_name_is_required">Card holder name is required</string>
     <string name="zip_code_must_be_6_characters">Zip code must be 6 characters</string>
     <string name="name_as_it_is_written_on_the_card">Name as it is written on the card</string>
+    <string name="added_to_cart">Added to Cart</string>
+    <string name="please_select_an_expiration_month">Please select an expiration month</string>
+    <string name="please_select_an_expiration_year">Please select an expiration year</string>
     <string-array name="months">
         <item>Month</item>
         <item>January</item>

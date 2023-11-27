@@ -169,6 +169,9 @@
     <string name="card_holder_name_is_required">Le nom du titulaire de la carte est requis</string>
     <string name="zip_code_must_be_6_characters">Le code postal doit comporter 6 caractères</string>
     <string name="name_as_it_is_written_on_the_card">Nom tel qu\'il est écrit sur la carte</string>
+    <string name="added_to_cart">Ajouté au panier</string>
+    <string name="please_select_an_expiration_month">Veuillez sélectionner un mois d\'expiration</string>
+    <string name="please_select_an_expiration_year">Veuillez sélectionner une année d\'expiration</string>
     <string-array name="months">
         <item>Mois</item>
         <item>January</item>

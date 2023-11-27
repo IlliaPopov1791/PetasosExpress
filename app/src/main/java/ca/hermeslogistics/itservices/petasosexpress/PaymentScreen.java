@@ -1,5 +1,7 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,8 +13,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 /*
  * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
@@ -21,10 +37,18 @@ import java.util.List;
  */
 public class PaymentScreen extends Fragment {
     private Spinner monthSpinner, yearSpinner;
+    private FirebaseFirestore db;
+    private FirebaseAuth auth;
+    private String totalAmount;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.payment_screen, container, false);
 
+        //Firebase components
+        db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+
+        //UI components
         TextView amountTextView = view.findViewById(R.id.amount);
         EditText creditCardNumber = view.findViewById(R.id.credit_card_number);
         EditText securityCode = view.findViewById(R.id.security_code);
@@ -46,20 +70,80 @@ public class PaymentScreen extends Fragment {
         yearSpinner.setAdapter(yearAdapter);
 
         if (getArguments() != null) {
-            String totalAmount = getArguments().getString("totalAmount", "0.00");
-            amountTextView.setText(totalAmount);
+            this.totalAmount = getArguments().getString("totalAmount", "0.00");
+            amountTextView.setText(this.totalAmount);
         }
 
         payButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (validatePaymentDetails(creditCardNumber, securityCode, cardHolderName, zipCode)) {
-
+                    createOrder(zipCode.getText().toString(), totalAmount);
                 }
             }
         });
-
         return view;
+    }
+
+    private void createOrder(String address, String totalAmount) {
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser != null) {
+            String userEmail = currentUser.getEmail();
+            if (userEmail != null) {
+                //Fetch cart items
+                SharedPreferences sharedPrefs = getActivity().getSharedPreferences("CartPrefs", Context.MODE_PRIVATE);
+                String cartJson = sharedPrefs.getString("cart", "[]");
+
+                try {
+                    JSONArray cartArray = new JSONArray(cartJson);
+                    Map<String, Object> orderMap = new HashMap<>();
+                    for (int i = 0; i < cartArray.length(); i++) {
+                        JSONObject cartItem = cartArray.getJSONObject(i);
+                        int productId = cartItem.getInt("id");
+                        int quantity = cartItem.getInt("quantity");
+                        orderMap.put(String.valueOf(productId), quantity);
+                    }
+
+                    //Prepare order document
+                    Map<String, Object> orderDocument = new HashMap<>();
+                    orderDocument.put("Address", address);
+                    orderDocument.put("User", userEmail);
+                    orderDocument.put("order", orderMap);
+                    orderDocument.put("status", "ordered");
+                    orderDocument.put("timestamp", new Date());
+
+                    String numericTotalAmount = totalAmount.replaceAll("[^\\d.]", "");
+                    double total = Double.parseDouble(numericTotalAmount);
+                    orderDocument.put("total", total);
+
+                    //Creating an order
+                    String documentId = UUID.randomUUID().toString().replace("-", "").substring(0, 16);
+                    db.collection("orderRecord").document(documentId)
+                            .set(orderDocument)
+                            .addOnSuccessListener(aVoid -> Toast.makeText(getContext(), "Order created successfully.", Toast.LENGTH_SHORT).show())
+                            .addOnFailureListener(e -> Toast.makeText(getContext(), "Error creating order.", Toast.LENGTH_SHORT).show());
+
+                    //Finding and set the delivery reference
+                    setDeliveryReference(documentId);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void setDeliveryReference(String orderDocumentId) {
+        db.collection("PetasosRecord")
+                .whereEqualTo("status", "ready")
+                .limit(1)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                        DocumentReference deliveryRef = task.getResult().getDocuments().get(0).getReference();
+                        db.collection("orderRecord").document(orderDocumentId)
+                                .update("delivery", deliveryRef);
+                    }
+                });
     }
 
     private boolean validatePaymentDetails(EditText creditCardNumber, EditText securityCode, EditText cardHolderName, EditText zipCode) {
@@ -68,12 +152,12 @@ public class PaymentScreen extends Fragment {
             return false;
         }
         if (monthSpinner.getSelectedItemPosition() == 0) {
-            Toast.makeText(getContext(), "Please select an expiration month", Toast.LENGTH_LONG).show();
+            DisplayToast(getString(R.string.please_select_an_expiration_month));
             return false;
         }
 
         if (yearSpinner.getSelectedItemPosition() == 0) {
-            Toast.makeText(getContext(), "Please select an expiration year", Toast.LENGTH_LONG).show();
+            DisplayToast(getString(R.string.please_select_an_expiration_year));
             return false;
         }
 
