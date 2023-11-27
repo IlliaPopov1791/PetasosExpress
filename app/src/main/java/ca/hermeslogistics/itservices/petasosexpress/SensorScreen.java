@@ -66,6 +66,7 @@ public class SensorScreen extends Fragment {
     // Motor Sensor
     private ProgressBar motorProgressBar;
     private TextView textViewMotorSpeed;
+    private String AssignedPetasos = "Petasos000";
     private static final int NOTIFICATION_PERMISSION_REQUEST_CODE = 100;
 
     public SensorScreen() {
@@ -87,16 +88,7 @@ public class SensorScreen extends Fragment {
         }
 
         // Initialize components for each sensor
-        initializeDistanceSensor(view);
-        initializeBalanceSensor(view);
-        initializeProximitySensor(view);
-        initializeMotorSensor(view);
-
-        // Set up Firestore document references and listeners for each sensor
-        setupBalanceSensor();
-        setupMotorSensor();
-        setupRangeSensors();
-
+        initializeSensors(view);
 
         return view;
     }
@@ -127,13 +119,29 @@ public class SensorScreen extends Fragment {
         textViewMotorSpeed = view.findViewById(R.id.textViewMotorSpeed);
     }
 
+    private void initializeSensors(View view){
+        // Initialize components
+        initializeDistanceSensor(view);
+        initializeBalanceSensor(view);
+        initializeProximitySensor(view);
+        initializeMotorSensor(view);
 
-    private void setupBalanceSensor() {
-        DocumentReference docRef = db.collection("PetasosRecord")
-                .document("Toronto")
-                .collection("Petasos001")
-                .document("Balance");
-        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        // Set up Firestore document references and listeners for each sensor
+        String sensorDocumentPath = "PetasosRecord/" + AssignedPetasos;
+        setupSensorListeners(sensorDocumentPath);
+    }
+
+    private void setupSensorListeners(String sensorDocumentPath) {
+        DocumentReference sensorDocRef = db.document(sensorDocumentPath);
+
+        // Set up listeners for each sensor
+        setupBalanceSensor(sensorDocRef);
+        setupMotorSensor(sensorDocRef);
+        setupRangeSensors(sensorDocRef);
+    }
+
+    private void setupBalanceSensor(DocumentReference sensorDocRef) {
+        sensorDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
                 if (e != null) {
@@ -161,12 +169,8 @@ public class SensorScreen extends Fragment {
     }
 
 
-    private void setupMotorSensor() {
-        DocumentReference motorRef = db.collection("PetasosRecord")
-                .document("Toronto")
-                .collection("Petasos001")
-                .document("Motors");
-        motorRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+    private void setupMotorSensor(DocumentReference sensorDocRef) {
+        sensorDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
                 if (e != null) {
@@ -192,19 +196,8 @@ public class SensorScreen extends Fragment {
     }
 
     //distance and prox
-    private void setupRangeSensors() {
-        // Document references for both sensors
-        DocumentReference distanceDocRef = db.collection("PetasosRecord")
-                .document("Toronto")
-                .collection("Petasos001")
-                .document("Distance");
-        DocumentReference proximityDocRef = db.collection("PetasosRecord")
-                .document("Toronto")
-                .collection("Petasos001")
-                .document("Proximity");
-
-        // Listener for the Distance Sensor
-        distanceDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+    private void setupRangeSensors(DocumentReference sensorDocRef) {
+        sensorDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
                 if (e != null) {
@@ -228,7 +221,7 @@ public class SensorScreen extends Fragment {
         });
 
         // Listener for the Proximity Sensor
-        proximityDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        sensorDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
                 if (e != null) {
@@ -237,7 +230,7 @@ public class SensorScreen extends Fragment {
                 }
 
                 if ((snapshot != null && snapshot.exists() && isAdded())) {
-                    proximity = snapshot.getLong("Proximity");
+                    proximity = snapshot.getLong("proximity");
                     updateProximityUI();
                 } else {
                     txtProximity.setText(String.format(Locale.getDefault(), "%.2f m", distance));

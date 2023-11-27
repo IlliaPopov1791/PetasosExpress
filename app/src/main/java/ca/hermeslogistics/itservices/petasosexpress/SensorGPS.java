@@ -33,6 +33,7 @@ public class SensorGPS extends Fragment implements OnMapReadyCallback {
     private static final int MY_LOCATION_REQUEST_CODE = 1;
     private GoogleMap mMap;
     private Marker currentLocationMarker;
+    private String AssignedPetasos = "Petasos000";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,9 +60,7 @@ public class SensorGPS extends Fragment implements OnMapReadyCallback {
     private void listenForLocationUpdates() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference locationRef = db.collection("PetasosRecord")
-                .document("Toronto")
-                .collection("Petasos001")
-                .document("Coordinates");
+                .document(AssignedPetasos);
 
         // Listen for real-time updates
         locationRef.addSnapshotListener((snapshot, e) -> {
