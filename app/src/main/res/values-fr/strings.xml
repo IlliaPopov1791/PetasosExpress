@@ -208,6 +208,8 @@
     </string-array>
     <string name="queue_alert_title">Ordre dans la file d\'attente</string>
     <string name="queue_alert_message">Nous recevons actuellement un nombre inhabituel de commandes. Votre commande est en file d\'attente et un robot livreur lui sera affecté dans les plus brefs délais.</string>
+    <string name="no_order_alert_title">Il n\'y a aucune commande à suivre</string>
+    <string name="no_order_alert_message">Il n\'y a aucune commande à votre nom, donc aucun robot de livraison ne lui est attribué. Toutes les lectures du capteur sont dans leur état par défaut.</string>
     <string name="ok">OK</string>
     <string name="cart_empty_message">Votre panier est vide. Ajoutez des articles pour procéder au paiement.</string>
 </resources>

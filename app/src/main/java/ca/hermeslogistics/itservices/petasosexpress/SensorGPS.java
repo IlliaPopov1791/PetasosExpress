@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -25,16 +27,23 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.Timestamp;
+import java.util.Arrays;
 
 public class SensorGPS extends Fragment implements OnMapReadyCallback {
 
     private static final int MY_LOCATION_REQUEST_CODE = 1;
     private GoogleMap mMap;
     private Marker currentLocationMarker;
-    private String AssignedPetasos = "Petasos001";
+    private String AssignedPetasos = "Petasos000";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,6 +64,7 @@ public class SensorGPS extends Fragment implements OnMapReadyCallback {
                 || ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
         }
+        checkAssignedOrder();
         listenForLocationUpdates();
     }
 
@@ -121,13 +131,63 @@ public class SensorGPS extends Fragment implements OnMapReadyCallback {
         }
     }
 
-    private void showQueueAlertDialog(String status) {
-        if(status == "ready"){
+    private void checkAssignedOrder() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
 
+        if (currentUser != null) {
+            String userEmail = currentUser.getEmail();
+
+            Query orderedQuery = db.collection("orderRecord")
+                    .whereEqualTo("User", userEmail)
+                    .whereEqualTo("status", "ordered")
+                    .orderBy("timestamp", Query.Direction.ASCENDING)
+                    .limit(1); // Only fetch the oldest one
+
+            orderedQuery.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                    //Found the oldest 'ordered' order
+                    DocumentSnapshot orderedDocument = task.getResult().getDocuments().get(0);
+                    handleOrderedOrder(orderedDocument);
+                } else {
+                    Query inQueueQuery = db.collection("orderRecord")
+                            .whereEqualTo("User", userEmail)
+                            .whereEqualTo("status", "in a queue");
+
+                    inQueueQuery.get().addOnCompleteListener(queueTask -> {
+                        if (queueTask.isSuccessful() && !queueTask.getResult().isEmpty()) {
+                            showQueueAlertDialog();
+                        } else {
+                            //No orders found at all
+                            showNoOrderAlertDialog();
+                        }
+                    });
+                }
+            });
         }
+    }
+    private void handleOrderedOrder(DocumentSnapshot document) {
+        // Extract Petasos ID from the delivery reference
+        DocumentReference deliveryRef = (DocumentReference) document.get("delivery");
+        String petasosId = deliveryRef.getId();
+        AssignedPetasos = petasosId;
+        Toast.makeText(getContext(), "Tracking your oldest order", Toast.LENGTH_LONG).show();
+        listenForLocationUpdates();
+    }
+    private void showQueueAlertDialog() {
         new AlertDialog.Builder(getContext())
                 .setTitle(getString(R.string.queue_alert_title))
                 .setMessage(getString(R.string.queue_alert_message))
+                .setPositiveButton(getString(R.string.ok), null)
+                .setIcon(R.drawable.ic_cart_foreground)
+                .show();
+    }
+
+    private void showNoOrderAlertDialog() {
+        new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.no_order_alert_title))
+                .setMessage(getString(R.string.no_order_alert_message))
                 .setPositiveButton(getString(R.string.ok), null)
                 .setIcon(R.drawable.ic_cart_foreground)
                 .show();

@@ -208,6 +208,8 @@
     </string-array>
     <string name="queue_alert_title">Order in Queue</string>
     <string name="queue_alert_message">We\'re experiencing an unusual amount of orders right now. Your order is in a queue and a delivery robot will be assigned to it as soon as possible.</string>
+    <string name="no_order_alert_title">There is no order to track</string>
+    <string name="no_order_alert_message">There is no order on your name, so no delivery robot is assigned to it. All sensor readings are in their default state.</string>
     <string name="ok">OK</string>
     <string name="cart_empty_message">Your cart is empty. Add items to proceed to checkout.</string>
 </resources>
