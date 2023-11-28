@@ -116,6 +116,7 @@ public class PaymentScreen extends Fragment {
                     orderDocument.put("total", total);
 
                     submitOrder(orderDocument);
+                    clearCart(sharedPrefs);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -207,6 +208,11 @@ public class PaymentScreen extends Fragment {
         }
 
         return true;
+    }
+    private void clearCart(SharedPreferences sharedPrefs) {
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.putString("cart", "[]");
+        editor.apply();
     }
     private void DisplayToast(String msg) {
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
