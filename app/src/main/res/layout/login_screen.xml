@@ -16,7 +16,7 @@
 
     <ImageView
         android:layout_width="489dp"
-        android:layout_height="354dp"
+        android:layout_height="256dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="32dp"
         android:src="@mipmap/ic_logo_wine" />
@@ -61,6 +61,16 @@
         android:textColor="@color/white"
         android:layout_marginTop="16dp"
         />
+
+    <Button
+        android:id="@+id/buttonGoogleLogin"
+        android:layout_width="377dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_background"
+        android:drawableRight="@mipmap/ic_google_foreground"
+        android:text="@string/loginGoogle"
+        android:textColor="@color/wine" />
 
     <Button
         android:id="@+id/buttonSignUp"

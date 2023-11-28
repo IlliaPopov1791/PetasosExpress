@@ -40,7 +40,7 @@
         android:layout_width="233dp"
         android:layout_height="49dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="@string/enter_your_email_address"
         android:hint="@string/email"
         android:importantForAccessibility="yes"
@@ -63,7 +63,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/editTextPassword"
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
-        app:layout_constraintVertical_bias="0.28" />
+        app:layout_constraintVertical_bias="0.21" />
+
+    <Button
+        android:id="@+id/buttonGoogleLogin"
+        android:layout_width="245dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_background"
+        android:text="@string/loginGoogle"
+        android:textColor="@color/wine"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
 
     <Button
         android:id="@+id/buttonSignUp"
@@ -76,7 +88,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/editTextPassword"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
-        app:layout_constraintVertical_bias="0.166" />
+        app:layout_constraintVertical_bias="0.865" />
 
     <EditText
         android:id="@+id/editTextPassword"
