@@ -58,7 +58,6 @@ dependencies {
     // AndroidX Test libraries
     testImplementation("androidx.test:core:1.4.0") // Check for the latest version
     testImplementation("androidx.test.ext:junit:1.1.3") // Check for the latest version
-    testImplementation("androidx.fragment:fragment-testing:1.3.6") // Check for the latest version
 
     // Android Test Dependencies
     androidTestImplementation("androidx.test.ext:junit:1.1.5") //Latest update for test implementation cases.
