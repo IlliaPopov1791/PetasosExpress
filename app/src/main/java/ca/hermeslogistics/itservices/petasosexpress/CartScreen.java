@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONArray;
@@ -104,15 +105,22 @@ public class CartScreen extends Fragment {
 
     private void navigateToPaymentScreen() {
         String totalAmount = totalAmountTextView.getText().toString();
-        PaymentScreen paymentScreen = new PaymentScreen();
 
-        Bundle args = new Bundle();
-        args.putString("totalAmount", totalAmount);
-        paymentScreen.setArguments(args);
+        // Check if the total amount is $0.00
+        if (totalAmount.equals("$00.00")) {
+            View view = getActivity().findViewById(android.R.id.content);
+            Snackbar.make(view, getString(R.string.cart_empty_message), Snackbar.LENGTH_SHORT).show();
+        } else {
+            PaymentScreen paymentScreen = new PaymentScreen();
 
-        requireActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_frame_layout, paymentScreen)
-                .addToBackStack(null)
-                .commit();
+            Bundle args = new Bundle();
+            args.putString("totalAmount", totalAmount);
+            paymentScreen.setArguments(args);
+
+            requireActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.main_frame_layout, paymentScreen)
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 }

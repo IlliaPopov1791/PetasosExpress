@@ -14,11 +14,11 @@
 
     <ImageView
         android:id="@+id/logoImageView"
-        android:layout_width="174dp"
-        android:layout_height="155dp"
+        android:layout_width="236dp"
+        android:layout_height="185dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:src="@mipmap/ic_launcher"
+        android:src="@mipmap/ic_launcher_foreground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
