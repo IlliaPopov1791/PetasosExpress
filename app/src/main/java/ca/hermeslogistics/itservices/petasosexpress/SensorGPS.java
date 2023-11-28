@@ -5,6 +5,7 @@ package ca.hermeslogistics.itservices.petasosexpress;
  * Section: B
  */
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -33,7 +34,7 @@ public class SensorGPS extends Fragment implements OnMapReadyCallback {
     private static final int MY_LOCATION_REQUEST_CODE = 1;
     private GoogleMap mMap;
     private Marker currentLocationMarker;
-    private String AssignedPetasos = "Petasos000";
+    private String AssignedPetasos = "Petasos001";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -118,5 +119,17 @@ public class SensorGPS extends Fragment implements OnMapReadyCallback {
                 //No marker :(
             }
         }
+    }
+
+    private void showQueueAlertDialog(String status) {
+        if(status == "ready"){
+
+        }
+        new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.queue_alert_title))
+                .setMessage(getString(R.string.queue_alert_message))
+                .setPositiveButton(getString(R.string.ok), null)
+                .setIcon(R.drawable.ic_cart_foreground)
+                .show();
     }
 }
