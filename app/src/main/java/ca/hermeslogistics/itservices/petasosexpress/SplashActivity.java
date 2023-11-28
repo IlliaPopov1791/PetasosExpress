@@ -12,6 +12,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.GetTokenResult;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 /*
  * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
  * Student ID: n01421791, n01479878, n01442206, n01375348
@@ -43,9 +45,10 @@ public class SplashActivity extends AppCompatActivity {
         // Check if user is already logged in and "Remember Me" is true
         sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         boolean isRemembered = sharedPreferences.getBoolean("RememberMe", false);
 
-        if (currentUser != null && isRemembered) {
+        if (currentUser != null && isRemembered || account != null) {
             currentUser.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
                 public void onComplete(@NonNull Task<GetTokenResult> task) {
                     if (task.isSuccessful()) {
