@@ -40,4 +40,16 @@
         android:dividerHeight="2dp"
         android:padding="20dp" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_cart"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="@color/logo_saturated"
+        android:src="@drawable/ic_cart_foreground"
+        />
+
 </RelativeLayout>
