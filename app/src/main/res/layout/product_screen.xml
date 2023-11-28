@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="5dp"
     android:background="@color/logo"
     tools:context=".ProductScreen">
 
@@ -27,6 +26,7 @@
         android:textSize="26sp"
         android:textColor="@color/ceramic"
         android:textStyle="bold"
+        android:layout_below="@id/product_image"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="24dp"/>
 
@@ -38,6 +38,7 @@
         android:textSize="26sp"
         android:textColor="@color/wine"
         android:textStyle="bold"
+        android:layout_below="@id/product_name"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="24dp"/>
 
@@ -49,23 +50,26 @@
         android:text="@string/amount"
         android:textColor="@color/wine"
         android:textSize="24sp"
+        android:layout_below="@id/product_producer"
         android:layout_marginBottom="24dp"/>
 
-
     <!-- Quantity Selector -->
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/quantity_selector"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_below="@id/product_price"
         android:layout_marginBottom="24dp">
 
         <TextView
+            android:id="@+id/quantity_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/wine"
             android:text="@string/quantity"
             android:textSize="24sp"
-            android:layout_gravity="center_vertical"/>
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
 
         <Button
             android:id="@+id/decrease_button"
@@ -73,6 +77,7 @@
             android:layout_height="40dp"
             android:textColor="@color/wine"
             android:textSize="28sp"
+            android:layout_toEndOf="@id/quantity_text"
             android:layout_marginStart="@dimen/spacing_huge"
             android:background="@drawable/button_background"
             android:text="@string/minus_long" />
@@ -84,8 +89,9 @@
             android:textColor="@color/wine"
             android:text="@string/number"
             android:textSize="24sp"
+            android:layout_toEndOf="@id/decrease_button"
             android:layout_marginStart="@dimen/spacing_medium"
-            android:layout_gravity="center_vertical"/>
+            android:layout_centerVertical="true"/>
 
         <Button
             android:id="@+id/increase_button"
@@ -94,16 +100,30 @@
             android:textColor="@color/wine"
             android:textSize="28sp"
             android:background="@drawable/button_background"
+            android:layout_toEndOf="@id/quantity"
             android:layout_marginStart="@dimen/spacing_medium"
             android:text="@string/plus" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <Button
         android:id="@+id/cart_button"
         android:layout_width="match_parent"
         android:layout_height="71dp"
+        android:layout_below="@id/quantity_selector"
         android:layout_marginTop="38dp"
         android:background="@drawable/button_background"
         android:text="@string/add_to_your_cart" />
-</LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_cart"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/logo_saturated"
+        android:src="@drawable/ic_cart_foreground" />
+
+</RelativeLayout>

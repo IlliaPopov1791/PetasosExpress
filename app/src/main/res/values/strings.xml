@@ -3,6 +3,7 @@
 <!-- Dylan Ashton | ID: n01442206 Section B -->
 <!-- Ahmad Aljawish | ID: n01375348 Section B -->
 <resources>
+    <string name="default_web_client_id">158343388699-2hte71l6b7mjtu9dlrgsi6muko9nf26p.apps.googleusercontent.com</string>
     <string name="app_name">PetasosExpress</string>
     <string name="app_describe">Effortless, autonomous deliveries at your fingertips.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -54,6 +55,7 @@
     <string name="motor_speed_label">Motor Speed</string>
     <string name="motor_speed_value_placeholder">%s km/h</string>
     <string name="login">Login</string>
+    <string name="loginGoogle">Login with Google</string>
     <string name="enter_your_password">Enter your password</string>
     <string name="password">Password</string>
     <string name="enter_your_gmail_address">Enter your Gmail address</string>

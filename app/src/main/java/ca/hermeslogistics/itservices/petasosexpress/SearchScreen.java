@@ -19,6 +19,7 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -84,6 +85,14 @@ public class SearchScreen extends Fragment {
         searchResultsListView.setOnItemClickListener((adapterView, view1, position, id) -> {
             Product selectedProduct = productAdapter.getItem(position);
             navigateToProductScreen(selectedProduct);
+        });
+
+        FloatingActionButton fabCart = view.findViewById(R.id.fab_cart);
+        fabCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadCartFragment();
+            }
         });
 
         return view;
@@ -152,6 +161,13 @@ public class SearchScreen extends Fragment {
         requireActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_frame_layout, productScreen)
                 .addToBackStack(null)
+                .commit();
+    }
+    private void loadCartFragment() {
+        CartScreen cartScreenFragment = new CartScreen();
+        getParentFragmentManager().beginTransaction()
+                .replace(R.id.main_frame_layout, cartScreenFragment)
+                .addToBackStack(null) // Optional: adds the transaction to the back stack
                 .commit();
     }
 }
