@@ -47,6 +47,7 @@ dependencies {
     implementation ("com.firebaseui:firebase-ui-storage:8.0.0")
     implementation("com.google.firebase:firebase-auth:22.1.2")
     implementation("com.google.firebase:firebase-firestore:24.0.0")
+    implementation ("com.google.android.gms:play-services-auth:20.7.0")
 
     // Unit Test Dependencies
     testImplementation("junit:junit:4.13.2")
