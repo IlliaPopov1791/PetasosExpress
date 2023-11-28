@@ -431,9 +431,11 @@ public class SensorScreen extends Fragment {
 
                     inQueueQuery.get().addOnCompleteListener(queueTask -> {
                         if (queueTask.isSuccessful() && !queueTask.getResult().isEmpty()) {
+                            initializeSensors(view);
                             showQueueAlertDialog();
                         } else {
                             //No orders found at all
+                            initializeSensors(view);
                             showNoOrderAlertDialog();
                         }
                     });
