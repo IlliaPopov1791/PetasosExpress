@@ -1,6 +1,7 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.SharedPreferences;
@@ -24,11 +25,14 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Query;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -87,8 +91,9 @@ public class SensorScreen extends Fragment {
             view = inflater.inflate(R.layout.sensor_screen_landscape, container, false);
         }
 
+        checkAssignedOrder(view);
         // Initialize components for each sensor
-        initializeSensors(view);
+
 
         return view;
     }
@@ -398,5 +403,67 @@ public class SensorScreen extends Fragment {
                 Toast.makeText(getContext(), "Permissions Denied", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void checkAssignedOrder(View view) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+
+        if (currentUser != null) {
+            String userEmail = currentUser.getEmail();
+
+            Query orderedQuery = db.collection("orderRecord")
+                    .whereEqualTo("User", userEmail)
+                    .whereEqualTo("status", "ordered")
+                    .orderBy("timestamp", Query.Direction.ASCENDING)
+                    .limit(1); // Only fetch the oldest one
+
+            orderedQuery.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                    //Found the oldest 'ordered' order
+                    DocumentSnapshot orderedDocument = task.getResult().getDocuments().get(0);
+                    handleOrderedOrder(orderedDocument, view);
+                } else {
+                    Query inQueueQuery = db.collection("orderRecord")
+                            .whereEqualTo("User", userEmail)
+                            .whereEqualTo("status", "in a queue");
+
+                    inQueueQuery.get().addOnCompleteListener(queueTask -> {
+                        if (queueTask.isSuccessful() && !queueTask.getResult().isEmpty()) {
+                            showQueueAlertDialog();
+                        } else {
+                            //No orders found at all
+                            showNoOrderAlertDialog();
+                        }
+                    });
+                }
+            });
+        }
+    }
+    private void handleOrderedOrder(DocumentSnapshot document,View view) {
+        // Extract Petasos ID from the delivery reference
+        DocumentReference deliveryRef = (DocumentReference) document.get("delivery");
+        String petasosId = deliveryRef.getId();
+        AssignedPetasos = petasosId;
+        Toast.makeText(getContext(), "Tracking your oldest order", Toast.LENGTH_LONG).show();
+        initializeSensors(view);
+    }
+    private void showQueueAlertDialog() {
+        new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.queue_alert_title))
+                .setMessage(getString(R.string.queue_alert_message))
+                .setPositiveButton(getString(R.string.ok), null)
+                .setIcon(R.drawable.ic_cart_foreground)
+                .show();
+    }
+
+    private void showNoOrderAlertDialog() {
+        new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.no_order_alert_title))
+                .setMessage(getString(R.string.no_order_alert_message))
+                .setPositiveButton(getString(R.string.ok), null)
+                .setIcon(R.drawable.ic_cart_foreground)
+                .show();
     }
 }
