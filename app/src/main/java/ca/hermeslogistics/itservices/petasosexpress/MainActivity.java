@@ -89,6 +89,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onDrawerStateChanged(int newState) {
             }
         });
+
+
     }
     @Override
     public void onBackPressed() {

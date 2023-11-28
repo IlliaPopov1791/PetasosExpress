@@ -17,6 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class Home extends Fragment {
 
     private EditText searchEditText;
@@ -40,6 +42,8 @@ public class Home extends Fragment {
         } else {
             view = inflater.inflate(R.layout.fragment_home_landscape, container, false);
         }
+
+
 
         // Initialize UI elements
         searchEditText = view.findViewById(R.id.searchEditText);
@@ -95,6 +99,14 @@ public class Home extends Fragment {
             handleSearch();
         });
 
+        FloatingActionButton fabCart = view.findViewById(R.id.fab_cart);
+        fabCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadCartFragment();
+            }
+        });
+
         return view;
     }
 
@@ -120,6 +132,13 @@ public class Home extends Fragment {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
+    private void loadCartFragment() {
+        CartScreen cartScreenFragment = new CartScreen();
+        getParentFragmentManager().beginTransaction()
+                .replace(R.id.main_frame_layout, cartScreenFragment)
+                .addToBackStack(null) // Optional: adds the transaction to the back stack
+                .commit();
+    }
 }
 
 

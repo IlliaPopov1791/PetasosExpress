@@ -43,7 +43,7 @@
         android:layout_height="52dp"
         android:layout_gravity="center"
         android:indeterminate="false"
-        android:max="200"
+        android:max="400"
         android:progress="1"
         android:progressDrawable="@drawable/circular_progress_bar"
         app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
