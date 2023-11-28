@@ -119,4 +119,7 @@ public class Home extends Fragment {
         String message = getString(R.string.searching_for, searchQuery);
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
+
 }
+
+
