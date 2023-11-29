@@ -1,25 +1,29 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-
+import org.robolectric.shadows.ShadowToast;
 
 
 import android.content.SharedPreferences;
 import android.widget.EditText;
 import android.widget.ToggleButton;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowToast;
-
-import static org.junit.Assert.*;
-
 import androidx.fragment.app.testing.FragmentScenario;
+import androidx.test.core.app.ApplicationProvider;
 
 
 @Config(sdk = {28})
