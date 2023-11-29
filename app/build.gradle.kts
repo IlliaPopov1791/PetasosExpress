@@ -63,5 +63,9 @@ dependencies {
 
     // Android Test Dependencies
     androidTestImplementation("androidx.test.ext:junit:1.1.5") //Latest update for test implementation cases.
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    // Espresso dependencies for UI testing
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation ("androidx.test:runner:1.4.0")
+    androidTestImplementation ("androidx.test:rules:1.4.0")
 }
