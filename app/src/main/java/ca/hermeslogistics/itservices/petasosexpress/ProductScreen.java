@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -91,6 +92,14 @@ public class ProductScreen extends Fragment {
             }
         });
 
+        FloatingActionButton fabCart = view.findViewById(R.id.fab_cart);
+        fabCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadCartFragment();
+            }
+        });
+
         return view;
     }
 
@@ -150,5 +159,13 @@ public class ProductScreen extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void loadCartFragment() {
+        CartScreen cartScreenFragment = new CartScreen();
+        getParentFragmentManager().beginTransaction()
+                .replace(R.id.main_frame_layout, cartScreenFragment)
+                .addToBackStack(null) // Optional: adds the transaction to the back stack
+                .commit();
     }
 }
