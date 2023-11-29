@@ -21,8 +21,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Home extends Fragment {
 
-    private EditText searchEditText;
-    private SharedViewModel sharedViewModel;
+    EditText searchEditText;
+    SharedViewModel sharedViewModel;
 
     public Home() {
         // Required empty public constructor
@@ -111,7 +111,7 @@ public class Home extends Fragment {
     }
 
 
-    private void handleSearch() {
+    void handleSearch() {
         String searchQuery = searchEditText.getText().toString();
         sharedViewModel.setSearchQuery(searchQuery);
 
@@ -132,7 +132,7 @@ public class Home extends Fragment {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
-    private void loadCartFragment() {
+    void loadCartFragment() {
         CartScreen cartScreenFragment = new CartScreen();
         getParentFragmentManager().beginTransaction()
                 .replace(R.id.main_frame_layout, cartScreenFragment)
