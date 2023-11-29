@@ -50,9 +50,7 @@ public class HomeTest {
         Espresso.onView(withId(R.id.foodButton)).perform(ViewActions.click());
         Espresso.onView(withId(R.id.searchEditText)).check(matches(withText(R.string.food_1)));
     }
-
 }
-
  */
 
 
