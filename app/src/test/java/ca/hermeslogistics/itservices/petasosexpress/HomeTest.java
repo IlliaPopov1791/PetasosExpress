@@ -50,6 +50,27 @@ public class HomeTest {
         Espresso.onView(withId(R.id.foodButton)).perform(ViewActions.click());
         Espresso.onView(withId(R.id.searchEditText)).check(matches(withText(R.string.food_1)));
     }
+
+    @Test
+    public void testElectronicsButton() {
+        //Espresso test code for electronicsButton
+        Espresso.onView(withId(R.id.electronicsButton)).perform(ViewActions.click());
+        Espresso.onView(withId(R.id.searchEditText)).check(matches(withText(R.string.technology_1)));
+    }
+
+    @Test
+    public void testMedicalButton() {
+        //Espresso test code for medicalButton
+        Espresso.onView(withId(R.id.medicalButton)).perform(ViewActions.click());
+        Espresso.onView(withId(R.id.searchEditText)).check(matches(withText(R.string.medicine)));
+    }
+
+    @Test
+    public void testOtherButton() {
+        //Espresso test code for otherButton
+        Espresso.onView(withId(R.id.otherButton)).perform(ViewActions.click());
+        Espresso.onView(withId(R.id.searchEditText)).check(matches(withText(R.string.other)));
+    }
 }
  */
 
