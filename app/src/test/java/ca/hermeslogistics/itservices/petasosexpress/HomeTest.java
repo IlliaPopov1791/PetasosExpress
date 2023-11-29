@@ -71,6 +71,21 @@ public class HomeTest {
         Espresso.onView(withId(R.id.otherButton)).perform(ViewActions.click());
         Espresso.onView(withId(R.id.searchEditText)).check(matches(withText(R.string.other)));
     }
+
+    @Test
+    public void testHandleSearch() {
+    // Espresso test code for handling search
+    Espresso.onView(withId(R.id.searchEditText))
+            .perform(ViewActions.typeText("Test Search Query"))
+            .perform(ViewActions.pressKey(KeyEvent.KEYCODE_ENTER));
+    }
+
+
+    @Test
+    public void testLoadCartFragment() {
+    // Espresso test code for loading cart fragment
+    Espresso.onView(withId(R.id.cartButton)).perform(ViewActions.click());
+    }
 }
  */
 
