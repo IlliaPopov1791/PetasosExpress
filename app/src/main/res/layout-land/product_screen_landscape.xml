@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:background="@color/logo"
+    tools:context=".ProductScreen">
+
+    <!-- Product Image -->
+    <ImageView
+        android:id="@+id/product_image"
+        android:layout_width="400dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/product_placeholder"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/product_image"/>
+
+    <!-- Scrollable Product Details Container -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@id/product_image">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Product Name -->
+            <TextView
+                android:id="@+id/product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_name"
+                android:textSize="26sp"
+                android:textColor="@color/ceramic"
+                android:textStyle="bold"
+                android:layout_marginBottom="24dp"/>
+
+            <!-- Product Producer -->
+            <TextView
+                android:id="@+id/product_producer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/producer"
+                android:textSize="20sp"
+                android:textColor="@color/wine"
+                android:textStyle="bold"
+                android:layout_marginBottom="24dp"/>
+
+            <!-- Product Price -->
+            <TextView
+                android:id="@+id/product_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/amount"
+                android:textColor="@color/wine"
+                android:textSize="22sp"
+                android:layout_marginBottom="24dp"/>
+
+            <!-- Quantity Selector -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp">
+
+                <!-- Quantity Text -->
+                <TextView
+                    android:id="@+id/quantity_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/quantity"
+                    android:textSize="20sp"
+                    android:textColor="@color/wine"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"/>
+
+                <!-- Decrease Button -->
+                <Button
+                    android:id="@+id/decrease_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="@string/minus_long"
+                    android:textSize="28sp"
+                    android:textColor="@color/wine"
+                    android:layout_toEndOf="@id/quantity_text"
+                    android:background="@drawable/button_background"
+                    android:layout_marginStart="10dp"/>
+
+                <!-- Quantity Value -->
+                <TextView
+                    android:id="@+id/quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/number"
+                    android:textSize="22sp"
+                    android:textColor="@color/wine"
+                    android:layout_toEndOf="@id/decrease_button"
+                    android:layout_marginStart="10dp"
+                    android:layout_centerVertical="true"/>
+
+                <!-- Increase Button -->
+                <Button
+                    android:id="@+id/increase_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="@string/plus"
+                    android:textSize="28sp"
+                    android:textColor="@color/wine"
+                    android:background="@drawable/button_background"
+                    android:layout_toEndOf="@id/quantity"
+                    android:layout_marginStart="10dp"/>
+
+            </RelativeLayout>
+
+            <!-- Add to Cart Button -->
+            <Button
+                android:id="@+id/cart_button"
+                android:layout_width="match_parent"
+                android:layout_height="71dp"
+                android:text="@string/add_to_your_cart"
+                android:background="@drawable/button_background"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Floating Action Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_cart"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/logo_saturated"
+        android:src="@drawable/ic_cart_foreground"/>
+
+</RelativeLayout>
