@@ -45,7 +45,12 @@ public class HomeTest {
         onView(withId(R.id.searchEditText)).check(matches(withText(R.string.medicine)));
         onView(withId(R.id.search_list)).check(matches(isDisplayed()));
     }
-
+    @Test
+    public void testOtherButton() {
+        onView(withId(R.id.otherButton)).perform(click());
+        onView(withId(R.id.searchEditText)).check(matches(withText(R.string.other)));
+        onView(withId(R.id.search_list)).check(matches(isDisplayed()));
+    }
     @Test
     public void testFabCartButton() {
         onView(withId(R.id.fab_cart)).perform(click());
