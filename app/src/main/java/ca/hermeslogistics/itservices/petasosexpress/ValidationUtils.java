@@ -26,4 +26,7 @@ public class ValidationUtils {
     public static boolean isValidComment(String comment) {
         return comment != null && !comment.trim().isEmpty();
     }
+    public static boolean isValidName(String name) {
+        return name != null && !name.trim().isEmpty();
+    }
 }
