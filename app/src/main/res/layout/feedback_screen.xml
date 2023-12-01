@@ -98,13 +98,15 @@
         android:layout_width="50dp"
         android:layout_height="52dp"
         android:layout_gravity="center"
+        android:layout_marginStart="20dp"
         android:indeterminate="false"
         android:max="400"
         android:progress="1"
         android:progressDrawable="@drawable/circular_progress_bar"
         app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
         app:layout_constraintStart_toEndOf="@+id/ratingBar"
-        app:layout_constraintTop_toTopOf="@+id/ratingBar" />
+        app:layout_constraintTop_toTopOf="@+id/ratingBar"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/myImageView"
