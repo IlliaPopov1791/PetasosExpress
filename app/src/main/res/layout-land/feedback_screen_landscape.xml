@@ -27,14 +27,14 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="4dp"
         android:numStars="5"
-        android:stepSize="1.0"
         android:progressTint="@color/wine"
+        android:stepSize="1.0"
         app:layout_constraintBottom_toTopOf="@+id/editTextName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.918" />
+        app:layout_constraintVertical_bias="0.675" />
 
     <ProgressBar
         android:id="@+id/feedbackProgressBar"
@@ -103,11 +103,25 @@
         android:id="@+id/buttonSubmit"
         android:layout_width="583dp"
         android:layout_height="39dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="4dp"
         android:backgroundTint="@color/logo_dark"
         android:text="@string/submit_feedback"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/myImageView"
+        android:layout_width="429dp"
+        android:layout_height="155dp"
+        android:rotation="90"
+        android:scaleX="0.8"
+        android:scaleY="1.7"
+        android:src="@mipmap/border_decor_foreground"
+        app:layout_constraintBottom_toTopOf="@+id/editTextName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+        app:layout_constraintVertical_bias="0.508" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
