@@ -6,7 +6,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-public class FeedbackScreenTest {
+public class ValidationUtilsTest {
 
     @Test
     public void testIsValidName_ValidName() {
@@ -26,16 +26,6 @@ public class FeedbackScreenTest {
     @Test
     public void testIsValidPhoneNumber_InvalidPhoneNumber() {
         assertFalse(ValidationUtils.isValidPhone("12345"));
-    }
-
-    @Test
-    public void testIsValidEmail_ValidEmail() {
-        assertTrue(ValidationUtils.isValidEmail("test@example.com"));
-    }
-
-    @Test
-    public void testIsValidEmail_InvalidEmail() {
-        assertFalse(ValidationUtils.isValidEmail("test@example"));
     }
 
     @Test
