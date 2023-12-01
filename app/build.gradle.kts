@@ -49,17 +49,17 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore:24.9.1")
     implementation ("com.google.android.gms:play-services-auth:20.7.0")
 
-    // Unit Test Dependencies
-    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation ("androidx.fragment:fragment-testing:1.6.2")
-    androidTestImplementation ("androidx.test:core:1.4.0")
-    testImplementation("junit:junit:4.13.2")
-    testImplementation("org.mockito:mockito-core:3.3.3")
+    implementation ("androidx.test.ext:junit:1.1.5")
 
-    // Robolectric
-    androidTestImplementation("org.robolectric:robolectric:4.11.1")
+    // Junit
+    testImplementation ("junit:junit:4.13.2")
+    androidTestImplementation ("junit:junit:4.13.2")
 
-    // Android Test Dependencies
-    androidTestImplementation("androidx.test.ext:junit:1.1.5") //Latest update for test implementation cases.
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    //Expresso
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation ("androidx.test:runner:1.5.2")
+    androidTestImplementation ("androidx.test:rules:1.5.0")
+
+    // Robletric
+    testImplementation ("org.robolectric:robolectric:4.11.1")
 }

@@ -43,7 +43,7 @@ public class SearchScreen extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.search_screen, container, false);
 
-        searchResultsListView = view.findViewById(R.id.search_stuff);
+        searchResultsListView = view.findViewById(R.id.search_list);
         searchEditText = view.findViewById(R.id.searchEditText);
         db = FirebaseFirestore.getInstance();
 

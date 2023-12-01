@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.main_frame_layout);
 
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
