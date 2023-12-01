@@ -83,7 +83,7 @@ public class FeedbackScreen extends Fragment {
         long lastFeedbackTime = prefs.getLong(LAST_FEEDBACK_KEY, 0);
         long currentTime = System.currentTimeMillis();
 
-// Check if last feedback was sent less than 24 hours ago
+        // Check if last feedback was sent less than 24 hours ago
         long timeElapsedSinceLastFeedback = currentTime - lastFeedbackTime;
         long twentyFourHoursInMilliseconds = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
@@ -104,19 +104,28 @@ public class FeedbackScreen extends Fragment {
         String comment = editTextComment.getText().toString().trim();
         float rating = ratingBar.getRating();
 
-        if (name.isEmpty() || phone.isEmpty() || email.isEmpty()) {
-            DisplayToast(getString(R.string.please_fill_in_all_fields));
+        if (name.isEmpty()) {
+            DisplayToast("Please fill the name field");
             return;
         }
 
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (!ValidationUtils.isValidEmail(email)) {
             DisplayToast(getString(R.string.invalid_email_format));
             return;
         }
 
-        String cleanPhone = phone.replaceAll("[^0-9]", "");
-        if (cleanPhone.length() != 10) {
+        if (!ValidationUtils.isValidPhone(phone)) {
             DisplayToast(getString(R.string.invalid_phone_format));
+            return;
+        }
+
+        if (!ValidationUtils.isValidComment(comment)) {
+            DisplayToast("Please leave a comment");
+            return;
+        }
+
+        if (!ValidationUtils.isValidRating(rating)) {
+            DisplayToast("Rating must be between 1.0 and 5.0");
             return;
         }
 
@@ -124,7 +133,7 @@ public class FeedbackScreen extends Fragment {
 
         Map<String, Object> feedback = new HashMap<>();
         feedback.put("name", name);
-        feedback.put("phone", Long.parseLong(cleanPhone));
+        feedback.put("phone", Long.parseLong(phone.replaceAll("[^0-9]", "")));
         feedback.put("email", email);
         feedback.put("comment", comment);
         feedback.put("rating", (long) rating);
@@ -148,8 +157,9 @@ public class FeedbackScreen extends Fragment {
                     .set(feedback)
                     .addOnSuccessListener(aVoid -> DisplayToast(getString(R.string.feedback_submitted_successfully)))
                     .addOnFailureListener(e -> DisplayToast(getString(R.string.failed_to_submit_feedback)));
-        }, 5000); // 5000 milliseconds delay
+        }, 5000);
     }
+
 
     private String generateRandomDocumentId(int targetStringLength) {
         int leftLimit = 48; // numeral '0'

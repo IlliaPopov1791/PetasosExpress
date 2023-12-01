@@ -18,4 +18,12 @@ public class ValidationUtils {
         String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{6,}$";
         return password.matches(passwordPattern);
     }
+
+    public static boolean isValidRating(float rating) {
+        return rating >= 1.0f && rating <= 5.0f;
+    }
+
+    public static boolean isValidComment(String comment) {
+        return comment != null && !comment.trim().isEmpty();
+    }
 }
