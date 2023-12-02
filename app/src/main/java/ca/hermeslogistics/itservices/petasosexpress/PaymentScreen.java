@@ -3,6 +3,7 @@ package ca.hermeslogistics.itservices.petasosexpress;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -41,8 +42,15 @@ public class PaymentScreen extends Fragment {
     private String totalAmount;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.payment_screen, container, false);
+        View view;
 
+        // Set the layout based on the orientation
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            view = inflater.inflate(R.layout.payment_screen, container, false);
+        } else {
+            view = inflater.inflate(R.layout.payment_screen_landscape, container, false);
+        }
         //Firebase components
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
