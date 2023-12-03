@@ -53,5 +53,9 @@ public class ProductTest {
     public void getId() {
         assertEquals(101, product.getId());
     }
+    @Test
+    public void getPrice() {
+        assertEquals(0.99, product.getPrice(), 0.001);
+    }
 
 }
