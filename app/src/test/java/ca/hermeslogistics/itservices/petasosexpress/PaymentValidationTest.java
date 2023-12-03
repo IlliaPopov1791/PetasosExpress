@@ -57,4 +57,8 @@ public class PaymentValidationTest {
     public void testInvalidCardHolderName() {
         assertFalse(validateCardHolderName(""));
     }
+    @Test
+    public void testValidAddress() {
+        assertTrue(validateAddress("Petasos 12345"));
+    }
 }
