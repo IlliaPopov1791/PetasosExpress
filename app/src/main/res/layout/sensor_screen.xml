@@ -18,8 +18,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/logo"
-    tools:context=".SensorScreen"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:context=".SensorScreen">
 
     <!-- TextView for Distance Sensor -->
     <TextView
@@ -37,12 +37,41 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- TextView for Motor Speed -->
+
+    <!-- TextView for Motor Speed Value -->
+
+    <ImageView
+        android:id="@+id/myImageView"
+        android:layout_width="256dp"
+        android:layout_height="88dp"
+        android:rotation="90"
+        android:scaleX="1"
+        android:scaleY="2.8"
+        android:src="@mipmap/border_decor_foreground"
+
+        app:layout_constraintBottom_toTopOf="@+id/yAxisLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.26" />
+
+    <ImageView
+        android:id="@+id/myImageView3"
+        android:layout_width="43dp"
+        android:layout_height="42dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/myImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/textViewMotor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="32dp"
         android:text="@string/motor_speed"
         android:textColor="@color/wine"
         android:textSize="25sp"
@@ -50,7 +79,138 @@
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <!-- TextView for Motor Speed Value -->
+    <ProgressBar
+        android:id="@+id/motorProgressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="356dp"
+        android:layout_height="87dp"
+        android:layout_below="@id/textViewMotorSpeed"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/progress_bar"
+        android:max="20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMotor" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/zAxisProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:indeterminate="false"
+        android:max="200"
+        android:progress="100"
+        app:indicatorColor="@color/wine"
+        app:indicatorSize="100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/yAxisProgressBar"
+        app:layout_constraintStart_toEndOf="@+id/yAxisProgressBar"
+        app:layout_constraintTop_toTopOf="@+id/yAxisProgressBar"
+        app:layout_constraintVertical_bias="0.0"
+        app:trackColor="@android:color/darker_gray"
+        app:trackThickness="6dp" />
+
+    <TextView
+        android:id="@+id/xAxisLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/x_axis"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/xAxisProgressBar"
+        app:layout_constraintEnd_toEndOf="@+id/xAxisProgressBar" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/yAxisProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:indeterminate="false"
+        android:max="200"
+        android:progress="100"
+        app:indicatorColor="@color/wine"
+        app:indicatorSize="100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/xAxisProgressBar"
+        app:layout_constraintStart_toEndOf="@+id/xAxisProgressBar"
+        app:layout_constraintTop_toTopOf="@+id/xAxisProgressBar"
+        app:layout_constraintVertical_bias="0.0"
+        app:trackColor="@android:color/darker_gray"
+        app:trackThickness="6dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/zAxisLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/z_axis"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/zAxisProgressBar"
+        app:layout_constraintEnd_toEndOf="@+id/zAxisProgressBar" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/xAxisProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="48dp"
+        android:indeterminate="false"
+        android:max="200"
+        android:progress="100"
+        app:indicatorColor="@color/wine"
+        app:indicatorSize="100dp"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/motorProgressBar"
+        app:trackColor="@android:color/darker_gray"
+        app:trackThickness="6dp" />
+
+    <TextView
+        android:id="@+id/yAxisLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/y_axis"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/yAxisProgressBar"
+        app:layout_constraintEnd_toEndOf="@+id/yAxisProgressBar" />
+
+    <TextView
+        android:id="@+id/zAxisValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/value_0"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/zAxisProgressBar"
+        app:layout_constraintTop_toBottomOf="@id/zAxisProgressBar" />
+
+    <TextView
+        android:id="@+id/xAxisValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/value_0"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/xAxisProgressBar"
+        app:layout_constraintTop_toBottomOf="@id/xAxisProgressBar" />
+
+    <TextView
+        android:id="@+id/yAxisValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/value_0"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/yAxisProgressBar"
+        app:layout_constraintTop_toBottomOf="@id/yAxisProgressBar" />
+
     <TextView
         android:id="@+id/textViewMotorSpeed"
         android:layout_width="161dp"
@@ -70,27 +230,23 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <!-- ProgressBar for Motor -->
-    <ProgressBar
-        android:id="@+id/motorProgressBar"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="356dp"
-        android:layout_height="87dp"
-        android:layout_below="@id/textViewMotorSpeed"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/progress_bar"
-        android:max="20"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMotor" />
 
     <!-- TextView for Stops History -->
+
+    <!-- ListView for Stops History -->
+
+    <!-- TextView for Distance Indicator -->
+
+    <!-- ImageView for Distance Sensor Status -->
+
+    <!-- ProgressBar for Proximity Sensor -->
+
     <TextView
         android:id="@+id/txtHistory"
         android:layout_width="197dp"
         android:layout_height="38dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="460dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="352dp"
         android:text="@string/stops_history"
         android:textColor="@color/wine"
         android:textSize="25sp"
@@ -98,19 +254,35 @@
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <!-- ListView for Stops History -->
     <ListView
         android:id="@+id/listView"
-        android:layout_width="368dp"
-        android:layout_height="136dp"
+        android:layout_width="350dp"
+        android:layout_height="248dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/txtHistory"
-        app:layout_constraintTop_toBottomOf="@+id/txtHistory" />
+        app:layout_constraintTop_toBottomOf="@+id/txtHistory"
+        app:layout_constraintVertical_bias="0.208" />
 
-    <!-- TextView for Distance Indicator -->
+    <ImageView
+        android:id="@+id/myImageView2"
+        android:layout_width="256dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="4dp"
+        android:rotation="90"
+        android:scaleX="1"
+        android:scaleY="2.8"
+
+        android:src="@mipmap/border_decor_foreground"
+        app:layout_constraintBottom_toTopOf="@+id/listView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtHistory"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="151dp"
-        android:layout_height="79dp"
+        android:layout_width="152dp"
+        android:layout_height="71dp"
         android:gravity="center"
         android:text="@string/_4cm"
         android:textColor="@color/wine"
@@ -119,22 +291,20 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.444" />
+        app:layout_constraintVertical_bias="0.54" />
 
-    <!-- ImageView for Distance Sensor Status -->
     <ImageView
         android:id="@+id/imgStatus"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="44dp"
         android:src="@drawable/ic_other_button"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.521" />
+        app:layout_constraintVertical_bias="0.478" />
 
-    <!-- ProgressBar for Proximity Sensor -->
     <ProgressBar
         android:id="@+id/proximityProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
@@ -151,127 +321,22 @@
         app:layout_constraintTop_toTopOf="@+id/imgStatus" />
 
     <!-- X Axis Progress Indicator -->
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/xAxisProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="72dp"
-        android:indeterminate="false"
-        android:max="200"
-        android:progress="100"
-        app:indicatorColor="@color/wine"
-        app:indicatorSize="100dp"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/motorProgressBar"
-        app:trackColor="@android:color/darker_gray"
-        app:trackThickness="6dp" />
 
     <!-- X Axis Label -->
-    <TextView
-        android:id="@+id/xAxisLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/x_axis"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/xAxisProgressBar"
-        app:layout_constraintEnd_toEndOf="@+id/xAxisProgressBar" />
 
     <!-- X Axis Value -->
-    <TextView
-        android:id="@+id/xAxisValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/value_0"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@id/xAxisProgressBar"
-        app:layout_constraintTop_toBottomOf="@id/xAxisProgressBar" />
 
     <!-- Y Axis Progress Indicator -->
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/yAxisProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:indeterminate="false"
-        android:max="200"
-        android:progress="100"
-        app:indicatorColor="@color/wine"
-        app:indicatorSize="100dp"
-        app:layout_constraintBottom_toBottomOf="@+id/xAxisProgressBar"
-        app:layout_constraintStart_toEndOf="@+id/xAxisProgressBar"
-        app:layout_constraintTop_toTopOf="@+id/xAxisProgressBar"
-        app:layout_constraintVertical_bias="0.0"
-        app:trackColor="@android:color/darker_gray"
-        app:trackThickness="6dp"
-        tools:ignore="MissingConstraints" />
 
     <!-- Y Axis Label -->
-    <TextView
-        android:id="@+id/yAxisLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/y_axis"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/yAxisProgressBar"
-        app:layout_constraintEnd_toEndOf="@+id/yAxisProgressBar" />
 
     <!-- Y Axis Value -->
-    <TextView
-        android:id="@+id/yAxisValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/value_0"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@id/yAxisProgressBar"
-        app:layout_constraintTop_toBottomOf="@id/yAxisProgressBar" />
 
     <!-- Z Axis Progress Indicator -->
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/zAxisProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:indeterminate="false"
-        android:max="200"
-        android:progress="100"
-        app:indicatorColor="@color/wine"
-        app:indicatorSize="100dp"
-        app:layout_constraintBottom_toBottomOf="@+id/yAxisProgressBar"
-        app:layout_constraintStart_toEndOf="@+id/yAxisProgressBar"
-        app:layout_constraintTop_toTopOf="@+id/yAxisProgressBar"
-        app:layout_constraintVertical_bias="0.0"
-        app:trackColor="@android:color/darker_gray"
-        app:trackThickness="6dp" />
 
     <!-- Z Axis Label -->
-    <TextView
-        android:id="@+id/zAxisLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/z_axis"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/zAxisProgressBar"
-        app:layout_constraintEnd_toEndOf="@+id/zAxisProgressBar" />
 
     <!-- Z Axis Value -->
-    <TextView
-        android:id="@+id/zAxisValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/value_0"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@id/zAxisProgressBar"
-        app:layout_constraintTop_toBottomOf="@id/zAxisProgressBar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
