@@ -8,9 +8,6 @@
     tools:context=".SearchScreen">
 
     <!-- Search Bar -->
-
-    <!-- ListView for search results -->
-
     <EditText
         android:id="@+id/searchEditText"
         android:layout_width="397dp"
@@ -29,6 +26,7 @@
         android:textColor="@color/ceramic"
         android:textSize="16sp" />
 
+    <!-- ListView for search results -->
     <ListView
         android:id="@+id/search_list"
         android:layout_width="match_parent"
@@ -41,6 +39,7 @@
         android:dividerHeight="2dp"
         android:padding="20dp" />
 
+    <!-- FloatingActionButton for Cart -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_cart"
         android:layout_width="60dp"

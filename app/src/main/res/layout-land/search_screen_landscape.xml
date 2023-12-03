@@ -31,6 +31,7 @@
         android:layout_marginTop="11dp"
         android:padding="20dp" />
 
+    <!-- FloatingActionButton for Cart -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_cart"
         android:layout_width="60dp"
