@@ -1,72 +1,53 @@
-<!-- Illia M. Popov | ID: n01421791 Section B -->
-<!-- William Margalik | ID: n01479878 Section B -->
-<!-- Dylan Ashton | ID: n01442206 Section B -->
-<!-- Ahmad Aljawish | ID: n01375348 Section B -->
+<!--
+    Authors:
+        - Illia M. Popov | ID: n01421791 | Section B
+        - William Margalik | ID: n01479878 | Section B
+        - Dylan Ashton | ID: n01442206 | Section B
+        - Ahmad Aljawish | ID: n01375348 | Section B
+-->
+
 <resources>
+    <!-- App Information -->
     <string name="default_web_client_id">158343388699-2hte71l6b7mjtu9dlrgsi6muko9nf26p.apps.googleusercontent.com</string>
     <string name="app_name">PetasosExpress</string>
-    <string name="app_describe">Livraisons autonomes et sans effort à portée de main.</string>
+    <string name="app_describe">Livraisons sans effort et autonomes à portée de main.</string>
+
+    <!-- Navigation -->
     <string name="hello_blank_fragment">Bonjour fragment vide</string>
-    <string name="sensors">Suivez votre livraison</string>
+    <string name="sensors">Suivre votre livraison</string>
     <string name="home">Accueil</string>
-    <string name="gps_sensor">Lieu de livraison</string>
-    <string name="distance_sensor">Capteur de Distance</string>
-    <string name="proximity_sensor">Capteur de Proximité</string>
-    <string name="balance_sensor">Capteur D\'équilibre</string>
-    <string name="motors_sensors">Capteurs de Moteurs</string>
+    <string name="gps_sensor">Emplacement de livraison</string>
+    <string name="distance_sensor">Capteur de distance</string>
+    <string name="proximity_sensor">Capteur de proximité</string>
+    <string name="balance_sensor">Capteur d\'équilibre</string>
+    <string name="motors_sensors">Capteurs de moteurs</string>
+
+    <!-- Dialogs and Alerts -->
     <string name="navigation_drawer_open">Ouvrir le tiroir de navigation</string>
     <string name="navigation_drawer_close">Fermer le tiroir de navigation</string>
-    <string name="alert_exit">Voulez-vous quitter l\'application ?</string>
+    <string name="alert_exit">Voulez-vous quitter l\'application ?</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
-    <string name="user_pfp">Profil Utilisateur</string>
+
+    <!-- User and Authentication -->
+    <string name="user_pfp">Profil utilisateur</string>
     <string name="welcome_message">Bienvenue sur PetasosExpress</string>
-    <string name="delivery_robot">Robot de Livraison</string>
-    <string name="place_order">Recherche</string>
-    <string name="search_hint">Rechercher des produits</string>
-    <string name="home_question1">Quelle commande avez-vous besoin aujourd\'hui?</string>
-    <string name="_4cm">4 cm</string>
-    <string name="status_warning">État : Avertissement</string>
-    <string name="set_proximity_threshold">Définir le seuil de proximité</string>
-    <string name="status">état :</string>
-    <string name="_status">État :</string>
-    <string name="motor_speed">Vitesse du Moteur :</string>
-    <string name="motor_speed_value">.</string>
-    <string name="motor_rpm">Tours par Minute du Moteur :</string>
-    <string name="error_codes">Codes d\'Erreur :</string>
-    <string name="safety_alerts">Alertes de Sécurité :</string>
-    <string name="emergency_stop">Arrêt d\'Urgence</string>
-    <string name="collision_avoidance">Évitement de collision</string>
-    <string name="distance">Distance :</string>
-    <string name="num_0">0</string>
-    <string name="meters">Mètres</string>
-    <string name="speed_mode">Mode de vitesse :</string>
-    <string name="change_units">Changer d\'unités (Mètres/Pieds)</string>
-    <string name="stops_history">Historique des arrêts :</string>
-    <string name="maximum_speed">Vitesse maximale</string>
-    <string name="x_axis">Axe X</string>
-    <string name="value_0">Valeur: 0</string>
-    <string name="y_axis">Axe Y</string>
-    <string name="z_axis">Axe Z</string>
-    <string name="start_simulation">Démarrer la simulation</string>
-    <string name="Settings">Settings</string>
-    <string name="AppSettings">AppSettings</string>
-    <string name="help">help</string>
-    <string name="motor_speed_label">Vitesse du moteur</string>
-    <string name="motor_speed_value_placeholder">%s km/h</string>
     <string name="login">Connexion</string>
-    <string name="loginGoogle">Connectez-vous avec Google</string>
+    <string name="loginGoogle">Connexion avec Google</string>
     <string name="enter_your_password">Entrez votre mot de passe</string>
     <string name="password">Mot de passe</string>
     <string name="enter_your_gmail_address">Entrez votre adresse Gmail</string>
     <string name="gmail">Gmail</string>
-    <string name="searching_for">Recherche en cours : %1$s</string>
-    <string name="location">emplacement</string>
-    <string name="dark_theme_switched">Passé en mode sombre</string>
-    <string name="light_theme_switched">Passé en mode lumière</string>
-    <string name="landscape_orientation">Paysage</string>
-    <string name="portrait_orientation">Portrait</string>
+    <string name="searching_for">Recherche de : %1$s</string>
+    <string name="location"> emplacement </string>
     <string name="authentication_failed">Échec de l\'authentification.</string>
+
+    <!-- Delivery and Ordering -->
+    <string name="delivery_robot">Robot de livraison</string>
+    <string name="place_order">Rechercher</string>
+    <string name="search_hint">Rechercher des produits</string>
+    <string name="home_question1">Quelle commande avez-vous aujourd\'hui ?</string>
+    <string name="_4cm">4cm</string>
     <string name="home_tag">accueil</string>
     <string name="gps_tag">gps</string>
     <string name="distance_tag">distance</string>
@@ -75,19 +56,76 @@
     <string name="motors_tag">moteurs</string>
     <string name="settings_tag">paramètres</string>
     <string name="tel_1234567890">tel:1234567890</string>
-    <string name="permission_granted">Permission accordée !</string>
-    <string name="permission_denied">Permission refusée !</string>
-    <string name="app_settings">paramètres_application</string>
+    <string name="permission_granted">Autorisation accordée !</string>
+    <string name="permission_denied">Autorisation refusée !</string>
+    <string name="ManageAccount" />
+    <string name="no_obstacles">Pas d\'obstacles</string>
+    <string name="delivery_robot_monitor">Moniteur du robot de livraison</string>
+    <string name="food_1">alimentation</string>
+    <string name="technology_1">technologie</string>
+    <string name="medicine">médecine</string>
+    <string name="other">autre</string>
+
+    <!-- Status and Information -->
+    <string name="status_warning">Statut : Avertissement</string>
+    <string name="set_proximity_threshold">Définir la distance de proximité</string>
+    <string name="status">statut :</string>
+    <string name="_status">Statut :</string>
+    <string name="motor_speed">Vitesse du moteur :</string>
+    <string name="motor_speed_value">.</string>
+    <string name="motor_rpm">RPM du moteur :</string>
+    <string name="error_codes">Codes d\'erreur :</string>
+    <string name="safety_alerts">Alertes de sécurité :</string>
+    <string name="emergency_stop">Arrêt d\'urgence</string>
+    <string name="collision_avoidance">Évitement de collision</string>
+    <string name="distance">Distance :</string>
+    <string name="num_0">0</string>
+    <string name="meters">Mètres</string>
+    <string name="speed_mode">Mode de vitesse :</string>
+
+    <!-- Motors and Movement -->
+    <string name="motor_speed_label">Vitesse du moteur</string>
+    <string name="motor_speed_value_placeholder">%s km/h</string>
+
+    <!-- Units and Measurements -->
+    <string name="change_units">Changer d\'unités (mètres/pieds)</string>
+
+    <!-- History and Logs -->
+    <string name="stops_history">Historique des arrêts :</string>
+
+    <!-- Simulation -->
+    <string name="maximum_speed">Vitesse maximale</string>
+    <string name="x_axis">Axe X</string>
+    <string name="value_0">Valeur : 0</string>
+    <string name="y_axis">Axe Y</string>
+    <string name="z_axis">Axe Z</string>
+    <string name="start_simulation">Démarrer la simulation</string>
+
+    <!-- App Settings -->
+    <string name="Settings">Paramètres</string>
+    <string name="AppSettings">Paramètres de l\'application</string>
+    <string name="help">Aide</string>
+    <string name="app_settings">paramètres_de_l_application</string>
     <string name="current_fragment">fragment_actuel</string>
     <string name="empty_space">" "</string>
     <string name="value">"Valeur : "</string>
     <string name="_2f_km_h">%.2f km/h</string>
-    <string name="registration_successful">Inscription réussie.</string>
-    <string name="registration_failed_please_try_again">Inscription échouée. Veuillez réessayer.</string>
+
+    <!-- Theme and Appearance -->
+    <string name="dark_theme_switched">Passage au thème sombre</string>
+    <string name="light_theme_switched">Passage au thème clair</string>
+
+    <!-- Orientation -->
+    <string name="landscape_orientation">Paysage</string>
+    <string name="portrait_orientation">Portrait</string>
+
+    <!-- Registration and Account -->
+    <string name="registration_successful">Enregistrement réussi.</string>
+    <string name="registration_failed_please_try_again">Échec de l\'enregistrement. Veuillez réessayer.</string>
     <string name="portrait">Portrait</string>
     <string name="landscape">Paysage</string>
     <string name="orientation">Orientation</string>
-    <string name="light">Lumière</string>
+    <string name="light">Clair</string>
     <string name="dark">Sombre</string>
     <string name="dark_mode">Mode sombre</string>
     <string name="cities">Villes</string>
@@ -100,10 +138,10 @@
     <string name="enter_your_email_address">Entrez votre adresse e-mail</string>
     <string name="email">E-mail</string>
     <string name="theme">Thème</string>
-    <string name="registration_in_process">Inscription en cours…</string>
+    <string name="registration_in_process">Enregistrement en cours…</string>
     <string name="remember_me">Se souvenir de moi</string>
-    <string name="sign_out">Se déconnecter</string>
-    <string name="no_data">Aucune donnée</string>
+    <string name="sign_out">Déconnexion</string>
+    <string name="no_data">Pas de données</string>
     <string name="first_name">Prénom</string>
     <string name="last_name">Nom de famille</string>
     <string name="phone_number">Numéro de téléphone</string>
@@ -118,41 +156,36 @@
     <string name="phone_hint">Numéro de téléphone</string>
     <string name="email_hint">E-mail</string>
     <string name="comment_hint">Commentaire</string>
-    <string name="submit_feedback">Soumettre le retour d\'information</string>
+    <string name="submit_feedback">Soumettre un retour d\'information</string>
     <string name="proximity_value_is_smaller_than_the_threshold">La valeur de proximité est inférieure au seuil.</string>
     <string name="please_fill_in_all_fields">Veuillez remplir tous les champs</string>
-    <string name="feedback_submitted_successfully">Retour soumis avec succès !</string>
-    <string name="failed_to_submit_feedback">Échec de la soumission du retour</string>
+    <string name="feedback_submitted_successfully">Retour d\'information soumis avec succès !</string>
+    <string name="failed_to_submit_feedback">Échec de soumission du retour d\'information</string>
     <string name="enter_your_last_name">Entrez votre nom de famille</string>
     <string name="enter_your_phone_number">Entrez votre numéro de téléphone</string>
     <string name="enter_your_first_name">Entrez votre prénom</string>
     <string name="invalid_email_format">Veuillez entrer une adresse e-mail valide.</string>
     <string name="invalid_password_format1">Le mot de passe doit comporter au moins 6 caractères,</string>
     <string name="invalid_password_format2">inclure un chiffre, une lettre majuscule et un caractère spécial.</string>
-    <string name="email_already_in_use">Cet e-mail est déjà utilisé</string>
+    <string name="email_already_in_use">Cette adresse e-mail est déjà utilisée</string>
     <string name="searching_for_category" translatable="false">Recherche d\'articles dans la catégorie : %s</string>
-    <string name="account_settings">Account Settings</string>
-    <string name="ManageAccount" />
-    <string name="no_obstacles">Aucun obstacle</string>
-    <string name="delivery_robot_monitor">Moniteur du robot de livraison</string>
-    <string name="food_1">nourriture</string>
-    <string name="technology_1">technologie</string>
-    <string name="medicine">médecine</string>
-    <string name="other">autre</string>
-    <string name="save_changes">Save Changes</string>
-    <string name="invalid_phone_format">Invalid phone format</string>
+    <string name="account_settings">Paramètres du compte</string>
+
+    <!-- Shopping Cart and Payment -->
+    <string name="save_changes">Enregistrer les modifications</string>
+    <string name="invalid_phone_format">Format de téléphone invalide</string>
     <string name="submit">Soumettre</string>
     <string name="pay">Payer</string>
-    <string name="contact_information">Informations de contact:</string>
+    <string name="contact_information">Coordonnées :</string>
     <string name="cvv">CVV</string>
     <string name="card_holder">Titulaire de la carte</string>
     <string name="card_number">Numéro de carte</string>
-    <string name="amount">$00,00</string>
-    <string name="payment_amount">Montant du paiement:</string>
+    <string name="amount">$00.00</string>
+    <string name="payment_amount">Montant du paiement :</string>
     <string name="add_to_cart">Ajouter au panier</string>
     <string name="product_image">Image du produit</string>
     <string name="product_name">Nom du produit</string>
-    <string name="quantity">Quantité</string>
+    <string name="quantity">Quantité :</string>
     <string name="producer">Producteur</string>
     <string name="minus">-</string>
     <string name="minus_long">—</string>
@@ -162,11 +195,11 @@
     <string name="cart">Panier</string>
     <string name="petasos_cart">Votre panier Petasos</string>
     <string name="add_to_your_cart">Ajouter à votre panier</string>
-    <string name="proceed_to_checkout">Procéder au paiement</string>
-    <string name="total_amount">Montant total:</string>
+    <string name="proceed_to_checkout">Passer à la caisse</string>
+    <string name="total_amount">Montant total :</string>
     <string name="remove">Supprimer</string>
-    <string name="address">Adresse:</string>
-    <string name="credit_card_number_must_be_16_digits">Le numéro de carte de crédit doit comporter 16chiffres</string>
+    <string name="address">Adresse :</string>
+    <string name="credit_card_number_must_be_16_digits">Le numéro de carte de crédit doit comporter 16 chiffres</string>
     <string name="cvv_must_be_3_digits">Le CVV doit comporter 3 chiffres</string>
     <string name="card_holder_name_is_required">Le nom du titulaire de la carte est requis</string>
     <string name="address_must_be_filled">L\'adresse est requise</string>
@@ -176,8 +209,10 @@
     <string name="please_select_an_expiration_year">Veuillez sélectionner une année d\'expiration</string>
     <string name="order_created_successfully">Commande créée avec succès.</string>
     <string name="error_creating_order">Erreur lors de la création de la commande.</string>
+
+    <!-- Date and Time -->
     <string-array name="months">
-        <item>Mois</item>
+        <item>Month</item>
         <item>January</item>
         <item>February</item>
         <item>March</item>
@@ -192,7 +227,7 @@
         <item>December</item>
     </string-array>
     <string-array name="year_array">
-        <item>Année</item>
+        <item>Year</item>
         <item>21</item>
         <item>22</item>
         <item>23</item>
@@ -207,11 +242,14 @@
         <item>32</item>
         <item>33</item>
         <item>34</item>
+
+        <!-- Order Queue and Alerts -->
     </string-array>
-    <string name="queue_alert_title">Ordre dans la file d\'attente</string>
-    <string name="queue_alert_message">Nous recevons actuellement un nombre inhabituel de commandes. Votre commande est en file d\'attente et un robot livreur lui sera affecté dans les plus brefs délais.</string>
-    <string name="no_order_alert_title">Il n\'y a aucune commande à suivre</string>
-    <string name="no_order_alert_message">Il n\'y a aucune commande à votre nom, donc aucun robot de livraison ne lui est attribué. Toutes les lectures du capteur sont dans leur état par défaut.</string>
+    <string name="queue_alert_title">Commande en file d\'attente</string>
+    <string name="queue_alert_message">Nous rencontrons actuellement un nombre inhabituel de commandes. Votre commande est en file d\'attente et un robot de livraison lui sera assigné dès que possible.</string>
+    <string name="no_order_alert_title">Aucune commande à suivre</string>
+    <string name="no_order_alert_message">Il n\'y a aucune commande à votre nom, donc aucun robot de livraison ne lui est assigné. Toutes les lectures des capteurs sont dans leur état par défaut.</string>
     <string name="ok">OK</string>
     <string name="cart_empty_message">Votre panier est vide. Ajoutez des articles pour procéder au paiement.</string>
+
 </resources>

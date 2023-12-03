@@ -1,11 +1,18 @@
-<!-- Illia M. Popov | ID: n01421791 Section B -->
-<!-- William Margalik | ID: n01479878 Section B -->
-<!-- Dylan Ashton | ID: n01442206 Section B -->
-<!-- Ahmad Aljawish | ID: n01375348 Section B -->
+<!--
+    Authors:
+        - Illia M. Popov | ID: n01421791 | Section B
+        - William Margalik | ID: n01479878 | Section B
+        - Dylan Ashton | ID: n01442206 | Section B
+        - Ahmad Aljawish | ID: n01375348 | Section B
+-->
+
 <resources>
+    <!-- App Information -->
     <string name="default_web_client_id">158343388699-2hte71l6b7mjtu9dlrgsi6muko9nf26p.apps.googleusercontent.com</string>
     <string name="app_name">PetasosExpress</string>
     <string name="app_describe">Effortless, autonomous deliveries at your fingertips.</string>
+
+    <!-- Navigation -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sensors">Track your delivery</string>
     <string name="home">Home</string>
@@ -14,18 +21,52 @@
     <string name="proximity_sensor">Proximity Sensor</string>
     <string name="balance_sensor">Balance Sensor</string>
     <string name="motors_sensors">Motors Sensors</string>
+
+    <!-- Dialogs and Alerts -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="alert_exit">Do you want to exit the app?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+
+    <!-- User and Authentication -->
     <string name="user_pfp">User Profile</string>
     <string name="welcome_message">Welcome to PetasosExpress</string>
+    <string name="login">Login</string>
+    <string name="loginGoogle">Login with Google</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="password">Password</string>
+    <string name="enter_your_gmail_address">Enter your Gmail address</string>
+    <string name="gmail">Gmail</string>
+    <string name="searching_for">Searching for: %1$s</string>
+    <string name="location"> location </string>
+    <string name="authentication_failed">Authentication failed.</string>
+
+    <!-- Delivery and Ordering -->
     <string name="delivery_robot">Delivery Robot</string>
     <string name="place_order">Search</string>
     <string name="search_hint">Search for products</string>
     <string name="home_question1">What order do you need today?</string>
     <string name="_4cm">4cm</string>
+    <string name="home_tag">home</string>
+    <string name="gps_tag">gps</string>
+    <string name="distance_tag">distance</string>
+    <string name="proximity_tag">proximity</string>
+    <string name="balance_tag">balance</string>
+    <string name="motors_tag">motors</string>
+    <string name="settings_tag">settings</string>
+    <string name="tel_1234567890">tel:1234567890</string>
+    <string name="permission_granted">Permission granted!</string>
+    <string name="permission_denied">Permission denied!</string>
+    <string name="ManageAccount" />
+    <string name="no_obstacles">No obstacles</string>
+    <string name="delivery_robot_monitor">Delivery Robot Monitor</string>
+    <string name="food_1">food</string>
+    <string name="technology_1">technology</string>
+    <string name="medicine">medicine</string>
+    <string name="other">other</string>
+
+    <!-- Status and Information -->
     <string name="status_warning">Status: Warning</string>
     <string name="set_proximity_threshold">Set Proximity Threshold</string>
     <string name="status">status:</string>
@@ -41,47 +82,44 @@
     <string name="num_0">0</string>
     <string name="meters">Meters</string>
     <string name="speed_mode">Speed Mode:</string>
+
+    <!-- Motors and Movement -->
+    <string name="motor_speed_label">Motor Speed</string>
+    <string name="motor_speed_value_placeholder">%s km/h</string>
+
+    <!-- Units and Measurements -->
     <string name="change_units">Change Units (Meters/Feet)</string>
+
+    <!-- History and Logs -->
     <string name="stops_history">Stops\' History:</string>
+
+    <!-- Simulation -->
     <string name="maximum_speed">Maximum Speed</string>
     <string name="x_axis">X Axis</string>
     <string name="value_0">Value: 0</string>
     <string name="y_axis">Y Axis</string>
     <string name="z_axis">Z Axis</string>
     <string name="start_simulation">Start Simulation</string>
+
+    <!-- App Settings -->
     <string name="Settings">Settings</string>
     <string name="AppSettings">AppSettings</string>
     <string name="help">help</string>
-    <string name="motor_speed_label">Motor Speed</string>
-    <string name="motor_speed_value_placeholder">%s km/h</string>
-    <string name="login">Login</string>
-    <string name="loginGoogle">Login with Google</string>
-    <string name="enter_your_password">Enter your password</string>
-    <string name="password">Password</string>
-    <string name="enter_your_gmail_address">Enter your Gmail address</string>
-    <string name="gmail">Gmail</string>
-    <string name="searching_for">Searching for: %1$s</string>
-    <string name="location"> location </string>
-    <string name="dark_theme_switched">Switched to Dark Theme</string>
-    <string name="light_theme_switched">Switched to Light Theme</string>
-    <string name="landscape_orientation">Landscape</string>
-    <string name="portrait_orientation">Portrait</string>
-    <string name="authentication_failed">Authentication failed.</string>
-    <string name="home_tag">home</string>
-    <string name="gps_tag">gps</string>
-    <string name="distance_tag">distance</string>
-    <string name="proximity_tag">proximity</string>
-    <string name="balance_tag">balance</string>
-    <string name="motors_tag">motors</string>
-    <string name="settings_tag">settings</string>
-    <string name="tel_1234567890">tel:1234567890</string>
-    <string name="permission_granted">Permission granted!</string>
-    <string name="permission_denied">Permission denied!</string>
     <string name="app_settings">app_settings</string>
     <string name="current_fragment">current_fragment</string>
     <string name="empty_space">" "</string>
     <string name="value">"Value: "</string>
     <string name="_2f_km_h">%.2f km/h</string>
+
+    <!-- Theme and Appearance -->
+    <string name="dark_theme_switched">Switched to Dark Theme</string>
+    <string name="light_theme_switched">Switched to Light Theme</string>
+
+    <!-- Orientation -->
+    <string name="landscape_orientation">Landscape</string>
+    <string name="portrait_orientation">Portrait</string>
+
+    <!-- Registration and Account -->
     <string name="registration_successful">Registration successful.</string>
     <string name="registration_failed_please_try_again">Registration failed. Please try again.</string>
     <string name="portrait">Portrait</string>
@@ -132,13 +170,8 @@
     <string name="email_already_in_use">This email is already in use</string>
     <string name="searching_for_category" translatable="false">Searching for items in category: %s</string>
     <string name="account_settings">Account Settings</string>
-    <string name="ManageAccount" />
-    <string name="no_obstacles">No obstacles</string>
-    <string name="delivery_robot_monitor">Delivery Robot Monitor</string>
-    <string name="food_1">food</string>
-    <string name="technology_1">technology</string>
-    <string name="medicine">medicine</string>
-    <string name="other">other</string>
+
+    <!-- Shopping Cart and Payment -->
     <string name="save_changes">Save Changes</string>
     <string name="invalid_phone_format">Invalid phone format</string>
     <string name="submit">Submit</string>
@@ -176,6 +209,8 @@
     <string name="please_select_an_expiration_year">Please select an expiration year</string>
     <string name="order_created_successfully">Order created successfully.</string>
     <string name="error_creating_order">Error creating order.</string>
+
+    <!-- Date and Time -->
     <string-array name="months">
         <item>Month</item>
         <item>January</item>
@@ -207,6 +242,8 @@
         <item>32</item>
         <item>33</item>
         <item>34</item>
+
+    <!-- Order Queue and Alerts -->
     </string-array>
     <string name="queue_alert_title">Order in Queue</string>
     <string name="queue_alert_message">We\'re experiencing an unusual amount of orders right now. Your order is in a queue and a delivery robot will be assigned to it as soon as possible.</string>
@@ -214,4 +251,5 @@
     <string name="no_order_alert_message">There is no order on your name, so no delivery robot is assigned to it. All sensor readings are in their default state.</string>
     <string name="ok">OK</string>
     <string name="cart_empty_message">Your cart is empty. Add items to proceed to checkout.</string>
+
 </resources>
