@@ -147,7 +147,6 @@
         android:layout_height="173dp"
         android:layout_marginTop="4dp"
         android:src="@mipmap/ic_launcher"
-        android:scaleX="-1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
