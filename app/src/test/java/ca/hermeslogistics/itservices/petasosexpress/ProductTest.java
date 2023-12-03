@@ -49,5 +49,9 @@ public class ProductTest {
         assertNotNull(product.getName());
         assertEquals("Apple", product.getName());
     }
+    @Test
+    public void getId() {
+        assertEquals(101, product.getId());
+    }
 
 }
