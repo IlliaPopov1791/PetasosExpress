@@ -67,4 +67,8 @@ public class ProductTest {
         assertNotNull(product.getType());
         assertEquals("Fruit", product.getType());
     }
+    @Test
+    public void getQuantity_InitialValue() {
+        assertEquals(0, product.getQuantity());
+    }
 }
