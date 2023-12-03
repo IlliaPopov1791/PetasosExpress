@@ -57,5 +57,10 @@ public class ProductTest {
     public void getPrice() {
         assertEquals(0.99, product.getPrice(), 0.001);
     }
+    @Test
+    public void getProducer() {
+        assertNotNull(product.getProducer());
+        assertEquals("FruitCorp", product.getProducer());
+    }
 
 }
