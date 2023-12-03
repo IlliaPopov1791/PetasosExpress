@@ -60,10 +60,14 @@ public class PaymentScreen extends Fragment {
         EditText creditCardNumber = view.findViewById(R.id.credit_card_number);
         EditText securityCode = view.findViewById(R.id.security_code);
         EditText cardHolderName = view.findViewById(R.id.card_holder_name);
-        EditText zipCode = view.findViewById(R.id.zip_code);
+        EditText address = view.findViewById(R.id.zip_code);
         Button payButton = view.findViewById(R.id.pay_button);
         monthSpinner = view.findViewById(R.id.spinner_month);
         yearSpinner = view.findViewById(R.id.spinner_year);
+
+        SharedPreferences settings = getActivity().getSharedPreferences(AppSettings.PREFS_NAME, Context.MODE_PRIVATE);
+        String savedAddress = settings.getString(AppSettings.ADDRESS_KEY, "");
+        address.setText(savedAddress);
 
         List<String> months = Arrays.asList(getResources().getStringArray(R.array.months));
         List<String> years = Arrays.asList(getResources().getStringArray(R.array.year_array));
@@ -84,8 +88,9 @@ public class PaymentScreen extends Fragment {
         payButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validatePaymentDetails(creditCardNumber, securityCode, cardHolderName, zipCode)) {
-                    createOrder(zipCode.getText().toString(), totalAmount);
+                if (validatePaymentDetails(creditCardNumber, securityCode, cardHolderName, address)) {
+                    createOrder(address.getText().toString(), totalAmount);
+                    navigateToCartScreen();
                 }
             }
         });
@@ -186,13 +191,40 @@ public class PaymentScreen extends Fragment {
 
 
     private boolean validatePaymentDetails(EditText creditCardNumber, EditText securityCode, EditText cardHolderName, EditText zipCode) {
-        return PaymentValidation.validateCreditCardNumberLength(creditCardNumber.getText().toString()) &&
-                PaymentValidation.validateExpirationMonth(monthSpinner.getSelectedItemPosition()) &&
-                PaymentValidation.validateExpirationYear(yearSpinner.getSelectedItemPosition()) &&
-                PaymentValidation.validateSecurityCodeLength(securityCode.getText().toString()) &&
-                PaymentValidation.validateCardHolderName(cardHolderName.getText().toString()) &&
-                PaymentValidation.validateAddress(zipCode.getText().toString());
+        //Needed to change again, otherwise it won't show toasts
+        if (!PaymentValidation.validateCreditCardNumberLength(creditCardNumber.getText().toString())) {
+            DisplayToast(getString(R.string.credit_card_number_must_be_16_digits));
+            return false;
+        }
+
+        if (!PaymentValidation.validateExpirationMonth(monthSpinner.getSelectedItemPosition())) {
+            DisplayToast(getString(R.string.please_select_an_expiration_month));
+            return false;
+        }
+
+        if (!PaymentValidation.validateExpirationYear(yearSpinner.getSelectedItemPosition())) {
+            DisplayToast(getString(R.string.please_select_an_expiration_year));
+            return false;
+        }
+
+        if (!PaymentValidation.validateSecurityCodeLength(securityCode.getText().toString())) {
+            DisplayToast(getString(R.string.cvv_must_be_3_digits));
+            return false;
+        }
+
+        if (!PaymentValidation.validateCardHolderName(cardHolderName.getText().toString())) {
+            DisplayToast(getString(R.string.card_holder_name_is_required));
+            return false;
+        }
+
+        if (!PaymentValidation.validateAddress(zipCode.getText().toString())) {
+            DisplayToast(getString(R.string.address_must_be_filled));
+            return false;
+        }
+
+        return true;
     }
+
     private void clearCart(SharedPreferences sharedPrefs) {
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putString("cart", "[]");
@@ -200,5 +232,15 @@ public class PaymentScreen extends Fragment {
     }
     private void DisplayToast(String msg) {
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+    private void navigateToCartScreen() {
+        Fragment cartScreenFragment = new CartScreen();
+        if (getFragmentManager() != null) {
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_frame_layout, cartScreenFragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 }
