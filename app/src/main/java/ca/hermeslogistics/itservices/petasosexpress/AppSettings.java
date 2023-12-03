@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
@@ -24,6 +23,7 @@ import androidx.fragment.app.Fragment;
  */
 public class AppSettings extends Fragment {
 
+    // Constants for shared preferences keys
     protected static final String PREFS_NAME = "UserSettings";
     public static final String THEME_KEY = "theme_mode";
     protected static final String ORIENTATION_KEY = "orientation_mode";
@@ -32,6 +32,7 @@ public class AppSettings extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Determine device orientation
         int orientation = getResources().getConfiguration().orientation;
         View view;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -40,24 +41,29 @@ public class AppSettings extends Fragment {
             view = inflater.inflate(R.layout.app_setttings_landscape, container, false);
         }
 
+        // Initialize UI elements
         ToggleButton toggleTheme = view.findViewById(R.id.toggle_theme);
         ToggleButton toggleOrientation = view.findViewById(R.id.toggle_portrait_landscape);
         ToggleButton toggleNotifications = view.findViewById(R.id.switch_notifications);
         EditText editTextAddress = view.findViewById(R.id.editTextText);
 
+        // Retrieve saved settings and apply them
         SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
         applySavedSettings(getActivity());
 
+        // Retrieve saved values from shared preferences
         boolean isDarkMode = settings.getBoolean(THEME_KEY, false);
         boolean isLandscape = settings.getBoolean(ORIENTATION_KEY, false);
         boolean areNotificationsEnabled = settings.getBoolean(NOTIFICATIONS_KEY, true);
         String savedAddress = settings.getString(ADDRESS_KEY, "");
 
+        // Set UI elements based on saved values
         toggleTheme.setChecked(isDarkMode);
         toggleOrientation.setChecked(isLandscape);
         toggleNotifications.setChecked(areNotificationsEnabled);
         editTextAddress.setText(savedAddress);
 
+        // Theme toggle button click listener
         toggleTheme.setOnClickListener(v -> {
             boolean isChecked = toggleTheme.isChecked();
             AppCompatDelegate.setDefaultNightMode(isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
@@ -66,6 +72,7 @@ public class AppSettings extends Fragment {
             settings.edit().putBoolean(THEME_KEY, isChecked).apply();
         });
 
+        // Orientation toggle button click listener
         toggleOrientation.setOnClickListener(v -> {
             boolean isChecked = toggleOrientation.isChecked();
             getActivity().setRequestedOrientation(isChecked ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -73,12 +80,14 @@ public class AppSettings extends Fragment {
             settings.edit().putBoolean(ORIENTATION_KEY, isChecked).apply();
         });
 
+        // Notifications toggle button click listener
         toggleNotifications.setOnClickListener(v -> {
             boolean isEnabled = toggleNotifications.isChecked();
             settings.edit().putBoolean(NOTIFICATIONS_KEY, isEnabled).apply();
             DisplayToast(isEnabled ? "Notifications enabled" : "Notifications disabled");
         });
 
+        // Address text field change listener
         editTextAddress.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -95,10 +104,12 @@ public class AppSettings extends Fragment {
         return view;
     }
 
+    // Display Toast message
     private void DisplayToast(String msg) {
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
+    // Apply saved settings to the activity
     public static void applySavedSettings(Activity activity) {
         SharedPreferences settings = activity.getSharedPreferences(PREFS_NAME, 0);
         if (settings.getBoolean(THEME_KEY, false)) {

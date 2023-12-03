@@ -5,13 +5,13 @@
  Dylan Ashton | ID: n01442206
  Ahmad Aljawish | ID: n01375348-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/logo"
-        tools:context=".AppSettings"
-        android:id="@+id/AppSettings">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/logo"
+    tools:context=".AppSettings"
+    android:id="@+id/AppSettings">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/relativeLayout"
@@ -23,7 +23,6 @@
         tools:layout_editor_absoluteY="37dp">
 
         <!-- Notifications Switch -->
-
         <TextView
             android:id="@+id/label_notifications"
             android:layout_width="wrap_content"
@@ -35,7 +34,6 @@
             app:layout_constraintStart_toStartOf="@+id/label_dark_mode"
             app:layout_constraintTop_toBottomOf="@+id/label_dark_mode" />
 
-
         <ToggleButton
             android:id="@+id/switch_notifications"
             android:layout_width="wrap_content"
@@ -46,6 +44,7 @@
             app:layout_constraintStart_toEndOf="@+id/label_notifications"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
+        <!-- Portrait/Landscape Toggle -->
         <ToggleButton
             android:id="@+id/toggle_portrait_landscape"
             android:layout_width="wrap_content"
@@ -70,6 +69,7 @@
             app:layout_constraintStart_toStartOf="@+id/label_notifications"
             app:layout_constraintTop_toBottomOf="@+id/label_notifications" />
 
+        <!-- Dark Mode Toggle -->
         <TextView
             android:id="@+id/label_dark_mode"
             android:layout_width="wrap_content"
@@ -115,7 +115,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <ImageView
             android:id="@+id/myImageView2"
             android:layout_width="415dp"
@@ -126,11 +125,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
 </FrameLayout>
-
-
-
