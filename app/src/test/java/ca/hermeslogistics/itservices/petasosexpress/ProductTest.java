@@ -44,4 +44,10 @@ public class ProductTest {
         product.setQuantity(10);
         assertEquals(10, product.getQuantity());
     }
+    @Test
+    public void getName() {
+        assertNotNull(product.getName());
+        assertEquals("Apple", product.getName());
+    }
+
 }
