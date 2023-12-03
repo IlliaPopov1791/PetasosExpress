@@ -41,4 +41,8 @@ public class PaymentValidationTest {
     public void testInvalidExpirationYear() {
         assertFalse(validateExpirationYear(0)); //'no selection'
     }
+    @Test
+    public void testValidSecurityCode() {
+        assertTrue(validateSecurityCodeLength("123"));
+    }
 }
