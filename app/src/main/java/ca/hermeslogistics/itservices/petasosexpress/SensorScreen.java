@@ -1,5 +1,7 @@
+// Import necessary packages
 package ca.hermeslogistics.itservices.petasosexpress;
 
+// Import Android classes and components
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
@@ -73,11 +75,13 @@ public class SensorScreen extends Fragment {
     private String AssignedPetasos = "Petasos000";
     private static final int NOTIFICATION_PERMISSION_REQUEST_CODE = 100;
 
+    // Constructor
     public SensorScreen() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Initialize Firebase Firestore
         db = FirebaseFirestore.getInstance();
 
         // Determine the device's current orientation
@@ -91,19 +95,21 @@ public class SensorScreen extends Fragment {
             view = inflater.inflate(R.layout.sensor_screen_landscape, container, false);
         }
 
+        // Check and initialize assigned order
         checkAssignedOrder(view);
         // Initialize components for each sensor
-
 
         return view;
     }
 
+    // Method to initialize Distance Sensor components
     private void initializeDistanceSensor(View view) {
         listView = view.findViewById(R.id.listView);
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, dateList);
         listView.setAdapter(adapter);
     }
 
+    // Method to initialize Balance Sensor components
     private void initializeBalanceSensor(View view) {
         xAxisProgressBar = view.findViewById(R.id.xAxisProgressBar);
         yAxisProgressBar = view.findViewById(R.id.yAxisProgressBar);
@@ -113,17 +119,20 @@ public class SensorScreen extends Fragment {
         zAxisValue = view.findViewById(R.id.zAxisValue);
     }
 
+    // Method to initialize Proximity Sensor components
     private void initializeProximitySensor(View view) {
         txtProximity = view.findViewById(R.id.textView2);
         imgStatus = view.findViewById(R.id.imgStatus);
         progressBar = view.findViewById(R.id.proximityProgressBar);
     }
 
+    // Method to initialize Motor Sensor components
     private void initializeMotorSensor(View view) {
         motorProgressBar = view.findViewById(R.id.motorProgressBar);
         textViewMotorSpeed = view.findViewById(R.id.textViewMotorSpeed);
     }
 
+    // Method to initialize all sensors
     private void initializeSensors(View view){
         // Initialize components
         initializeDistanceSensor(view);
@@ -136,6 +145,7 @@ public class SensorScreen extends Fragment {
         setupSensorListeners(sensorDocumentPath);
     }
 
+    // Method to set up listeners for all sensors
     private void setupSensorListeners(String sensorDocumentPath) {
         DocumentReference sensorDocRef = db.document(sensorDocumentPath);
 
@@ -145,11 +155,13 @@ public class SensorScreen extends Fragment {
         setupRangeSensors(sensorDocRef);
     }
 
+    // Method to set up listener for Balance Sensor
     private void setupBalanceSensor(DocumentReference sensorDocRef) {
         sensorDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
                 if (e != null) {
+                    // Handle server error
                     xAxisValue.setText(R.string.server_error);
                     yAxisValue.setText(R.string.server_error);
                     zAxisValue.setText(R.string.server_error);
@@ -157,6 +169,7 @@ public class SensorScreen extends Fragment {
                 }
 
                 if ((snapshot != null && snapshot.exists() && isAdded())) {
+                    // If snapshot exists, update Balance Sensor values
                     Number xAxis = snapshot.getLong("X-axis");
                     Number yAxis = snapshot.getLong("Y-axis");
                     Number zAxis = snapshot.getLong("Z-axis");
@@ -165,6 +178,7 @@ public class SensorScreen extends Fragment {
                     updateAxis(yAxisProgressBar, yAxisValue, yAxis);
                     updateAxis(zAxisProgressBar, zAxisValue, zAxis);
                 } else {
+                    // If no data, display appropriate message
                     xAxisValue.setText(R.string.no_data);
                     yAxisValue.setText(R.string.no_data);
                     zAxisValue.setText(R.string.no_data);
@@ -173,17 +187,19 @@ public class SensorScreen extends Fragment {
         });
     }
 
-
+    // Method to set up listener for Motor Sensor
     private void setupMotorSensor(DocumentReference sensorDocRef) {
         sensorDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
                 if (e != null) {
+                    // Handle server error
                     textViewMotorSpeed.setText(R.string.server_error);
                     return;
                 }
 
                 if ((snapshot != null && snapshot.exists() && isAdded())) {
+                    // If snapshot exists, update Motor Sensor values
                     Double rpm = snapshot.getDouble("rps");
                     if (rpm != null) {
                         String formattedRPM = String.format(Locale.getDefault(), "%.2f", rpm);
@@ -191,25 +207,29 @@ public class SensorScreen extends Fragment {
                         motorProgressBar.setProgress((int) Math.round(rpm));
                         textViewMotorSpeed.setText(getString(R.string.rpm_value_placeholder, formattedRPM));
                     } else {
+                        // If no data, display appropriate message
                         textViewMotorSpeed.setText(R.string.no_data);
                     }
                 } else {
+                    // If no data, display appropriate message
                     textViewMotorSpeed.setText(R.string.no_data);
                 }
             }
         });
     }
 
-    //distance and prox
+    // Method to set up listeners for Range Sensors (Distance and Proximity Sensors)
     private void setupRangeSensors(DocumentReference sensorDocRef) {
         sensorDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
                 if (e != null) {
+                    // Handle server error
                     txtProximity.setText(R.string.server_error);
                     return;
                 }
                 if ((snapshot != null && snapshot.exists())) {
+                    // If snapshot exists, update Distance Sensor values
                     Double pulseDuration = snapshot.getDouble("Pulse Duration");
                     Double speedOfSound = snapshot.getDouble("Speed of Sound");
 
@@ -230,14 +250,17 @@ public class SensorScreen extends Fragment {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
                 if (e != null) {
+                    // Handle server error
                     txtProximity.setText(R.string.server_error);
                     return;
                 }
 
                 if ((snapshot != null && snapshot.exists() && isAdded())) {
+                    // If snapshot exists, update Proximity Sensor values
                     proximity = snapshot.getLong("proximity");
                     updateProximityUI();
                 } else {
+                    // If no data, display appropriate message
                     txtProximity.setText(String.format(Locale.getDefault(), "%.2f m", distance));
                     updateImageViewBasedOnDistance(imgStatus, distance);
                     updateProgressBarOnDis(progressBar, distance);
@@ -246,6 +269,7 @@ public class SensorScreen extends Fragment {
         });
     }
 
+    // Method to update Distance Sensor UI components
     private void updateDistanceUI() {
         if (distance != null) {
             if (distance >= 0.2 && distance <= 4.0) {
@@ -257,21 +281,24 @@ public class SensorScreen extends Fragment {
             updateImageViewBasedOnDistance(imgStatus, distance);
             updateProgressBarOnDis(progressBar, distance);
         } else {
+            // If no data, display appropriate message
             txtProximity.setText(R.string.no_data);
         }
     }
 
+    // Method to update Proximity Sensor UI components
     private void updateProximityUI() {
         if (proximity != null && proximity.intValue() <= 20) {
             txtProximity.setText(String.format(Locale.getDefault(), "%d cm", proximity.intValue()));
             updateImageViewBasedOnProximity(imgStatus, proximity.intValue());
             updateProgressBarOnProx(progressBar, proximity.intValue());
         } else {
+            // If no data or proximity is greater than 20, update Distance UI components
             updateDistanceUI();
         }
     }
 
-
+    // Method to update Balance Sensor axis values and progress bars
     private void updateAxis(ProgressBar progressBar, TextView valueText, Number axisValue) {
         if (axisValue != null) {
             int value = axisValue.intValue();
@@ -279,10 +306,12 @@ public class SensorScreen extends Fragment {
             progressBar.setProgress(normalizedProgress);
             valueText.setText(getString(R.string.placeholder, value));
         } else {
+            // If no data, display appropriate message
             valueText.setText(R.string.no_data);
         }
     }
 
+    // Method to update Proximity Sensor image based on proximity value
     private void updateImageViewBasedOnProximity(ImageView imageView, int proximityValue) {
         if (proximityValue < 10) {
             imageView.setImageResource(R.mipmap.statsu_cancel_round);
@@ -292,6 +321,7 @@ public class SensorScreen extends Fragment {
         }
     }
 
+    // Method to update Distance Sensor image based on distance value
     private void updateImageViewBasedOnDistance(ImageView imageView, double distance) {
         if (distance > 0.4) {
             imageView.setImageResource(R.mipmap.status_good_round);
@@ -300,6 +330,7 @@ public class SensorScreen extends Fragment {
         }
     }
 
+    // Method to update progress bar for Proximity Sensor based on proximity value
     private void updateProgressBarOnProx(ProgressBar progressBar, Integer proximityValue) {
         final int minProximity = 20; // Min value for proximity to be used in cm
         int progressValue;
@@ -315,7 +346,7 @@ public class SensorScreen extends Fragment {
         progressBar.setProgress(progressValue);
     }
 
-    private void updateProgressBarOnDis(ProgressBar progressBar, Double distance) {
+        private void updateProgressBarOnDis(ProgressBar progressBar, Double distance) {
         final int maxDistance = 400; // Max distance in cm (4 meters)
         int progressValue;
 
