@@ -53,4 +53,8 @@ public class PaymentValidationTest {
     public void testValidCardHolderName() {
         assertTrue(validateCardHolderName("John Doe"));
     }
+    @Test
+    public void testInvalidCardHolderName() {
+        assertFalse(validateCardHolderName(""));
+    }
 }
