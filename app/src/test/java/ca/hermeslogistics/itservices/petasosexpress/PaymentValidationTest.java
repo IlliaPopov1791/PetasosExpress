@@ -49,4 +49,8 @@ public class PaymentValidationTest {
     public void testInvalidSecurityCode() {
         assertFalse(validateSecurityCodeLength("12"));
     }
+    @Test
+    public void testValidCardHolderName() {
+        assertTrue(validateCardHolderName("John Doe"));
+    }
 }
