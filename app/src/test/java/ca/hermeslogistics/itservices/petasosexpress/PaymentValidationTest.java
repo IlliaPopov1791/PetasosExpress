@@ -61,4 +61,8 @@ public class PaymentValidationTest {
     public void testValidAddress() {
         assertTrue(validateAddress("Petasos 12345"));
     }
+    @Test
+    public void testInvalidAddress() {
+        assertFalse(validateAddress(""));
+    }
 }
