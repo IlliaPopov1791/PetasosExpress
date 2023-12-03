@@ -1,9 +1,11 @@
 package ca.hermeslogistics.itservices.petasosexpress;
+
 /*
  * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
  * Student ID: n01421791, n01479878, n01442206, n01375348
  * Section: B
  */
+
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.pm.PackageManager;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -36,6 +39,7 @@ import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.Timestamp;
+
 import java.util.Arrays;
 
 public class SensorGPS extends Fragment implements OnMapReadyCallback {
@@ -47,33 +51,40 @@ public class SensorGPS extends Fragment implements OnMapReadyCallback {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.sensor_gps, container, false);
+
+        // Initialize the map fragment and set up the map asynchronously
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
+
         return view;
     }
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
+        // Initialize the Google Map
         mMap = googleMap;
 
-        //Checking if we have location permission
+        // Check for location permission and enable my location if granted
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
         }
+
+        // Check for an assigned order and start listening for location updates
         checkAssignedOrder();
         listenForLocationUpdates();
     }
 
     private void listenForLocationUpdates() {
+        // Get the Firestore instance and the reference to the Petasos record
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference locationRef = db.collection("PetasosRecord")
-                .document(AssignedPetasos);
+        DocumentReference locationRef = db.collection("PetasosRecord").document(AssignedPetasos);
 
-        // Listen for real-time updates
+        // Listen for real-time updates on the Petasos location
         locationRef.addSnapshotListener((snapshot, e) -> {
             if (e != null) {
                 // Handle error
@@ -81,6 +92,7 @@ public class SensorGPS extends Fragment implements OnMapReadyCallback {
             }
 
             if ((snapshot != null && snapshot.exists() && isAdded())) {
+                // Extract the GeoPoint from the snapshot and update the map
                 GeoPoint geoPoint = snapshot.getGeoPoint("Location");
                 if (geoPoint != null) {
                     LatLng newLocation = new LatLng(geoPoint.getLatitude(), geoPoint.getLongitude());
@@ -91,6 +103,7 @@ public class SensorGPS extends Fragment implements OnMapReadyCallback {
     }
 
     private void updateMap(LatLng location) {
+        // Update the map with the current location marker
         if (mMap != null) {
             if (currentLocationMarker != null) {
                 currentLocationMarker.remove();
@@ -108,11 +121,13 @@ public class SensorGPS extends Fragment implements OnMapReadyCallback {
         }
     }
 
-
     private void requestLocationPermission() {
+        // Request location permission
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
     }
-    private BitmapDescriptor resizeMapIcons(String iconName, int width, int height){
+
+    private BitmapDescriptor resizeMapIcons(String iconName, int width, int height) {
+        // Resize the map icon to a specified width and height
         Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier(iconName, "drawable", getActivity().getPackageName()));
         Bitmap resizedBitmap = Bitmap.createScaledBitmap(imageBitmap, width, height, false);
         return BitmapDescriptorFactory.fromBitmap(resizedBitmap);
@@ -120,18 +135,20 @@ public class SensorGPS extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        // Handle the result of the location permission request
         if (requestCode == MY_LOCATION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     mMap.setMyLocationEnabled(true);
                 }
             } else {
-                //No marker :(
+                // No marker :(
             }
         }
     }
 
     private void checkAssignedOrder() {
+        // Check if there is an assigned order for the current user
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
@@ -139,6 +156,7 @@ public class SensorGPS extends Fragment implements OnMapReadyCallback {
         if (currentUser != null) {
             String userEmail = currentUser.getEmail();
 
+            // Query the ordered orders for the current user
             Query orderedQuery = db.collection("orderRecord")
                     .whereEqualTo("User", userEmail)
                     .whereEqualTo("status", "ordered")
@@ -147,19 +165,21 @@ public class SensorGPS extends Fragment implements OnMapReadyCallback {
 
             orderedQuery.get().addOnCompleteListener(task -> {
                 if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                    //Found the oldest 'ordered' order
+                    // Found the oldest 'ordered' order, handle it
                     DocumentSnapshot orderedDocument = task.getResult().getDocuments().get(0);
                     handleOrderedOrder(orderedDocument);
                 } else {
+                    // If no 'ordered' orders found, check for 'in a queue' orders
                     Query inQueueQuery = db.collection("orderRecord")
                             .whereEqualTo("User", userEmail)
                             .whereEqualTo("status", "in a queue");
 
                     inQueueQuery.get().addOnCompleteListener(queueTask -> {
                         if (queueTask.isSuccessful() && !queueTask.getResult().isEmpty()) {
+                            // If 'in a queue' orders found, show a queue alert
                             showQueueAlertDialog();
                         } else {
-                            //No orders found at all
+                            // If no orders found at all, show a no order alert
                             showNoOrderAlertDialog();
                         }
                     });
@@ -167,15 +187,18 @@ public class SensorGPS extends Fragment implements OnMapReadyCallback {
             });
         }
     }
+
     private void handleOrderedOrder(DocumentSnapshot document) {
-        // Extract Petasos ID from the delivery reference
+        // Extract Petasos ID from the delivery reference and start tracking
         DocumentReference deliveryRef = (DocumentReference) document.get("delivery");
         String petasosId = deliveryRef.getId();
         AssignedPetasos = petasosId;
         Toast.makeText(getContext(), "Tracking your oldest order", Toast.LENGTH_LONG).show();
         listenForLocationUpdates();
     }
+
     private void showQueueAlertDialog() {
+        // Show an alert dialog for orders 'in a queue'
         new AlertDialog.Builder(getContext())
                 .setTitle(getString(R.string.queue_alert_title))
                 .setMessage(getString(R.string.queue_alert_message))
@@ -185,6 +208,7 @@ public class SensorGPS extends Fragment implements OnMapReadyCallback {
     }
 
     private void showNoOrderAlertDialog() {
+        // Show an alert dialog for no orders found
         new AlertDialog.Builder(getContext())
                 .setTitle(getString(R.string.no_order_alert_title))
                 .setMessage(getString(R.string.no_order_alert_message))
