@@ -2,6 +2,7 @@ package ca.hermeslogistics.itservices.petasosexpress;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,8 +31,15 @@ public class ProductScreen extends Fragment {
     private int productId;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.product_screen, container, false);
+        View view;
 
+        // Set the layout based on the orientation
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            view = inflater.inflate(R.layout.product_screen, container, false);
+        } else {
+            view = inflater.inflate(R.layout.product_screen_landscape, container, false);
+        }
         ImageView productImage = view.findViewById(R.id.product_image);
         TextView productNameTextView = view.findViewById(R.id.product_name);
         TextView productProducerTextView = view.findViewById(R.id.product_producer);
@@ -40,6 +48,7 @@ public class ProductScreen extends Fragment {
         Button riseButton = view.findViewById(R.id.increase_button);
         Button dropButton = view.findViewById(R.id.decrease_button);
         Button cartButton = view.findViewById(R.id.cart_button);
+
 
         // Set the initial quantity
         int initialQuantity = 1;

@@ -9,7 +9,6 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -28,13 +27,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.GetTokenResult;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginScreen extends AppCompatActivity {
@@ -96,11 +93,11 @@ public class LoginScreen extends AppCompatActivity {
                 }
 
                 // Validating credentials
-                if (!ValidationUtils.isValidEmail(email)) {
+                if (!GeneralValidationUtils.isValidEmail(email)) {
                     Toast.makeText(LoginScreen.this, R.string.invalid_email_format, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (!ValidationUtils.isValidPassword(password)) {
+                if (!GeneralValidationUtils.isValidPassword(password)) {
                     Toast.makeText(LoginScreen.this, R.string.invalid_password_format1, Toast.LENGTH_SHORT).show();
                     Toast.makeText(LoginScreen.this, R.string.invalid_password_format2, Toast.LENGTH_SHORT).show();
                     return;

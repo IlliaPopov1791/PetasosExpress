@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     @Override
     public void onBackPressed() {
+        // super call causes problematic behaviour
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.main_frame_layout);
 
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -305,22 +306,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, fragmentToLoad).commit();
     }
-    /*
-    private void signOut() {
-        // Sign out from Firebase (Important!!!)
-        FirebaseAuth.getInstance().signOut();
-
-        // Clear "Remember Me" preference
-        clearRememberMe(this);
-
-        // Go back to the Login Screen
-        Intent intent = new Intent(this, LoginScreen.class);
-        // Clearing the stack to prevent going back to the MainActivity after signing out
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
-    }
-    */
 
     private void signOut() {
         // Sign out from Firebase

@@ -1,7 +1,5 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
-import static java.security.AccessController.getContext;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -97,12 +95,12 @@ public class SignupScreen extends AppCompatActivity {
                 }
 
                 // Validating credentials
-                if (!ValidationUtils.isValidEmail(email)) {
+                if (!GeneralValidationUtils.isValidEmail(email)) {
                     Toast.makeText(SignupScreen.this, R.string.invalid_email_format, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if (!ValidationUtils.isValidPhone(phone)) {
+                if (!GeneralValidationUtils.isValidPhone(phone)) {
                     Toast.makeText(SignupScreen.this, R.string.invalid_phone_format, Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -112,7 +110,7 @@ public class SignupScreen extends AppCompatActivity {
                     return;
                 }
 
-                if (!ValidationUtils.isValidPassword(password)) {
+                if (!GeneralValidationUtils.isValidPassword(password)) {
                     Toast.makeText(SignupScreen.this, R.string.invalid_password_format1, Toast.LENGTH_SHORT).show();
                     Toast.makeText(SignupScreen.this, R.string.invalid_password_format2, Toast.LENGTH_SHORT).show();
                     return;

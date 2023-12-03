@@ -165,11 +165,11 @@
     <string name="proceed_to_checkout">Proceed to Checkout</string>
     <string name="total_amount">Total Amount:</string>
     <string name="remove">Remove</string>
-    <string name="zip_code">Zip Code:</string>
+    <string name="address">Address:</string>
     <string name="credit_card_number_must_be_16_digits">Credit card number must be 16 digits</string>
     <string name="cvv_must_be_3_digits">CVV must be 3 digits</string>
     <string name="card_holder_name_is_required">Card holder name is required</string>
-    <string name="zip_code_must_be_6_characters">Zip code must be 6 characters</string>
+    <string name="address_must_be_filled">Address is required</string>
     <string name="name_as_it_is_written_on_the_card">Name as it is written on the card</string>
     <string name="added_to_cart">Added to Cart</string>
     <string name="please_select_an_expiration_month">Please select an expiration month</string>

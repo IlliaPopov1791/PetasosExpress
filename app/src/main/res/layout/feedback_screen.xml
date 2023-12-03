@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="80dp"
         android:numStars="5"
         android:progressTint="@color/wine"
         android:stepSize="1.0"
@@ -98,12 +98,28 @@
         android:layout_width="50dp"
         android:layout_height="52dp"
         android:layout_gravity="center"
+        android:layout_marginStart="20dp"
         android:indeterminate="false"
         android:max="400"
         android:progress="1"
         android:progressDrawable="@drawable/circular_progress_bar"
         app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
         app:layout_constraintStart_toEndOf="@+id/ratingBar"
-        app:layout_constraintTop_toTopOf="@+id/ratingBar" />
+        app:layout_constraintTop_toTopOf="@+id/ratingBar"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/myImageView"
+        android:layout_width="415dp"
+        android:layout_height="160dp"
+        android:rotation="90"
+        android:scaleY="1.7"
+        android:src="@mipmap/border_decor_foreground"
+        app:layout_constraintBottom_toTopOf="@+id/editTextName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+        app:layout_constraintVertical_bias="0.739" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

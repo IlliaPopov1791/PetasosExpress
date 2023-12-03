@@ -1,5 +1,6 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -40,7 +41,15 @@ public class CartScreen extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.cart_screen, container, false);
+        View view;
+
+        // Set the layout based on the orientation
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            view = inflater.inflate(R.layout.cart_screen, container, false);
+        } else {
+            view = inflater.inflate(R.layout.cart_screen_landscape, container, false);
+        }
 
         cartItemsListView = view.findViewById(R.id.cart_items_list);
         totalAmountTextView = view.findViewById(R.id.total_amount);

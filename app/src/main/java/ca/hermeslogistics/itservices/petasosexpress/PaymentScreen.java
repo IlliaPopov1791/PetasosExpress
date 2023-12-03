@@ -3,6 +3,7 @@ package ca.hermeslogistics.itservices.petasosexpress;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -41,8 +42,15 @@ public class PaymentScreen extends Fragment {
     private String totalAmount;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.payment_screen, container, false);
+        View view;
 
+        // Set the layout based on the orientation
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            view = inflater.inflate(R.layout.payment_screen, container, false);
+        } else {
+            view = inflater.inflate(R.layout.payment_screen_landscape, container, false);
+        }
         //Firebase components
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
@@ -52,10 +60,14 @@ public class PaymentScreen extends Fragment {
         EditText creditCardNumber = view.findViewById(R.id.credit_card_number);
         EditText securityCode = view.findViewById(R.id.security_code);
         EditText cardHolderName = view.findViewById(R.id.card_holder_name);
-        EditText zipCode = view.findViewById(R.id.zip_code);
+        EditText address = view.findViewById(R.id.zip_code);
         Button payButton = view.findViewById(R.id.pay_button);
         monthSpinner = view.findViewById(R.id.spinner_month);
         yearSpinner = view.findViewById(R.id.spinner_year);
+
+        SharedPreferences settings = getActivity().getSharedPreferences(AppSettings.PREFS_NAME, Context.MODE_PRIVATE);
+        String savedAddress = settings.getString(AppSettings.ADDRESS_KEY, "");
+        address.setText(savedAddress);
 
         List<String> months = Arrays.asList(getResources().getStringArray(R.array.months));
         List<String> years = Arrays.asList(getResources().getStringArray(R.array.year_array));
@@ -76,8 +88,9 @@ public class PaymentScreen extends Fragment {
         payButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validatePaymentDetails(creditCardNumber, securityCode, cardHolderName, zipCode)) {
-                    createOrder(zipCode.getText().toString(), totalAmount);
+                if (validatePaymentDetails(creditCardNumber, securityCode, cardHolderName, address)) {
+                    createOrder(address.getText().toString(), totalAmount);
+                    navigateToCartScreen();
                 }
             }
         });
@@ -178,37 +191,40 @@ public class PaymentScreen extends Fragment {
 
 
     private boolean validatePaymentDetails(EditText creditCardNumber, EditText securityCode, EditText cardHolderName, EditText zipCode) {
-        if (creditCardNumber.getText().toString().length() != 16) {
+        //Needed to change again, otherwise it won't show toasts
+        if (!PaymentValidation.validateCreditCardNumberLength(creditCardNumber.getText().toString())) {
             DisplayToast(getString(R.string.credit_card_number_must_be_16_digits));
             return false;
         }
-        if (monthSpinner.getSelectedItemPosition() == 0) {
+
+        if (!PaymentValidation.validateExpirationMonth(monthSpinner.getSelectedItemPosition())) {
             DisplayToast(getString(R.string.please_select_an_expiration_month));
             return false;
         }
 
-        if (yearSpinner.getSelectedItemPosition() == 0) {
+        if (!PaymentValidation.validateExpirationYear(yearSpinner.getSelectedItemPosition())) {
             DisplayToast(getString(R.string.please_select_an_expiration_year));
             return false;
         }
 
-        if (securityCode.getText().toString().length() != 3) {
+        if (!PaymentValidation.validateSecurityCodeLength(securityCode.getText().toString())) {
             DisplayToast(getString(R.string.cvv_must_be_3_digits));
             return false;
         }
 
-        if (cardHolderName.getText().toString().trim().isEmpty()) {
+        if (!PaymentValidation.validateCardHolderName(cardHolderName.getText().toString())) {
             DisplayToast(getString(R.string.card_holder_name_is_required));
             return false;
         }
 
-        if (zipCode.getText().toString().length() != 6) {
-            DisplayToast(getString(R.string.zip_code_must_be_6_characters));
+        if (!PaymentValidation.validateAddress(zipCode.getText().toString())) {
+            DisplayToast(getString(R.string.address_must_be_filled));
             return false;
         }
 
         return true;
     }
+
     private void clearCart(SharedPreferences sharedPrefs) {
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putString("cart", "[]");
@@ -216,5 +232,15 @@ public class PaymentScreen extends Fragment {
     }
     private void DisplayToast(String msg) {
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+    private void navigateToCartScreen() {
+        Fragment cartScreenFragment = new CartScreen();
+        if (getFragmentManager() != null) {
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_frame_layout, cartScreenFragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 }
