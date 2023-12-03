@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
- Illia M. Popov | ID: n01421791
- William Margalik | ID: n01479878
- Dylan Ashton | ID: n01442206
- Ahmad Aljawish | ID: n01375348-->
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+Illia M. Popov | ID: n01421791
+William Margalik | ID: n01479878
+Dylan Ashton | ID: n01442206
+Ahmad Aljawish | ID: n01375348-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
@@ -15,6 +16,7 @@
     android:padding="16dp"
     tools:context=".LoginScreen">
 
+    <!-- Logo Image -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="339dp"
@@ -26,6 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Remember Me Checkbox -->
     <CheckBox
         android:id="@+id/remember"
         android:layout_width="231dp"
@@ -35,6 +38,7 @@
         app:layout_constraintStart_toStartOf="@+id/editTextPassword"
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
+    <!-- Email Input -->
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="233dp"
@@ -51,6 +55,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
+    <!-- Login Button -->
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="241dp"
@@ -65,6 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
         app:layout_constraintVertical_bias="0.21" />
 
+    <!-- Google Sign-In Button -->
     <Button
         android:id="@+id/buttonGoogleLogin"
         android:layout_width="245dp"
@@ -77,6 +83,7 @@
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
 
+    <!-- Sign-Up Button -->
     <Button
         android:id="@+id/buttonSignUp"
         android:layout_width="241dp"
@@ -90,6 +97,7 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
         app:layout_constraintVertical_bias="0.865" />
 
+    <!-- Password Input -->
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="234dp"
