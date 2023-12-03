@@ -62,5 +62,9 @@ public class ProductTest {
         assertNotNull(product.getProducer());
         assertEquals("FruitCorp", product.getProducer());
     }
-
+    @Test
+    public void getType() {
+        assertNotNull(product.getType());
+        assertEquals("Fruit", product.getType());
+    }
 }
