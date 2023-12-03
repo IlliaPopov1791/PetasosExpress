@@ -169,7 +169,7 @@
     <string name="credit_card_number_must_be_16_digits">Le numéro de carte de crédit doit comporter 16chiffres</string>
     <string name="cvv_must_be_3_digits">Le CVV doit comporter 3 chiffres</string>
     <string name="card_holder_name_is_required">Le nom du titulaire de la carte est requis</string>
-    <string name="zip_code_must_be_6_characters">Le code postal doit comporter 6 caractères</string>
+    <string name="address_must_be_filled">L\'adresse est requise</string>
     <string name="name_as_it_is_written_on_the_card">Nom tel qu\'il est écrit sur la carte</string>
     <string name="added_to_cart">Ajouté au panier</string>
     <string name="please_select_an_expiration_month">Veuillez sélectionner un mois d\'expiration</string>

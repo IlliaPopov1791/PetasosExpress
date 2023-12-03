@@ -1,6 +1,6 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
-public class ValidationUtils {
+public class GeneralValidationUtils {
     //Method to validate email
     protected static boolean isValidEmail(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();

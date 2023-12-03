@@ -62,4 +62,5 @@ dependencies {
 
     // Robletric
     testImplementation ("org.robolectric:robolectric:4.11.1")
+    testImplementation ("org.mockito:mockito-core:4.0.0")
 }

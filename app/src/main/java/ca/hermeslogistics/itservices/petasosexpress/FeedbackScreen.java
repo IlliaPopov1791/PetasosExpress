@@ -109,22 +109,22 @@ public class FeedbackScreen extends Fragment {
             return;
         }
 
-        if (!ValidationUtils.isValidEmail(email)) {
+        if (!GeneralValidationUtils.isValidEmail(email)) {
             DisplayToast(getString(R.string.invalid_email_format));
             return;
         }
 
-        if (!ValidationUtils.isValidPhone(phone)) {
+        if (!GeneralValidationUtils.isValidPhone(phone)) {
             DisplayToast(getString(R.string.invalid_phone_format));
             return;
         }
 
-        if (!ValidationUtils.isValidComment(comment)) {
+        if (!GeneralValidationUtils.isValidComment(comment)) {
             DisplayToast("Please leave a comment");
             return;
         }
 
-        if (!ValidationUtils.isValidRating(rating)) {
+        if (!GeneralValidationUtils.isValidRating(rating)) {
             DisplayToast("Rating must be between 1.0 and 5.0");
             return;
         }

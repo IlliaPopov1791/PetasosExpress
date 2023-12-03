@@ -186,36 +186,12 @@ public class PaymentScreen extends Fragment {
 
 
     private boolean validatePaymentDetails(EditText creditCardNumber, EditText securityCode, EditText cardHolderName, EditText zipCode) {
-        if (creditCardNumber.getText().toString().length() != 16) {
-            DisplayToast(getString(R.string.credit_card_number_must_be_16_digits));
-            return false;
-        }
-        if (monthSpinner.getSelectedItemPosition() == 0) {
-            DisplayToast(getString(R.string.please_select_an_expiration_month));
-            return false;
-        }
-
-        if (yearSpinner.getSelectedItemPosition() == 0) {
-            DisplayToast(getString(R.string.please_select_an_expiration_year));
-            return false;
-        }
-
-        if (securityCode.getText().toString().length() != 3) {
-            DisplayToast(getString(R.string.cvv_must_be_3_digits));
-            return false;
-        }
-
-        if (cardHolderName.getText().toString().trim().isEmpty()) {
-            DisplayToast(getString(R.string.card_holder_name_is_required));
-            return false;
-        }
-
-        if (zipCode.getText().toString().length() != 6) {
-            DisplayToast(getString(R.string.zip_code_must_be_6_characters));
-            return false;
-        }
-
-        return true;
+        return PaymentValidation.validateCreditCardNumberLength(creditCardNumber.getText().toString()) &&
+                PaymentValidation.validateExpirationMonth(monthSpinner.getSelectedItemPosition()) &&
+                PaymentValidation.validateExpirationYear(yearSpinner.getSelectedItemPosition()) &&
+                PaymentValidation.validateSecurityCodeLength(securityCode.getText().toString()) &&
+                PaymentValidation.validateCardHolderName(cardHolderName.getText().toString()) &&
+                PaymentValidation.validateAddress(zipCode.getText().toString());
     }
     private void clearCart(SharedPreferences sharedPrefs) {
         SharedPreferences.Editor editor = sharedPrefs.edit();
