@@ -170,6 +170,9 @@
     <string name="email_already_in_use">This email is already in use</string>
     <string name="searching_for_category" translatable="false">Searching for items in category: %s</string>
     <string name="account_settings">Account Settings</string>
+    <string name="please_fill_the_name_field">Please fill the name field</string>
+    <string name="please_leave_a_comment">Please leave a comment</string>
+    <string name="rating_must_be_between_1_0_and_5_0">Rating must be between 1.0 and 5.0</string>
 
     <!-- Shopping Cart and Payment -->
     <string name="save_changes">Save Changes</string>
@@ -251,5 +254,10 @@
     <string name="no_order_alert_message">There is no order on your name, so no delivery robot is assigned to it. All sensor readings are in their default state.</string>
     <string name="ok">OK</string>
     <string name="cart_empty_message">Your cart is empty. Add items to proceed to checkout.</string>
+
+    <!-- Constants -->
+    <string name="min_distance_threshold">0.2</string>
+    <string name="max_distance_threshold">4.0</string>
+
 
 </resources>

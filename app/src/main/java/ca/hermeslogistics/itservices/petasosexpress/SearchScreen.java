@@ -76,34 +76,23 @@ public class SearchScreen extends Fragment {
         return view;
     }
 
-    // Fetch items from Firestore
+    // Fetch items from Firestore and update UI
     private void fetchItems(String initialQuery) {
         db.collection("goods").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                // Clear lists
                 productList.clear();
                 fullItemList.clear();
 
-                // Parse Firestore documents
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    String name = document.getString("name");
-                    Long id = document.getLong("id");
-                    Double price = document.getDouble("price");
-                    String producer = document.getString("producer");
-                    String type = document.getString("type");
-
-                    // Check for null values
-                    if (name != null && price != null) {
-                        Product product = new Product(name, id.intValue(), price, producer, type);
+                    Product product = parseDocument(document);
+                    if (product != null) {
                         fullItemList.add(product);
                         productList.add(product);
                     }
                 }
 
-                // Notify adapter
                 productAdapter.notifyDataSetChanged();
 
-                // Filter items based on initial query
                 if (!initialQuery.isEmpty()) {
                     filterAdapter(initialQuery);
                 }
@@ -111,6 +100,20 @@ public class SearchScreen extends Fragment {
                 Log.e("FetchItems", "Error fetching documents", task.getException());
             }
         });
+    }
+
+    // Parse a Firestore document into a Product object
+    private Product parseDocument(QueryDocumentSnapshot document) {
+        String name = document.getString("name");
+        Long id = document.getLong("id");
+        Double price = document.getDouble("price");
+        String producer = document.getString("producer");
+        String type = document.getString("type");
+
+        if (name != null && id != null && price != null) {
+            return new Product(name, id.intValue(), price, producer, type);
+        }
+        return null;
     }
 
     // Filter adapter based on the search query

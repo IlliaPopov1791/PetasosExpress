@@ -272,9 +272,9 @@ public class SensorScreen extends Fragment {
     // Method to update Distance Sensor UI components
     private void updateDistanceUI() {
         if (distance != null) {
-            if (distance >= 0.2 && distance <= 4.0) {
+            if (distance >= getResources().getInteger(R.integer.min_distance_threshold) / 100.0f && distance <= getResources().getInteger(R.integer.max_distance_threshold) / 100.0f) {
                 txtProximity.setText(String.format(Locale.getDefault(), "%.2f m", distance));
-            } else if (distance > 4.0) {
+            } else if (distance > getResources().getInteger(R.integer.max_distance_threshold) / 100.0f) {
                 txtProximity.setText(R.string.no_obstacles);
             }
 
@@ -288,7 +288,7 @@ public class SensorScreen extends Fragment {
 
     // Method to update Proximity Sensor UI components
     private void updateProximityUI() {
-        if (proximity != null && proximity.intValue() <= 20) {
+        if (proximity != null && proximity.intValue() <= getResources().getInteger(R.integer.proximity_max_value)) {
             txtProximity.setText(String.format(Locale.getDefault(), "%d cm", proximity.intValue()));
             updateImageViewBasedOnProximity(imgStatus, proximity.intValue());
             updateProgressBarOnProx(progressBar, proximity.intValue());
@@ -323,7 +323,7 @@ public class SensorScreen extends Fragment {
 
     // Method to update Distance Sensor image based on distance value
     private void updateImageViewBasedOnDistance(ImageView imageView, double distance) {
-        if (distance > 0.4) {
+        if (distance > getResources().getInteger(R.integer.min_distance_threshold) / 100.0f) {
             imageView.setImageResource(R.mipmap.status_good_round);
         } else {
             imageView.setImageResource(R.mipmap.status_warning_round);
@@ -332,7 +332,7 @@ public class SensorScreen extends Fragment {
 
     // Method to update progress bar for Proximity Sensor based on proximity value
     private void updateProgressBarOnProx(ProgressBar progressBar, Integer proximityValue) {
-        final int minProximity = 20; // Min value for proximity to be used in cm
+        final int minProximity = getResources().getInteger(R.integer.proximity_max_value); // Min value for proximity to be used in cm
         int progressValue;
 
         if (proximityValue != null && proximityValue <= minProximity) {
@@ -347,13 +347,13 @@ public class SensorScreen extends Fragment {
     }
 
         private void updateProgressBarOnDis(ProgressBar progressBar, Double distance) {
-        final int maxDistance = 400; // Max distance in cm (4 meters)
+        final int maxDistance = getResources().getInteger(R.integer.max_distance_threshold); // Max distance in cm (4 meters)
         int progressValue;
 
-        if (distance != null && distance <= 4.0 && distance >= 0.20) {
+        if (distance != null && distance <= getResources().getInteger(R.integer.max_distance_threshold) / 100.0f && distance >= getResources().getInteger(R.integer.min_distance_threshold) / 100.0f) {
             // Convert distance to cm and scale it for the progress bar
-            double scaledDistance = (4.0 - distance) * 100; // Convert to cm and invert
-            progressValue = (int) (scaledDistance * 400 / maxDistance);
+            double scaledDistance = (getResources().getInteger(R.integer.max_distance_threshold) / 100.0f - distance) * 100; // Convert to cm and invert
+            progressValue = (int) (scaledDistance * getResources().getInteger(R.integer.max_distance_threshold) / maxDistance);
         } else {
             progressValue = 0;
         }

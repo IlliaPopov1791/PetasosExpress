@@ -170,6 +170,9 @@
     <string name="email_already_in_use">Cette adresse e-mail est déjà utilisée</string>
     <string name="searching_for_category" translatable="false">Recherche d\'articles dans la catégorie : %s</string>
     <string name="account_settings">Paramètres du compte</string>
+    <string name="please_fill_the_name_field">Veuillez remplir le champ du nom</string>
+    <string name="please_leave_a_comment">Veuillez laisser un commentaire</string>
+    <string name="rating_must_be_between_1_0_and_5_0">La note doit être comprise entre 1,0 et 5,0</string>
 
     <!-- Shopping Cart and Payment -->
     <string name="save_changes">Enregistrer les modifications</string>
@@ -242,14 +245,17 @@
         <item>32</item>
         <item>33</item>
         <item>34</item>
-
-        <!-- Order Queue and Alerts -->
     </string-array>
+    <!-- Order Queue and Alerts -->
     <string name="queue_alert_title">Commande en file d\'attente</string>
     <string name="queue_alert_message">Nous rencontrons actuellement un nombre inhabituel de commandes. Votre commande est en file d\'attente et un robot de livraison lui sera assigné dès que possible.</string>
     <string name="no_order_alert_title">Aucune commande à suivre</string>
     <string name="no_order_alert_message">Il n\'y a aucune commande à votre nom, donc aucun robot de livraison ne lui est assigné. Toutes les lectures des capteurs sont dans leur état par défaut.</string>
     <string name="ok">OK</string>
     <string name="cart_empty_message">Votre panier est vide. Ajoutez des articles pour procéder au paiement.</string>
+
+    <!-- Constants -->
+    <string name="min_distance_threshold">0.2</string>
+    <string name="max_distance_threshold">4.0</string>
 
 </resources>

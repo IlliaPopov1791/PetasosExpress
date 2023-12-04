@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <integer name="min_distance_threshold">20</integer>
+    <integer name="max_distance_threshold">400</integer>
+    <integer name="notification_permission_request_code">100</integer>
+    <integer name="proximity_max_value">20</integer>
+</resources>

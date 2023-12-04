@@ -104,8 +104,8 @@ public class FeedbackScreen extends Fragment {
         String comment = editTextComment.getText().toString().trim();
         float rating = ratingBar.getRating();
 
-        if (name.isEmpty()) {
-            DisplayToast("Please fill the name field");
+        if (!GeneralValidationUtils.isValidName(name)) {
+            DisplayToast(getString(R.string.please_fill_the_name_field));
             return;
         }
 
@@ -120,12 +120,12 @@ public class FeedbackScreen extends Fragment {
         }
 
         if (!GeneralValidationUtils.isValidComment(comment)) {
-            DisplayToast("Please leave a comment");
+            DisplayToast(getString(R.string.please_leave_a_comment));
             return;
         }
 
         if (!GeneralValidationUtils.isValidRating(rating)) {
-            DisplayToast("Rating must be between 1.0 and 5.0");
+            DisplayToast(getString(R.string.rating_must_be_between_1_0_and_5_0));
             return;
         }
 
