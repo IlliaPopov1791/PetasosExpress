@@ -110,7 +110,19 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="240dp"
             android:layout_marginTop="24dp"
-            android:text="Default address"
+            android:text="@string/default_address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="141dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="272dp"
+            android:layout_marginTop="312dp"
+            android:background="@drawable/button_background"
+            android:text="@string/save_changes"
+            android:textColor="@color/ceramic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -46,6 +47,7 @@ public class AppSettings extends Fragment {
         ToggleButton toggleOrientation = view.findViewById(R.id.toggle_portrait_landscape);
         ToggleButton toggleNotifications = view.findViewById(R.id.switch_notifications);
         EditText editTextAddress = view.findViewById(R.id.editTextText);
+        Button buttonSave = view.findViewById(R.id.buttonSave);
 
         // Retrieve saved settings and apply them
         SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
@@ -88,17 +90,11 @@ public class AppSettings extends Fragment {
         });
 
         // Address text field change listener
-        editTextAddress.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                settings.edit().putString(ADDRESS_KEY, s.toString()).apply();
-            }
+        // Save button click listener
+        buttonSave.setOnClickListener(v -> {
+            String address = editTextAddress.getText().toString();
+            settings.edit().putString(ADDRESS_KEY, address).apply();
+            DisplayToast("Address saved");
         });
 
         return view;

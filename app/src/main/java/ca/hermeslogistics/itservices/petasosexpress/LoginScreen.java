@@ -95,11 +95,11 @@ public class LoginScreen extends AppCompatActivity {
 
                 // Validate user input
                 if (email.isEmpty()) {
-                    Toast.makeText(LoginScreen.this, "Email field is empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginScreen.this, R.string.email_field_is_empty, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (password.isEmpty()) {
-                    Toast.makeText(LoginScreen.this, "Password field is empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginScreen.this, R.string.password_field_is_empty, Toast.LENGTH_SHORT).show();
                     return;
                 }
 

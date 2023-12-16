@@ -70,16 +70,17 @@
             app:layout_constraintTop_toBottomOf="@+id/label_notifications" />
 
         <!-- Dark Mode Toggle -->
+
         <TextView
             android:id="@+id/label_dark_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
+            android:layout_marginStart="84dp"
             android:text="@string/theme"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.335" />
+            app:layout_constraintVertical_bias="0.382" />
 
         <ToggleButton
             android:id="@+id/toggle_theme"
@@ -94,36 +95,50 @@
 
         <EditText
             android:id="@+id/editTextText"
-            android:layout_width="161dp"
-            android:layout_height="43dp"
-            android:layout_marginStart="148dp"
-            android:layout_marginTop="156dp"
+            android:layout_width="172dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="200dp"
             android:backgroundTint="@color/wine"
             android:ems="10"
-            android:hint="Address"
+            android:hint="@string/address"
             android:inputType="text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="141dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="208dp"
+            android:layout_marginTop="200dp"
+            android:background="@drawable/button_background"
+            android:text="@string/save_changes"
+            android:textColor="@color/ceramic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            android:layout_width="217dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="172dp"
-            android:text="Default address"
+            android:text="@string/default_address"
+            android:textSize="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/myImageView2"
-            android:layout_width="415dp"
-            android:layout_height="160dp"
+            android:layout_width="397dp"
+            android:layout_height="142dp"
             android:src="@mipmap/ic_launcher"
             app:layout_constraintBottom_toTopOf="@+id/editTextText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.275" />
 
         <ImageView
             android:id="@+id/myImageView"
