@@ -54,8 +54,8 @@ dependencies {
 
     // Junit
     testImplementation ("junit:junit:4.13.2")
-    androidTestImplementation ("junit:junit:4.13.2")
-    implementation ("androidx.test.ext:junit:1.1.5")
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("androidx.test.ext:junit:1.1.5")
 
     //Expresso
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
@@ -65,4 +65,7 @@ dependencies {
     // Robletric
     testImplementation ("org.robolectric:robolectric:4.11.1")
     testImplementation ("org.mockito:mockito-core:4.0.0")
+    testImplementation ("androidx.fragment:fragment-testing:1.6.2")
+
+    testImplementation ("androidx.test:core:1.5.0")
 }

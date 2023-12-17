@@ -8,7 +8,7 @@ import static ca.hermeslogistics.itservices.petasosexpress.PaymentValidation.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(RobolectricTestRunner.class)
+
 public class PaymentValidationTest {
 
     @Test
