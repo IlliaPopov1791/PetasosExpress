@@ -449,7 +449,7 @@ public class SensorScreen extends Fragment {
 
     // Method to update Proximity Sensor UI components
     private void updateProximityUI() {
-        if (proximity != null && (proximity.intValue() <= getResources().getInteger(R.integer.proximity_max_value) || distance.intValue() <= getResources().getInteger(R.integer.proximity_max_value))) {
+        if (proximity != null && proximity.intValue() <= getResources().getInteger(R.integer.proximity_max_value)) {
             txtProximity.setText(String.format(Locale.getDefault(), "%d cm", proximity.intValue()));
             updateImageViewBasedOnProximity(imgStatus, proximity.intValue());
             updateProgressBarOnProx(progressBar, proximity.intValue());

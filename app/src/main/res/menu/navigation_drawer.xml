@@ -33,6 +33,10 @@
                     android:id="@+id/sensor_screen"
                     android:icon="@mipmap/ic_petasos_foreground"
                     android:title="@string/delivery_robot_monitor" />
+                <item
+                    android:id="@+id/test_screen"
+                    android:icon="@mipmap/ic_launcher_foreground"
+                    android:title="@string/test" />
             </group>
         </menu>
     </item>

@@ -229,6 +229,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     fragmentToLoad = new ManageAccount();
                     fragmentTag = getString(R.string.ManageAccount);
                 }
+                else if (itemId == R.id.test_screen) {
+                    fragmentToLoad = new TestSensor();
+                    fragmentTag = getString(R.string.test);
+                }
                 if (fragmentToLoad != null) {
                     fragmentManager.beginTransaction().replace(R.id.main_frame_layout, fragmentToLoad).commit();
                     saveCurrentFragment(fragmentTag);

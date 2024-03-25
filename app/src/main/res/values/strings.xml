@@ -261,6 +261,7 @@
     <string name="default_address">Default address</string>
     <string name="email_field_is_empty">Email field is empty</string>
     <string name="password_field_is_empty">Password field is empty</string>
+    <string name="test">Test</string>
 
 
 </resources>

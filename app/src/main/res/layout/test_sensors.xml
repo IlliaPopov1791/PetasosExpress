@@ -283,111 +283,135 @@
         app:layout_constraintTop_toTopOf="@+id/imgStatus" />
 
 
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="87dp"
-        android:layout_height="72dp"
-        android:background="@drawable/round_button"
-        android:padding="10dp"
-        android:text="R"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        tools:layout_editor_absoluteX="246dp"
-        tools:layout_editor_absoluteY="549dp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="0dp"
+        android:layout_height="248dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="76dp"
-        android:layout_height="62dp"
-        android:background="@drawable/round_button"
-        android:padding="10dp"
-        android:text="F-L"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        tools:layout_editor_absoluteX="83dp"
-        tools:layout_editor_absoluteY="487dp" />
+        <!-- Row 1 -->
+        <Button
+            android:id="@+id/buttonNorthWest"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_background"
+            android:text="NW"
+            app:layout_constraintBottom_toTopOf="@+id/buttonWest"
+            app:layout_constraintEnd_toStartOf="@+id/buttonNorth"
+            app:layout_constraintHeight_percent="0.33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.33" />
 
-    <Button
-        android:id="@+id/button12"
-        android:layout_width="87dp"
-        android:layout_height="72dp"
-        android:background="@drawable/round_button"
-        android:padding="10dp"
-        android:text="F"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        tools:layout_editor_absoluteX="159dp"
-        tools:layout_editor_absoluteY="477dp" />
+        <Button
+            android:id="@+id/buttonNorth"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_background"
+            android:text="N"
+            app:layout_constraintBottom_toTopOf="@+id/buttonToggle"
+            app:layout_constraintEnd_toStartOf="@+id/buttonNorthEast"
+            app:layout_constraintHeight_percent="0.33"
+            app:layout_constraintStart_toEndOf="@+id/buttonNorthWest"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.33" />
 
-    <Button
-        android:id="@+id/butto11"
-        android:layout_width="76dp"
-        android:layout_height="62dp"
-        android:background="@drawable/round_button"
-        android:padding="10dp"
-        android:text="F-R"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        tools:layout_editor_absoluteX="246dp"
-        tools:layout_editor_absoluteY="487dp" />
+        <Button
+            android:id="@+id/buttonNorthEast"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_background"
+            android:text="NE"
+            app:layout_constraintBottom_toTopOf="@+id/buttonEast"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.33"
+            app:layout_constraintStart_toEndOf="@+id/buttonNorth"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.33" />
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="93dp"
-        android:layout_height="80dp"
-        android:textColor="@android:color/black"
-        android:thumb="@drawable/switch_thumb"
-        android:track="@drawable/switch_track"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="549dp" />
+        <!-- Row 2 -->
+        <Button
+            android:id="@+id/buttonWest"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_background"
+            android:text="W"
+            app:layout_constraintBottom_toTopOf="@+id/buttonSouthWest"
+            app:layout_constraintEnd_toStartOf="@+id/buttonToggle"
+            app:layout_constraintHeight_percent="0.33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonNorthWest"
+            app:layout_constraintWidth_percent="0.33" />
 
-    <Button
-        android:id="@+id/button10"
-        android:layout_width="87dp"
-        android:layout_height="72dp"
-        android:background="@drawable/round_button"
-        android:padding="10dp"
-        android:text="L"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="549dp" />
+        <Switch
+            android:id="@+id/buttonToggle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_background"
+            app:layout_constraintBottom_toTopOf="@+id/buttonSouth"
+            app:layout_constraintEnd_toStartOf="@+id/buttonEast"
+            app:layout_constraintHeight_percent="0.33"
+            app:layout_constraintStart_toEndOf="@+id/buttonWest"
+            app:layout_constraintTop_toBottomOf="@+id/buttonNorth"
+            app:layout_constraintWidth_percent="0.33" />
 
-    <Button
-        android:id="@+id/button9"
-        android:layout_width="76dp"
-        android:layout_height="62dp"
-        android:background="@drawable/round_button"
-        android:padding="10dp"
-        android:text="R-L"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        tools:layout_editor_absoluteX="83dp"
-        tools:layout_editor_absoluteY="621dp" />
+        <Button
+            android:id="@+id/buttonEast"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_background"
+            android:text="E"
+            app:layout_constraintBottom_toTopOf="@+id/buttonSouthEast"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/buttonToggle"
+            app:layout_constraintTop_toBottomOf="@+id/buttonNorthEast"
+            app:layout_constraintWidth_percent="0.33"
+            app:layout_constraintHeight_percent="0.33" />
 
-    <Button
-        android:id="@+id/button8"
-        android:layout_width="87dp"
-        android:layout_height="72dp"
-        android:background="@drawable/round_button"
-        android:padding="10dp"
-        android:text="R"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        tools:layout_editor_absoluteX="159dp"
-        tools:layout_editor_absoluteY="621dp" />
+        <!-- Row 3 -->
+        <Button
+            android:id="@+id/buttonSouthWest"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_background"
+            android:text="SW"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonWest"
+            app:layout_constraintEnd_toStartOf="@+id/buttonSouth"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.33"
+            app:layout_constraintHeight_percent="0.33" />
 
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="76dp"
-        android:layout_height="62dp"
-        android:background="@drawable/round_button"
-        android:padding="10dp"
-        android:text="R-R"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        tools:layout_editor_absoluteX="246dp"
-        tools:layout_editor_absoluteY="621dp" />
+        <Button
+            android:id="@+id/buttonSouth"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_background"
+            android:text="S"
+            app:layout_constraintStart_toEndOf="@+id/buttonSouthWest"
+            app:layout_constraintEnd_toStartOf="@+id/buttonSouthEast"
+            app:layout_constraintTop_toBottomOf="@+id/buttonToggle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.33"
+            app:layout_constraintHeight_percent="0.33" />
+
+        <Button
+            android:id="@+id/buttonSouthEast"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_background"
+            android:text="SE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonEast"
+            app:layout_constraintStart_toEndOf="@+id/buttonSouth"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.33"
+            app:layout_constraintHeight_percent="0.33" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

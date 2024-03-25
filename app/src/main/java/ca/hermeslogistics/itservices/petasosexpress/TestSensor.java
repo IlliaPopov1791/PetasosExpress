@@ -2,6 +2,8 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
 // Import Android classes and components
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
@@ -11,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +32,11 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -45,7 +53,6 @@ import java.util.Locale;
 import javax.annotation.Nullable;
 
 
-
 /*
  * Names: Illia M. Popov, William Margalik, Dylan Ashton, Ahmad Aljawish
  * Student ID: n01421791, n01479878, n01442206, n01375348
@@ -53,6 +60,7 @@ import javax.annotation.Nullable;
  */
 public class TestSensor extends Fragment {
     private FirebaseFirestore db;
+    private DatabaseReference dbRef;
 
     // Distance Sensor
     private TextView txtValue;
@@ -83,8 +91,8 @@ public class TestSensor extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Initialize Firebase Firestore
-        db = FirebaseFirestore.getInstance();
+        // Initialize Firebase Realtime Database
+        dbRef = FirebaseDatabase.getInstance().getReference();
 
         // Determine the device's current orientation
         int orientation = getResources().getConfiguration().orientation;
@@ -92,9 +100,9 @@ public class TestSensor extends Fragment {
         // Load the appropriate layout based on orientation
         View view;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            view = inflater.inflate(R.layout.sensor_screen, container, false);
+            view = inflater.inflate(R.layout.test_sensors, container, false);
         } else {
-            view = inflater.inflate(R.layout.sensor_screen_landscape, container, false);
+            view = inflater.inflate(R.layout.test_sensors_landscape, container, false);
         }
 
         // Check and initialize assigned order
@@ -102,15 +110,16 @@ public class TestSensor extends Fragment {
         // Initialize components for each sensor
 
         return view;
-
     }
 
-    // Method to initialize Distance Sensor components
+    /* Method to initialize Distance Sensor components
     private void initializeDistanceSensor(View view) {
         listView = view.findViewById(R.id.listView);
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, dateList);
         listView.setAdapter(adapter);
     }
+
+     */
 
     // Method to initialize Balance Sensor components
     private void initializeBalanceSensor(View view) {
@@ -135,47 +144,39 @@ public class TestSensor extends Fragment {
         textViewMotorSpeed = view.findViewById(R.id.textViewMotorSpeed);
     }
 
-    // Method to initialize all sensors
     private void initializeSensors(View view){
         // Initialize components
-        initializeDistanceSensor(view);
+        //initializeDistanceSensor(view);
         initializeBalanceSensor(view);
         initializeProximitySensor(view);
         initializeMotorSensor(view);
 
-        // Set up Firestore document references and listeners for each sensor
-        String sensorDocumentPath = "PetasosRecord/" + AssignedPetasos;
-        setupSensorListeners(sensorDocumentPath);
+        // Set up Realtime Database references and listeners for each sensor
+        setupSensorListeners();
     }
+
 
     // Method to set up listeners for all sensors
-    private void setupSensorListeners(String sensorDocumentPath) {
-        DocumentReference sensorDocRef = db.document(sensorDocumentPath);
+    private void setupSensorListeners() {
+        DatabaseReference sensorRef = dbRef.child("Petasos001");
 
         // Set up listeners for each sensor
-        setupBalanceSensor(sensorDocRef);
-        setupMotorSensor(sensorDocRef);
-        setupRangeSensors(sensorDocRef);
+        setupBalanceSensor(sensorRef);
+        setupMotorSensor(sensorRef);
+        setupRangeSensors(sensorRef);
     }
 
-    // Method to set up listener for Balance Sensor
-    private void setupBalanceSensor(DocumentReference sensorDocRef) {
-        sensorDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    // Handle server error
-                    xAxisValue.setText(R.string.server_error);
-                    yAxisValue.setText(R.string.server_error);
-                    zAxisValue.setText(R.string.server_error);
-                    return;
-                }
+    private void setupBalanceSensor(DatabaseReference sensorRef) {
+        DatabaseReference balanceSensorRef = sensorRef.child("BalanceSensor");
 
-                if ((snapshot != null && snapshot.exists() && isAdded())) {
-                    // If snapshot exists, update Balance Sensor values
-                    Number xAxis = snapshot.getLong("X-axis");
-                    Number yAxis = snapshot.getLong("Y-axis");
-                    Number zAxis = snapshot.getLong("Z-axis");
+        balanceSensorRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists() && isAdded()) {
+                    // If data snapshot exists, update Balance Sensor values
+                    Float xAxis = dataSnapshot.child("x").getValue(Float.class);
+                    Float yAxis = dataSnapshot.child("y").getValue(Float.class);
+                    Float zAxis = dataSnapshot.child("z").getValue(Float.class);
 
                     updateAxis(xAxisProgressBar, xAxisValue, xAxis);
                     updateAxis(yAxisProgressBar, yAxisValue, yAxis);
@@ -187,41 +188,60 @@ public class TestSensor extends Fragment {
                     zAxisValue.setText(R.string.no_data);
                 }
             }
-        });
-    }
 
-    // Method to set up listener for Motor Sensor
-    private void setupMotorSensor(DocumentReference sensorDocRef) {
-        sensorDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    // Handle server error
-                    textViewMotorSpeed.setText(R.string.server_error);
-                    return;
-                }
-
-                if ((snapshot != null && snapshot.exists() && isAdded())) {
-                    // If snapshot exists, update Motor Sensor values
-                    Double rpm = snapshot.getDouble("rps");
-                    if (rpm != null) {
-                        String formattedRPM = String.format(Locale.getDefault(), "%.2f", rpm);
-                        motorProgressBar.setProgress((int) Math.round(rpm));
-                        motorProgressBar.setProgress((int) Math.round(rpm));
-                        textViewMotorSpeed.setText(getString(R.string.rpm_value_placeholder, formattedRPM));
-                    } else {
-                        // If no data, display appropriate message
-                        textViewMotorSpeed.setText(R.string.no_data);
-                    }
-                } else {
-                    // If no data, display appropriate message
-                    textViewMotorSpeed.setText(R.string.no_data);
-                }
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+                Log.w(TAG, "loadBalanceSensor:onCancelled", databaseError.toException());
+                xAxisValue.setText(R.string.server_error);
+                yAxisValue.setText(R.string.server_error);
+                zAxisValue.setText(R.string.server_error);
             }
         });
     }
 
-    // Method to set up listeners for Range Sensors (Distance and Proximity Sensors)
+
+    // Method to set up listener for Motor Sensor and determine the lowest value
+    private void setupMotorSensor(DatabaseReference sensorRef) {
+        ValueEventListener motorSensorListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child("MotorSensorFront").exists() && dataSnapshot.child("MotorSensorRear").exists()) {
+                    Double motorFrontValue = dataSnapshot.child("MotorSensorFront/value").getValue(Double.class);
+                    Double motorRearValue = dataSnapshot.child("MotorSensorRear/value").getValue(Double.class);
+
+                    // Determine the lowest value between the two
+                    if (motorFrontValue != null && motorRearValue != null) {
+                        double lowestValue = Math.min(motorFrontValue, motorRearValue);
+
+                        // Update UI with the lowest motor speed value
+                        updateMotorSpeedUI(lowestValue);
+                    } else {
+                        // Handle null case or set default
+                        updateMotorSpeedUI(0.0);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+                Log.w(TAG, "loadMotorSensor:onCancelled", databaseError.toException());
+            }
+        };
+
+        sensorRef.addValueEventListener(motorSensorListener);
+    }
+
+    private void updateMotorSpeedUI(double motorSpeed) {
+        // Update your UI with the motorSpeed value
+        // This can be your ProgressBar and TextView
+        motorProgressBar.setProgress((int) motorSpeed);
+        String formattedRPM = String.format(Locale.getDefault(), "%.2f", motorSpeed);
+        textViewMotorSpeed.setText(getString(R.string.rpm_value_placeholder, formattedRPM));
+    }
+
+    /* Method to set up listeners for Range Sensors (Distance and Proximity Sensors) (Old)
     private void setupRangeSensors(DocumentReference sensorDocRef) {
         sensorDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -272,6 +292,59 @@ public class TestSensor extends Fragment {
         });
     }
 
+     */
+
+    private void setupRangeSensors(DatabaseReference sensorRef) {
+        DatabaseReference distanceSensorRef = sensorRef.child("DistanceSensor");
+        DatabaseReference proximitySensorRef = sensorRef.child("ProximitySensor");
+
+        // Listener for the Distance Sensor
+        distanceSensorRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists() && dataSnapshot.hasChild("distance")) {
+                    distance = dataSnapshot.child("distance").getValue(Double.class);
+                    if (distance != null) {
+                        updateDistanceUI();
+                    }
+                } else {
+                    // Handle case where the distance data is not available
+                    txtProximity.setText(R.string.no_data);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "loadDistanceSensor:onCancelled", databaseError.toException());
+                txtProximity.setText(R.string.server_error);
+            }
+        });
+
+        // Listener for the Proximity Sensor
+        proximitySensorRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists() && dataSnapshot.hasChild("prox")) {
+                    proximity = dataSnapshot.child("prox").getValue(Double.class);
+                    if (proximity != null) {
+                        updateProximityUI();
+                    }
+                } else {
+                    // Handle case where the proximity data is not available
+                    txtProximity.setText(String.format(Locale.getDefault(), "%.2f m", distance));
+                    updateImageViewBasedOnDistance(imgStatus, distance);
+                    updateProgressBarOnDis(progressBar, distance);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "loadProximitySensor:onCancelled", databaseError.toException());
+                txtProximity.setText(R.string.server_error);
+            }
+        });
+    }
+
     // Method to update Distance Sensor UI components
     private void updateDistanceUI() {
         if (distance != null) {
@@ -280,7 +353,6 @@ public class TestSensor extends Fragment {
             } else if (distance > getResources().getInteger(R.integer.max_distance_threshold) / 100.0f) {
                 txtProximity.setText(R.string.no_obstacles);
             }
-
             updateImageViewBasedOnDistance(imgStatus, distance);
             updateProgressBarOnDis(progressBar, distance);
         } else {
@@ -318,7 +390,7 @@ public class TestSensor extends Fragment {
     private void updateImageViewBasedOnProximity(ImageView imageView, int proximityValue) {
         if (proximityValue < 10) {
             imageView.setImageResource(R.mipmap.statsu_cancel_round);
-            emergencyStop();
+            //emergencyStop();
         } else {
             imageView.setImageResource(R.mipmap.status_warning_round);
         }
@@ -362,28 +434,6 @@ public class TestSensor extends Fragment {
         }
         progressBar.setProgress(progressValue);
     }
-
-
-    private void emergencyStop() {
-        String currentDateTime = DateFormat.getDateTimeInstance().format(new Date());
-        dateList.add(currentDateTime);
-        adapter.notifyDataSetChanged();
-        listView.smoothScrollToPosition(dateList.size() - 1);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                if (isAdded()) {
-                    sendNotification();
-                }
-            } else {
-                requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION_REQUEST_CODE);
-            }
-        } else {
-            if (isAdded()) {
-                sendNotification();
-            }
-        }
-    }
-
 
 
     private void sendNotification() {
