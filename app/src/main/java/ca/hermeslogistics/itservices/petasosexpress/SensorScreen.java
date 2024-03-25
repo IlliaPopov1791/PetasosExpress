@@ -2,6 +2,8 @@
 package ca.hermeslogistics.itservices.petasosexpress;
 
 // Import Android classes and components
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
@@ -11,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +32,11 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -51,6 +59,7 @@ import javax.annotation.Nullable;
  */
 public class SensorScreen extends Fragment {
     private FirebaseFirestore db;
+    private DatabaseReference dbRef;
 
     // Distance Sensor
     private TextView txtValue;
@@ -81,8 +90,8 @@ public class SensorScreen extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Initialize Firebase Firestore
-        db = FirebaseFirestore.getInstance();
+        // Initialize Firebase Realtime Database
+        dbRef = FirebaseDatabase.getInstance().getReference();
 
         // Determine the device's current orientation
         int orientation = getResources().getConfiguration().orientation;
@@ -131,8 +140,8 @@ public class SensorScreen extends Fragment {
         motorProgressBar = view.findViewById(R.id.motorProgressBar);
         textViewMotorSpeed = view.findViewById(R.id.textViewMotorSpeed);
     }
-
-    // Method to initialize all sensors
+    /*
+    // Method to initialize all sensors (Old)
     private void initializeSensors(View view){
         // Initialize components
         initializeDistanceSensor(view);
@@ -144,8 +153,19 @@ public class SensorScreen extends Fragment {
         String sensorDocumentPath = "PetasosRecord/" + AssignedPetasos;
         setupSensorListeners(sensorDocumentPath);
     }
+    */
+    private void initializeSensors(View view){
+        // Initialize components
+        initializeDistanceSensor(view);
+        initializeBalanceSensor(view);
+        initializeProximitySensor(view);
+        initializeMotorSensor(view);
 
-    // Method to set up listeners for all sensors
+        // Set up Realtime Database references and listeners for each sensor
+        setupSensorListeners();
+    }
+
+    /* Method to set up listeners for all sensors (Old)
     private void setupSensorListeners(String sensorDocumentPath) {
         DocumentReference sensorDocRef = db.document(sensorDocumentPath);
 
@@ -154,8 +174,19 @@ public class SensorScreen extends Fragment {
         setupMotorSensor(sensorDocRef);
         setupRangeSensors(sensorDocRef);
     }
+     */
 
-    // Method to set up listener for Balance Sensor
+    // Method to set up listeners for all sensors
+    private void setupSensorListeners() {
+        DatabaseReference sensorRef = dbRef.child("Petasos001");
+
+        // Set up listeners for each sensor
+        setupBalanceSensor(sensorRef);
+        setupMotorSensor(sensorRef);
+        setupRangeSensors(sensorRef);
+    }
+
+    /* Method to set up listener for Balance Sensor (Old)
     private void setupBalanceSensor(DocumentReference sensorDocRef) {
         sensorDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -187,7 +218,43 @@ public class SensorScreen extends Fragment {
         });
     }
 
-    // Method to set up listener for Motor Sensor
+     */
+    private void setupBalanceSensor(DatabaseReference sensorRef) {
+        DatabaseReference balanceSensorRef = sensorRef.child("BalanceSensor");
+
+        balanceSensorRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists() && isAdded()) {
+                    // If data snapshot exists, update Balance Sensor values
+                    Float xAxis = dataSnapshot.child("x").getValue(Float.class);
+                    Float yAxis = dataSnapshot.child("y").getValue(Float.class);
+                    Float zAxis = dataSnapshot.child("z").getValue(Float.class);
+
+                    updateAxis(xAxisProgressBar, xAxisValue, xAxis);
+                    updateAxis(yAxisProgressBar, yAxisValue, yAxis);
+                    updateAxis(zAxisProgressBar, zAxisValue, zAxis);
+                } else {
+                    // If no data, display appropriate message
+                    xAxisValue.setText(R.string.no_data);
+                    yAxisValue.setText(R.string.no_data);
+                    zAxisValue.setText(R.string.no_data);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+                Log.w(TAG, "loadBalanceSensor:onCancelled", databaseError.toException());
+                xAxisValue.setText(R.string.server_error);
+                yAxisValue.setText(R.string.server_error);
+                zAxisValue.setText(R.string.server_error);
+            }
+        });
+    }
+
+
+    /* Method to set up listener for Motor Sensor (Old)
     private void setupMotorSensor(DocumentReference sensorDocRef) {
         sensorDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -218,7 +285,49 @@ public class SensorScreen extends Fragment {
         });
     }
 
-    // Method to set up listeners for Range Sensors (Distance and Proximity Sensors)
+     */
+
+    // Method to set up listener for Motor Sensor and determine the lowest value
+    private void setupMotorSensor(DatabaseReference sensorRef) {
+        ValueEventListener motorSensorListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child("MotorSensorFront").exists() && dataSnapshot.child("MotorSensorRear").exists()) {
+                    Double motorFrontValue = dataSnapshot.child("MotorSensorFront/value").getValue(Double.class);
+                    Double motorRearValue = dataSnapshot.child("MotorSensorRear/value").getValue(Double.class);
+
+                    // Determine the lowest value between the two
+                    if (motorFrontValue != null && motorRearValue != null) {
+                        double lowestValue = Math.min(motorFrontValue, motorRearValue);
+
+                        // Update UI with the lowest motor speed value
+                        updateMotorSpeedUI(lowestValue);
+                    } else {
+                        // Handle null case or set default
+                        updateMotorSpeedUI(0.0);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+                Log.w(TAG, "loadMotorSensor:onCancelled", databaseError.toException());
+            }
+        };
+
+        sensorRef.addValueEventListener(motorSensorListener);
+    }
+
+    private void updateMotorSpeedUI(double motorSpeed) {
+        // Update your UI with the motorSpeed value
+        // This can be your ProgressBar and TextView
+        motorProgressBar.setProgress((int) motorSpeed);
+        String formattedRPM = String.format(Locale.getDefault(), "%.2f", motorSpeed);
+        textViewMotorSpeed.setText(getString(R.string.rpm_value_placeholder, formattedRPM));
+    }
+
+    /* Method to set up listeners for Range Sensors (Distance and Proximity Sensors) (Old)
     private void setupRangeSensors(DocumentReference sensorDocRef) {
         sensorDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -269,6 +378,59 @@ public class SensorScreen extends Fragment {
         });
     }
 
+     */
+
+    private void setupRangeSensors(DatabaseReference sensorRef) {
+        DatabaseReference distanceSensorRef = sensorRef.child("DistanceSensor");
+        DatabaseReference proximitySensorRef = sensorRef.child("ProximitySensor");
+
+        // Listener for the Distance Sensor
+        distanceSensorRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists() && dataSnapshot.hasChild("distance")) {
+                    distance = dataSnapshot.child("distance").getValue(Double.class);
+                    if (distance != null) {
+                        updateDistanceUI();
+                    }
+                } else {
+                    // Handle case where the distance data is not available
+                    txtProximity.setText(R.string.no_data);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "loadDistanceSensor:onCancelled", databaseError.toException());
+                txtProximity.setText(R.string.server_error);
+            }
+        });
+
+        // Listener for the Proximity Sensor
+        proximitySensorRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists() && dataSnapshot.hasChild("prox")) {
+                    proximity = dataSnapshot.child("prox").getValue(Double.class);
+                    if (proximity != null) {
+                        updateProximityUI();
+                    }
+                } else {
+                    // Handle case where the proximity data is not available
+                    txtProximity.setText(String.format(Locale.getDefault(), "%.2f m", distance));
+                    updateImageViewBasedOnDistance(imgStatus, distance);
+                    updateProgressBarOnDis(progressBar, distance);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "loadProximitySensor:onCancelled", databaseError.toException());
+                txtProximity.setText(R.string.server_error);
+            }
+        });
+    }
+
     // Method to update Distance Sensor UI components
     private void updateDistanceUI() {
         if (distance != null) {
@@ -277,7 +439,6 @@ public class SensorScreen extends Fragment {
             } else if (distance > getResources().getInteger(R.integer.max_distance_threshold) / 100.0f) {
                 txtProximity.setText(R.string.no_obstacles);
             }
-
             updateImageViewBasedOnDistance(imgStatus, distance);
             updateProgressBarOnDis(progressBar, distance);
         } else {
@@ -288,7 +449,7 @@ public class SensorScreen extends Fragment {
 
     // Method to update Proximity Sensor UI components
     private void updateProximityUI() {
-        if (proximity != null && proximity.intValue() <= getResources().getInteger(R.integer.proximity_max_value)) {
+        if (proximity != null && (proximity.intValue() <= getResources().getInteger(R.integer.proximity_max_value) || distance.intValue() <= getResources().getInteger(R.integer.proximity_max_value))) {
             txtProximity.setText(String.format(Locale.getDefault(), "%d cm", proximity.intValue()));
             updateImageViewBasedOnProximity(imgStatus, proximity.intValue());
             updateProgressBarOnProx(progressBar, proximity.intValue());
