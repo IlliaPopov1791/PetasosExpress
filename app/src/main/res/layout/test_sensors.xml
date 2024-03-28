@@ -345,7 +345,7 @@
             app:layout_constraintTop_toBottomOf="@+id/buttonNorthWest"
             app:layout_constraintWidth_percent="0.33" />
 
-        <Switch
+        <ToggleButton
             android:id="@+id/buttonToggle"
             android:layout_width="0dp"
             android:layout_height="0dp"
