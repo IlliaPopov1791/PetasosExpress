@@ -212,6 +212,11 @@ public class TestSensor extends Fragment {
                     Float yAxis = dataSnapshot.child("y").getValue(Float.class);
                     Float zAxis = dataSnapshot.child("z").getValue(Float.class);
 
+                    // Adjusting Balance Sensor valuesinto a different format
+                    xAxis *= 100;
+                    yAxis *= 100;
+                    zAxis *= 100;
+
                     updateAxis(xAxisProgressBar, xAxisValue, xAxis);
                     updateAxis(yAxisProgressBar, yAxisValue, yAxis);
                     updateAxis(zAxisProgressBar, zAxisValue, zAxis);
@@ -275,59 +280,6 @@ public class TestSensor extends Fragment {
         textViewMotorSpeed.setText(getString(R.string.rpm_value_placeholder, formattedRPM));
     }
 
-    /* Method to set up listeners for Range Sensors (Distance and Proximity Sensors) (Old)
-    private void setupRangeSensors(DocumentReference sensorDocRef) {
-        sensorDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    // Handle server error
-                    txtProximity.setText(R.string.server_error);
-                    return;
-                }
-                if ((snapshot != null && snapshot.exists())) {
-                    // If snapshot exists, update Distance Sensor values
-                    Double pulseDuration = snapshot.getDouble("Pulse Duration");
-                    Double speedOfSound = snapshot.getDouble("Speed of Sound");
-
-                    // Check if both values are not null before using them
-                    if (pulseDuration != null && speedOfSound != null) {
-                        distance = pulseDuration * speedOfSound;
-                        updateDistanceUI();
-                    } else {
-                        distance = 0.0;
-                        txtProximity.setText(R.string.no_data);
-                    }
-                }
-            }
-        });
-
-        // Listener for the Proximity Sensor
-        sensorDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    // Handle server error
-                    txtProximity.setText(R.string.server_error);
-                    return;
-                }
-
-                if ((snapshot != null && snapshot.exists() && isAdded())) {
-                    // If snapshot exists, update Proximity Sensor values
-                    proximity = snapshot.getLong("proximity");
-                    updateProximityUI();
-                } else {
-                    // If no data, display appropriate message
-                    txtProximity.setText(String.format(Locale.getDefault(), "%.2f m", distance));
-                    updateImageViewBasedOnDistance(imgStatus, distance);
-                    updateProgressBarOnDis(progressBar, distance);
-                }
-            }
-        });
-    }
-
-     */
-
     private void setupRangeSensors(DatabaseReference sensorRef) {
         DatabaseReference distanceSensorRef = sensorRef.child("DistanceSensor");
         DatabaseReference proximitySensorRef = sensorRef.child("ProximitySensor");
@@ -339,6 +291,7 @@ public class TestSensor extends Fragment {
                 if (dataSnapshot.exists() && dataSnapshot.hasChild("distance")) {
                     distance = dataSnapshot.child("distance").getValue(Double.class);
                     if (distance != null) {
+                        distance/= 1000;
                         updateDistanceUI();
                     }
                 } else {
