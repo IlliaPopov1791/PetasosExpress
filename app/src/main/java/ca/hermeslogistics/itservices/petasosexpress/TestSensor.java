@@ -129,8 +129,8 @@ public class TestSensor extends Fragment {
         // Set listeners for directional buttons
         setDirectionalButtonListener(buttonNorth, directionRef, "Y", 1);
         setDirectionalButtonListener(buttonSouth, directionRef, "Y", -1);
-        setDirectionalButtonListener(buttonEast, directionRef, "X", 1);
-        setDirectionalButtonListener(buttonWest, directionRef, "X", -1);
+        setDirectionalButtonListener(buttonEast, directionRef, "X", -1);
+        setDirectionalButtonListener(buttonWest, directionRef, "X", 1);
 
         // Set listeners for combination buttons
         setCombinedButtonListener(buttonNorthEast, directionRef, 1, 1, true);
