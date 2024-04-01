@@ -127,10 +127,10 @@ public class TestSensor extends Fragment {
         DatabaseReference directionRef = dbRef.child("Petasos001").child("direction");
 
         // Set listeners for directional buttons
-        setDirectionalButtonListener(buttonNorth, directionRef, "Y", 1);
-        setDirectionalButtonListener(buttonSouth, directionRef, "Y", -1);
-        setDirectionalButtonListener(buttonEast, directionRef, "X", -1);
-        setDirectionalButtonListener(buttonWest, directionRef, "X", 1);
+        setDirectionalButtonListener(buttonNorth, directionRef, "Y", -1);
+        setDirectionalButtonListener(buttonSouth, directionRef, "Y", 1);
+        setDirectionalButtonListener(buttonEast, directionRef, "X", 1);
+        setDirectionalButtonListener(buttonWest, directionRef, "X", -1);
 
         // Set listeners for combination buttons
         setCombinedButtonListener(buttonNorthEast, directionRef, 1, 1, true);
@@ -215,7 +215,7 @@ public class TestSensor extends Fragment {
                     // Adjusting Balance Sensor valuesinto a different format
                     xAxis *= 100;
                     yAxis *= 100;
-                    zAxis *= 100;
+                    zAxis *= -100;
 
                     updateAxis(xAxisProgressBar, xAxisValue, xAxis);
                     updateAxis(yAxisProgressBar, yAxisValue, yAxis);
@@ -335,7 +335,7 @@ public class TestSensor extends Fragment {
     // Method to update Distance Sensor UI components
     private void updateDistanceUI() {
         if (distance != null) {
-            if (distance >= getResources().getInteger(R.integer.min_distance_threshold) / 100.0f && distance <= getResources().getInteger(R.integer.max_distance_threshold) / 100.0f) {
+            if (distance >= 5 / 100.0f && distance <= getResources().getInteger(R.integer.max_distance_threshold) / 100.0f) {
                 txtProximity.setText(String.format(Locale.getDefault(), "%.2f m", distance));
             } else if (distance > getResources().getInteger(R.integer.max_distance_threshold) / 100.0f) {
                 txtProximity.setText(R.string.no_obstacles);
@@ -351,7 +351,7 @@ public class TestSensor extends Fragment {
     // Method to update Proximity Sensor UI components
     private void updateProximityUI() {
         if (proximity != null && proximity.intValue() <= getResources().getInteger(R.integer.proximity_max_value)) {
-            txtProximity.setText(String.format(Locale.getDefault(), "%d cm", proximity.intValue()));
+            txtProximity.setText(String.format(Locale.getDefault(), "%d mm", proximity.intValue()));
             updateImageViewBasedOnProximity(imgStatus, proximity.intValue());
             updateProgressBarOnProx(progressBar, proximity.intValue());
         } else {
