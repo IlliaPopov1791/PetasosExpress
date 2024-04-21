@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -113,14 +114,14 @@ public class TestSensor extends Fragment {
         // Initialize components for each sensor
 
         // Initialize the buttons and their listeners
-        Button buttonNorth = view.findViewById(R.id.buttonNorth);
-        Button buttonSouth = view.findViewById(R.id.buttonSouth);
-        Button buttonEast = view.findViewById(R.id.buttonEast);
-        Button buttonWest = view.findViewById(R.id.buttonWest);
-        Button buttonNorthEast = view.findViewById(R.id.buttonNorthEast);
-        Button buttonSouthWest = view.findViewById(R.id.buttonSouthWest);
-        Button buttonNorthWest = view.findViewById(R.id.buttonNorthWest);
-        Button buttonSouthEast = view.findViewById(R.id.buttonSouthEast);
+        ImageButton buttonNorth = view.findViewById(R.id.buttonNorth);
+        ImageButton buttonSouth = view.findViewById(R.id.buttonSouth);
+        ImageButton buttonEast = view.findViewById(R.id.buttonEast);
+        ImageButton buttonWest = view.findViewById(R.id.buttonWest);
+        ImageButton buttonNorthEast = view.findViewById(R.id.buttonNorthEast);
+        ImageButton buttonSouthWest = view.findViewById(R.id.buttonSouthWest);
+        ImageButton buttonNorthWest = view.findViewById(R.id.buttonNorthWest);
+        ImageButton buttonSouthEast = view.findViewById(R.id.buttonSouthEast);
         ToggleButton buttonToggle = view.findViewById(R.id.buttonToggle);
 
         // Reference to your direction node in the database
@@ -133,10 +134,10 @@ public class TestSensor extends Fragment {
         setDirectionalButtonListener(buttonWest, directionRef, "X", -1);
 
         // Set listeners for combination buttons
-        setCombinedButtonListener(buttonNorthEast, directionRef, 1, 1, true);
-        setCombinedButtonListener(buttonSouthWest, directionRef, -1, -1, true);
-        setCombinedButtonListener(buttonNorthWest, directionRef, -1, 1, true);
-        setCombinedButtonListener(buttonSouthEast, directionRef, 1, -1, true);
+        setCombinedButtonListener(buttonNorthEast, directionRef, -1, -1, true);
+        setCombinedButtonListener(buttonSouthWest, directionRef, 1, 1, true);
+        setCombinedButtonListener(buttonNorthWest, directionRef, 1, -1, true);
+        setCombinedButtonListener(buttonSouthEast, directionRef, -1, 1, true);
 
         // Set listener for the toggle button
         buttonToggle.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -540,7 +541,7 @@ public class TestSensor extends Fragment {
                 .show();
     }
 
-    private void setDirectionalButtonListener(Button button, DatabaseReference ref, String axis, int value) {
+    private void setDirectionalButtonListener(ImageButton button, DatabaseReference ref, String axis, int value) {
         button.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
@@ -554,7 +555,7 @@ public class TestSensor extends Fragment {
         });
     }
 
-    private void setCombinedButtonListener(Button button, DatabaseReference ref, int xValue, int yValue, boolean rotateValue) {
+    private void setCombinedButtonListener(ImageButton button, DatabaseReference ref, int xValue, int yValue, boolean rotateValue) {
         button.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:

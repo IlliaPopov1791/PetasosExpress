@@ -261,4 +261,5 @@
     <string name="email_field_is_empty">Le champ email est vide</string>
     <string name="password_field_is_empty">Le champ du mot de passe est vide</string>
     <string name="test">Test</string>
+    <string name="moving_forward">Moving the robot forward</string>
 </resources>

@@ -292,12 +292,12 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <!-- Row 1 -->
-        <Button
+        <ImageButton
             android:id="@+id/buttonNorthWest"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_background"
-            android:text="NW"
+            android:src="@mipmap/ic_northwest_foreground"
             app:layout_constraintBottom_toTopOf="@+id/buttonWest"
             app:layout_constraintEnd_toStartOf="@+id/buttonNorth"
             app:layout_constraintHeight_percent="0.33"
@@ -305,25 +305,26 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.33" />
 
-        <Button
+        <ImageButton
             android:id="@+id/buttonNorth"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_background"
-            android:text="N"
+            android:src="@drawable/ic_forward_foreground"
             app:layout_constraintBottom_toTopOf="@+id/buttonToggle"
             app:layout_constraintEnd_toStartOf="@+id/buttonNorthEast"
             app:layout_constraintHeight_percent="0.33"
             app:layout_constraintStart_toEndOf="@+id/buttonNorthWest"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.33" />
+            app:layout_constraintWidth_percent="0.33"
+            android:contentDescription="@string/moving_forward" />
 
-        <Button
+        <ImageButton
             android:id="@+id/buttonNorthEast"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_background"
-            android:text="NE"
+            android:src="@mipmap/ic_northeast_foreground"
             app:layout_constraintBottom_toTopOf="@+id/buttonEast"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.33"
@@ -332,12 +333,12 @@
             app:layout_constraintWidth_percent="0.33" />
 
         <!-- Row 2 -->
-        <Button
+        <ImageButton
             android:id="@+id/buttonWest"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_background"
-            android:text="W"
+            android:src="@drawable/ic_left_foreground"
             app:layout_constraintBottom_toTopOf="@+id/buttonSouthWest"
             app:layout_constraintEnd_toStartOf="@+id/buttonToggle"
             app:layout_constraintHeight_percent="0.33"
@@ -349,6 +350,7 @@
             android:id="@+id/buttonToggle"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:textStyle="bold"
             android:background="@drawable/button_background"
             app:layout_constraintBottom_toTopOf="@+id/buttonSouth"
             app:layout_constraintEnd_toStartOf="@+id/buttonEast"
@@ -357,12 +359,12 @@
             app:layout_constraintTop_toBottomOf="@+id/buttonNorth"
             app:layout_constraintWidth_percent="0.33" />
 
-        <Button
+        <ImageButton
             android:id="@+id/buttonEast"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_background"
-            android:text="E"
+            android:src="@drawable/ic_right_foreground"
             app:layout_constraintBottom_toTopOf="@+id/buttonSouthEast"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/buttonToggle"
@@ -371,12 +373,12 @@
             app:layout_constraintHeight_percent="0.33" />
 
         <!-- Row 3 -->
-        <Button
+        <ImageButton
             android:id="@+id/buttonSouthWest"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_background"
-            android:text="SW"
+            android:src="@mipmap/ic_southwest_foreground"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonWest"
             app:layout_constraintEnd_toStartOf="@+id/buttonSouth"
@@ -384,12 +386,12 @@
             app:layout_constraintWidth_percent="0.33"
             app:layout_constraintHeight_percent="0.33" />
 
-        <Button
+        <ImageButton
             android:id="@+id/buttonSouth"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_background"
-            android:text="S"
+            android:src="@drawable/ic_backward_foreground"
             app:layout_constraintStart_toEndOf="@+id/buttonSouthWest"
             app:layout_constraintEnd_toStartOf="@+id/buttonSouthEast"
             app:layout_constraintTop_toBottomOf="@+id/buttonToggle"
@@ -397,12 +399,12 @@
             app:layout_constraintWidth_percent="0.33"
             app:layout_constraintHeight_percent="0.33" />
 
-        <Button
+        <ImageButton
             android:id="@+id/buttonSouthEast"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_background"
-            android:text="SE"
+            android:src="@mipmap/ic_southeast_foreground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonEast"
             app:layout_constraintStart_toEndOf="@+id/buttonSouth"
